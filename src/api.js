@@ -1,5 +1,5 @@
 // src/api.js
-const API_URL = 'http://localhost:3001/api';
+const API_URL = 'https://workout-tracker-hljr.onrender.com/api';
 
 export const getWorkouts = async () => {
   const response = await fetch(`${API_URL}/workouts`);
