@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+/* Переменные для светлой темы */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333;
+    --table-bg-color: #f4f4f4;
+    --table-border-color: #ddd;
+    --button-bg-color: #300F0F;
+    --button-text-color: #fff;
+    --icon-color: 0; /* Черный для светлой темы */
+}
+
+/* Темная тема */
+.dark-theme {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --table-bg-color: #1e1e1e;
+    --table-border-color: #333;
+    --button-bg-color: #3a3a3a;
+    --button-text-color: #fff;
+    --icon-color: 1; /* Белый для темной темы */
+}
+
+/* Применение переменных ко всему сайту */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    padding-bottom: 100px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--text-color);
+}
+
+table, th, td {
+    background-color: var(--table-bg-color);
+}
+
+/* Стили для кнопок */
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+/* button:hover {
+    background-color: #300F0F;
+} */

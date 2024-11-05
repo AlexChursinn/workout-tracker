@@ -1,0 +1,94 @@
+/* src/global.css */
+
+/* Переменные для светлой темы */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333;
+  --table-bg-color: #f4f4f4;
+  --table-border-color: #ddd;
+  --button-bg-color: #300F0F;
+  --button-text-color: #fff;
+}
+
+/* Переменные для темной темы */
+.dark-theme {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --table-bg-color: #1e1e1e;
+  --table-border-color: #333;
+  --button-bg-color: #3a3a3a;
+  --button-text-color: #fff;
+}
+
+/* Применение переменных ко всему сайту */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Основные стили текста */
+h1, h2, label {
+  color: var(--text-color);
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+/* Стили таблиц */
+table, th, td {
+  background-color: var(--table-bg-color);
+  border: 1px solid var(--table-border-color);
+  color: var(--text-color);
+}
+
+/* Стили для кнопок */
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--button-bg-color);
+}
+
+/* Стили для дат */
+.dateDisplay, .react-datepicker__current-month {
+  color: var(--text-color);
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+  .dateDisplay {
+    font-size: 1.3rem;
+  }
+  .react-datepicker {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dateDisplay {
+    font-size: 1.1rem;
+  }
+  .react-datepicker {
+    font-size: 0.8rem;
+  }
+}

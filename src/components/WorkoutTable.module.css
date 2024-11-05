@@ -1,0 +1,282 @@
+/* Основные стили для таблицы на больших экранах */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: var(--table-bg-color);
+  color: var(--text-color);
+}
+
+table, th, td {
+  border: 1px solid var(--table-border-color);
+  padding: 10px;
+}
+
+th {
+  background-color: var(--table-bg-color);
+  font-weight: bold;
+  text-align: center;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+td {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* Стили для кнопок */
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+/* button:hover {
+  background-color: var(--button-bg-color);
+} */
+
+/* Кнопка добавления упражнения */
+.addExerciseButton {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 15px;
+}
+
+/* Кнопка добавления подхода */
+.addSetButton {
+  padding: 8px 12px;
+  margin: 0;
+  margin-right: 8px; /* Отступ справа между кнопками */
+}
+
+/* Кнопка удаления подхода */
+.deleteSetButton {
+  padding: 8px 12px;
+  margin: 0; /* Убираем отступ сверху */
+  background-color: #d9534f; /* Красный цвет для удаления */
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.deleteSetButton:hover {
+  background-color: #c9302c; /* Темно-красный при наведении */
+}
+
+
+/* Кнопка удаления упражнения */
+.deleteButton {
+  background-color: #d9534f; /* Красный цвет */
+  color: white;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  margin: 0; /* Убираем отступы */
+}
+
+.deleteButton:hover {
+  background-color: #c9302c; /* Темно-красный при наведении */
+}
+
+/* Контейнер для кнопок добавления и удаления подходов */
+.setControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стили для выпадающего списка */
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: var(--table-bg-color);
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--button-bg-color);
+  background-color: var(--bg-color);
+  box-shadow: 0 0 5px rgba(48, 15, 15, 1);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-bottom: 20px;
+    border: 1px solid var(--table-border-color);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5px;
+    text-align: left;
+    font-size: 0.85rem;
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    color: var(--text-color);
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: var(--text-color);
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  td:last-child {
+    border-bottom: none;
+  }
+
+  /* Центрирование кнопки "Добавить упражнение" на мобильных и планшетах */
+  .addExerciseButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Увеличиваем размеры кнопок на мобильных */
+  .addSetButton,
+  .deleteSetButton,
+  .deleteButton {
+    width: 100%;
+    padding: 8px;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+}
+
+/* Дополнительная адаптация для очень маленьких экранов */
+@media (max-width: 480px) {
+  .table {
+    align-items: center;
+  }
+
+  td {
+    padding: 8px 5px;
+    font-size: 0.8rem;
+  }
+
+  button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  select {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+}
+
+/* Стили модального окна */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: var(--bg-color);
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--text-color);
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+button + button {
+  background-color: #6c757d;
+  margin-left: 10px;
+}
+
+/* button + button:hover {
+  background-color: #5a6268;
+} */
+
+/* Адаптивные размеры для маленьких экранов */
+@media (max-width: 480px) {
+  .modalContent {
+    width: 90%;
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  label, input, button {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,88 @@
+/* src/components/Footer.module.css */
+
+.footer {
+  width: 100%;
+  background-color: var(--bg-color);
+  border-top: 1px solid var(--table-border-color);
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 20px;
+  justify-content: space-around;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(var(--icon-color));
+  transition: filter 0.3s ease;
+}
+
+.divider {
+  height: 40px;
+  width: 1px;
+  background-color: var(--table-border-color);
+}
+
+.navButton {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+/* Отключение фона при hover */
+.navButton:hover {
+  background-color: transparent;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .divider {
+    height: 30px;
+    margin: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .divider {
+    height: 24px;
+    margin: 0 10px;
+  }
+}

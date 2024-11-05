@@ -1,0 +1,8291 @@
+{
+  "workouts": [
+    {
+      "id": 1730716878126,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730716879590,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730716880476,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730716882555,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730716884039,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730716914494,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730723001757,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730723002931,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730723107292,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730723109382,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730723169590,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730723171582,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730723172749,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730723176968,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730723407047,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730724188619,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730733125280,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730733126243,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730733132470,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730733133730,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730733140578,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730733142812,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730733401694,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Грудь",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730733402993,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730733407661,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730736123354,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730736402000,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730736637918,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730736642347,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730736989316,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730736992892,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737055583,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737060512,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737062313,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737063425,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737067027,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737071561,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737073026,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737074277,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737075526,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737402502,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737416453,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737418919,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737420335,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737422788,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737775837,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737781183,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737792021,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737816285,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "",
+              "weight": "0"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730737821195,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "0"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730793973617,
+      "workout_date": "2024-11-06",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730794002670,
+      "workout_date": "2024-11-07",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730794666631,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730795052667,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730795193305,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730795196746,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730795201280,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730795210016,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796099147,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796182528,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 9,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796211307,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            {
+              "reps": "5",
+              "weight": "5"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "2",
+              "weight": "2"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796274126,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "0"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796768280,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796885963,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 9,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796887749,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 9,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796891478,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796892812,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 9,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796894677,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796895412,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 9,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796896518,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 9,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796967703,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796968480,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796969146,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796969645,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796970497,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796971013,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796971797,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796972766,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796973613,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796974196,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796974865,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796975295,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796975662,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796976014,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796976394,
+      "workout_date": "2024-11-04",
+      "exercises": []
+    },
+    {
+      "id": 1730796976750,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796978966,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796979911,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796980350,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796980763,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796981146,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796982611,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796983160,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796986932,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Ноги",
+          "exercise": "Присед",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796987463,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Руки",
+          "exercise": "Подъем гантелей на скамье 45",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796988113,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Плечи",
+          "exercise": "Жим штанги сидя на скамье",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796989529,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Прочее",
+          "exercise": "Гиперэкстензия",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796989996,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "",
+              "weight": ""
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796990380,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "12",
+              "weight": "12"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796990700,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796991114,
+      "workout_date": "2024-11-04",
+      "exercises": []
+    },
+    {
+      "id": 1730796996900,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796998095,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796998947,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730796999978,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730797000647,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730797001628,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730797003432,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730797004796,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730797005877,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730797006345,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730797007161,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730797007764,
+      "workout_date": "2024-11-04",
+      "exercises": []
+    },
+    {
+      "id": 1730797008581,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730797176757,
+      "workout_date": "2024-11-04",
+      "exercises": []
+    },
+    {
+      "id": 1730797178416,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730797189435,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730797190384,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730798320469,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730798323965,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730798325771,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730798326675,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730798327717,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730798328939,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730798485811,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730798489016,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730798600090,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730798605267,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730798683039,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730799221585,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730799223243,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730799224629,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа 45",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730799226230,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730799428616,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730799429639,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730799712536,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730799922870,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730799923846,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730799974303,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Брусья",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "10"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730799995075,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730800150480,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730800157474,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730800294508,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 7,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730800464338,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 6,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730800464796,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730800465048,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730800465258,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730800465461,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730800465891,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730800560399,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730800562223,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730800563926,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730801556983,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730801559008,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730801847714,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730801851790,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730801853080,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730801854243,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730801855339,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730802038969,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730802039928,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null,
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730802150128,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730802155625,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730802165910,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730802166840,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730802171209,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730803265668,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730803267175,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730803349707,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730808660045,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730808662107,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730809769226,
+      "workout_date": "2024-11-04",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 4,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        },
+        {
+          "id": 5,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730810285717,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "0"
+            },
+            null
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730810290159,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "0"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730810486847,
+      "workout_date": "2024-11-07",
+      "exercises": []
+    },
+    {
+      "id": 1730810489675,
+      "workout_date": "2024-11-06",
+      "exercises": []
+    },
+    {
+      "id": 1730810534343,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "0"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730810535324,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "0"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730810535857,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "0"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730810536575,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "0"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730810537774,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "0"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730810538844,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "0"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            null,
+            null
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1730810543726,
+      "workout_date": "2024-11-05",
+      "exercises": [
+        {
+          "id": 1,
+          "muscleGroup": "Грудь",
+          "exercise": "Жим штанги лежа Горизонт",
+          "sets": [
+            {
+              "reps": "10",
+              "weight": "0"
+            },
+            {
+              "reps": "1",
+              "weight": "1"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "muscleGroup": "Спина",
+          "exercise": "Тяга верхнего блока",
+          "sets": [
+            null,
+            {
+              "reps": "10",
+              "weight": "10"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "muscleGroup": "",
+          "exercise": "",
+          "sets": [
+            {
+              "reps": "1",
+              "weight": "1"
+            },
+            null
+          ]
+        }
+      ]
+    }
+  ]
+}

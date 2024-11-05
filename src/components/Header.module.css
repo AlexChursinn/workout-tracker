@@ -1,0 +1,43 @@
+/* src/components/Header.module.css */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  height: 70px;
+  max-height: 70px;
+}
+
+.logo {
+  width: 50px;
+  height: auto;
+}
+
+.themeToggle {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.themeToggle img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Адаптация для планшетов */
+@media (max-width: 768px) {
+  .themeToggle {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 480px) {
+  .themeToggle {
+    width: 20px;
+    height: 20px;
+  }
+}
