@@ -1,8 +1,6 @@
 // src/api.js
 
-const API_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://workout-tracker-hljr.onrender.com/api' // URL вашего backend на Render
-  : 'http://localhost:3001/api';
+const API_URL = 'http://localhost:3001/api'; // Убедитесь, что это соответствует адресу вашего локального сервера
 
 // Функция для получения тренировок текущего пользователя
 export const getWorkouts = async () => {
