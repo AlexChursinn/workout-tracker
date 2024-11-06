@@ -1,13 +1,15 @@
-// src/index.js
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client'; // Изменено на новый API
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';  // Импортируем BrowserRouter
+import { BrowserRouter } from 'react-router-dom'; // Импортируем BrowserRouter
 import './global.css';
 
-ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById('root')
+// Используем createRoot для поддержки React 18
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
 );

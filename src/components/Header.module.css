@@ -1,9 +1,8 @@
-/* src/components/Header.module.css */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 0px;
   background-color: var(--bg-color);
   color: var(--text-color);
   height: 70px;
@@ -13,6 +12,12 @@
 .logo {
   width: 50px;
   height: auto;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Расстояние между элементами */
 }
 
 .themeToggle {
@@ -26,18 +31,49 @@
   height: 100%;
 }
 
+/* Отключение hover-эффекта */
+.themeToggle:hover,
+.logoutButton:hover,
+.logoutIcon:hover {
+  background: none;
+  transform: none;
+  filter: none;
+}
+
+.logoutButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.logoutIcon {
+  width: 30px;
+  height: 30px;
+}
+
 /* Адаптация для планшетов */
 @media (max-width: 768px) {
-  .themeToggle {
+  .themeToggle,
+  .logoutIcon {
     width: 25px;
     height: 25px;
+  }
+
+  .controls {
+    gap: 10px;
   }
 }
 
 /* Адаптация для мобильных устройств */
 @media (max-width: 480px) {
-  .themeToggle {
+  .themeToggle,
+  .logoutIcon {
     width: 20px;
     height: 20px;
+  }
+
+  .controls {
+    gap: 8px;
   }
 }
