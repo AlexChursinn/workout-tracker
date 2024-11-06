@@ -6,7 +6,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://workout-tracker-beta-rose.vercel.app'], // Добавьте URL вашего фронтенда
+  origin: '*', // Временно разрешить все источники для тестирования
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
