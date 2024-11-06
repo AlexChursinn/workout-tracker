@@ -8,7 +8,7 @@
     --table-border-color: #ddd;
     --button-bg-color: #300F0F;
     --button-text-color: #fff;
-    --icon-color: 0; /* Черный для светлой темы */
+    --icon-color: #000000; /* Черный для светлой темы */
 }
 
 /* Темная тема */
@@ -19,7 +19,7 @@
     --table-border-color: #333;
     --button-bg-color: #3a3a3a;
     --button-text-color: #fff;
-    --icon-color: 1; /* Белый для темной темы */
+    --icon-color: #ffffff; /* Белый для темной темы */
 }
 
 /* Применение переменных ко всему сайту */
@@ -60,7 +60,3 @@ button {
     border-radius: 4px;
     transition: background-color 0.3s;
 }
-
-/* button:hover {
-    background-color: #300F0F;
-} */

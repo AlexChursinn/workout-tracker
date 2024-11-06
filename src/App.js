@@ -65,8 +65,7 @@ const App = () => {
         workout_date: workoutDate,
         exercises: dataForDate,
       };
-      // eslint-disable-next-line no-unused-vars
-      const response = await addWorkout(newWorkout);
+      await addWorkout(newWorkout); // Убрали переменную response
       setWorkoutData((prevData) => ({
         ...prevData,
         [selectedDate.toDateString()]: dataForDate,
@@ -105,7 +104,7 @@ const App = () => {
         />
         <Route path="/analytics" element={<Analytics />} />
       </Routes>
-      <Footer onNavigateToday={() => handleDateSelect(new Date())} />
+      <Footer darkMode={darkMode} onNavigateToday={() => handleDateSelect(new Date())} />
     </div>
   );
 };

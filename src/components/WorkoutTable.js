@@ -1,6 +1,10 @@
+// src/components/WorkoutTable.js
+
 import React, { useState, useEffect } from 'react';
 import ExerciseModal from './ExerciseModal';
 import styles from './WorkoutTable.module.css';
+import copyIcon from '../assets/copy.svg';
+import deleteIcon from '../assets/delete.svg'; // Импортируем иконку удаления
 
 const muscleGroups = {
   "Грудь": ["Жим штанги лежа Горизонт", "Жим штанги лежа 45", "Жим штанги лежа Низ", "Жим гантелей 15", "Жим гантелей 30", "Жим гантелей 45", "Брусья", "Разводка гантелей Горизонт", "Разводка гантелей 15", "Сведение рук в кроссовере", "Бабочка", "Отжимания"],
@@ -70,6 +74,20 @@ const WorkoutTable = ({ date, workoutData, onWorkoutChange }) => {
     handleWorkoutUpdate(updatedWorkouts);
   };
 
+  const handleCopySet = (workoutId) => {
+    const updatedWorkouts = workouts.map((workout) => {
+      if (workout.id === workoutId && workout.sets.length > 0) {
+        const lastSet = workout.sets[workout.sets.length - 1];
+        const newSet = lastSet && lastSet.reps !== undefined && lastSet.weight !== undefined 
+          ? { ...lastSet } 
+          : null;
+        workout.sets = [...workout.sets, newSet];
+      }
+      return workout;
+    });
+    handleWorkoutUpdate(updatedWorkouts);
+  };
+
   return (
     <table className={styles.table}>
       <thead>
@@ -80,7 +98,7 @@ const WorkoutTable = ({ date, workoutData, onWorkoutChange }) => {
           {Array.from({ length: Math.max(...workouts.map(w => w.sets.length), 1) }, (_, i) => (
             <th key={i}>Подход {i + 1}</th>
           ))}
-          <th>Добавить подход</th>
+          <th>Управление подходами</th>
           <th>Удалить</th>
         </tr>
       </thead>
@@ -127,14 +145,21 @@ const WorkoutTable = ({ date, workoutData, onWorkoutChange }) => {
             <td>
               <div className={styles.setControls}>
                 <button className={styles.addSetButton} onClick={() => handleAddSet(workout.id)}>+</button>
+                {workout.sets.length > 0 && (
+                  <button className={styles.copySetButton} onClick={() => handleCopySet(workout.id)}>
+                    <img src={copyIcon} alt="Copy" className={styles.copyIcon} />
+                  </button>
+                )}
                 {workout.sets.length > 1 && (
                   <button className={styles.deleteSetButton} onClick={() => handleDeleteSet(workout.id)}>-</button>
                 )}
               </div>
             </td>
-            <td>
-              <button className={styles.deleteButton} onClick={() => handleDeleteRow(workout.id)}>Удалить</button>
-            </td>
+            <td className={styles.centeredCell}>
+  <button className={styles.deleteButton} onClick={() => handleDeleteRow(workout.id)}>
+    <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} />
+  </button>
+</td>
           </tr>
         ))}
         <tr>

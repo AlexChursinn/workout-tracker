@@ -36,51 +36,41 @@
 .icon {
   width: 24px;
   height: 24px;
-  filter: brightness(0) invert(var(--icon-color));
-  transition: filter 0.3s ease;
+  transition: 0.3s ease;
 }
 
+/* Убираем эффект hover */
+.navButton:hover {
+  background-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Divider */
 .divider {
   height: 40px;
   width: 1px;
   background-color: var(--table-border-color);
 }
 
-.navButton {
-  background: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-}
-
-/* Отключение фона при hover */
-.navButton:hover {
-  background-color: transparent;
-}
-
-/* Адаптивные стили */
+/* Адаптивные стили для планшетов */
 @media (max-width: 768px) {
   .icon {
     width: 20px;
     height: 20px;
   }
-
   .divider {
     height: 30px;
     margin: 0 15px;
   }
 }
 
+/* Адаптивные стили для мобильных устройств */
 @media (max-width: 480px) {
   .icon {
     width: 18px;
     height: 18px;
   }
-
   .divider {
     height: 24px;
     margin: 0 10px;

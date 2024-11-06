@@ -1,16 +1,18 @@
 // src/components/Footer.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import todayIconLight from '../assets/today-icon-light.svg'; // Иконка светлой темы
+import todayIconDark from '../assets/today-icon-dark.svg';   // Иконка темной темы
+import analyticsIconLight from '../assets/analytics-icon-light.svg'; // Иконка светлой темы
+import analyticsIconDark from '../assets/analytics-icon-dark.svg';   // Иконка темной темы
 import styles from './Footer.module.css';
-import todayIcon from '../assets/today-icon.svg'; // Иконка для текущей даты
-import analyticsIcon from '../assets/analytics-icon.svg'; // Иконка для аналитики
 
-const Footer = ({ onNavigateToday }) => {
+const Footer = ({ darkMode, onNavigateToday }) => {
     const navigate = useNavigate();
 
     const handleTodayClick = () => {
-        navigate('/');          // Переход на главную страницу
-        onNavigateToday();       // Установка текущей даты
+        navigate('/');
+        onNavigateToday();
     };
 
     return (
@@ -18,13 +20,25 @@ const Footer = ({ onNavigateToday }) => {
             <div className={styles.container}>
                 <div className={styles.navButton}>
                     <button onClick={handleTodayClick} className={styles.navButton}>
-                        <img src={todayIcon} alt="Сегодня" className={styles.icon} />
+                        {/* Отображаем светлую иконку, если темная тема, и темную, если светлая */}
+                        <img
+                            src={darkMode ? todayIconLight : todayIconDark}
+                            alt="Сегодня"
+                            className={styles.icon}
+                        />
                     </button>
                 </div>
+                
                 <div className={styles.divider}></div>
+                
                 <div className={styles.navButton}>
                     <button onClick={() => navigate('/analytics')} className={styles.navButton}>
-                        <img src={analyticsIcon} alt="Аналитика" className={styles.icon} />
+                        {/* Отображаем светлую иконку, если темная тема, и темную, если светлая */}
+                        <img
+                            src={darkMode ? analyticsIconLight : analyticsIconDark}
+                            alt="Аналитика"
+                            className={styles.icon}
+                        />
                     </button>
                 </div>
             </div>
