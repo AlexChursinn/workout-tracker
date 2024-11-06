@@ -6,7 +6,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000', // Убедитесь, что адрес совпадает с клиентским приложением
+  origin: ['http://localhost:3000', 'https://your-vercel-app-url.com'], // Добавьте URL вашего фронтенда на Vercel
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
