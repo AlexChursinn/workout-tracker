@@ -50,7 +50,7 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/register', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, { // Используйте переменную окружения
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
