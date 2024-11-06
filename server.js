@@ -6,10 +6,15 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000', // Убедитесь, что адрес совпадает с клиентским приложением
+  origin: [
+    'http://localhost:3000', // Локальная разработка
+    'https://workout-tracker-beta-rose.vercel.app', // URL вашего приложения на Vercel
+    'https://workout-tracker-hljr.onrender.com' // URL вашего приложения на Render
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
+
 app.use(express.json());
 
 const SECRET_KEY = 'your_secret_key';
