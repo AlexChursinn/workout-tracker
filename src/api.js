@@ -1,7 +1,7 @@
 // src/api.js
 
 const API_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-render-backend-url.com/api' // Замените на URL вашего backend на Render
+  ? 'https://workout-tracker-hljr.onrender.com/api' // URL вашего backend на Render
   : 'http://localhost:3001/api';
 
 // Функция для получения тренировок текущего пользователя
