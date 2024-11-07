@@ -1,5 +1,7 @@
+// src/components/Login.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import Spinner from './Spinner'; // Импорт компонента спинера
 import styles from './Login.module.css';
 
 const Login = ({ onLogin }) => {
@@ -9,6 +11,7 @@ const Login = ({ onLogin }) => {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState(''); // 'success' или 'error'
   const [isMessageVisible, setIsMessageVisible] = useState(false);
+  const [loading, setLoading] = useState(false); // Добавлено состояние загрузки
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,8 +48,10 @@ const Login = ({ onLogin }) => {
       return;
     }
 
+    setLoading(true); // Включаем спинер при начале загрузки
+
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, { // Используйте переменную окружения
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -60,12 +65,14 @@ const Login = ({ onLogin }) => {
         setMessageType('success');
         setTimeout(() => navigate('/'), 2000);
       } else {
-        setMessage(data.message || 'Ошибка входа. Проверьте ваши данные и попробуйте снова.');
+        setMessage(data.message || 'Ошибка входа. Проверьте ваши данные и попробуйте снова');
         setMessageType('error');
       }
     } catch (error) {
-      setMessage('Произошла ошибка при входе. Попробуйте позже.');
+      setMessage('Произошла ошибка при входе. Попробуйте позже');
       setMessageType('error');
+    } finally {
+      setLoading(false); // Отключаем спинер после завершения загрузки
     }
   };
 
@@ -99,7 +106,9 @@ const Login = ({ onLogin }) => {
         className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
       />
       {errors.password && <p className={styles.errorText}>{errors.password}</p>}
-      <button onClick={handleLogin} className={styles.button}>Войти</button>
+      <button onClick={handleLogin} className={styles.button} disabled={loading}>
+  {loading ? <Spinner darkMode={true} isButton={true} /> : 'Войти'}
+</button>
       <div>
         <Link to="/register" className={styles.link}>Зарегистрироваться</Link>
       </div>

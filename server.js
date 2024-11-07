@@ -63,7 +63,7 @@ app.post('/api/register', async (req, res) => {
     res.status(201).json({ message: 'Регистрация успешна' });
   } catch (error) {
     console.error('Ошибка при хэшировании пароля или записи в базу данных:', error);
-    res.status(500).json({ message: 'Ошибка сервера. Попробуйте позже.' });
+    res.status(500).json({ message: 'Ошибка сервера. Попробуйте позже' });
   }
 });
 

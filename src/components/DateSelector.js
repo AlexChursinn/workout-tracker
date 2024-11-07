@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru'; // Импортируем русский язык
 
-// Регистрируем русский язык для использования в DatePicker
+// Регистрируем русский язык для календаря
 registerLocale('ru', ru);
 
 const DateSelector = ({ selectedDate, onDateSelect, filledDates }) => {

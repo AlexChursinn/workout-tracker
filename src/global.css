@@ -3,10 +3,11 @@
 /* Переменные для светлой темы */
 :root {
     --bg-color: #ffffff;
+    --bg-color-rgb: 255, 255, 255; /* Добавлено для использования в rgba */
     --text-color: #333;
     --table-bg-color: #f4f4f4;
     --table-border-color: #ddd;
-    --button-bg-color: #300F0F;
+    --button-bg-color: #000;
     --button-text-color: #fff;
     --icon-color: #000000; /* Черный для светлой темы */
 }
@@ -14,6 +15,7 @@
 /* Темная тема */
 .dark-theme {
     --bg-color: #121212;
+    --bg-color-rgb: 18, 18, 18; /* Добавлено для использования в rgba */
     --text-color: #e0e0e0;
     --table-bg-color: #1e1e1e;
     --table-border-color: #333;
@@ -21,6 +23,7 @@
     --button-text-color: #fff;
     --icon-color: #ffffff; /* Белый для темной темы */
 }
+
 
 /* Применение переменных ко всему сайту */
 body {

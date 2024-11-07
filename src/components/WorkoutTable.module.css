@@ -58,10 +58,6 @@ button {
   margin: 0 auto; /* Центрируем кнопку по горизонтали в ячейке */
 }
 
-.deleteButton:hover {
-  background-color: var(--button-bg-color-hover, #4CAF50);
-}
-
 /* Стили для иконки удаления */
 .deleteIcon {
   width: 15px;
@@ -88,8 +84,8 @@ button {
   transition: background-color 0.3s;
 }
 
-.addSetButton:hover, .deleteSetButton:hover, .copySetButton:hover {
-  background-color: var(--button-bg-color-hover, #4CAF50);
+.addSetButton:hover, .deleteSetButton:hover, .copySetButton:hover, .deleteButton:hover  {
+  background-color: var(--button-bg-color-hover, #4d4d4d);
 }
 
 /* Стили для иконки копирования */
@@ -128,6 +124,10 @@ select:focus {
   border-color: var(--button-bg-color);
   background-color: var(--bg-color);
   box-shadow: 0 0 5px rgba(48, 15, 15, 1);
+}
+
+.addExerciseButton:hover {
+  background-color: #4d4d4d;
 }
 
 /* Адаптивность для мобильных устройств */

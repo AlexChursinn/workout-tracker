@@ -1,10 +1,10 @@
 // src/components/Footer.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import todayIconLight from '../assets/today-icon-light.svg'; // Иконка светлой темы
-import todayIconDark from '../assets/today-icon-dark.svg';   // Иконка темной темы
-import analyticsIconLight from '../assets/analytics-icon-light.svg'; // Иконка светлой темы
-import analyticsIconDark from '../assets/analytics-icon-dark.svg';   // Иконка темной темы
+import todayIconLight from '../assets/today-icon-light.svg'; 
+import todayIconDark from '../assets/today-icon-dark.svg';  
+import analyticsIconLight from '../assets/analytics-icon-light.svg'; 
+import analyticsIconDark from '../assets/analytics-icon-dark.svg';  
 import styles from './Footer.module.css';
 
 const Footer = ({ darkMode, onNavigateToday }) => {

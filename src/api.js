@@ -1,7 +1,6 @@
 // src/api.js
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
-// Убедитесь, что это соответствует адресу вашего локального сервера
 
 // Функция для получения тренировок текущего пользователя
 export const getWorkouts = async () => {

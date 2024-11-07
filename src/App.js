@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Header from './components/Header';
@@ -8,6 +9,7 @@ import Analytics from './components/Analytics';
 import Login from './components/Login';
 import Register from './components/Register';
 import ProtectedRoute from './ProtectedRoute';
+import Spinner from './components/Spinner';
 import { getWorkouts, addWorkout } from './api';
 import './global.css';
 import './App.css';
@@ -22,6 +24,7 @@ const App = () => {
   const [workoutData, setWorkoutData] = useState({});
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('jwt'));
   const [authToken, setAuthToken] = useState(localStorage.getItem('jwt') || null);
+  const [loading, setLoading] = useState(true); // Состояние для загрузки
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -48,9 +51,11 @@ const App = () => {
 
   const fetchData = async () => {
     try {
+      setLoading(true); // Включение спиннера перед загрузкой данных
       const token = authToken;
       if (!token) {
         setWorkoutData({});
+        setLoading(false); // Выключение спиннера после завершения загрузки
         return;
       }
 
@@ -63,6 +68,8 @@ const App = () => {
       setWorkoutData(formattedData);
     } catch (error) {
       console.error('Ошибка при загрузке данных:', error);
+    } finally {
+      setLoading(false); // Отключение спиннера в случае ошибки или успешной загрузки
     }
   };
 
@@ -130,25 +137,22 @@ const App = () => {
                   onDateSelect={handleDateSelect}
                   filledDates={filledDates}
                 />
-                {showTable && (
-                  <WorkoutTable
-                    date={selectedDate}
-                    workoutData={workoutData[selectedDate.toDateString()] || []}
-                    onWorkoutChange={handleWorkoutChange}
-                  />
+                {loading ? (
+                  <Spinner darkMode={darkMode} /> // Отображение спиннера при загрузке данных
+                ) : (
+                  showTable && (
+                    <WorkoutTable
+                      date={selectedDate}
+                      workoutData={workoutData[selectedDate.toDateString()] || []}
+                      onWorkoutChange={handleWorkoutChange}
+                    />
+                  )
                 )}
               </>
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/analytics"
-          element={
-            <ProtectedRoute>
-              <Analytics />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
       {!isAuthPage && (

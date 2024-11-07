@@ -1,37 +1,28 @@
 /* src/components/Spinner.module.css */
+.spinnerContainer {
+  display: flex;
+  justify-content: center; /* Центрирует по горизонтали */
+  align-items: flex-start; /* Располагает сверху */
+}
+
 .spinner {
-    width: 40px;
-    height: 40px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
+  width: 50px; /* Настрой размер при необходимости */
+  height: 50px;
+  animation: spin 1s linear infinite; /* Анимация вращения */
+  padding-top: 100px; /* Отступ сверху для спиннера, настройте по необходимости */
+}
+
+.spinnerButton {
+  width: 20px; /* Измените размер по необходимости */
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  .doubleBounce1,
-  .doubleBounce2 {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: #333;
-    opacity: 0.6;
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation: bounce 2.0s infinite ease-in-out;
+  100% {
+    transform: rotate(360deg);
   }
-  
-  .doubleBounce2 {
-    animation-delay: -1.0s;
-  }
-  
-  @keyframes bounce {
-    0%, 100% {
-      transform: scale(0.0);
-    }
-    50% {
-      transform: scale(1.0);
-    }
-  }
-  
+}

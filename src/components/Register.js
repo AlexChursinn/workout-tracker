@@ -1,5 +1,7 @@
+// src/components/Register.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Spinner from './Spinner'; // Импорт компонента спинера
 import styles from './Register.module.css';
 
 const Register = () => {
@@ -10,6 +12,7 @@ const Register = () => {
   const [messageType, setMessageType] = useState(''); // 'success' или 'error'
   const [errors, setErrors] = useState({});
   const [isMessageVisible, setIsMessageVisible] = useState(false);
+  const [loading, setLoading] = useState(false); // Добавлено состояние загрузки
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,8 +52,10 @@ const Register = () => {
       return;
     }
 
+    setLoading(true); // Включаем спинер при начале загрузки
+
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, { // Используйте переменную окружения
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -66,13 +71,15 @@ const Register = () => {
           navigate('/login');
         }, 2000);
       } else {
-        setMessage(data.message || 'Ошибка регистрации. Попробуйте снова.');
+        setMessage(data.message || 'Ошибка регистрации. Попробуйте снова');
         setMessageType('error');
       }
     } catch (error) {
       console.error('Ошибка при отправке запроса на регистрацию:', error);
-      setMessage('Произошла ошибка при регистрации. Попробуйте позже.');
+      setMessage('Произошла ошибка при регистрации. Попробуйте позже');
       setMessageType('error');
+    } finally {
+      setLoading(false); // Отключаем спинер после завершения загрузки
     }
   };
 
@@ -118,7 +125,9 @@ const Register = () => {
         className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
       />
       {errors.password && <p className={styles.errorText}>{errors.password}</p>}
-      <button onClick={handleRegister} className={styles.button}>Зарегистрироваться</button>
+      <button onClick={handleRegister} className={styles.button} disabled={loading}>
+  {loading ? <Spinner darkMode={true} isButton={true} /> : 'Зарегистрироваться'}
+</button>
       <button onClick={() => navigate('/login')} className={styles.backButton}>Вернуться на страницу входа</button>
       {message && (
         <p className={`${styles.message} ${isMessageVisible ? styles.messageVisible : ''} ${messageType === 'success' ? styles.successMessage : styles.errorMessage}`}>

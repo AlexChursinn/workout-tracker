@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import ExerciseModal from './ExerciseModal';
 import styles from './WorkoutTable.module.css';
 import copyIcon from '../assets/copy.svg';
-import deleteIcon from '../assets/delete.svg'; // Импортируем иконку удаления
+import deleteIcon from '../assets/delete.svg'; 
 
 const muscleGroups = {
   "Грудь": ["Жим штанги лежа Горизонт", "Жим штанги лежа 45", "Жим штанги лежа Низ", "Жим гантелей 15", "Жим гантелей 30", "Жим гантелей 45", "Брусья", "Разводка гантелей Горизонт", "Разводка гантелей 15", "Сведение рук в кроссовере", "Бабочка", "Отжимания"],
