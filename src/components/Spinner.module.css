@@ -9,7 +9,6 @@
   width: 50px; /* Настрой размер при необходимости */
   height: 50px;
   animation: spin 1s linear infinite; /* Анимация вращения */
-  padding-top: 100px; /* Отступ сверху для спиннера, настройте по необходимости */
 }
 
 .spinnerButton {
