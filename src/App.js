@@ -51,8 +51,8 @@ const App = () => {
 
   const fetchData = async () => {
     try {
-      // Сохранение текущей позиции скролла
-      const scrollPosition = window.scrollY;
+      // Сохранение текущей позиции скролла для разных браузеров и устройств
+      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       setLoading(true); // Включение спиннера перед загрузкой данных
 
       const token = authToken;
@@ -72,8 +72,11 @@ const App = () => {
 
       // Восстановление позиции скролла после обновления данных
       setTimeout(() => {
-        window.scrollTo(0, scrollPosition);
-      }, 0);
+        window.scrollTo({
+          top: scrollPosition,
+          behavior: 'instant', // Измените на 'smooth' для плавной прокрутки, если нужно
+        });
+      }, 100); // Можно увеличить значение для обеспечения полной загрузки на мобильных устройствах
     } catch (error) {
       console.error('Ошибка при загрузке данных:', error);
     } finally {
