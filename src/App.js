@@ -51,7 +51,10 @@ const App = () => {
 
   const fetchData = async () => {
     try {
+      // Сохранение текущей позиции скролла
+      const scrollPosition = window.scrollY;
       setLoading(true); // Включение спиннера перед загрузкой данных
+
       const token = authToken;
       if (!token) {
         setWorkoutData({});
@@ -66,6 +69,11 @@ const App = () => {
         return acc;
       }, {});
       setWorkoutData(formattedData);
+
+      // Восстановление позиции скролла после обновления данных
+      setTimeout(() => {
+        window.scrollTo(0, scrollPosition);
+      }, 0);
     } catch (error) {
       console.error('Ошибка при загрузке данных:', error);
     } finally {
