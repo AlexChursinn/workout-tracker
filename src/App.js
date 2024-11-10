@@ -1,6 +1,6 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import Header from './components/Header';
 import WorkoutPage from './components/WorkoutPage';
 import Footer from './components/Footer';
@@ -10,7 +10,7 @@ import Register from './components/Register';
 import ProtectedRoute from './ProtectedRoute';
 import Spinner from './components/Spinner';
 import Home from './components/Home';
-import { getWorkouts, addWorkout } from './api';
+import { getWorkouts, addWorkout, refreshAuthToken } from './api';
 import './global.css';
 
 const App = () => {
@@ -39,6 +39,16 @@ const App = () => {
     navigate('/login');
   };
 
+  const isTokenExpired = (token) => {
+    try {
+      const decoded = jwtDecode(token);
+      return decoded.exp * 1000 < Date.now(); // Проверка истечения срока действия
+    } catch (error) {
+      console.error('Ошибка при проверке токена:', error);
+      return true; // Считаем токен истекшим в случае ошибки
+    }
+  };
+
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add('dark-theme');
@@ -49,15 +59,22 @@ const App = () => {
   }, [darkMode]);
 
   useEffect(() => {
-    if (isAuthenticated && authToken) {
-      fetchData().then(() => {
-        // Восстанавливаем положение прокрутки после загрузки данных
-        const savedPosition = sessionStorage.getItem('scrollPosition');
-        if (savedPosition !== null) {
-          window.scrollTo(0, parseInt(savedPosition, 10));
+    const checkAndRefreshToken = async () => {
+      if (authToken && isTokenExpired(authToken)) {
+        const newToken = await refreshAuthToken();
+        if (newToken) {
+          setAuthToken(newToken);
+          setIsAuthenticated(true);
+          fetchData();
+        } else {
+          handleLogout(); // Если обновление не удалось, выполняем выход
         }
-      });
-    }
+      } else if (isAuthenticated && authToken) {
+        fetchData();
+      }
+    };
+
+    checkAndRefreshToken();
   }, [isAuthenticated, authToken]);
 
   useEffect(() => {
@@ -130,7 +147,6 @@ const App = () => {
 
   const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
 
-  // Сохраняем положение прокрутки перед обновлением или уходом со страницы
   useEffect(() => {
     const saveScrollPosition = () => {
       sessionStorage.setItem('scrollPosition', window.scrollY);
@@ -144,7 +160,6 @@ const App = () => {
     };
   }, []);
 
-  // Прокручиваем страницу вверх при переходе на новую страницу
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);

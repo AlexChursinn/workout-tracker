@@ -1,15 +1,27 @@
-// src/api.js
-
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 
 // Функция для получения тренировок текущего пользователя
 export const getWorkouts = async (token) => {
   try {
-    const response = await fetch(`${API_URL}/user-workouts`, {
+    let response = await fetch(`${API_URL}/user-workouts`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
     });
+
+    if (response.status === 401) {
+      const newToken = await refreshAuthToken();
+      if (newToken) {
+        response = await fetch(`${API_URL}/user-workouts`, {
+          headers: {
+            'Authorization': `Bearer ${newToken}`,
+          },
+        });
+      } else {
+        throw new Error('Токен истек и не удалось обновить его');
+      }
+    }
+
     if (!response.ok) {
       throw new Error('Ошибка при загрузке тренировок');
     }
@@ -38,6 +50,28 @@ export const addWorkout = async (workout, token) => {
   } catch (error) {
     console.error('Ошибка при добавлении тренировки:', error);
     throw error;
+  }
+};
+
+// Функция для обновления токена
+export const refreshAuthToken = async () => {
+  try {
+    const response = await fetch(`${API_URL}/refresh-token`, {
+      method: 'POST',
+      credentials: 'include', // Используется, если refresh token хранится в httpOnly cookie
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem('jwt', data.accessToken); // Сохраняем новый токен в localStorage
+      return data.accessToken;
+    } else {
+      console.error('Ошибка при обновлении токена');
+      return null;
+    }
+  } catch (error) {
+    console.error('Ошибка при обновлении токена:', error);
+    return null;
   }
 };
 
