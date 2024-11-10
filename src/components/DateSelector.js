@@ -1,10 +1,10 @@
+// src/components/DateSelector.js
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
-import ru from 'date-fns/locale/ru'; // Импортируем русский язык
+import ru from 'date-fns/locale/ru';
 
-// Регистрируем русский язык для календаря
 registerLocale('ru', ru);
 
 const DateSelector = ({ selectedDate, onDateSelect, filledDates }) => {
@@ -44,9 +44,8 @@ const DateSelector = ({ selectedDate, onDateSelect, filledDates }) => {
           }}
           inline
           renderDayContents={renderDayContents}
-          locale="ru" // Устанавливаем русский язык
+          locale="ru"
           dateFormat="dd.MM.yyyy"
-          showPopperArrow={false} // Скрываем стрелку поппера
         />
       )}
     </div>

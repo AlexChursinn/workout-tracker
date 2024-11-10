@@ -1,0 +1,65 @@
+.homeContainer {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.dateHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+
+.calendarIcon {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.3s ease;
+}
+
+.workoutBlock {
+  background-color: var(--table-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--table-border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%; /* Устанавливаем ширину на 90% для большей гибкости */
+  max-width: 600px; /* Ограничиваем максимальную ширину */
+  margin-left: auto; /* Центрируем блок */
+  margin-right: auto; /* Центрируем блок */
+  box-sizing: border-box; /* Чтобы отступы и границы учитывались в ширине */
+}
+
+.workoutBlockContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.doneIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.workoutBlock h3 {
+  margin: 0; /* Убираем отступы */
+}
+
+.workoutBlock p {
+  margin: 15px 0 0 0; /* Отступ сверху */
+  text-align: left; /* Выравнивание текста по левому краю */
+}
+
+.workoutBlock:hover {
+  background-color: rgba(var(--bg-color-rgb), 0.8);
+}
+
+.noWorkoutsMessage {
+  color: var(--text-color);
+  font-size: 1.5rem;
+}

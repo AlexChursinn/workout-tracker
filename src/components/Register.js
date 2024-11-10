@@ -126,8 +126,8 @@ const Register = () => {
       />
       {errors.password && <p className={styles.errorText}>{errors.password}</p>}
       <button onClick={handleRegister} className={styles.button} disabled={loading}>
-  {loading ? <Spinner darkMode={true} isButton={true} /> : 'Зарегистрироваться'}
-</button>
+        {loading ? <Spinner darkMode={true} isButton={true} /> : 'Зарегистрироваться'}
+      </button>
       <button onClick={() => navigate('/login')} className={styles.backButton}>Вернуться на страницу входа</button>
       {message && (
         <p className={`${styles.message} ${isMessageVisible ? styles.messageVisible : ''} ${messageType === 'success' ? styles.successMessage : styles.errorMessage}`}>

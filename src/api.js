@@ -3,11 +3,11 @@
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 
 // Функция для получения тренировок текущего пользователя
-export const getWorkouts = async () => {
+export const getWorkouts = async (token) => {
   try {
     const response = await fetch(`${API_URL}/user-workouts`, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Authorization': `Bearer ${token}`,
       },
     });
     if (!response.ok) {
@@ -21,13 +21,13 @@ export const getWorkouts = async () => {
 };
 
 // Функция для добавления новой тренировки
-export const addWorkout = async (workout) => {
+export const addWorkout = async (workout, token) => {
   try {
     const response = await fetch(`${API_URL}/user-workouts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(workout),
     });

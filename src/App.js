@@ -1,18 +1,17 @@
 // src/App.js
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
-import DateSelector from './components/DateSelector';
-import WorkoutTable from './components/WorkoutTable';
+import WorkoutPage from './components/WorkoutPage';
 import Footer from './components/Footer';
 import Analytics from './components/Analytics';
 import Login from './components/Login';
 import Register from './components/Register';
 import ProtectedRoute from './ProtectedRoute';
 import Spinner from './components/Spinner';
+import Home from './components/Home';
 import { getWorkouts, addWorkout } from './api';
 import './global.css';
-import './App.css';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
@@ -24,9 +23,9 @@ const App = () => {
   const [workoutData, setWorkoutData] = useState({});
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('jwt'));
   const [authToken, setAuthToken] = useState(localStorage.getItem('jwt') || null);
-  const [loading, setLoading] = useState(true); // Состояние для загрузки
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleTheme = () => {
     setDarkMode((prevMode) => !prevMode);
@@ -51,14 +50,11 @@ const App = () => {
 
   const fetchData = async () => {
     try {
-      // Сохранение текущей позиции скролла для разных браузеров и устройств
-      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-      setLoading(true); // Включение спиннера перед загрузкой данных
-
+      setLoading(true);
       const token = authToken;
       if (!token) {
         setWorkoutData({});
-        setLoading(false); // Выключение спиннера после завершения загрузки
+        setLoading(false);
         return;
       }
 
@@ -69,24 +65,22 @@ const App = () => {
         return acc;
       }, {});
       setWorkoutData(formattedData);
-
-      // Восстановление позиции скролла после обновления данных
-      setTimeout(() => {
-        window.scrollTo({
-          top: scrollPosition,
-          behavior: 'instant', // Измените на 'smooth' для плавной прокрутки, если нужно
-        });
-      }, 100); // Можно увеличить значение для обеспечения полной загрузки на мобильных устройствах
     } catch (error) {
       console.error('Ошибка при загрузке данных:', error);
     } finally {
-      setLoading(false); // Отключение спиннера в случае ошибки или успешной загрузки
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     if (isAuthenticated && authToken) {
-      fetchData();
+      fetchData().then(() => {
+        // Восстанавливаем положение прокрутки после загрузки данных
+        const savedPosition = sessionStorage.getItem('scrollPosition');
+        if (savedPosition !== null) {
+          window.scrollTo(0, parseInt(savedPosition, 10));
+        }
+      });
     }
   }, [isAuthenticated, authToken]);
 
@@ -119,8 +113,12 @@ const App = () => {
         exercises: dataForDate,
       };
 
+      setWorkoutData((prevData) => ({
+        ...prevData,
+        [new Date(workoutDate).toDateString()]: dataForDate,
+      }));
+
       await addWorkout(newWorkout, token);
-      fetchData();
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
     }
@@ -132,39 +130,56 @@ const App = () => {
 
   const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
 
+  // Сохраняем положение прокрутки перед обновлением или уходом со страницы
+  useEffect(() => {
+    const saveScrollPosition = () => {
+      sessionStorage.setItem('scrollPosition', window.scrollY);
+    };
+
+    window.addEventListener('beforeunload', saveScrollPosition);
+    window.addEventListener('pagehide', saveScrollPosition);
+    return () => {
+      window.removeEventListener('beforeunload', saveScrollPosition);
+      window.removeEventListener('pagehide', saveScrollPosition);
+    };
+  }, []);
+
   return (
     <div className="container">
-      <Header darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} showLogoutButton={!isAuthPage} />
+      <Header
+        darkMode={darkMode}
+        toggleTheme={toggleTheme}
+        onLogout={handleLogout}
+        showLogoutButton={!isAuthPage}
+      />
       <Routes>
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
         <Route
-          path="/"
+          path="/:date"
           element={
-            <ProtectedRoute key={isAuthenticated}>
-              <>
-                <DateSelector
-                  selectedDate={selectedDate}
-                  onDateSelect={handleDateSelect}
-                  filledDates={filledDates}
-                />
-                {loading ? (
-                  <Spinner darkMode={darkMode} /> // Отображение спиннера при загрузке данных
-                ) : (
-                  showTable && (
-                    <WorkoutTable
-                      date={selectedDate}
-                      workoutData={workoutData[selectedDate.toDateString()] || []}
-                      onWorkoutChange={handleWorkoutChange}
-                    />
-                  )
-                )}
-              </>
+            <ProtectedRoute>
+              <WorkoutPage
+                workoutData={workoutData}
+                selectedDate={selectedDate}
+                onDateSelect={handleDateSelect}
+                onWorkoutChange={handleWorkoutChange}
+                loading={loading}
+                darkMode={darkMode}
+              />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home workoutData={workoutData} onDateSelect={handleDateSelect} darkMode={darkMode} loading={loading}/>
             </ProtectedRoute>
           }
         />
         <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
       {!isAuthPage && (
         <Footer darkMode={darkMode} onNavigateToday={() => handleDateSelect(new Date())} />

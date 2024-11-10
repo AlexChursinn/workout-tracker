@@ -1,20 +1,29 @@
 /* src/components/Spinner.module.css */
 .spinnerContainer {
   display: flex;
-  justify-content: center; /* Центрирует по горизонтали */
-  align-items: flex-start; /* Располагает сверху */
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Обеспечивает видимость поверх других элементов */
+  width: 100%; /* Охватывает всю ширину страницы */
+  height: 100%; /* Охватывает всю высоту страницы */
 }
 
 .spinner {
-  width: 50px; /* Настрой размер при необходимости */
+  width: 50px; /* Размер спинера */
   height: 50px;
   animation: spin 1s linear infinite; /* Анимация вращения */
 }
 
 .spinnerButton {
-  width: 20px; /* Измените размер по необходимости */
+  width: 20px; /* Размер спинера в кнопках */
   height: 20px;
   animation: spin 1s linear infinite;
+  display: inline-block; /* Устанавливаем спинер в строку */
+  vertical-align: middle; /* Центрирование по вертикали */
 }
 
 @keyframes spin {

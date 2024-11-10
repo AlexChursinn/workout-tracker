@@ -7,12 +7,11 @@ import analyticsIconLight from '../assets/analytics-icon-light.svg';
 import analyticsIconDark from '../assets/analytics-icon-dark.svg';  
 import styles from './Footer.module.css';
 
-const Footer = ({ darkMode, onNavigateToday }) => {
+const Footer = ({ darkMode }) => {
     const navigate = useNavigate();
 
     const handleTodayClick = () => {
-        navigate('/');
-        onNavigateToday();
+        navigate('/home');
     };
 
     return (

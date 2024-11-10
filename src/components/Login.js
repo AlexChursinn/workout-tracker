@@ -107,8 +107,8 @@ const Login = ({ onLogin }) => {
       />
       {errors.password && <p className={styles.errorText}>{errors.password}</p>}
       <button onClick={handleLogin} className={styles.button} disabled={loading}>
-  {loading ? <Spinner darkMode={true} isButton={true} /> : 'Войти'}
-</button>
+        {loading ? <Spinner darkMode={true} isButton={true} /> : 'Войти'}
+      </button>
       <div>
         <Link to="/register" className={styles.link}>Зарегистрироваться</Link>
       </div>
