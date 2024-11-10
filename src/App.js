@@ -48,6 +48,23 @@ const App = () => {
     localStorage.setItem('darkMode', darkMode);
   }, [darkMode]);
 
+  useEffect(() => {
+    if (isAuthenticated && authToken) {
+      fetchData().then(() => {
+        // Восстанавливаем положение прокрутки после загрузки данных
+        const savedPosition = sessionStorage.getItem('scrollPosition');
+        if (savedPosition !== null) {
+          window.scrollTo(0, parseInt(savedPosition, 10));
+        }
+      });
+    }
+  }, [isAuthenticated, authToken]);
+
+  useEffect(() => {
+    localStorage.setItem('selectedDate', selectedDate.toISOString());
+    localStorage.setItem('showTable', showTable);
+  }, [selectedDate, showTable]);
+
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -71,23 +88,6 @@ const App = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    if (isAuthenticated && authToken) {
-      fetchData().then(() => {
-        // Восстанавливаем положение прокрутки после загрузки данных
-        const savedPosition = sessionStorage.getItem('scrollPosition');
-        if (savedPosition !== null) {
-          window.scrollTo(0, parseInt(savedPosition, 10));
-        }
-      });
-    }
-  }, [isAuthenticated, authToken]);
-
-  useEffect(() => {
-    localStorage.setItem('selectedDate', selectedDate.toISOString());
-    localStorage.setItem('showTable', showTable);
-  }, [selectedDate, showTable]);
 
   const handleDateSelect = (date) => {
     setSelectedDate(date);
@@ -144,6 +144,11 @@ const App = () => {
     };
   }, []);
 
+  // Прокручиваем страницу вверх при переходе на новую страницу
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <div className="container">
       <Header
@@ -174,7 +179,7 @@ const App = () => {
           path="/home"
           element={
             <ProtectedRoute>
-              <Home workoutData={workoutData} onDateSelect={handleDateSelect} darkMode={darkMode} loading={loading}/>
+              <Home workoutData={workoutData} onDateSelect={handleDateSelect} darkMode={darkMode} loading={loading} />
             </ProtectedRoute>
           }
         />
