@@ -10,6 +10,7 @@ export const useWorkoutTable = (initialWorkoutData, onWorkoutChange) => {
   }, [initialWorkoutData]);
 
   const handleWorkoutUpdate = (updatedWorkouts) => {
+    console.log('Updated workouts:', updatedWorkouts); // Отладочное сообщение
     setWorkouts(updatedWorkouts);
     onWorkoutChange(updatedWorkouts);
   };
