@@ -24,6 +24,7 @@
   cursor: pointer;
   width: 30px;
   height: 30px;
+  margin-right: 10px;
 }
 
 .themeToggle img {
@@ -44,12 +45,18 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
+  padding: 0; /* Убираем padding */
+  width: 30px; /* Фиксированный размер */
+  height: 30px; /* Фиксированный размер */
+  display: flex;
+  align-items: center; /* Центрирование по вертикали */
+  justify-content: center; /* Центрирование по горизонтали */
+  margin: 0 auto; /* Центрирование при необходимости */
 }
 
 .logoutIcon {
-  width: 30px;
-  height: 30px;
+  width: 100%; /* Иконка занимает всю ширину и высоту */
+  height: 100%;
 }
 
 /* Адаптация для планшетов */

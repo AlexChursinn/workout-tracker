@@ -68,7 +68,7 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading }) => {
                 />
                 <h3>{new Date(date).toLocaleDateString()}</h3>
               </div>
-              <p>{workoutData[date]?.name || 'Название тренировки'}</p>
+             {/*  <p>{workoutData[date]?.name || 'Название тренировки'}</p> */}
             </div>
           ))}
         </>
