@@ -65,7 +65,6 @@ const App = () => {
         if (newToken) {
           setAuthToken(newToken);
           setIsAuthenticated(true);
-          fetchData();
         } else {
           handleLogout(); // Если обновление не удалось, выполняем выход
         }
@@ -74,7 +73,12 @@ const App = () => {
       }
     };
 
-    checkAndRefreshToken();
+    // Устанавливаем интервал для регулярной проверки токена
+    const interval = setInterval(checkAndRefreshToken, 1 * 60 * 1000); // Проверка каждые 15 минут
+
+    checkAndRefreshToken(); // Первоначальная проверка при монтировании компонента
+
+    return () => clearInterval(interval);
   }, [isAuthenticated, authToken]);
 
   useEffect(() => {
@@ -85,14 +89,17 @@ const App = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const token = authToken;
-      if (!token) {
-        setWorkoutData({});
-        setLoading(false);
-        return;
+      if (authToken && isTokenExpired(authToken)) {
+        const newToken = await refreshAuthToken();
+        if (newToken) {
+          setAuthToken(newToken);
+        } else {
+          handleLogout();
+          return;
+        }
       }
 
-      const response = await getWorkouts(token);
+      const response = await getWorkouts(authToken);
       const { workouts } = response;
       const formattedData = workouts.reduce((acc, workout) => {
         acc[new Date(workout.workout_date).toDateString()] = workout.exercises || [];
@@ -101,6 +108,9 @@ const App = () => {
       setWorkoutData(formattedData);
     } catch (error) {
       console.error('Ошибка при загрузке данных:', error);
+      if (error.message.includes('Unauthorized')) {
+        handleLogout();
+      }
     } finally {
       setLoading(false);
     }
