@@ -3,7 +3,6 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 // Функция для получения тренировок текущего пользователя
 export const getWorkouts = async (token) => {
   try {
-    console.log('Токен для запроса (getWorkouts):', token?.trim());
     if (!token || token.split('.').length !== 3) {
       throw new Error('Некорректный формат токена');
     }
