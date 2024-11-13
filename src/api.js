@@ -3,18 +3,22 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 // Функция для получения тренировок текущего пользователя
 export const getWorkouts = async (token) => {
   try {
+    // Логирование токена перед отправкой запроса
+    console.log('Токен для запроса (getWorkouts):', token?.trim());
+
     let response = await fetch(`${API_URL}/user-workouts`, {
       headers: {
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${token?.trim()}`, // Убираем лишние пробелы
       },
     });
 
     if (response.status === 401) {
+      console.warn('Токен истек. Попытка обновления...');
       const newToken = await refreshAuthToken();
       if (newToken) {
         response = await fetch(`${API_URL}/user-workouts`, {
           headers: {
-            'Authorization': `Bearer ${newToken}`,
+            'Authorization': `Bearer ${newToken.trim()}`,
           },
         });
       } else {
@@ -35,14 +39,17 @@ export const getWorkouts = async (token) => {
 // Функция для добавления новой тренировки
 export const addWorkout = async (workout, token) => {
   try {
+    console.log('Токен для запроса (addWorkout):', token?.trim());
+
     const response = await fetch(`${API_URL}/user-workouts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${token?.trim()}`,
       },
       body: JSON.stringify(workout),
     });
+
     if (!response.ok) {
       throw new Error('Ошибка при добавлении тренировки');
     }
@@ -56,6 +63,8 @@ export const addWorkout = async (workout, token) => {
 // Функция для обновления токена
 export const refreshAuthToken = async () => {
   try {
+    console.log('Попытка обновления токена...');
+
     const response = await fetch(`${API_URL}/refresh-token`, {
       method: 'POST',
       credentials: 'include', // Используется, если refresh token хранится в httpOnly cookie
@@ -63,6 +72,7 @@ export const refreshAuthToken = async () => {
 
     if (response.ok) {
       const data = await response.json();
+      console.log('Обновленный токен:', data.accessToken); // Логирование обновленного токена
       localStorage.setItem('jwt', data.accessToken); // Сохраняем новый токен в localStorage
       return data.accessToken;
     } else {
@@ -78,6 +88,8 @@ export const refreshAuthToken = async () => {
 // Функция для регистрации нового пользователя
 export const registerUser = async (userData) => {
   try {
+    console.log('Попытка регистрации пользователя...');
+
     const response = await fetch(`${API_URL}/register`, {
       method: 'POST',
       headers: {
@@ -85,6 +97,7 @@ export const registerUser = async (userData) => {
       },
       body: JSON.stringify(userData),
     });
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || 'Ошибка регистрации');
@@ -99,6 +112,8 @@ export const registerUser = async (userData) => {
 // Функция для авторизации пользователя
 export const loginUser = async (credentials) => {
   try {
+    console.log('Попытка авторизации пользователя...');
+
     const response = await fetch(`${API_URL}/login`, {
       method: 'POST',
       headers: {
@@ -106,11 +121,16 @@ export const loginUser = async (credentials) => {
       },
       body: JSON.stringify(credentials),
     });
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || 'Ошибка авторизации');
     }
-    return await response.json();
+
+    const data = await response.json();
+    console.log('Получен токен при авторизации:', data.token); // Логирование полученного токена
+    localStorage.setItem('jwt', data.token); // Сохраняем токен в localStorage
+    return data;
   } catch (error) {
     console.error('Ошибка при авторизации пользователя:', error);
     throw error;
