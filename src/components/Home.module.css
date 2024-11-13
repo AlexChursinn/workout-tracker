@@ -35,6 +35,10 @@
   box-sizing: border-box; /* Чтобы отступы и границы учитывались в ширине */
 }
 
+.workoutBlock:last-child {
+  margin-bottom: 0px;
+}
+
 .workoutBlockContent {
   display: flex;
   align-items: center;

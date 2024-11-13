@@ -1,4 +1,3 @@
-// src/components/Home.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DateSelector from './DateSelector';
@@ -13,15 +12,14 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const navigate = useNavigate();
 
-  // Проверяем, загружаются ли данные
   if (loading) {
     return <Spinner darkMode={darkMode} />;
   }
 
   // Фильтруем только те даты, где есть тренировки
-  const filteredWorkoutData = Object.keys(workoutData).filter(
-    (date) => workoutData[date] && Array.isArray(workoutData[date]) && workoutData[date].length > 0
-  );
+  const filteredWorkoutData = Object.entries(workoutData)
+    .filter(([date, exercises]) => Array.isArray(exercises) && exercises.length > 0)
+    .map(([date]) => date);
 
   const hasWorkouts = filteredWorkoutData.length > 0;
 
@@ -66,9 +64,17 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading }) => {
                   alt="Иконка завершенной тренировки"
                   className={styles.doneIcon}
                 />
-                <h3>{new Date(date).toLocaleDateString()}</h3>
+                <h3>
+                  {new Date(date)
+                    .toLocaleDateString('ru-RU', {
+                      weekday: 'long',
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric'
+                    })
+                    .replace(/^([а-яё])/i, (match) => match.toUpperCase())}
+                </h3>
               </div>
-             {/*  <p>{workoutData[date]?.name || 'Название тренировки'}</p> */}
             </div>
           ))}
         </>

@@ -12,14 +12,13 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
     parsedDate.setHours(0, 0, 0, 0);
     const localDate = new Date(parsedDate.getTime() - parsedDate.getTimezoneOffset() * 60000);
 
-    if (!isNaN(localDate)) {
+    if (!isNaN(localDate) && localDate.getTime() !== selectedDate.getTime()) {
       onDateSelect(localDate);
-    } else {
+    } else if (isNaN(localDate)) {
       console.error('Invalid date format:', date);
     }
-  }, [date, onDateSelect]);
+  }, [date, onDateSelect, selectedDate]);
 
-  // Проверяем, загружаются ли данные
   if (loading) {
     return <Spinner darkMode={darkMode} />;
   }

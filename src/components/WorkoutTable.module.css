@@ -156,6 +156,10 @@ select:focus {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
+  tr:last-child {
+    margin-bottom: 0px;
+  }
+
   td {
     display: flex;
     justify-content: space-between;
