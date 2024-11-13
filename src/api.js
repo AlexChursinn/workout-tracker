@@ -3,12 +3,14 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 // Функция для получения тренировок текущего пользователя
 export const getWorkouts = async (token) => {
   try {
-    // Логирование токена перед отправкой запроса
     console.log('Токен для запроса (getWorkouts):', token?.trim());
+    if (!token || token.split('.').length !== 3) {
+      throw new Error('Некорректный формат токена');
+    }
 
     let response = await fetch(`${API_URL}/user-workouts`, {
       headers: {
-        'Authorization': `Bearer ${token?.trim()}`, // Убираем лишние пробелы
+        'Authorization': `Bearer ${token.trim()}`, // Убираем лишние пробелы
       },
     });
 
@@ -40,12 +42,15 @@ export const getWorkouts = async (token) => {
 export const addWorkout = async (workout, token) => {
   try {
     console.log('Токен для запроса (addWorkout):', token?.trim());
+    if (!token || token.split('.').length !== 3) {
+      throw new Error('Некорректный формат токена');
+    }
 
     const response = await fetch(`${API_URL}/user-workouts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token?.trim()}`,
+        'Authorization': `Bearer ${token.trim()}`,
       },
       body: JSON.stringify(workout),
     });
@@ -67,14 +72,18 @@ export const refreshAuthToken = async () => {
 
     const response = await fetch(`${API_URL}/refresh-token`, {
       method: 'POST',
-      credentials: 'include', // Используется, если refresh token хранится в httpOnly cookie
+      credentials: 'include',
     });
 
     if (response.ok) {
       const data = await response.json();
-      console.log('Обновленный токен:', data.accessToken); // Логирование обновленного токена
-      localStorage.setItem('jwt', data.accessToken); // Сохраняем новый токен в localStorage
-      return data.accessToken;
+      console.log('Обновленный токен:', data.accessToken);
+      if (data.accessToken && data.accessToken.split('.').length === 3) {
+        localStorage.setItem('jwt', data.accessToken);
+        return data.accessToken;
+      } else {
+        throw new Error('Получен некорректный формат токена при обновлении');
+      }
     } else {
       console.error('Ошибка при обновлении токена');
       return null;
@@ -128,8 +137,12 @@ export const loginUser = async (credentials) => {
     }
 
     const data = await response.json();
-    console.log('Получен токен при авторизации:', data.token); // Логирование полученного токена
-    localStorage.setItem('jwt', data.token); // Сохраняем токен в localStorage
+    console.log('Получен токен при авторизации:', data.token);
+    if (data.token && data.token.split('.').length === 3) {
+      localStorage.setItem('jwt', data.token);
+    } else {
+      throw new Error('Получен некорректный формат токена при авторизации');
+    }
     return data;
   } catch (error) {
     console.error('Ошибка при авторизации пользователя:', error);

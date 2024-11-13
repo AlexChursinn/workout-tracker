@@ -100,8 +100,10 @@ const verifyToken = (req, res, next) => {
   }
 
   const token = authHeader.split(' ')[1];
-  if (!token) {
-    return res.status(401).json({ message: 'Токен отсутствует' });
+  console.log('Токен перед проверкой на сервере:', token);
+
+  if (!token || token.split('.').length !== 3) {
+    return res.status(401).json({ message: 'Некорректный формат токена' });
   }
 
   try {
