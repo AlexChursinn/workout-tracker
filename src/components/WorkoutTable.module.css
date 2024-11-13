@@ -7,7 +7,6 @@
   color: var(--text-color);
   overflow-x: auto;
   border-radius: 4px;
-  border: none;
 }
 
 table, th, td {
@@ -187,6 +186,10 @@ select:focus {
     width: 100%;
     margin: 5px 0;
   }
+
+  select {
+    margin-left: 10px; /* Добавленный отступ слева */
+  }
 }
 
 /* Дополнительная адаптация для экранов до 480px */
@@ -210,5 +213,6 @@ select:focus {
   select {
     font-size: 0.75rem;
     padding: 4px;
+    margin-left: 8px; /* Добавленный отступ слева для маленьких экранов */
   }
 }
