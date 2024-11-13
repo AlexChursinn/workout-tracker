@@ -1,3 +1,4 @@
+require('dotenv').config(); // Загрузите переменные окружения из .env файла
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -17,7 +18,9 @@ app.use(cors({
 
 app.use(express.json());
 
-const SECRET_KEY = 'your_secret_key'; // Замените на ваш реальный секретный ключ, который совпадает с ключом, используемым при создании токена
+const SECRET_KEY = process.env.SECRET_KEY || 'fallback_key'; // Загрузите секретный ключ из переменных окружения
+console.log('Сервер запущен с секретным ключом:', SECRET_KEY); // Для тестирования, удалите из продакшена
+
 const dbFile = 'db.json';
 
 // Функция чтения базы данных
@@ -108,7 +111,6 @@ const verifyToken = (req, res, next) => {
   }
 
   try {
-    console.log('Секретный ключ для проверки:', SECRET_KEY); // Убедитесь, что ключ корректен (удалите из продакшена)
     const decoded = jwt.verify(token, SECRET_KEY);
     req.user = decoded; // Сохраняем декодированные данные для использования в маршрутах
     next();
