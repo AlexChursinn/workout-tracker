@@ -1,4 +1,3 @@
-require('dotenv').config(); // Загрузка переменных среды
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -18,7 +17,7 @@ app.use(cors({
 
 app.use(express.json());
 
-const SECRET_KEY = process.env.SECRET_KEY || 'fallback_secret_key'; // Использование секретного ключа из переменных окружения
+const SECRET_KEY = process.env.SECRET_KEY || 'fallback_secret_key';
 const dbFile = 'db.json';
 
 // Функция чтения базы данных
