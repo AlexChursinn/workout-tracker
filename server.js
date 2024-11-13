@@ -17,7 +17,7 @@ app.use(cors({
 
 app.use(express.json());
 
-const SECRET_KEY = 'your_secret_key';
+const SECRET_KEY = 'your_secret_key'; // Замените на ваш реальный секретный ключ, который совпадает с ключом, используемым при создании токена
 const dbFile = 'db.json';
 
 // Функция чтения базы данных
@@ -85,6 +85,7 @@ app.post('/api/login', async (req, res) => {
 
     // Создание токена с userId и email
     const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
+    console.log('Созданный токен:', token);
     res.json({ token });
   } catch (error) {
     console.error('Ошибка при проверке пароля:', error);
@@ -107,6 +108,7 @@ const verifyToken = (req, res, next) => {
   }
 
   try {
+    console.log('Секретный ключ для проверки:', SECRET_KEY); // Убедитесь, что ключ корректен (удалите из продакшена)
     const decoded = jwt.verify(token, SECRET_KEY);
     req.user = decoded; // Сохраняем декодированные данные для использования в маршрутах
     next();
