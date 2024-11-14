@@ -21,3 +21,4 @@ const Spinner = ({ darkMode, isButton = false }) => {
 };
 
 export default Spinner;
+ 

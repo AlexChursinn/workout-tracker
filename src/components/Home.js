@@ -86,3 +86,4 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading }) => {
 };
 
 export default Home;
+ 

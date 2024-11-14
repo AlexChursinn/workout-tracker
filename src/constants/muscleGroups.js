@@ -9,4 +9,4 @@ const muscleGroups = {
   };
   
   export default muscleGroups;
-  
+   

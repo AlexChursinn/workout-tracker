@@ -181,3 +181,4 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
 };
 
 export default WorkoutTable;
+ 

@@ -57,3 +57,4 @@ const ExerciseModal = ({ workoutId, setIndex, onSave, onClose }) => {
 };
 
 export default ExerciseModal;
+ 

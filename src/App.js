@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import Header from './components/Header';
 import WorkoutPage from './components/WorkoutPage';
 import Footer from './components/Footer';
@@ -69,11 +69,12 @@ const App = () => {
           handleLogout(); // Если обновление не удалось, выполняем выход
         }
       } else if (isAuthenticated && authToken) {
-        await fetchData();
+        fetchData();
       }
     };
 
-    const interval = setInterval(checkAndRefreshToken, 15 * 60 * 1000); // Проверка каждые 15 минут
+    // Устанавливаем интервал для регулярной проверки токена
+    const interval = setInterval(checkAndRefreshToken, 1 * 60 * 1000); // Проверка каждые 15 минут
 
     checkAndRefreshToken(); // Первоначальная проверка при монтировании компонента
 
@@ -116,10 +117,8 @@ const App = () => {
   };
 
   const handleDateSelect = (date) => {
-    if (date.getTime() !== selectedDate.getTime()) {
-      setSelectedDate(date);
-      setShowTable(true);
-    }
+    setSelectedDate(date);
+    setShowTable(true);
   };
 
   const handleLogin = (token) => {
@@ -220,3 +219,4 @@ const App = () => {
 };
 
 export default App;
+ 

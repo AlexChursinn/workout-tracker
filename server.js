@@ -17,7 +17,7 @@ app.use(cors({
 
 app.use(express.json());
 
-const SECRET_KEY = process.env.SECRET_KEY || 'fallback_secret_key';
+const SECRET_KEY = 'your_secret_key';
 const dbFile = 'db.json';
 
 // Функция чтения базы данных
@@ -83,6 +83,7 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).json({ message: 'Неверный email или пароль' });
     }
 
+    // Создание токена с userId и email
     const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
     res.json({ token });
   } catch (error) {
@@ -91,34 +92,17 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Проверка токена
-const verifyToken = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
+// Получение данных о тренировках пользователя
+app.get('/api/user-workouts', (req, res) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
     return res.status(401).json({ message: 'Токен отсутствует' });
-  }
-
-  const token = authHeader.split(' ')[1];
-
-  if (!token || token.split('.').length !== 3) {
-    return res.status(401).json({ message: 'Некорректный формат токена' });
   }
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
-    req.user = decoded;
-    next();
-  } catch (error) {
-    console.error('Ошибка при проверке токена:', error.message);
-    return res.status(403).json({ message: 'Неверный или поврежденный токен' });
-  }
-};
-
-// Получение данных о тренировках пользователя
-app.get('/api/user-workouts', verifyToken, (req, res) => {
-  try {
     const db = readDatabase();
-    const user = db.users.find(user => user.id === req.user.id);
+    const user = db.users.find(user => user.id === decoded.id);
 
     if (!user) {
       return res.status(404).json({ message: 'Пользователь не найден' });
@@ -126,16 +110,22 @@ app.get('/api/user-workouts', verifyToken, (req, res) => {
 
     res.json({ workouts: user.workouts });
   } catch (error) {
-    console.error('Ошибка при обработке запроса о тренировках:', error);
-    res.status(500).json({ message: 'Ошибка сервера' });
+    console.error('Ошибка при проверке токена:', error);
+    res.status(403).json({ message: 'Неверный токен' });
   }
 });
 
 // Добавление тренировки для пользователя
-app.post('/api/user-workouts', verifyToken, (req, res) => {
+app.post('/api/user-workouts', (req, res) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ message: 'Токен отсутствует' });
+  }
+
   try {
+    const decoded = jwt.verify(token, SECRET_KEY);
     const db = readDatabase();
-    const userIndex = db.users.findIndex(user => user.id === req.user.id);
+    const userIndex = db.users.findIndex(user => user.id === decoded.id);
 
     if (userIndex === -1) {
       return res.status(404).json({ message: 'Пользователь не найден' });
@@ -149,10 +139,11 @@ app.post('/api/user-workouts', verifyToken, (req, res) => {
     db.users[userIndex].workouts.push(newWorkout);
     writeDatabase(db);
 
+    // Возвращаем обновленные данные для клиента
     res.status(201).json({ workouts: db.users[userIndex].workouts });
   } catch (error) {
     console.error('Ошибка при добавлении тренировки:', error);
-    res.status(500).json({ message: 'Ошибка сервера' });
+    res.status(403).json({ message: 'Неверный токен' });
   }
 });
 
@@ -160,3 +151,4 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+ 

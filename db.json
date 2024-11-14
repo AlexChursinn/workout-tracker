@@ -392,6 +392,92 @@
               ]
             }
           ]
+        },
+        {
+          "id": 1731563276618,
+          "workout_date": "2024-11-16",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1731563279415,
+          "workout_date": "2024-11-16",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "Спина",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1731563280567,
+          "workout_date": "2024-11-16",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "Спина",
+              "exercise": "Тяга верхнего блока",
+              "sets": [
+                null
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1731563281262,
+          "workout_date": "2024-11-16",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "Спина",
+              "exercise": "Тяга верхнего блока",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1731563312327,
+      "name": "ppp",
+      "email": "ppp@gmail.com",
+      "passwordHash": "$2a$10$94LxEcQObqCbLXCtgRdd4OmPc6gH/jz5BMW91H1EwpnAoO9UtB7SS",
+      "workouts": [
+        {
+          "id": 1731563341285,
+          "workout_date": "2024-11-14",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            }
+          ]
         }
       ]
     }
