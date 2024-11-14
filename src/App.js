@@ -8,7 +8,6 @@ import Analytics from './components/Analytics';
 import Login from './components/Login';
 import Register from './components/Register';
 import ProtectedRoute from './ProtectedRoute';
-import Spinner from './components/Spinner';
 import Home from './components/Home';
 import { getWorkouts, addWorkout, refreshAuthToken } from './api';
 import './global.css';

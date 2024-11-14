@@ -92,63 +92,60 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Получение данных о тренировках пользователя
-app.get('/api/user-workouts', (req, res) => {
-  const token = req.headers.authorization?.split(' ')[1];
+// Middleware для проверки токена
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
+
   if (!token) {
     return res.status(401).json({ message: 'Токен отсутствует' });
   }
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
-    const db = readDatabase();
-    const user = db.users.find(user => user.id === decoded.id);
-
-    if (!user) {
-      return res.status(404).json({ message: 'Пользователь не найден' });
-    }
-
-    res.json({ workouts: user.workouts });
+    req.user = decoded; // Добавляем декодированные данные в запрос для дальнейшего использования
+    next();
   } catch (error) {
     console.error('Ошибка при проверке токена:', error);
-    res.status(403).json({ message: 'Неверный токен' });
+    return res.status(403).json({ message: 'Неверный токен' });
   }
+};
+
+// Получение данных о тренировках пользователя
+app.get('/api/user-workouts', authenticateToken, (req, res) => {
+  const db = readDatabase();
+  const user = db.users.find(user => user.id === req.user.id);
+
+  if (!user) {
+    return res.status(404).json({ message: 'Пользователь не найден' });
+  }
+
+  res.json({ workouts: user.workouts });
 });
 
 // Добавление тренировки для пользователя
-app.post('/api/user-workouts', (req, res) => {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) {
-    return res.status(401).json({ message: 'Токен отсутствует' });
+app.post('/api/user-workouts', authenticateToken, (req, res) => {
+  const db = readDatabase();
+  const userIndex = db.users.findIndex(user => user.id === req.user.id);
+
+  if (userIndex === -1) {
+    return res.status(404).json({ message: 'Пользователь не найден' });
   }
 
-  try {
-    const decoded = jwt.verify(token, SECRET_KEY);
-    const db = readDatabase();
-    const userIndex = db.users.findIndex(user => user.id === decoded.id);
+  const newWorkout = {
+    id: Date.now(),
+    workout_date: req.body.workout_date,
+    exercises: req.body.exercises,
+  };
 
-    if (userIndex === -1) {
-      return res.status(404).json({ message: 'Пользователь не найден' });
-    }
+  db.users[userIndex].workouts.push(newWorkout);
+  writeDatabase(db);
 
-    const newWorkout = {
-      id: Date.now(),
-      workout_date: req.body.workout_date,
-      exercises: req.body.exercises,
-    };
-    db.users[userIndex].workouts.push(newWorkout);
-    writeDatabase(db);
-
-    // Возвращаем обновленные данные для клиента
-    res.status(201).json({ workouts: db.users[userIndex].workouts });
-  } catch (error) {
-    console.error('Ошибка при добавлении тренировки:', error);
-    res.status(403).json({ message: 'Неверный токен' });
-  }
+  // Возвращаем обновленные данные для клиента
+  res.status(201).json({ workouts: db.users[userIndex].workouts });
 });
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
- 
