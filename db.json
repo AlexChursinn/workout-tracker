@@ -339,6 +339,59 @@
               ]
             }
           ]
+        },
+        {
+          "id": 1731510382599,
+          "workout_date": "2024-11-14",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа 45",
+              "sets": [
+                null,
+                null
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 3,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 4,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1731510675804,
+          "workout_date": "2024-11-15",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            }
+          ]
         }
       ]
     }

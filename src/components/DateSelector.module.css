@@ -1,76 +1,75 @@
-/* Стили для кнопки выбора даты */
-.dateDisplay {
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #007BFF;
-  text-decoration: underline;
-  margin-bottom: 20px;
-}
-
-.dateDisplay:hover {
-  color: #0056b3;
-}
-
-/* Подсветка заполненных дней в календаре */
-.highlighted-date {
-  background-color: #300F0F !important;
-  color: white !important;
-  border-radius: 50%;
-  font-weight: bold;
-}
-
-/* Основные стили для календаря */
+/* Основные стили для компонента календаря */
 .react-datepicker {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  font-family: Arial, sans-serif;
+  border: 1px solid var(--table-border-color) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden !important;
+  font-family: 'Rubik', sans-serif !important;
+  background-color: var(--bg-color) !important;
 }
 
 .react-datepicker__header {
-  background-color: #f4f4f4;
-  border-bottom: 1px solid #ddd;
-  padding-top: 10px;
+  background-color: var(--table-bg-color) !important;
+  border-bottom: 1px solid var(--table-border-color) !important;
+  padding-top: 10px !important;
 }
 
 .react-datepicker__current-month {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
+  color: var(--text-color) !important;
 }
 
 .react-datepicker__day-name,
 .react-datepicker__day,
 .react-datepicker__time-name {
-  width: 2rem;
-  line-height: 2rem;
-  margin: 0.2rem;
-  color: #333;
+  width: 2.5rem !important;
+  line-height: 2.5rem !important;
+  margin: 0.2rem !important;
+  color: var(--text-color) !important;
+  border-radius: 50% !important;
+  transition: background-color 0.2s, color 0.2s !important;
 }
 
-/* Стили для подсвеченного дня */
-.react-datepicker__day--highlighted-date {
-  background-color: #300F0F !important;
-  color: white !important;
-  border-radius: 50%;
+/* Стили для текущей выбранной даты */
+.react-datepicker__day--selected {
+  background-color: var(--button-bg-color) !important;
+  color: var(--button-text-color) !important;
 }
 
-/* Адаптивные стили */
+/* Стили для выделенных дней */
+.react-datepicker__day--highlighted {
+  background-color: #4CAF50 !important; /* Цвет подсветки заполненных дней */
+  color: #ffffff !important;
+}
+
+/* Стили для дней за пределами текущего месяца */
+.react-datepicker__day--outside-month {
+  color: #b3b3b3 !important;
+}
+
+/* Адаптивность для экранов до 768px */
 @media (max-width: 768px) {
-  .dateDisplay {
-    font-size: 1.3rem;
-  }
   .react-datepicker {
-    font-size: 0.9rem;
+    font-size: 0.9rem !important;
+  }
+  .react-datepicker__day-name,
+  .react-datepicker__day,
+  .react-datepicker__time-name {
+    width: 2rem !important;
+    line-height: 2rem !important;
   }
 }
 
+/* Адаптивность для экранов до 480px */
 @media (max-width: 480px) {
-  .dateDisplay {
-    font-size: 1.1rem;
-  }
   .react-datepicker {
-    font-size: 0.8rem;
+    font-size: 0.8rem !important;
+  }
+  .react-datepicker__day-name,
+  .react-datepicker__day,
+  .react-datepicker__time-name {
+    width: 1.8rem !important;
+    line-height: 1.8rem !important;
   }
 }
