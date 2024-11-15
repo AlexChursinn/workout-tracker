@@ -8,7 +8,7 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:3000', // Локальная разработка
   'https://workout-tracker-beta-rose.vercel.app', // URL вашего приложения на Vercel
-  'https://workout-tracker-64ux.onrender.com' // URL вашего приложения на Render
+  'https://workout-tracker-hljr.onrender.com' // URL вашего приложения на Render
 ];
 
 app.use(cors({
