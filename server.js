@@ -5,19 +5,38 @@ const fs = require('fs');
 const cors = require('cors');
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:3000', // Локальная разработка
+  'https://workout-tracker-beta-rose.vercel.app', // URL вашего приложения на Vercel
+  'https://workout-tracker-64ux.onrender.com' // URL вашего приложения на Render
+];
+
+// Настройка CORS
 app.use(cors({
-  origin: [
-    'http://localhost:3000', // Локальная разработка
-    'https://workout-tracker-beta-rose.vercel.app', // URL вашего приложения на Vercel
-    'https://workout-tracker-64ux.onrender.com' // URL вашего приложения на Render
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
   credentials: true,
 }));
 
+// Обработка preflight-запросов
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.sendStatus(204);
+});
+
 app.use(express.json());
 
-const SECRET_KEY = 'your_secret_key';
+const SECRET_KEY = process.env.SECRET_KEY || 'your_secret_key';
 const dbFile = 'db.json';
 
 // Функция чтения базы данных
