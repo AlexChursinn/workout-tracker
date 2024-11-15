@@ -5,13 +5,13 @@ const fs = require('fs');
 const cors = require('cors');
 const app = express();
 
+// Настройка CORS
 const allowedOrigins = [
   'http://localhost:3000', // Локальная разработка
-  'https://workout-tracker-beta-rose.vercel.app', // Ваше приложение на Vercel
+  'https://workout-tracker-beta-rose.vercel.app', // URL вашего приложения на Vercel
   'https://workout-tracker-64ux.onrender.com' // Новый URL вашего приложения на Render
 ];
 
-// Настройка CORS
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -42,6 +42,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
+// Использование переменной окружения SECRET_KEY
 const SECRET_KEY = process.env.SECRET_KEY || 'your_secret_key';
 const dbFile = 'db.json';
 
