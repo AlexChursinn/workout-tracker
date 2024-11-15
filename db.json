@@ -1,3 +1,26 @@
 {
-  "users": []}
-    
+  "users": [
+    {
+      "id": 1731659052793,
+      "name": "alex",
+      "email": "alex@gmail.com",
+      "passwordHash": "$2a$10$/3hAj4n1/.VAbrXjXEunGeXjCoS2M.iUYmQ9IA5rJKobcKVZffl32",
+      "workouts": [
+        {
+          "id": 1731659062654,
+          "workout_date": "2024-11-15",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
