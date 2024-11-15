@@ -5,12 +5,20 @@ const fs = require('fs');
 const cors = require('cors');
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:3000', // Локальная разработка
+  'https://workout-tracker-beta-rose.vercel.app', // URL вашего приложения на Vercel
+  'https://workout-tracker-64ux.onrender.com' // URL вашего приложения на Render
+];
+
 app.use(cors({
-  origin: [
-    'http://localhost:3000', // Локальная разработка
-    'https://workout-tracker-beta-rose.vercel.app', // URL вашего приложения на Vercel
-    'https://workout-tracker-64ux.onrender.com' // URL вашего приложения на Render
-  ],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
@@ -18,8 +26,11 @@ app.use(cors({
 // Обработка preflight-запросов для всех маршрутов
 app.options('*', cors());
 
+// Middleware для установки заголовков CORS вручную
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  if (allowedOrigins.includes(req.headers.origin)) {
+    res.header("Access-Control-Allow-Origin", req.headers.origin);
+  }
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   if (req.method === 'OPTIONS') {
