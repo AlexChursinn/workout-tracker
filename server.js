@@ -7,8 +7,8 @@ const app = express();
 
 const allowedOrigins = [
   'http://localhost:3000', // Локальная разработка
-  'https://workout-tracker-beta-rose.vercel.app', // URL вашего приложения на Vercel
-  'https://workout-tracker-64ux.onrender.com' // URL вашего приложения на Render
+  'https://workout-tracker-beta-rose.vercel.app', // Ваше приложение на Vercel
+  'https://workout-tracker-64ux.onrender.com' // Новый URL вашего приложения на Render
 ];
 
 // Настройка CORS
@@ -26,12 +26,18 @@ app.use(cors({
 }));
 
 // Обработка preflight-запросов
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', req.headers.origin);
+app.options('*', cors());
+
+// Установка заголовков вручную для всех запросов
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Credentials', 'true');
-  res.sendStatus(204);
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+  next();
 });
 
 app.use(express.json());
