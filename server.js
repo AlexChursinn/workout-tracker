@@ -9,14 +9,16 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:3000', // Локальная разработка
   'https://workout-tracker-beta-rose.vercel.app', // URL вашего приложения на Vercel
-  'https://workout-tracker-64ux.onrender.com' // Новый URL вашего приложения на Render
+  'https://workout-tracker-64ux.onrender.com' // URL приложения на Render
 ];
 
 app.use(cors({
   origin: (origin, callback) => {
+    console.log(`CORS Origin: ${origin}`); // Логирование для проверки источников запросов
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.error('Not allowed by CORS:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
@@ -30,6 +32,7 @@ app.options('*', cors());
 
 // Установка заголовков вручную для всех запросов
 app.use((req, res, next) => {
+  console.log(`Request Method: ${req.method}, URL: ${req.url}, Headers: ${JSON.stringify(req.headers)}`);
   res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -49,7 +52,9 @@ const dbFile = 'db.json';
 // Функция чтения базы данных
 const readDatabase = () => {
   try {
+    console.log('Чтение базы данных');
     const data = fs.readFileSync(dbFile, 'utf8');
+    console.log('База данных успешно прочитана');
     return JSON.parse(data);
   } catch (error) {
     console.error('Ошибка при чтении файла базы данных:', error);
@@ -60,7 +65,9 @@ const readDatabase = () => {
 // Функция записи базы данных
 const writeDatabase = (data) => {
   try {
+    console.log('Запись в базу данных');
     fs.writeFileSync(dbFile, JSON.stringify(data, null, 2));
+    console.log('Запись в базу данных выполнена успешно');
   } catch (error) {
     console.error('Ошибка при записи в файл базы данных:', error);
     throw error;
@@ -69,15 +76,18 @@ const writeDatabase = (data) => {
 
 // Регистрация пользователя
 app.post('/api/register', async (req, res) => {
+  console.log('Получен запрос на регистрацию:', req.body);
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
+    console.warn('Некорректные данные при регистрации');
     return res.status(400).json({ message: 'Все поля обязательны для заполнения' });
   }
 
   const db = readDatabase();
 
   if (db.users.some(user => user.email === email)) {
+    console.warn('Пользователь с таким email уже существует:', email);
     return res.status(400).json({ message: 'Пользователь с таким email уже существует' });
   }
 
@@ -86,6 +96,7 @@ app.post('/api/register', async (req, res) => {
     const newUser = { id: Date.now(), name, email, passwordHash, workouts: [] };
     db.users.push(newUser);
     writeDatabase(db);
+    console.log('Регистрация пользователя выполнена успешно:', newUser);
     res.status(201).json({ message: 'Регистрация успешна' });
   } catch (error) {
     console.error('Ошибка при хэшировании пароля или записи в базу данных:', error);
@@ -95,22 +106,25 @@ app.post('/api/register', async (req, res) => {
 
 // Авторизация пользователя
 app.post('/api/login', async (req, res) => {
+  console.log('Получен запрос на авторизацию:', req.body);
   const { email, password } = req.body;
   const db = readDatabase();
   const user = db.users.find(user => user.email === email);
 
   if (!user) {
+    console.warn('Пользователь не найден при авторизации:', email);
     return res.status(401).json({ message: 'Неверный email или пароль' });
   }
 
   try {
     const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
     if (!isPasswordValid) {
+      console.warn('Неверный пароль для пользователя:', email);
       return res.status(401).json({ message: 'Неверный email или пароль' });
     }
 
-    // Создание токена с userId и email
     const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
+    console.log('Авторизация пользователя успешна:', email);
     res.json({ token });
   } catch (error) {
     console.error('Ошибка при проверке пароля:', error);
@@ -120,16 +134,19 @@ app.post('/api/login', async (req, res) => {
 
 // Middleware для проверки токена
 const authenticateToken = (req, res, next) => {
+  console.log('Проверка токена');
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
+    console.warn('Токен отсутствует');
     return res.status(401).json({ message: 'Токен отсутствует' });
   }
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);
-    req.user = decoded; // Добавляем декодированные данные в запрос для дальнейшего использования
+    req.user = decoded;
+    console.log('Токен проверен успешно:', decoded);
     next();
   } catch (error) {
     console.error('Ошибка при проверке токена:', error);
@@ -139,22 +156,27 @@ const authenticateToken = (req, res, next) => {
 
 // Получение данных о тренировках пользователя
 app.get('/api/user-workouts', authenticateToken, (req, res) => {
+  console.log('Запрос на получение тренировок пользователя');
   const db = readDatabase();
   const user = db.users.find(user => user.id === req.user.id);
 
   if (!user) {
+    console.warn('Пользователь не найден:', req.user.id);
     return res.status(404).json({ message: 'Пользователь не найден' });
   }
 
+  console.log('Данные о тренировках пользователя отправлены:', user.workouts);
   res.json({ workouts: user.workouts });
 });
 
 // Добавление тренировки для пользователя
 app.post('/api/user-workouts', authenticateToken, (req, res) => {
+  console.log('Запрос на добавление тренировки:', req.body);
   const db = readDatabase();
   const userIndex = db.users.findIndex(user => user.id === req.user.id);
 
   if (userIndex === -1) {
+    console.warn('Пользователь не найден:', req.user.id);
     return res.status(404).json({ message: 'Пользователь не найден' });
   }
 
@@ -167,7 +189,7 @@ app.post('/api/user-workouts', authenticateToken, (req, res) => {
   db.users[userIndex].workouts.push(newWorkout);
   writeDatabase(db);
 
-  // Возвращаем обновленные данные для клиента
+  console.log('Новая тренировка добавлена:', newWorkout);
   res.status(201).json({ workouts: db.users[userIndex].workouts });
 });
 
