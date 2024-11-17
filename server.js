@@ -5,6 +5,15 @@ const fs = require('fs');
 const cors = require('cors');
 const app = express();
 
+// Путь к файлу базы данных
+const dbFile = 'db.json';
+
+// Проверка существования файла базы данных и его создание, если он отсутствует
+if (!fs.existsSync(dbFile)) {
+  fs.writeFileSync(dbFile, JSON.stringify({ users: [] }, null, 2));
+  console.log('Создан новый файл db.json');
+}
+
 // Настройка CORS
 const allowedOrigins = [
   'http://localhost:3000', // Локальная разработка
@@ -47,7 +56,6 @@ app.use(express.json());
 
 // Использование переменной окружения SECRET_KEY
 const SECRET_KEY = process.env.SECRET_KEY || 'your_secret_key';
-const dbFile = 'db.json';
 
 // Функция чтения базы данных
 const readDatabase = () => {
