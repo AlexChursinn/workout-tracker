@@ -41,7 +41,8 @@ app.options('*', cors());
 
 // Установка заголовков вручную для всех запросов
 app.use((req, res, next) => {
-  console.log(`Request Method: ${req.method}, URL: ${req.url}, Headers: ${JSON.stringify(req.headers)}`);
+  console.log(`Request Method: ${req.method}, URL: ${req.url}`);
+  console.log(`Request Headers: ${JSON.stringify(req.headers)}`);
   res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
