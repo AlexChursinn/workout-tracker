@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const cors = require('cors');
+const { exec } = require('child_process');
 const app = express();
 
 // Путь к файлу базы данных
@@ -23,7 +24,7 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    console.log(`CORS Origin: ${origin}`); // Логирование для проверки источников запросов
+    console.log(`CORS Origin: ${origin}`);
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -38,20 +39,6 @@ app.use(cors({
 
 // Обработка preflight-запросов
 app.options('*', cors());
-
-// Установка заголовков вручную для всех запросов
-app.use((req, res, next) => {
-  console.log(`Request Method: ${req.method}, URL: ${req.url}`);
-  console.log(`Request Headers: ${JSON.stringify(req.headers)}`);
-  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(204);
-  }
-  next();
-});
 
 app.use(express.json());
 
@@ -71,16 +58,27 @@ const readDatabase = () => {
   }
 };
 
-// Функция записи базы данных
+// Функция записи базы данных и сохранения изменений в Git
 const writeDatabase = (data) => {
   try {
-    console.log('Запись в базу данных');
     fs.writeFileSync(dbFile, JSON.stringify(data, null, 2));
     console.log('Запись в базу данных выполнена успешно');
+    commitAndPushDatabase(); // Создаем коммит и пушим изменения
   } catch (error) {
     console.error('Ошибка при записи в файл базы данных:', error);
     throw error;
   }
+};
+
+// Функция для автоматического коммита и пуша изменений в репозиторий
+const commitAndPushDatabase = () => {
+  exec('git add db.json && git commit -m "Auto backup db.json" && git push', (error, stdout, stderr) => {
+    if (error) {
+      console.error('Ошибка при коммите и пуше данных:', error);
+      return;
+    }
+    console.log('База данных успешно сохранена в репозитории:', stdout);
+  });
 };
 
 // Регистрация пользователя
