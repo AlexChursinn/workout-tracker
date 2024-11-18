@@ -129,7 +129,10 @@ select {
   background-position: right 10px center; /* Центрируем стрелку */
   background-size: 10px;
   padding-right: 30px; /* Оставляем место для стрелки */
-  line-height: 1.5; /* Помогает центровать содержимое */
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Обрезка текста с многоточием */
+  white-space: nowrap; /* Отключаем перенос строк */
 }
 
 select:focus {
