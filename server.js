@@ -2,16 +2,17 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
+const path = require('path');
 const cors = require('cors');
 const app = express();
 
-// Путь к файлу базы данных в постоянном хранилище
-const dbFile = '/persistent/db.json';
+// Определение пути к файлу базы данных
+const dbFile = fs.existsSync('/persistent') ? '/persistent/db.json' : path.join(__dirname, 'db.json');
 
 // Проверка существования файла базы данных и его создание, если он отсутствует
 if (!fs.existsSync(dbFile)) {
   fs.writeFileSync(dbFile, JSON.stringify({ users: [] }, null, 2));
-  console.log('Создан новый файл db.json в постоянном хранилище');
+  console.log(`Создан новый файл db.json по пути: ${dbFile}`);
 }
 
 // Настройка CORS

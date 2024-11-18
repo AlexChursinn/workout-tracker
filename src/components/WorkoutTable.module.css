@@ -3,16 +3,15 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  background-color: var(--table-bg-color);
   color: var(--text-color);
   overflow-x: auto;
   border-radius: 4px;
 }
 
-table, th, td {
+/* table, th, td {
   border: 1px solid var(--table-border-color);
   padding: 10px;
-}
+} */
 
 tr:last-child {
   margin-bottom: 0px;
@@ -133,16 +132,16 @@ select:focus {
 }
 
 .addExerciseButton:hover {
-  background-color: #4d4d4d;/*  */
+  background-color: #4d4d4d;
 }
 
 /* Адаптивность для экранов до 768px */
 @media (max-width: 768px) {
   .table {
+    background-color: transparent; /* Убираем фон у всей таблицы */
     overflow-x: auto;
     border-collapse: separate;
   }
-
 
   thead {
     display: none;
@@ -151,11 +150,11 @@ select:focus {
   tbody tr {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border: 1px solid var(--table-border-color);
     border-radius: 5px;
-    padding: 8px;
-    background-color: var(--table-bg-color);
+    padding: 15px;
+    background-color: var(--table-bg-color); /* Применяем фон только к tr */
   }
 
   td {
@@ -189,7 +188,7 @@ select:focus {
   }
 
   select {
-    margin-left: 10px; /* Добавленный отступ слева */
+    margin-left: 10px;
   }
 }
 
@@ -214,7 +213,6 @@ select:focus {
   select {
     font-size: 0.75rem;
     padding: 4px;
-    margin-left: 8px; /* Добавленный отступ слева для маленьких экранов */
+    margin-left: 8px;
   }
 }
- 

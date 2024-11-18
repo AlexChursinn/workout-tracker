@@ -525,6 +525,82 @@
         {
           "id": 1731865384339,
           "workout_date": "2024-11-18"
+        },
+        {
+          "id": 1731926017122,
+          "workout_date": "2024-11-17",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 3,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 4,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1731926019082,
+          "workout_date": "2024-11-17",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "Спина",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 3,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 4,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            }
+          ]
         }
       ]
     },
