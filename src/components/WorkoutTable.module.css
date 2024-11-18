@@ -8,10 +8,10 @@
   border-radius: 4px;
 }
 
-/* table, th, td {
+table, th, td {
   border: 1px solid var(--table-border-color);
   padding: 10px;
-} */
+}
 
 tr:last-child {
   margin-bottom: 0px;
@@ -137,6 +137,11 @@ select:focus {
 
 /* Адаптивность для экранов до 768px */
 @media (max-width: 768px) {
+  table, th, td {
+    border: none;
+    padding: 0px;
+  }
+
   .table {
     background-color: transparent; /* Убираем фон у всей таблицы */
     overflow-x: auto;
@@ -173,6 +178,11 @@ select:focus {
     color: var(--text-color);
   }
 
+  td[data-label="Группа Мышц"]::before,
+  td[data-label="Упражнение"]::before {
+    content: none; /* Убираем текст для этих колонок */
+  }
+
   td:last-child {
     border-bottom: none;
   }
@@ -184,18 +194,15 @@ select:focus {
 
   .deleteButton, .addExerciseButton {
     width: 100%;
-    margin: 5px 0;
   }
 
-  select {
-    margin-left: 10px;
-  }
 }
+
 
 /* Дополнительная адаптация для экранов до 480px */
 @media (max-width: 480px) {
   td {
-    padding: 6px 4px;
+    padding: 10px 4px;
     font-size: 0.75rem;
   }
 
@@ -213,6 +220,5 @@ select:focus {
   select {
     font-size: 0.75rem;
     padding: 4px;
-    margin-left: 8px;
   }
 }
