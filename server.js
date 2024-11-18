@@ -3,16 +3,15 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const cors = require('cors');
-const { exec } = require('child_process');
 const app = express();
 
-// Путь к файлу базы данных
-const dbFile = 'db.json';
+// Путь к файлу базы данных в постоянном хранилище
+const dbFile = '/persistent/db.json';
 
 // Проверка существования файла базы данных и его создание, если он отсутствует
 if (!fs.existsSync(dbFile)) {
   fs.writeFileSync(dbFile, JSON.stringify({ users: [] }, null, 2));
-  console.log('Создан новый файл db.json');
+  console.log('Создан новый файл db.json в постоянном хранилище');
 }
 
 // Настройка CORS
@@ -58,27 +57,15 @@ const readDatabase = () => {
   }
 };
 
-// Функция записи базы данных и сохранения изменений в Git
+// Функция записи базы данных
 const writeDatabase = (data) => {
   try {
     fs.writeFileSync(dbFile, JSON.stringify(data, null, 2));
     console.log('Запись в базу данных выполнена успешно');
-    commitAndPushDatabase(); // Создаем коммит и пушим изменения
   } catch (error) {
     console.error('Ошибка при записи в файл базы данных:', error);
     throw error;
   }
-};
-
-// Функция для автоматического коммита и пуша изменений в репозиторий
-const commitAndPushDatabase = () => {
-  exec('git add db.json && git commit -m "Auto backup db.json" && git push', (error, stdout, stderr) => {
-    if (error) {
-      console.error('Ошибка при коммите и пуше данных:', error);
-      return;
-    }
-    console.log('База данных успешно сохранена в репозитории:', stdout);
-  });
 };
 
 // Регистрация пользователя
