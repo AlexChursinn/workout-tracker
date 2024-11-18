@@ -122,6 +122,14 @@ select {
   background-color: var(--table-bg-color);
   font-size: 0.9rem;
   color: var(--text-color);
+  -webkit-appearance: none; /* Отключает стандартный стиль браузера */
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10" fill="%23cccccc"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* Центрируем стрелку */
+  background-size: 10px;
+  padding-right: 30px; /* Оставляем место для стрелки */
+  line-height: 1.5; /* Помогает центровать содержимое */
 }
 
 select:focus {
@@ -201,9 +209,10 @@ select:focus {
     padding: 10px 5px;
     -webkit-appearance: none; /* Отключает стандартный стиль браузера */
     appearance: none;
+    background-position: right 10px center; /* Центрируем стрелку */
+    padding-right: 30px; /* Оставляем место для стрелки */
   }
 }
-
 
 /* Дополнительная адаптация для экранов до 480px */
 @media (max-width: 480px) {
@@ -225,5 +234,7 @@ select:focus {
 
   select {
     font-size: 0.75rem;
+    background-position: right 10px center; /* Центрируем стрелку */
+    padding-right: 30px; /* Оставляем место для стрелки */
   }
 }

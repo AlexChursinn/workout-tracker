@@ -601,6 +601,44 @@
               ]
             }
           ]
+        },
+        {
+          "id": 1731929385193,
+          "workout_date": "2024-11-17",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "Спина",
+              "exercise": "Тяга верхнего блока",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 3,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 4,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            }
+          ]
         }
       ]
     },
