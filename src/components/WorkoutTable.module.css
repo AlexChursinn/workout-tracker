@@ -197,8 +197,10 @@ select:focus {
   }
 
   select {
-    font-size: 0.85rem !important;
-    padding: 10px 5px !important;
+    font-size: 0.85rem;
+    padding: 10px 5px;
+    -webkit-appearance: none; /* Отключает стандартный стиль браузера */
+    appearance: none;
   }
 }
 
