@@ -64,6 +64,25 @@ button {
     transition: background-color 0.3s;
 }
 
+input {
+    width: calc(100% - 20px); /* Оставляем отступы по бокам */
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    box-sizing: border-box;
+    border: 1px solid var(--table-border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+/* Обводка при активном input */
+input:focus {
+    border-color: #4d4d4d; /* Темно-зеленая обводка при фокусе */
+    box-shadow: 0 0 5px #4d4d4d; /* Темно-зеленая тень */
+    outline: none; /* Убираем стандартное выделение */
+  }
+
 /* Адаптивность для экранов планшетов */
 @media (max-width: 768px) {
     h1 {

@@ -1,4 +1,4 @@
-/* Основные стили таблицы */
+/* Общие стили для таблицы */
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -13,10 +13,6 @@ table, th, td {
   padding: 10px;
 }
 
-tr:last-child {
-  margin-bottom: 0px;
-}
-
 th {
   background-color: var(--table-bg-color);
   font-weight: bold;
@@ -26,11 +22,30 @@ th {
 }
 
 td {
+  position: relative;
   text-align: center;
   font-size: 0.9rem;
   color: var(--text-color);
-  word-wrap: break-word;
-  white-space: normal;
+}
+
+/* Уникальные стили для инпутов в WorkoutTable */
+.workoutTableInput {
+  text-align: center;
+  width: 60px;
+  padding: 10px;
+  margin: 5px 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  background-color: var(--table-bg-color);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.workoutTableInput:focus {
+  outline: none;
+  border-color: var(--button-bg-color);
+  box-shadow: 0 0 5px rgba(48, 15, 15, 0.3);
 }
 
 /* Общие стили для кнопок */
@@ -46,10 +61,8 @@ button {
 
 /* Кнопка удаления */
 .deleteButton {
-  width: 30px;
-  height: 30px;
-  min-width: 70px;
-  min-height: 30px;
+  width: 100%;
+  height: 40px;
   padding: 0;
   background-color: var(--button-bg-color);
   color: var(--button-text-color);
@@ -70,13 +83,10 @@ button {
 }
 
 /* Кнопки управления подходами */
-.addSetButton, .deleteSetButton, .copySetButton {
+.addSetButton, .deleteSetButton, .copySetButton{
   width: 30px;
-  height: 30px;
-  min-width: 30px;
-  min-height: 30px;
-  padding: 0;
-  margin: 0 5px;
+  height: 40px;
+  margin: 0 0 0 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,6 +111,7 @@ button {
 
 /* Кнопка добавления упражнения */
 .addExerciseButton {
+  height: 40px;
   display: block;
   margin: 0 auto;
   padding: 10px 15px;
@@ -122,17 +133,17 @@ select {
   background-color: var(--table-bg-color);
   font-size: 0.9rem;
   color: var(--text-color);
-  -webkit-appearance: none; /* Отключает стандартный стиль браузера */
+  -webkit-appearance: none;
   appearance: none;
   background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 20 20"><polygon points="0,0 20,0 10,10" fill="%23cccccc"/></svg>');
   background-repeat: no-repeat;
-  background-position: right 10px center; /* Центрируем стрелку */
+  background-position: right 10px center;
   background-size: 10px;
-  padding-right: 30px; /* Оставляем место для стрелки */
+  padding-right: 30px;
   line-height: 1.5;
   overflow: hidden;
-  text-overflow: ellipsis; /* Обрезка текста с многоточием */
-  white-space: nowrap; /* Отключаем перенос строк */
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 select:focus {
@@ -146,15 +157,76 @@ select:focus {
   background-color: #4d4d4d;
 }
 
-/* Адаптивность для экранов до 768px */
+/* Контейнер для круга и подходов */
+/* Контейнер для подходов */
+.setContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Стиль для текста "Подход X" */
+.approachText {
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+/* Стиль для круга */
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+/* Скрыть на экранах шире 768px */
+.hideOnLargeScreens {
+  display: none;
+}
+
+/* Скрыть на экранах уже 768px */
+.hideOnSmallScreens {
+  display: none;
+}
+
+.numberIcon {
+  display: none;
+}
+
+/* Адаптивность для WorkoutTable */
 @media (max-width: 768px) {
+  .workoutTableInput {
+    width: 100%;
+    margin: 2px 5px;
+    font-size: 0.85rem;
+  }
+
+  .repWeightContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  td {
+    padding: 4px;
+    font-size: 0.85rem;
+    text-align: left;
+  }
+
   table, th, td {
     border: none;
     padding: 0px;
   }
 
   .table {
-    background-color: transparent; /* Убираем фон у всей таблицы */
+    background-color: transparent;
     overflow-x: auto;
     border-collapse: separate;
   }
@@ -163,19 +235,20 @@ select:focus {
     display: none;
   }
 
-  tbody tr {
+  tr {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
     border: 1px solid var(--table-border-color);
     border-radius: 5px;
     padding: 15px;
-    background-color: var(--table-bg-color); /* Применяем фон только к tr */
+    background-color: var(--table-bg-color);
   }
 
   td {
-    display: flex;
+    /* display: flex; */
     justify-content: space-between;
+    align-items: center;
     padding: 6px;
     text-align: left;
     font-size: 0.85rem;
@@ -184,16 +257,21 @@ select:focus {
   }
 
   td::before {
-    content: attr(data-label);
+    display: inline-block;
+    /* content: attr(data-label); */
     font-weight: bold;
     color: var(--text-color);
+    margin-right: 10px;
+    position: static;
+    transform: none;
+    width: auto;
   }
 
   td[data-label="Группа Мышц"]::before,
   td[data-label="Упражнение"]::before {
-    content: none; /* Убираем текст для этих колонок */
+    content: none;
   }
-
+ 
   td:last-child {
     border-bottom: none;
   }
@@ -210,15 +288,67 @@ select:focus {
   select {
     font-size: 0.85rem;
     padding: 10px 5px;
-    -webkit-appearance: none; /* Отключает стандартный стиль браузера */
+    -webkit-appearance: none;
     appearance: none;
-    background-position: right 10px center; /* Центрируем стрелку */
-    padding-right: 30px; /* Оставляем место для стрелки */
+    background-position: right 10px center;
+    padding-right: 30px;
   }
+
+  .hideOnLargeScreens {
+    display: inline-flex;
+  }
+
+  .hideOnSmallScreens {
+    display: none;
+  }
+
+  .setContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Растягиваем на всю ширину */
+  }
+
+  .circle {
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+  }
+
+  .numberCell {
+    display: flex;
+    justify-content: space-between; /* Располагаем элементы по краям */
+    align-items: center; /* Вертикальное выравнивание */
+  }
+  
+  .numberIcon {
+    display: block;
+    width: 20px; /* Размер иконки */
+    height: 20px;
+    padding: 5px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+  }
+  
+  .numberText {
+    font-size: 1rem; /* Размер текста */
+    color: var(--text-color); /* Используем переменную темы */
+  }
+
 }
 
 /* Дополнительная адаптация для экранов до 480px */
 @media (max-width: 480px) {
+  .workoutTableInput {
+    width: 70px;
+    margin: 2px 0;
+    font-size: 0.75rem;
+  }
+
   td {
     padding: 10px 4px;
     font-size: 0.75rem;
@@ -230,14 +360,14 @@ select:focus {
   }
 
   .addSetButton, .deleteSetButton, .copySetButton {
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
     font-size: 0.8rem;
   }
 
   select {
     font-size: 0.75rem;
-    background-position: right 10px center; /* Центрируем стрелку */
-    padding-right: 30px; /* Оставляем место для стрелки */
+    background-position: right 10px center;
+    padding-right: 30px;
   }
 }

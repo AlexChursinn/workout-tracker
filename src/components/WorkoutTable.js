@@ -1,9 +1,8 @@
-// src/components/WorkoutTable.js
 import React, { useState, useEffect } from 'react';
-import ExerciseModal from './ExerciseModal';
 import styles from './WorkoutTable.module.css';
 import copyIcon from '../assets/copy.svg';
 import deleteIcon from '../assets/delete.svg';
+import numberIcon from '../assets/numberIcon.svg';
 
 const muscleGroups = {
   "Грудь": ["Жим штанги лежа Горизонт", "Жим штанги лежа 45", "Жим штанги лежа Низ", "Жим гантелей 15", "Жим гантелей 30", "Жим гантелей 45", "Брусья", "Разводка гантелей Горизонт", "Разводка гантелей 15", "Сведение рук в кроссовере", "Бабочка", "Отжимания"],
@@ -16,7 +15,6 @@ const muscleGroups = {
 
 const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
   const [workouts, setWorkouts] = useState(Array.isArray(workoutData) ? workoutData : []);
-  const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
     setWorkouts(Array.isArray(workoutData) ? workoutData : []);
@@ -30,7 +28,7 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
   const handleAddRow = () => {
     handleWorkoutUpdate([
       ...workouts,
-      { id: workouts.length + 1, muscleGroup: '', exercise: '', sets: [null] }
+      { id: workouts.length + 1, muscleGroup: '', exercise: '', sets: [{ reps: '', weight: '' }] }
     ]);
   };
 
@@ -41,24 +39,24 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
     handleWorkoutUpdate(updatedWorkouts);
   };
 
-  const handleCellClick = (workoutId, setIndex) => {
-    setModalData({ workoutId, setIndex });
-  };
-
-  const updateWorkout = (workoutId, setIndex, reps, weight) => {
+  const handleSetChange = (workoutId, setIndex, field, value) => {
     const updatedWorkouts = workouts.map((workout) =>
       workout.id === workoutId
-        ? { ...workout, sets: workout.sets.map((set, i) => (i === setIndex ? { reps, weight } : set)) }
+        ? {
+            ...workout,
+            sets: workout.sets.map((set, i) =>
+              i === setIndex ? { ...set, [field]: value } : set
+            ),
+          }
         : workout
     );
     handleWorkoutUpdate(updatedWorkouts);
-    setModalData(null);
   };
 
   const handleAddSet = (workoutId) => {
     const updatedWorkouts = workouts.map((workout) =>
       workout.id === workoutId
-        ? { ...workout, sets: [...workout.sets, null] }
+        ? { ...workout, sets: [...workout.sets, { reps: '', weight: '' }] }
         : workout
     );
     handleWorkoutUpdate(updatedWorkouts);
@@ -79,7 +77,7 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
         const lastSet = workout.sets[workout.sets.length - 1];
         const newSet = lastSet && lastSet.reps !== undefined && lastSet.weight !== undefined 
           ? { ...lastSet } 
-          : null;
+          : { reps: '', weight: '' };
         workout.sets = [...workout.sets, newSet];
       }
       return workout;
@@ -104,7 +102,14 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
       <tbody>
         {workouts.map((workout) => (
           <tr key={workout.id}>
-            <td data-label="№">{workout.id}</td>
+<td data-label="№" className={styles.numberCell}>
+  <img
+    src={numberIcon} // Импортированный SVG
+    alt="Workout Icon" // Альтернативный текст
+    className={styles.numberIcon} // Стили для иконки
+  />
+  <span className={styles.numberText}>{workout.id}</span> {/* Отображаем ID */}
+</td>
             <td data-label="Группа Мышц">
               <select
                 value={workout.muscleGroup}
@@ -136,11 +141,35 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
                 ))}
               </select>
             </td>
-            {workout.sets.map((set, i) => (
-              <td key={i} data-label={`Подход ${i + 1}`} onClick={() => handleCellClick(workout.id, i)}>
-                {set ? `${set.reps} x ${set.weight}` : 'Добавить'}
-              </td>
-            ))}
+{workout.sets.map((set, i) => (
+  <td 
+    key={i} 
+    data-label={window.innerWidth > 768 ? `Подход ${i + 1}` : ''} // Убираем текст на малых экранах
+  >
+    <div className={styles.setContainer}>
+      <span className={`${styles.circle} ${styles.hideOnLargeScreens}`}>{i + 1}</span>
+      <span className={`${styles.approachText} ${styles.hideOnSmallScreens}`}>Подход {i + 1}</span>
+      <div className={styles.repWeightContainer}>
+        <input
+          type="number"
+          placeholder="Повт."
+          className={styles.workoutTableInput}
+          value={set?.reps || ''}
+          onChange={(e) => handleSetChange(workout.id, i, 'reps', e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Вес"
+          className={styles.workoutTableInput}
+          value={set?.weight || ''}
+          onChange={(e) => handleSetChange(workout.id, i, 'weight', e.target.value)}
+        />
+      </div>
+    </div>
+  </td>
+))}
+
+
             <td>
               <div className={styles.setControls}>
                 <button className={styles.addSetButton} onClick={() => handleAddSet(workout.id)}>+</button>
@@ -167,18 +196,8 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
           </td>
         </tr>
       </tbody>
-
-      {modalData && (
-        <ExerciseModal
-          workoutId={modalData.workoutId}
-          setIndex={modalData.setIndex}
-          onSave={updateWorkout}
-          onClose={() => setModalData(null)}
-        />
-      )}
     </table>
   );
 };
 
 export default WorkoutTable;
- 
