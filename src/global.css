@@ -4,7 +4,7 @@
 :root {
     --bg-color: #ffffff;
     --bg-color-rgb: 255, 255, 255; /* Добавлено для использования в rgba */
-    --text-color: #333;
+    --text-color: #000;
     --table-bg-color: #f4f4f4;
     --table-border-color: #ddd;
     --button-bg-color: #000;
