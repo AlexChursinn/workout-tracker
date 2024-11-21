@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DateSelector from './DateSelector';
 import Spinner from './Spinner';
@@ -12,6 +12,7 @@ import lineWhite from '../assets/lineupwhite.svg';
 
 const Home = ({ workoutData, onDateSelect, darkMode, loading }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const dateSelectorRef = useRef(null);
   const navigate = useNavigate();
 
   if (loading) {
@@ -36,6 +37,12 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading }) => {
     }
   };
 
+  const handleCalendarClick = () => {
+    if (dateSelectorRef.current) {
+      dateSelectorRef.current.toggleCalendar(); // Предполагается, что DateSelector поддерживает метод toggleCalendar
+    }
+  };
+
   return (
     <div className={styles.homeContainer}>
       <div className={styles.dateHeader}>
@@ -43,8 +50,10 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading }) => {
           src={darkMode ? calendarIconBlack : calendarIconWhite}
           alt="Календарь"
           className={styles.calendarIcon}
+          onClick={handleCalendarClick}
         />
         <DateSelector
+          ref={dateSelectorRef}
           selectedDate={selectedDate}
           onDateSelect={handleDateChange}
           filledDates={filteredWorkoutData}

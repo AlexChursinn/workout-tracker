@@ -1,5 +1,4 @@
-// src/components/DateSelector.js
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
@@ -8,10 +7,10 @@ import './DateSelector.css'; // Подключаем CSS для кастомны
 
 registerLocale('ru', ru);
 
-const DateSelector = ({ selectedDate, onDateSelect, filledDates }) => {
+const DateSelector = forwardRef(({ selectedDate, onDateSelect, filledDates }, ref) => {
   const [openCalendar, setOpenCalendar] = useState(false);
 
-  const highlightedDates = filledDates.map(date => new Date(date).setHours(0, 0, 0, 0));
+  const highlightedDates = filledDates.map((date) => new Date(date).setHours(0, 0, 0, 0));
 
   const renderDayContents = (day, date) => {
     const dateTime = date.setHours(0, 0, 0, 0);
@@ -23,13 +22,19 @@ const DateSelector = ({ selectedDate, onDateSelect, filledDates }) => {
           backgroundColor: isFilled ? '#000' : 'transparent',
           color: isFilled ? 'white' : '',
           borderRadius: isFilled ? '50%' : '',
-          padding: '5px'
+          padding: '5px',
         }}
       >
         {day}
       </div>
     );
   };
+
+  useImperativeHandle(ref, () => ({
+    toggleCalendar: () => setOpenCalendar((prev) => !prev),
+    openCalendar: () => setOpenCalendar(true),
+    closeCalendar: () => setOpenCalendar(false),
+  }));
 
   return (
     <div>
@@ -52,7 +57,6 @@ const DateSelector = ({ selectedDate, onDateSelect, filledDates }) => {
       )}
     </div>
   );
-};
+});
 
 export default DateSelector;
- 

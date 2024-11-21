@@ -4,7 +4,7 @@
 :root {
     --bg-color: #ffffff;
     --bg-color-rgb: 255, 255, 255; /* Добавлено для использования в rgba */
-    --text-color: #333;
+    --text-color: #000;
     --table-bg-color: #f4f4f4;
     --table-border-color: #ddd;
     --button-bg-color: #000;
@@ -18,7 +18,7 @@
     --bg-color-rgb: 18, 18, 18; /* Добавлено для использования в rgba */
     --text-color: #e0e0e0;
     --table-bg-color: #1e1e1e;
-    --table-border-color: #333;
+    --table-border-color: #000;
     --button-bg-color: #3a3a3a;
     --button-text-color: #fff;
     --icon-color: #ffffff; /* Белый для темной темы */

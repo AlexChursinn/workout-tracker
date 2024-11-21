@@ -17,6 +17,7 @@
 .calendarIcon {
   width: 24px;
   height: 24px;
+  cursor: pointer;
   transition: filter 0.3s ease;
 }
 

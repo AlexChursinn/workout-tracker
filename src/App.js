@@ -13,7 +13,12 @@ import { getWorkouts, addWorkout, refreshAuthToken } from './api';
 import './global.css';
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
+    // Устанавливаем темную тему по умолчанию
+    const [darkMode, setDarkMode] = useState(() => {
+      const savedMode = localStorage.getItem('darkMode');
+      return savedMode !== null ? savedMode === 'true' : true; // Темная тема включена по умолчанию
+    });
+    
   const [selectedDate, setSelectedDate] = useState(() => {
     const savedDate = localStorage.getItem('selectedDate');
     return savedDate ? new Date(savedDate) : new Date();
@@ -25,6 +30,8 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+
+  
 
   const toggleTheme = () => {
     setDarkMode((prevMode) => !prevMode);
