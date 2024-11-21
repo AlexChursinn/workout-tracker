@@ -3,6 +3,7 @@
   color: var(--text-color);
   display: flex;
   flex-direction: column;
+  min-height: 100vh; /* Контейнер занимает весь экран */
 }
 
 .dateHeader {
@@ -28,11 +29,11 @@
   margin-bottom: 20px;
   cursor: pointer;
   transition: background-color 0.3s;
-  width: 100%; /* Устанавливаем ширину на 90% для большей гибкости */
-  max-width: 600px; /* Ограничиваем максимальную ширину */
-  margin-left: auto; /* Центрируем блок */
-  margin-right: auto; /* Центрируем блок */
-  box-sizing: border-box; /* Чтобы отступы и границы учитывались в ширине */
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
 }
 
 .workoutBlock:last-child {
@@ -51,31 +52,52 @@
 }
 
 .workoutBlock h3 {
-  margin: 0; /* Убираем отступы */
+  margin: 0;
 }
 
 .workoutBlock p {
-  margin: 15px 0 0 0; /* Отступ сверху */
-  text-align: left; /* Выравнивание текста по левому краю */
+  margin: 15px 0 0 0;
+  text-align: left;
 }
 
 .workoutBlock:hover {
   background-color: rgba(var(--bg-color-rgb), 0.8);
 }
 
+.noWorkouts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 100%; /* Центрируем содержимое по высоте */
+  text-align: center;
+}
+
+.lineIcon {
+  width: 40px; /* Уменьшенный размер иконки */
+  height: auto;
+  margin: 0;
+}
+
 .noWorkoutsMessage {
   color: var(--text-color);
   font-size: 1.5rem;
+  margin-top: 0px;
 }
 
 @media (max-width: 768px) {
- h3 {
-  font-size: 1rem;
- }
+  h3 {
+    font-size: 1rem;
+  }
+
+  .lineIcon {
+    width: 30px;
+  }
 }
 
 @media (max-width: 320px) {
   h3 {
-   font-size: 0.85rem;
+    font-size: 0.85rem;
   }
- } 
+}

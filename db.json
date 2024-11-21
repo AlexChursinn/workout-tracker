@@ -4294,6 +4294,294 @@
               ]
             }
           ]
+        },
+        {
+          "id": 1732203610785,
+          "workout_date": "2024-11-19",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа 45",
+              "sets": [
+                {
+                  "reps": "10",
+                  "weight": "10"
+                },
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732203611308,
+          "workout_date": "2024-11-19",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732203611907,
+          "workout_date": "2024-11-19",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732203612209,
+          "workout_date": "2024-11-19",
+          "exercises": []
+        },
+        {
+          "id": 1732203615058,
+          "workout_date": "2024-11-17",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 3,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 4,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732203615627,
+          "workout_date": "2024-11-17",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 3,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732203615827,
+          "workout_date": "2024-11-17",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                null
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732203616009,
+          "workout_date": "2024-11-17",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732203616152,
+          "workout_date": "2024-11-17",
+          "exercises": []
+        },
+        {
+          "id": 1732203619639,
+          "workout_date": "2024-11-15",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": ""
+                },
+                {
+                  "reps": "",
+                  "weight": ""
+                },
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732203620673,
+          "workout_date": "2024-11-15",
+          "exercises": []
+        },
+        {
+          "id": 1732203623311,
+          "workout_date": "2024-11-08",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732203623658,
+          "workout_date": "2024-11-08",
+          "exercises": []
+        },
+        {
+          "id": 1732203920279,
+          "workout_date": "2024-11-21",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732204089685,
+          "workout_date": "2024-11-21",
+          "exercises": []
         }
       ]
     },

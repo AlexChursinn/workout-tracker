@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import logoBlack from '../assets/logo-black.svg';
 import logoWhite from '../assets/logo-white.svg';
 import sunIcon from '../assets/sun.svg';
@@ -8,9 +9,16 @@ import logoutIconDark from '../assets/logout-dark.svg';
 import styles from './Header.module.css';
 
 const Header = ({ darkMode, toggleTheme, onLogout, showLogoutButton }) => {
+
+  const navigate = useNavigate();
+
+  const handleTodayClick = () => {
+      navigate('/home');
+  };
+
   return (
     <header className={styles.header}>
-      <img src={darkMode ? logoWhite : logoBlack} alt="Логотип" className={styles.logo} />
+      <img src={darkMode ? logoWhite : logoBlack} alt="Логотип" className={styles.logo} onClick={handleTodayClick} />
       <div className={styles.controls}>
         <div className={styles.themeToggle} onClick={toggleTheme}>
           <img src={darkMode ? sunIcon : moonIcon} alt="Переключение темы" />
