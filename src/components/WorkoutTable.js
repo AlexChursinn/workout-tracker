@@ -28,7 +28,7 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
   const handleAddRow = () => {
     handleWorkoutUpdate([
       ...workouts,
-      { id: workouts.length + 1, muscleGroup: '', exercise: '', sets: [{ reps: '', weight: '' }] }
+      { id: workouts.length + 1, muscleGroup: '', exercise: '', sets: [{ reps: '', weight: '', isEditing: true }] }
     ]);
   };
 
@@ -56,7 +56,7 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
   const handleAddSet = (workoutId) => {
     const updatedWorkouts = workouts.map((workout) =>
       workout.id === workoutId
-        ? { ...workout, sets: [...workout.sets, { reps: '', weight: '' }] }
+        ? { ...workout, sets: [...workout.sets, { reps: '', weight: '', isEditing: true }] }
         : workout
     );
     handleWorkoutUpdate(updatedWorkouts);
@@ -75,9 +75,7 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
     const updatedWorkouts = workouts.map((workout) => {
       if (workout.id === workoutId && workout.sets.length > 0) {
         const lastSet = workout.sets[workout.sets.length - 1];
-        const newSet = lastSet && lastSet.reps !== undefined && lastSet.weight !== undefined 
-          ? { ...lastSet } 
-          : { reps: '', weight: '' };
+        const newSet = lastSet ? { ...lastSet, isEditing: true } : { reps: '', weight: '', isEditing: true };
         workout.sets = [...workout.sets, newSet];
       }
       return workout;
@@ -102,14 +100,14 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
       <tbody>
         {workouts.map((workout) => (
           <tr key={workout.id}>
-<td data-label="№" className={styles.numberCell}>
-  <img
-    src={numberIcon} // Импортированный SVG
-    alt="Workout Icon" // Альтернативный текст
-    className={styles.numberIcon} // Стили для иконки
-  />
-  <span className={styles.numberText}>{workout.id}</span> {/* Отображаем ID */}
-</td>
+            <td data-label="№" className={styles.numberCell}>
+              <img
+                src={numberIcon}
+                alt="Workout Icon"
+                className={styles.numberIcon}
+              />
+              <span className={styles.numberText}>{workout.id}</span>
+            </td>
             <td data-label="Группа Мышц">
               <select
                 value={workout.muscleGroup}
@@ -141,35 +139,44 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
                 ))}
               </select>
             </td>
-{workout.sets.map((set, i) => (
-  <td 
-    key={i} 
-    data-label={window.innerWidth > 768 ? `Подход ${i + 1}` : ''} // Убираем текст на малых экранах
-  >
-    <div className={styles.setContainer}>
-      <span className={`${styles.circle} ${styles.hideOnLargeScreens}`}>{i + 1}</span>
-      <span className={`${styles.approachText} ${styles.hideOnSmallScreens}`}>Подход {i + 1}</span>
-      <div className={styles.repWeightContainer}>
-        <input
-          type="number"
-          placeholder="Повт."
-          className={styles.workoutTableInput}
-          value={set?.reps || ''}
-          onChange={(e) => handleSetChange(workout.id, i, 'reps', e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Вес"
-          className={styles.workoutTableInput}
-          value={set?.weight || ''}
-          onChange={(e) => handleSetChange(workout.id, i, 'weight', e.target.value)}
-        />
-      </div>
-    </div>
-  </td>
-))}
-
-
+            {workout.sets.map((set, i) => (
+              <td key={i}>
+                <div className={styles.setContainer}>
+                  {/* Номер подхода для малых экранов */}
+                  <span className={`${styles.circle} ${styles.hideOnLargeScreens}`}>{i + 1}</span>
+                  {set.isEditing || !set.reps || !set.weight ? (
+                    <>
+                      <input
+                        type="number"
+                        placeholder="Повт."
+                        className={styles.workoutTableInput}
+                        value={set?.reps || ''}
+                        onChange={(e) => handleSetChange(workout.id, i, 'reps', e.target.value)}
+                      />
+                      <input
+                        type="number"
+                        placeholder="Вес"
+                        className={styles.workoutTableInput}
+                        value={set?.weight || ''}
+                        onBlur={() => {
+                          if (set.reps && set.weight) {
+                            handleSetChange(workout.id, i, 'isEditing', false);
+                          }
+                        }}
+                        onChange={(e) => handleSetChange(workout.id, i, 'weight', e.target.value)}
+                      />
+                    </>
+                  ) : (
+                    <span
+                      className={styles.setText}
+                      onClick={() => handleSetChange(workout.id, i, 'isEditing', true)}
+                    >
+                      {set.reps && set.weight ? `${set.reps} х ${set.weight}` : 'Введите данные'}
+                    </span>
+                  )}
+                </div>
+              </td>
+            ))}
             <td>
               <div className={styles.setControls}>
                 <button className={styles.addSetButton} onClick={() => handleAddSet(workout.id)}>+</button>

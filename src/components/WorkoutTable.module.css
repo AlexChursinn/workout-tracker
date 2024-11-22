@@ -160,7 +160,7 @@ select:focus {
 /* Контейнер для круга и подходов */
 /* Контейнер для подходов */
 .setContainer {
-  display: flex;
+ /*  display: flex; */
   align-items: center;
   gap: 8px;
 }
@@ -309,8 +309,8 @@ select:focus {
   }
 
   .circle {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     font-size: 0.8rem;
   }
 
@@ -345,7 +345,8 @@ select:focus {
 @media (max-width: 480px) {
   .workoutTableInput {
     width: 70px;
-    margin: 2px 0;
+    height: 40px;
+    /* margin: 2px 0; */
     font-size: 0.75rem;
   }
 
@@ -360,8 +361,8 @@ select:focus {
   }
 
   .addSetButton, .deleteSetButton, .copySetButton {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     font-size: 0.8rem;
   }
 
