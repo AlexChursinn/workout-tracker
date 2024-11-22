@@ -50,7 +50,7 @@ const App = () => {
       }
     }
   }, []);
-
+ 
   const toggleTheme = () => {
     setDarkMode((prevMode) => !prevMode);
   };

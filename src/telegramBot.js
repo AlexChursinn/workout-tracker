@@ -24,7 +24,7 @@ bot.onText(/\/start/, (msg) => {
                         web_app: { url: 'https://workout-tracker-beta-rose.vercel.app/' } // Замените URL на ваш
                     }
                 ]
-            ]
+            ] 
         }
     };
 
