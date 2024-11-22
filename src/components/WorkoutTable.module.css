@@ -304,8 +304,33 @@ select:focus {
 
   .setContainer {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Размещаем элементы по краям */
+    align-items: center; /* Выравниваем элементы по вертикали */
     width: 100%; /* Растягиваем на всю ширину */
+  }
+
+  .approachNumber {
+    text-align: left; /* Нумерация подходов прижата к левому краю */
+    flex: 0 0 auto; /* Элемент занимает минимально необходимую ширину */
+    font-size: 0.9rem; /* Размер текста */
+    padding-right: 10px; /* Отступ справа для читаемости */
+  }
+
+  .inputContainer {
+    display: flex;
+    gap: 10px; /* Отступы между инпутами */
+    flex: 0 0 auto; /* Минимальная ширина контейнера с инпутами */
+  }
+
+  .workoutInput {
+    text-align: right; /* Текст в инпутах прижат к правому краю */
+    width: 50px; /* Ширина инпута */
+    padding: 5px; /* Внутренние отступы */
+    font-size: 0.9rem; /* Размер текста */
+    border: 1px solid var(--table-border-color); /* Граница */
+    border-radius: 4px; /* Скругление углов */
+    background-color: var(--table-bg-color); /* Цвет фона инпута */
+    color: var(--text-color); /* Цвет текста */
   }
 
   .circle {

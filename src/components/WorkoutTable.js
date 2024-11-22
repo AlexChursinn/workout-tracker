@@ -145,7 +145,7 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
                   {/* Номер подхода для малых экранов */}
                   <span className={`${styles.circle} ${styles.hideOnLargeScreens}`}>{i + 1}</span>
                   {set.isEditing || !set.reps || !set.weight ? (
-                    <>
+                    <div class="inputContainer">
                       <input
                         type="number"
                         placeholder="Повт."
@@ -165,7 +165,7 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange }) => {
                         }}
                         onChange={(e) => handleSetChange(workout.id, i, 'weight', e.target.value)}
                       />
-                    </>
+                    </div>
                   ) : (
                     <span
                       className={styles.setText}
