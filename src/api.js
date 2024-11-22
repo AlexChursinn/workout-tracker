@@ -53,6 +53,31 @@ export const addWorkout = async (workout, token) => {
   }
 };
 
+// Функция для авторизации через Telegram WebApp
+export const loginWithTelegram = async (telegramData) => {
+  try {
+    const response = await fetch(`${API_URL}/telegram-auth`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(telegramData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Ошибка авторизации через Telegram');
+    }
+
+    const { token } = await response.json();
+    localStorage.setItem('jwt', token); // Сохраняем токен в localStorage
+    return token;
+  } catch (error) {
+    console.error('Ошибка при авторизации через Telegram:', error);
+    throw error;
+  }
+};
+
 // Функция для обновления токена
 export const refreshAuthToken = async () => {
   try {
@@ -116,4 +141,3 @@ export const loginUser = async (credentials) => {
     throw error;
   }
 };
- 

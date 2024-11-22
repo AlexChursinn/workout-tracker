@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const crypto = require('crypto');
 const app = express();
 
 // Определение пути к файлу базы данных
@@ -17,9 +18,11 @@ if (!fs.existsSync(dbFile)) {
 
 // Настройка CORS
 const allowedOrigins = [
-  'http://localhost:3000', // Локальная разработка
-  'https://workout-tracker-beta-rose.vercel.app', // URL вашего приложения на Vercel
-  'https://workout-tracker-64ux.onrender.com' // URL приложения на Render
+  'http://localhost:3000',
+  'https://workout-tracker-beta-rose.vercel.app',
+  'https://workout-tracker-64ux.onrender.com',
+  'https://web.telegram.org',
+  'https://t.me'
 ];
 
 app.use(cors({
@@ -99,6 +102,46 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
+// Авторизация через Telegram WebApp
+const validateTelegramAuth = (query) => {
+  const secretKey = crypto.createHmac('sha256', SECRET_KEY).update('WebAppAuth').digest();
+  const checkString = Object.keys(query)
+    .filter((key) => key !== 'hash')
+    .sort()
+    .map((key) => `${key}=${query[key]}`)
+    .join('\n');
+  const hash = crypto.createHmac('sha256', secretKey).update(checkString).digest('hex');
+  return hash === query.hash;
+};
+
+app.post('/api/telegram-auth', (req, res) => {
+  const data = req.body;
+
+  if (!validateTelegramAuth(data)) {
+    return res.status(403).json({ message: 'Данные Telegram недействительны' });
+  }
+
+  const { id, first_name, last_name, username } = data;
+  const db = readDatabase();
+
+  let user = db.users.find((u) => u.telegram_id === id);
+
+  if (!user) {
+    user = {
+      id: Date.now(),
+      telegram_id: id,
+      name: `${first_name} ${last_name || ''}`.trim(),
+      username,
+      workouts: [],
+    };
+    db.users.push(user);
+    writeDatabase(db);
+  }
+
+  const token = jwt.sign({ id: user.id, telegram_id: user.telegram_id }, SECRET_KEY, { expiresIn: '1h' });
+  res.json({ token });
+});
+
 // Авторизация пользователя
 app.post('/api/login', async (req, res) => {
   console.log('Получен запрос на авторизацию:', req.body);
@@ -153,7 +196,9 @@ const authenticateToken = (req, res, next) => {
 app.get('/api/user-workouts', authenticateToken, (req, res) => {
   console.log('Запрос на получение тренировок пользователя');
   const db = readDatabase();
-  const user = db.users.find(user => user.id === req.user.id);
+  const user = db.users.find(
+    (u) => u.id === req.user.id || u.telegram_id === req.user.telegram_id
+  );
 
   if (!user) {
     console.warn('Пользователь не найден:', req.user.id);
@@ -168,7 +213,9 @@ app.get('/api/user-workouts', authenticateToken, (req, res) => {
 app.post('/api/user-workouts', authenticateToken, (req, res) => {
   console.log('Запрос на добавление тренировки:', req.body);
   const db = readDatabase();
-  const userIndex = db.users.findIndex(user => user.id === req.user.id);
+  const userIndex = db.users.findIndex(
+    (u) => u.id === req.user.id || u.telegram_id === req.user.telegram_id
+  );
 
   if (userIndex === -1) {
     console.warn('Пользователь не найден:', req.user.id);

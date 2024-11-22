@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import Header from './components/Header';
 import WorkoutPage from './components/WorkoutPage';
 import Footer from './components/Footer';
@@ -9,16 +9,16 @@ import Login from './components/Login';
 import Register from './components/Register';
 import ProtectedRoute from './ProtectedRoute';
 import Home from './components/Home';
-import { getWorkouts, addWorkout, refreshAuthToken } from './api';
+import { getWorkouts, addWorkout, refreshAuthToken, loginWithTelegram } from './api';
 import './global.css';
 
 const App = () => {
-    // Устанавливаем темную тему по умолчанию
-    const [darkMode, setDarkMode] = useState(() => {
-      const savedMode = localStorage.getItem('darkMode');
-      return savedMode !== null ? savedMode === 'true' : true; // Темная тема включена по умолчанию
-    });
-    
+  // Устанавливаем темную тему по умолчанию
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    return savedMode !== null ? savedMode === 'true' : true; // Темная тема включена по умолчанию
+  });
+
   const [selectedDate, setSelectedDate] = useState(() => {
     const savedDate = localStorage.getItem('selectedDate');
     return savedDate ? new Date(savedDate) : new Date();
@@ -31,7 +31,25 @@ const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  
+  // Проверяем, запущено ли приложение через Telegram WebApp
+  useEffect(() => {
+    if (typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
+      const telegramData = window.Telegram.WebApp.initDataUnsafe;
+
+      if (telegramData?.user) {
+        loginWithTelegram(telegramData.user)
+          .then((token) => {
+            setAuthToken(token);
+            setIsAuthenticated(true);
+            fetchData();
+            console.log('Успешная авторизация через Telegram');
+          })
+          .catch((error) => {
+            console.error('Ошибка авторизации через Telegram:', error);
+          });
+      }
+    }
+  }, []);
 
   const toggleTheme = () => {
     setDarkMode((prevMode) => !prevMode);
@@ -79,7 +97,6 @@ const App = () => {
       }
     };
 
-    // Устанавливаем интервал для регулярной проверки токена
     const interval = setInterval(checkAndRefreshToken, 1 * 60 * 1000); // Проверка каждые 15 минут
 
     checkAndRefreshToken(); // Первоначальная проверка при монтировании компонента
@@ -225,4 +242,3 @@ const App = () => {
 };
 
 export default App;
- 
