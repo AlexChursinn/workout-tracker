@@ -1,2 +1,146 @@
 {
-  "users": []}
+  "users": [
+    {
+      "id": 1732277806547,
+      "name": "3",
+      "email": "3@gmail.com",
+      "passwordHash": "$2a$10$lhKg31GZeu6Iq06mUSQsSuvckdwqTP0xAUuGw79tZWfwmvxpGCkbm",
+      "workouts": [
+        {
+          "id": 1732277817776,
+          "workout_date": "2024-11-22",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732277818430,
+          "workout_date": "2024-11-22",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732277818911,
+          "workout_date": "2024-11-22",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1732277833138,
+      "name": "a",
+      "email": "alex@gmail.com",
+      "passwordHash": "$2a$10$tEIpupRNsWnmA1cE9tcOGOn3cNjNIjLAYYb7f4yK5Bvc2cFpJLxY.",
+      "workouts": [
+        {
+          "id": 1732277842662,
+          "workout_date": "2024-11-22",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1732277846680,
+          "workout_date": "2024-12-01",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
