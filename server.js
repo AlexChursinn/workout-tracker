@@ -7,6 +7,9 @@ const cors = require('cors');
 const crypto = require('crypto');
 const app = express();
 
+// Подключение Telegram Bot
+const bot = require('./src/telegramBot'); // Путь к вашему боту
+
 // Определение пути к файлу базы данных
 const dbFile = fs.existsSync('/persistent') ? '/persistent/db.json' : path.join(__dirname, 'db.json');
 
