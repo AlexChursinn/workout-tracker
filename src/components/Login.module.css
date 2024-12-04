@@ -106,6 +106,51 @@
     background-color: #4d4d4d;
     color: var(--icon-color);
   }
+
+  .checkboxContainer {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    gap: 8px; /* Расстояние между чекбоксом и текстом */
+  }
+  
+  .checkbox {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--text-color);
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s, border-color 0.3s;
+    appearance: none; /* Полностью убираем стандартный стиль */
+    margin: 0px;
+  }
+  
+  .checkbox:checked {
+    background-color: var(--button-bg-color);
+    border-color: var(--button-bg-color);
+  }
+  
+  .checkbox:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 10px;
+    border: solid var(--button-text-color);
+    border-width: 0 3px 3px 0; /* Толщина линии галочки */
+    transform: translate(-50%, -60%) rotate(45deg);
+  }
+    
+  .checkboxLabel {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    cursor: pointer;
+  }
+  
+  
   
   @media (max-width: 600px) {
     .container {

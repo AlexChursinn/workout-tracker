@@ -1,25 +1,36 @@
-// src/components/Login.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import Spinner from './Spinner'; // Импорт компонента спинера
+import Spinner from './Spinner';
 import styles from './Login.module.css';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false); // Новое состояние для "Запомнить меня"
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState(''); // 'success' или 'error'
+  const [messageType, setMessageType] = useState('');
   const [isMessageVisible, setIsMessageVisible] = useState(false);
-  const [loading, setLoading] = useState(false); // Добавлено состояние загрузки
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Загрузка сохраненных данных из localStorage
+    const savedEmail = localStorage.getItem('savedEmail');
+    const savedPassword = localStorage.getItem('savedPassword');
+    if (savedEmail && savedPassword) {
+      setEmail(savedEmail);
+      setPassword(savedPassword);
+      setRememberMe(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (message) {
       setIsMessageVisible(true);
       const timer = setTimeout(() => {
         setIsMessageVisible(false);
-        setTimeout(() => setMessage(''), 500); // Убираем текст после исчезновения
+        setTimeout(() => setMessage(''), 500);
       }, 5000);
       return () => clearTimeout(timer);
     }
@@ -42,46 +53,55 @@ const Login = ({ onLogin }) => {
   };
 
   const handleLogin = async () => {
-    if (loading) return; // Предотвращение повторного клика
-  
+    if (loading) return;
+
     if (!validateForm()) {
       setMessage('Пожалуйста, исправьте ошибки в форме');
       setMessageType('error');
       return;
     }
-  
-    setLoading(true); // Включаем спинер
-  
+
+    setLoading(true);
+
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-  
+
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem('jwt', data.token);
+
+        // Сохраняем email и пароль, если "Запомнить меня" выбрано
+        if (rememberMe) {
+          localStorage.setItem('savedEmail', email);
+          localStorage.setItem('savedPassword', password); // Сохраняем пароль
+        } else {
+          localStorage.removeItem('savedEmail');
+          localStorage.removeItem('savedPassword');
+        }
+
         onLogin(data.token);
         setMessage('Вход выполнен успешно');
         setMessageType('success');
-  
-        // Отображаем уведомление, но продолжаем крутить спиннер
+
         setTimeout(() => {
-          navigate('/'); // Переход на главную страницу
+          navigate('/');
         }, 2000);
       } else {
         setMessage(data.message || 'Ошибка входа. Проверьте ваши данные и попробуйте снова');
         setMessageType('error');
-        setLoading(false); // Отключаем спинер при ошибке
+        setLoading(false);
       }
     } catch (error) {
       setMessage('Произошла ошибка при входе. Попробуйте позже');
       setMessageType('error');
-      setLoading(false); // Отключаем спинер при ошибке
+      setLoading(false);
     }
   };
-  
+
   const handleInputChange = (field, value) => {
     if (field === 'email') {
       setEmail(value);
@@ -92,6 +112,8 @@ const Login = ({ onLogin }) => {
       setErrors(prevErrors => ({ ...prevErrors, password: '' }));
     }
   };
+
+  const toggleRememberMe = () => setRememberMe(prev => !prev);
 
   return (
     <div className={styles.container}>
@@ -112,6 +134,20 @@ const Login = ({ onLogin }) => {
         className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
       />
       {errors.password && <p className={styles.errorText}>{errors.password}</p>}
+      <div className={styles.checkboxContainer}>
+  <input
+    type="checkbox"
+    id="rememberMe"
+    className={styles.checkbox}
+    checked={rememberMe}
+    onChange={toggleRememberMe}
+  />
+  <label htmlFor="rememberMe" className={styles.checkboxLabel}>
+    Запомнить меня
+  </label>
+</div>
+
+
       <button onClick={handleLogin} className={styles.button} disabled={loading}>
         {loading ? <Spinner darkMode={true} isButton={true} /> : 'Войти'}
       </button>
@@ -128,4 +164,3 @@ const Login = ({ onLogin }) => {
 };
 
 export default Login;
- 
