@@ -144,7 +144,7 @@ const Login = ({ onLogin }) => {
     aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
   >
     <img
-      src={showPassword ? hideIcon : showIcon}
+      src={showPassword ? showIcon : hideIcon}
       alt=""
     />
   </button>
