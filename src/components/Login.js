@@ -2,20 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Spinner from './Spinner';
 import styles from './Login.module.css';
+import showIcon from '../assets/show.svg';
+import hideIcon from '../assets/hidden.svg'; 
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false); // Новое состояние для "Запомнить меня"
+  const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
   const [isMessageVisible, setIsMessageVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // Для отображения пароля
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Загрузка сохраненных данных из localStorage
     const savedEmail = localStorage.getItem('savedEmail');
     const savedPassword = localStorage.getItem('savedPassword');
     if (savedEmail && savedPassword) {
@@ -73,11 +75,9 @@ const Login = ({ onLogin }) => {
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem('jwt', data.token);
-
-        // Сохраняем email и пароль, если "Запомнить меня" выбрано
         if (rememberMe) {
           localStorage.setItem('savedEmail', email);
-          localStorage.setItem('savedPassword', password); // Сохраняем пароль
+          localStorage.setItem('savedPassword', password);
         } else {
           localStorage.removeItem('savedEmail');
           localStorage.removeItem('savedPassword');
@@ -115,6 +115,8 @@ const Login = ({ onLogin }) => {
 
   const toggleRememberMe = () => setRememberMe(prev => !prev);
 
+  const togglePasswordVisibility = () => setShowPassword(prev => !prev);
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Вход</h2>
@@ -126,27 +128,41 @@ const Login = ({ onLogin }) => {
         className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
       />
       {errors.email && <p className={styles.errorText}>{errors.email}</p>}
-      <input
-        type="password"
-        placeholder="Пароль"
-        value={password}
-        onChange={e => handleInputChange('password', e.target.value)}
-        className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
-      />
-      {errors.password && <p className={styles.errorText}>{errors.password}</p>}
-      <div className={styles.checkboxContainer}>
-  <input
-    type="checkbox"
-    id="rememberMe"
-    className={styles.checkbox}
-    checked={rememberMe}
-    onChange={toggleRememberMe}
-  />
-  <label htmlFor="rememberMe" className={styles.checkboxLabel}>
-    Запомнить меня
-  </label>
-</div>
 
+      <div className={styles.passwordContainer}>
+  <input
+    type={showPassword ? 'text' : 'password'}
+    placeholder="Пароль"
+    value={password}
+    onChange={e => handleInputChange('password', e.target.value)}
+    className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
+  />
+  <button
+    type="button"
+    className={styles.togglePassword}
+    onClick={togglePasswordVisibility}
+    aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
+  >
+    <img
+      src={showPassword ? hideIcon : showIcon}
+      alt=""
+    />
+  </button>
+</div>
+      {errors.password && <p className={styles.errorText}>{errors.password}</p>}
+
+      <div className={styles.checkboxContainer}>
+        <input
+          type="checkbox"
+          id="rememberMe"
+          className={styles.checkbox}
+          checked={rememberMe}
+          onChange={toggleRememberMe}
+        />
+        <label htmlFor="rememberMe" className={styles.checkboxLabel}>
+          Запомнить меня
+        </label>
+      </div>
 
       <button onClick={handleLogin} className={styles.button} disabled={loading}>
         {loading ? <Spinner darkMode={true} isButton={true} /> : 'Войти'}

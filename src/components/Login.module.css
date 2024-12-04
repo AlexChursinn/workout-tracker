@@ -150,6 +150,32 @@
     cursor: pointer;
   }
   
+  .passwordContainer {
+    position: relative;
+  }
+  
+  .togglePassword {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Отступ от правого края инпута */
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background-color: var(--button-bg-color); /* Фон кнопки */
+    border: none;
+    border-radius: 5px; /* Кнопка круглая */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0px;
+  }
+  
+  .togglePassword img {
+    width: 20px;
+    height: 20px;
+  }
   
   
   @media (max-width: 600px) {
