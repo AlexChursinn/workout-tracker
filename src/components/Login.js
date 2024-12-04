@@ -65,8 +65,11 @@ const Login = ({ onLogin }) => {
         onLogin(data.token);
         setMessage('Вход выполнен успешно');
         setMessageType('success');
-        // Переход на главную страницу
-        navigate('/');
+  
+        // Отображаем уведомление, но продолжаем крутить спиннер
+        setTimeout(() => {
+          navigate('/'); // Переход на главную страницу
+        }, 2000);
       } else {
         setMessage(data.message || 'Ошибка входа. Проверьте ваши данные и попробуйте снова');
         setMessageType('error');
@@ -79,7 +82,6 @@ const Login = ({ onLogin }) => {
     }
   };
   
-
   const handleInputChange = (field, value) => {
     if (field === 'email') {
       setEmail(value);

@@ -67,8 +67,11 @@ const Register = () => {
       if (response.ok) {
         setMessage('Регистрация прошла успешно');
         setMessageType('success');
-        // Переход на страницу входа
-        navigate('/login');
+  
+        // Отображаем уведомление, но продолжаем крутить спинер
+        setTimeout(() => {
+          navigate('/login'); // Переход на страницу входа
+        }, 2000);
       } else {
         setMessage(data.message || 'Ошибка регистрации. Попробуйте снова');
         setMessageType('error');
@@ -82,7 +85,6 @@ const Register = () => {
     }
   };
   
-
   const handleInputChange = (field, value) => {
     if (field === 'name') {
       setName(value);
