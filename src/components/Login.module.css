@@ -57,6 +57,10 @@
   .button:hover {
     background-color: #4d4d4d;
   }
+
+  .button:disabled {
+    cursor: not-allowed; /* Указатель отключен */
+  }
   
   .message {
     margin-top: 15px;

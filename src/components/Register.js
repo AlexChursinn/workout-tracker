@@ -46,42 +46,42 @@ const Register = () => {
   };
 
   const handleRegister = async () => {
+    if (loading) return; // Предотвращение повторного клика
+  
     if (!validateForm()) {
       setMessage('Пожалуйста, исправьте ошибки в форме');
       setMessageType('error');
       return;
     }
-
-    setLoading(true); // Включаем спинер при начале загрузки
-
+  
+    setLoading(true); // Включаем спинер
+  
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
       });
-
+  
       const data = await response.json();
       if (response.ok) {
         setMessage('Регистрация прошла успешно');
         setMessageType('success');
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
+        // Переход на страницу входа
+        navigate('/login');
       } else {
         setMessage(data.message || 'Ошибка регистрации. Попробуйте снова');
         setMessageType('error');
+        setLoading(false); // Отключаем спинер при ошибке
       }
     } catch (error) {
-      console.error('Ошибка при отправке запроса на регистрацию:', error);
+      console.error('Ошибка при регистрации:', error);
       setMessage('Произошла ошибка при регистрации. Попробуйте позже');
       setMessageType('error');
-    } finally {
-      setLoading(false); // Отключаем спинер после завершения загрузки
+      setLoading(false); // Отключаем спинер при ошибке
     }
   };
+  
 
   const handleInputChange = (field, value) => {
     if (field === 'name') {

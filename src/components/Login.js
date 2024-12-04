@@ -42,39 +42,43 @@ const Login = ({ onLogin }) => {
   };
 
   const handleLogin = async () => {
+    if (loading) return; // Предотвращение повторного клика
+  
     if (!validateForm()) {
       setMessage('Пожалуйста, исправьте ошибки в форме');
       setMessageType('error');
       return;
     }
-
-    setLoading(true); // Включаем спинер при начале загрузки
-
+  
+    setLoading(true); // Включаем спинер
+  
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem('jwt', data.token);
         onLogin(data.token);
         setMessage('Вход выполнен успешно');
         setMessageType('success');
-        setTimeout(() => navigate('/'), 2000);
+        // Переход на главную страницу
+        navigate('/');
       } else {
         setMessage(data.message || 'Ошибка входа. Проверьте ваши данные и попробуйте снова');
         setMessageType('error');
+        setLoading(false); // Отключаем спинер при ошибке
       }
     } catch (error) {
       setMessage('Произошла ошибка при входе. Попробуйте позже');
       setMessageType('error');
-    } finally {
-      setLoading(false); // Отключаем спинер после завершения загрузки
+      setLoading(false); // Отключаем спинер при ошибке
     }
   };
+  
 
   const handleInputChange = (field, value) => {
     if (field === 'email') {

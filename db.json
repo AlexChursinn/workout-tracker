@@ -36,6 +36,83 @@
               ]
             }
           ]
+        },
+        {
+          "id": 1733326461421,
+          "workout_date": "2024-12-06",
+          "title": "Тренировка",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1733327458610,
+      "name": "4",
+      "email": "4@gmail.com",
+      "passwordHash": "$2a$10$5UBwkRV5Q3801myOQc/n5efZcYCl3uyJGHoIXsFu3NTICv7wsqXMi",
+      "workouts": []
+    },
+    {
+      "id": 1733327501108,
+      "name": "5",
+      "email": "5@gmail.com",
+      "passwordHash": "$2a$10$VeMZSEVMeuzWomC0SifB9..IutnLyBYSkJvb0zx0ElW6P9VB.aVBG",
+      "workouts": [
+        {
+          "id": 1733327513511,
+          "workout_date": "2024-12-04",
+          "title": "Test",
+          "exercises": [
+            {
+              "id": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            }
+          ]
         }
       ]
     }
