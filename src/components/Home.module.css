@@ -43,8 +43,8 @@
 
 .workoutBlockContent {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column; /* Выравниваем элементы вертикально */
+  gap: 8px; /* Добавляем отступ между строками */
 }
 
 .doneIcon {
@@ -87,18 +87,53 @@
   margin-top: 0px;
 }
 
-@media (max-width: 768px) {
-  h3 {
-    font-size: 1rem;
-  }
+.workoutInfo {
+  display: flex;
+  align-items: center; /* Выравниваем иконку и текст по вертикали */
+  gap: 10px; /* Отступ между иконкой и текстом */
+}
 
+.workoutBlockContent h3 {
+  margin: 0;
+  font-size: 1rem; /* Основной размер текста */
+  text-align: left; /* Выравнивание текста по левому краю */
+  word-break: break-word; /* Перенос текста на следующую строку при необходимости */
+  overflow-wrap: anywhere; /* Позволяет тексту переноситься в любом месте */
+  white-space: normal; /* Текст переносится по умолчанию */
+  line-height: 1.4; /* Увеличение межстрочного интервала для читаемости */
+}
+
+.doneIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0; /* Иконка не сжимается */
+}
+
+.mainTitle {
+  margin: 0px 0px 16px 0px;
+}
+
+@media (max-width: 768px) {
   .lineIcon {
     width: 30px;
+  }
+
+  .workoutBlockContent h3 {
+    font-size: 1em; /* Уменьшение размера текста */
+  }
+
+  .workoutInfo {
+    gap: 8px; /* Сокращаем отступы между иконкой и текстом */
   }
 }
 
 @media (max-width: 320px) {
-  h3 {
-    font-size: 0.85rem;
+  .workoutBlockContent h3 {
+    font-size: 0.8rem; /* Еще меньше размер текста для мобильных экранов */
+  }
+
+  .doneIcon {
+    width: 16px; /* Уменьшение размера иконки */
+    height: 16px;
   }
 }

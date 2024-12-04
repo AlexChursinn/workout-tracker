@@ -134,6 +134,7 @@ app.post('/api/login', async (req, res) => {
 });
 
 // Получение данных о тренировках пользователя
+// Получение данных о тренировках пользователя
 app.get('/api/user-workouts', authenticateToken, (req, res) => {
   const db = readDatabase();
   const user = db.users.find((u) => u.id === req.user.id);
@@ -145,39 +146,52 @@ app.get('/api/user-workouts', authenticateToken, (req, res) => {
   res.json({ workouts: user.workouts });
 });
 
-// Добавление тренировки для пользователя
+// Добавление или обновление тренировки для пользователя
 app.post('/api/user-workouts', authenticateToken, (req, res) => {
-  const { workout_date, exercises } = req.body;
+  const { workout_date, exercises, title } = req.body;
+
+  console.log('Workout received on server:', req.body); // Логируем входящие данные
 
   if (!workout_date || !Array.isArray(exercises)) {
     return res.status(400).json({ message: 'Некорректные данные тренировки' });
   }
 
-  const db = readDatabase();
+  const db = readDatabase(); // Читаем текущие данные из файла
   const userIndex = db.users.findIndex((u) => u.id === req.user.id);
 
   if (userIndex === -1) {
-    console.error('Пользователь не найден:', req.user);
     return res.status(404).json({ message: 'Пользователь не найден' });
   }
 
+  const user = db.users[userIndex];
+  const existingWorkoutIndex = user.workouts.findIndex((w) => w.workout_date === workout_date);
+
   const newWorkout = {
-    id: Date.now(),
+    id: existingWorkoutIndex !== -1 ? user.workouts[existingWorkoutIndex].id : Date.now(),
     workout_date,
+    title: title || (existingWorkoutIndex !== -1 ? user.workouts[existingWorkoutIndex].title : ''),
     exercises,
   };
 
-  db.users[userIndex].workouts.push(newWorkout);
+  if (existingWorkoutIndex !== -1) {
+    user.workouts[existingWorkoutIndex] = newWorkout;
+  } else {
+    user.workouts.push(newWorkout);
+  }
+
+  console.log('Workout to save in db.json:', db); // Лог перед записью
 
   try {
-    writeDatabase(db);
-    console.log(`Тренировка добавлена для пользователя ${db.users[userIndex].email}`);
-    res.status(201).json({ workouts: db.users[userIndex].workouts });
+    writeDatabase(db); // Записываем изменения в db.json
+    console.log('Workout successfully saved.');
+    res.status(201).json({ workouts: user.workouts });
   } catch (error) {
-    console.error('Ошибка при сохранении тренировки:', error);
+    console.error('Error saving workout:', error);
     res.status(500).json({ message: 'Ошибка сервера' });
   }
 });
+
+
 
 // Запуск сервера
 const PORT = process.env.PORT || 3001;

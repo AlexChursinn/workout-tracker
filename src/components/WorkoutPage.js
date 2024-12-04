@@ -1,11 +1,13 @@
-// src/components/WorkoutPage.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import WorkoutTable from './WorkoutTable';
 import Spinner from './Spinner';
+import styles from './WorkoutPage.module.css';
 
-const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange, loading, darkMode }) => {
+const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange, onTitleChange, loading, darkMode }) => {
   const { date } = useParams();
+  const [workoutTitle, setWorkoutTitle] = useState('');
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
 
   useEffect(() => {
     const parsedDate = new Date(date);
@@ -19,16 +21,57 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
     }
   }, [date, onDateSelect, selectedDate]);
 
+  useEffect(() => {
+    const currentWorkout = workoutData[selectedDate.toDateString()] || {};
+    setWorkoutTitle(currentWorkout.title || '');
+  }, [selectedDate, workoutData]);
+
+  const handleTitleSave = () => {
+    const updatedWorkoutData = {
+      ...workoutData,
+      [selectedDate.toDateString()]: {
+        ...workoutData[selectedDate.toDateString()],
+        title: workoutTitle,
+      },
+    };
+
+    console.log('Workout data to save:', updatedWorkoutData[selectedDate.toDateString()]);
+    onTitleChange(workoutTitle);
+    setIsEditingTitle(false);
+  };
+
   if (loading) {
     return <Spinner darkMode={darkMode} />;
   }
 
   return (
-    <div>
-      <h1>Тренировка на {selectedDate.toLocaleDateString()}</h1>
+    <div className={styles.container}>
+      <h1 className={styles.dateTitle}>Тренировка на {selectedDate.toLocaleDateString()}</h1>
+
+      <div>
+        {isEditingTitle ? (
+          <input
+            type="text"
+            value={workoutTitle}
+            onChange={(e) => setWorkoutTitle(e.target.value)}
+            onBlur={handleTitleSave}
+            onKeyDown={(e) => e.key === 'Enter' && handleTitleSave()}
+            autoFocus
+            className={styles.inputTitle}
+          />
+        ) : (
+          <h2
+            onClick={() => setIsEditingTitle(true)}
+            className={styles.editableTitle}
+          >
+            {workoutTitle || 'Введите название тренировки'}
+          </h2>
+        )}
+      </div>
+
       <WorkoutTable
         date={selectedDate}
-        workoutData={workoutData[selectedDate.toDateString()] || []}
+        workoutData={workoutData[selectedDate.toDateString()]?.exercises || []}
         onWorkoutChange={onWorkoutChange}
       />
     </div>
@@ -36,4 +79,3 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
 };
 
 export default WorkoutPage;
- 

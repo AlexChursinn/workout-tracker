@@ -32,9 +32,9 @@ export const getWorkouts = async (token) => {
   }
 };
 
-// Функция для добавления новой тренировки
 export const addWorkout = async (workout, token) => {
   try {
+    console.log('Workout being sent to server:', workout); // Логируем данные перед отправкой
     const response = await fetch(`${API_URL}/user-workouts`, {
       method: 'POST',
       headers: {
@@ -52,6 +52,8 @@ export const addWorkout = async (workout, token) => {
     throw error;
   }
 };
+
+
 
 // Функция для авторизации через Telegram WebApp
 export const loginWithTelegram = async (telegramData) => {

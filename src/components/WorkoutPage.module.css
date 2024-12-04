@@ -1,0 +1,21 @@
+/* WorkoutPage.module.css */
+
+.dateTitle {
+    font-size: 1.5rem;
+}
+
+.inputTitle {
+    font-size: 1.5rem;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.editableTitle {
+    cursor: pointer;
+    font-size: 1.25rem;
+    color: var(--text-color);
+    margin: 0px;
+}

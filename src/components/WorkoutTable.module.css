@@ -2,7 +2,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 16px;
   color: var(--text-color);
   overflow-x: auto;
   border-radius: 4px;
@@ -40,6 +40,13 @@ td {
   color: var(--text-color);
   background-color: var(--table-bg-color);
   transition: border-color 0.3s, box-shadow 0.3s;
+  -moz-appearance: textfield;
+}
+
+.workoutTableInput::-webkit-inner-spin-button, 
+.workoutTableInput::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
 .workoutTableInput:focus {
@@ -97,6 +104,10 @@ button {
   cursor: pointer;
   font-size: 1.2rem;
   transition: background-color 0.3s;
+}
+
+.addSetButton {
+  margin: 0px;
 }
 
 .addSetButton:hover, .deleteSetButton:hover, .copySetButton:hover, .deleteButton:hover {

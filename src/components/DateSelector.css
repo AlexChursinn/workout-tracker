@@ -4,7 +4,7 @@
     cursor: pointer;
     color: var(--text-color);
     text-decoration: none;
-    margin-bottom: 20px;
+    margin: 16px 0px;
     transition: color 0.3s;
   }
   
@@ -51,7 +51,7 @@
 }
   
   .custom-datepicker .react-datepicker__day--selected {
-    background-color: var(--text-color);
+    background-color: #b7b7b7;
     color: var(--button-text-color);
     font-weight: bold;
   }
@@ -112,7 +112,6 @@
   }
   
   .dark-theme .custom-datepicker .react-datepicker__day--selected {
-    background-color: #555;
     color: #fff;
   }
   

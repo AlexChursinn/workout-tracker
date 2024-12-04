@@ -16,7 +16,7 @@ const App = () => {
   // Устанавливаем темную тему по умолчанию
   const [darkMode, setDarkMode] = useState(() => {
     const savedMode = localStorage.getItem('darkMode');
-    return savedMode !== null ? savedMode === 'true' : true; // Темная тема включена по умолчанию
+    return savedMode !== null ? savedMode === 'true' : true;
   });
 
   const [selectedDate, setSelectedDate] = useState(() => {
@@ -50,7 +50,7 @@ const App = () => {
       }
     }
   }, []);
- 
+
   const toggleTheme = () => {
     setDarkMode((prevMode) => !prevMode);
   };
@@ -69,7 +69,7 @@ const App = () => {
       return decoded.exp * 1000 < Date.now(); // Проверка истечения срока действия
     } catch (error) {
       console.error('Ошибка при проверке токена:', error);
-      return true; // Считаем токен истекшим в случае ошибки
+      return true;
     }
   };
 
@@ -90,16 +90,16 @@ const App = () => {
           setAuthToken(newToken);
           setIsAuthenticated(true);
         } else {
-          handleLogout(); // Если обновление не удалось, выполняем выход
+          handleLogout();
         }
       } else if (isAuthenticated && authToken) {
         fetchData();
       }
     };
 
-    const interval = setInterval(checkAndRefreshToken, 1 * 60 * 1000); // Проверка каждые 15 минут
+    const interval = setInterval(checkAndRefreshToken, 15 * 60 * 1000); // Проверка каждые 15 минут
 
-    checkAndRefreshToken(); // Первоначальная проверка при монтировании компонента
+    checkAndRefreshToken();
 
     return () => clearInterval(interval);
   }, [isAuthenticated, authToken]);
@@ -112,20 +112,13 @@ const App = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      if (authToken && isTokenExpired(authToken)) {
-        const newToken = await refreshAuthToken();
-        if (newToken) {
-          setAuthToken(newToken);
-        } else {
-          handleLogout();
-          return;
-        }
-      }
-
       const response = await getWorkouts(authToken);
       const { workouts } = response;
       const formattedData = workouts.reduce((acc, workout) => {
-        acc[new Date(workout.workout_date).toDateString()] = workout.exercises || [];
+        acc[new Date(workout.workout_date).toDateString()] = {
+          title: workout.title || '',
+          exercises: workout.exercises || [],
+        };
         return acc;
       }, {});
       setWorkoutData(formattedData);
@@ -154,28 +147,58 @@ const App = () => {
 
   const handleWorkoutChange = async (dataForDate) => {
     try {
-      const token = authToken;
-      if (!token) return;
-
       const workoutDate = selectedDate.toISOString().split('T')[0];
-      const newWorkout = {
+      const currentWorkoutData = workoutData[selectedDate.toDateString()] || {};
+      const updatedWorkout = {
         workout_date: workoutDate,
+        title: currentWorkoutData.title || '', // Учитываем текущее название
         exercises: dataForDate,
       };
-
+  
+      console.log('Updated workout sent to server:', updatedWorkout);
+  
       setWorkoutData((prevData) => ({
         ...prevData,
-        [new Date(workoutDate).toDateString()]: dataForDate,
+        [selectedDate.toDateString()]: updatedWorkout,
       }));
-
-      await addWorkout(newWorkout, token);
+  
+      await addWorkout(updatedWorkout, authToken); // Отправляем обновление на сервер
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
     }
   };
+  
+  
+
+  const handleTitleChange = async (newTitle) => {
+    try {
+      const workoutDate = selectedDate.toISOString().split('T')[0];
+      const currentWorkoutData = workoutData[selectedDate.toDateString()] || {};
+      const updatedWorkout = {
+        workout_date: workoutDate,
+        title: newTitle,
+        exercises: currentWorkoutData.exercises || [],
+      };
+  
+      console.log('Updated title sent to server:', updatedWorkout); // Логируем данные перед отправкой
+  
+      setWorkoutData((prevData) => ({
+        ...prevData,
+        [selectedDate.toDateString()]: updatedWorkout,
+      }));
+  
+      await addWorkout(updatedWorkout, authToken); // Отправляем обновление на сервер
+    } catch (error) {
+      console.error('Ошибка при сохранении названия тренировки:', error);
+    }
+  };
+  
+  
+  
+  
 
   const filledDates = Object.keys(workoutData).filter(
-    (date) => workoutData[date] && workoutData[date].length > 0
+    (date) => workoutData[date] && workoutData[date].exercises?.length > 0
   );
 
   const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
@@ -217,6 +240,7 @@ const App = () => {
                 selectedDate={selectedDate}
                 onDateSelect={handleDateSelect}
                 onWorkoutChange={handleWorkoutChange}
+                onTitleChange={handleTitleChange}
                 loading={loading}
                 darkMode={darkMode}
               />
@@ -242,4 +266,3 @@ const App = () => {
 };
 
 export default App;
- 
