@@ -42,6 +42,10 @@ body {
     padding-bottom: 100px;
 }
 
+input, textarea, button {
+    font-family: 'Rubik', sans-serif;
+  }
+
 h1 {
     font-size: 2.5rem;
     color: var(--text-color);
