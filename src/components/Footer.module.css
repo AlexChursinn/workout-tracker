@@ -41,6 +41,11 @@
   transition: 0.3s ease;
 }
 
+/* Изменение цвета активной иконки */
+.icon.active {
+  filter: var(--active-shadow); /* Применяем переменную для тени */
+}
+
 /* Убираем эффект hover */
 .navButton:hover {
   background-color: transparent;
