@@ -5,6 +5,7 @@ import Header from './components/Header';
 import WorkoutPage from './components/WorkoutPage';
 import Footer from './components/Footer';
 import Analytics from './components/Analytics';
+import Exercises from './components/Exercises';
 import Settings from './components/Settings';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -257,6 +258,7 @@ const App = () => {
           }
         />
         <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
+        <Route path="/exercises" element={<ProtectedRoute><Exercises /></ProtectedRoute>} />
         <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>

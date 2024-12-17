@@ -4,8 +4,10 @@ import todayIconLight from '../assets/today-icon-light.svg';
 import todayIconDark from '../assets/today-icon-dark.svg';
 import analyticsIconLight from '../assets/analytics-icon-light.svg';
 import analyticsIconDark from '../assets/analytics-icon-dark.svg';
-import settingsIconLight from '../assets/settings-icon-light.svg'; // Иконка для светлой темы
-import settingsIconDark from '../assets/settings-icon-dark.svg'; // Иконка для темной темы
+import settingsIconLight from '../assets/settings-icon-light.svg'; 
+import settingsIconDark from '../assets/settings-icon-dark.svg'; 
+import exercisesIconLight from '../assets/exercises-icon-light.svg';
+import exercisesIconDark from '../assets/exercises-icon-dark.svg'; 
 import styles from './Footer.module.css';
 
 const Footer = ({ darkMode }) => {
@@ -44,6 +46,20 @@ const Footer = ({ darkMode }) => {
 
         {/* Разделитель */}
         <div className={styles.divider}></div>
+
+                {/* Список упражнений */}
+                <div className={styles.navButton}>
+          <button onClick={() => navigate('/exercises')} className={styles.navButton}>
+            <img
+              src={darkMode ? exercisesIconLight : exercisesIconDark}
+              alt="Упражнения"
+              className={`${styles.icon} ${isCurrentPage('/exercises') ? styles.active : ''}`}
+            />
+          </button>
+        </div>
+
+                {/* Разделитель */}
+                <div className={styles.divider}></div>
 
         {/* Настройки */}
         <div className={styles.navButton}>
