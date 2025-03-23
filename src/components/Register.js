@@ -1,18 +1,17 @@
-// src/components/Register.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Spinner from './Spinner'; // Импорт компонента спинера
+import Spinner from './Spinner';
 import styles from './Register.module.css';
 
-const Register = () => {
+const Register = ({ onLogin }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState(''); // 'success' или 'error'
+  const [messageType, setMessageType] = useState('');
   const [errors, setErrors] = useState({});
   const [isMessageVisible, setIsMessageVisible] = useState(false);
-  const [loading, setLoading] = useState(false); // Добавлено состояние загрузки
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,7 +19,7 @@ const Register = () => {
       setIsMessageVisible(true);
       const timer = setTimeout(() => {
         setIsMessageVisible(false);
-        setTimeout(() => setMessage(''), 500); // Убираем текст после исчезновения
+        setTimeout(() => setMessage(''), 500);
       }, 5000);
       return () => clearTimeout(timer);
     }
@@ -46,57 +45,60 @@ const Register = () => {
   };
 
   const handleRegister = async () => {
-    if (loading) return; // Предотвращение повторного клика
-  
+    if (loading) return;
+
     if (!validateForm()) {
       setMessage('Пожалуйста, исправьте ошибки в форме');
       setMessageType('error');
       return;
     }
-  
-    setLoading(true); // Включаем спинер
-  
+
+    setLoading(true);
+
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, password }),
       });
-  
+
       const data = await response.json();
       if (response.ok) {
         setMessage('Регистрация прошла успешно');
         setMessageType('success');
-  
-        // Отображаем уведомление, но продолжаем крутить спинер
+
+        // Выполняем автоматический вход
+        localStorage.setItem('jwt', data.token);
+        onLogin(data.token);
+
         setTimeout(() => {
-          navigate('/login'); // Переход на страницу входа
+          navigate('/home');
         }, 2000);
       } else {
         setMessage(data.message || 'Ошибка регистрации. Попробуйте снова');
         setMessageType('error');
-        setLoading(false); // Отключаем спинер при ошибке
+        setLoading(false);
       }
     } catch (error) {
       console.error('Ошибка при регистрации:', error);
       setMessage('Произошла ошибка при регистрации. Попробуйте позже');
       setMessageType('error');
-      setLoading(false); // Отключаем спинер при ошибке
+      setLoading(false);
     }
   };
-  
+
   const handleInputChange = (field, value) => {
     if (field === 'name') {
       setName(value);
-      setErrors(prevErrors => ({ ...prevErrors, name: '' }));
+      setErrors((prevErrors) => ({ ...prevErrors, name: '' }));
     }
     if (field === 'email') {
       setEmail(value);
-      setErrors(prevErrors => ({ ...prevErrors, email: '' }));
+      setErrors((prevErrors) => ({ ...prevErrors, email: '' }));
     }
     if (field === 'password') {
       setPassword(value);
-      setErrors(prevErrors => ({ ...prevErrors, password: '' }));
+      setErrors((prevErrors) => ({ ...prevErrors, password: '' }));
     }
   };
 
@@ -107,7 +109,7 @@ const Register = () => {
         type="text"
         placeholder="Имя"
         value={name}
-        onChange={e => handleInputChange('name', e.target.value)}
+        onChange={(e) => handleInputChange('name', e.target.value)}
         className={`${styles.input} ${errors.name ? styles.inputError : ''}`}
       />
       {errors.name && <p className={styles.errorText}>{errors.name}</p>}
@@ -115,7 +117,7 @@ const Register = () => {
         type="email"
         placeholder="Email"
         value={email}
-        onChange={e => handleInputChange('email', e.target.value)}
+        onChange={(e) => handleInputChange('email', e.target.value)}
         className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
       />
       {errors.email && <p className={styles.errorText}>{errors.email}</p>}
@@ -123,16 +125,22 @@ const Register = () => {
         type="password"
         placeholder="Пароль"
         value={password}
-        onChange={e => handleInputChange('password', e.target.value)}
+        onChange={(e) => handleInputChange('password', e.target.value)}
         className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
       />
       {errors.password && <p className={styles.errorText}>{errors.password}</p>}
       <button onClick={handleRegister} className={styles.button} disabled={loading}>
         {loading ? <Spinner darkMode={true} isButton={true} /> : 'Зарегистрироваться'}
       </button>
-      <button onClick={() => navigate('/login')} className={styles.backButton}>Вернуться на страницу входа</button>
+      <button onClick={() => navigate('/login')} className={styles.backButton}>
+        Вернуться на страницу входа
+      </button>
       {message && (
-        <p className={`${styles.message} ${isMessageVisible ? styles.messageVisible : ''} ${messageType === 'success' ? styles.successMessage : styles.errorMessage}`}>
+        <p
+          className={`${styles.message} ${isMessageVisible ? styles.messageVisible : ''} ${
+            messageType === 'success' ? styles.successMessage : styles.errorMessage
+          }`}
+        >
           {message}
         </p>
       )}
@@ -141,4 +149,3 @@ const Register = () => {
 };
 
 export default Register;
- 

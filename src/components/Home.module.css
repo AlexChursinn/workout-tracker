@@ -1,3 +1,5 @@
+/* Home.module.css */
+
 .homeContainer {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -50,6 +52,7 @@
 .doneIcon {
   width: 20px;
   height: 20px;
+  flex-shrink: 0; /* Иконка не сжимается */
 }
 
 .workoutBlock h3 {
@@ -103,14 +106,9 @@
   line-height: 1.4; /* Увеличение межстрочного интервала для читаемости */
 }
 
-.doneIcon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0; /* Иконка не сжимается */
-}
-
 .mainTitle {
   margin: 0px 0px 16px 0px;
+  text-align: center; /* Добавлено для соответствия вашему стилю */
 }
 
 @media (max-width: 768px) {

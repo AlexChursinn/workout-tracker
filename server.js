@@ -6,16 +6,13 @@ const path = require('path');
 const cors = require('cors');
 const app = express();
 
-// Определение пути к файлу базы данных
 const dbFile = fs.existsSync('/persistent') ? '/persistent/db.json' : path.join(__dirname, 'db.json');
 
-// Проверка существования файла базы данных и его создание, если он отсутствует
 if (!fs.existsSync(dbFile)) {
   fs.writeFileSync(dbFile, JSON.stringify({ users: [] }, null, 2));
   console.log(`Создан новый файл db.json по пути: ${dbFile}`);
 }
 
-// Настройка CORS
 const allowedOrigins = [
   'http://localhost:3000',
   'https://workout-tracker-beta-rose.vercel.app',
@@ -39,10 +36,8 @@ app.use(cors({
 
 app.use(express.json());
 
-// Использование переменной окружения SECRET_KEY
 const SECRET_KEY = process.env.SECRET_KEY || 'your_secret_key';
 
-// Функция чтения базы данных
 const readDatabase = () => {
   try {
     const data = fs.readFileSync(dbFile, 'utf8');
@@ -53,7 +48,6 @@ const readDatabase = () => {
   }
 };
 
-// Функция записи базы данных
 const writeDatabase = (data) => {
   try {
     fs.writeFileSync(dbFile, JSON.stringify(data, null, 2));
@@ -64,7 +58,6 @@ const writeDatabase = (data) => {
   }
 };
 
-// Middleware для проверки токена
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
@@ -83,7 +76,6 @@ const authenticateToken = (req, res, next) => {
   }
 };
 
-// Регистрация пользователя
 app.post('/api/register', async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -99,17 +91,18 @@ app.post('/api/register', async (req, res) => {
 
   try {
     const passwordHash = await bcrypt.hash(password, 10);
-    const newUser = { id: Date.now(), name, email, passwordHash, workouts: [] };
+    const newUser = { id: Date.now(), name, email, passwordHash, workouts: [], customMuscleGroups: {} };
     db.users.push(newUser);
     writeDatabase(db);
-    res.status(201).json({ message: 'Регистрация успешна' });
+
+    const token = jwt.sign({ id: newUser.id, email: newUser.email }, SECRET_KEY, { expiresIn: '1h' });
+    res.status(201).json({ message: 'Регистрация успешна', token });
   } catch (error) {
     console.error('Ошибка регистрации пользователя:', error);
     res.status(500).json({ message: 'Ошибка сервера' });
   }
 });
 
-// Авторизация пользователя
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
   const db = readDatabase();
@@ -133,8 +126,6 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Получение данных о тренировках пользователя
-// Получение данных о тренировках пользователя
 app.get('/api/user-workouts', authenticateToken, (req, res) => {
   const db = readDatabase();
   const user = db.users.find((u) => u.id === req.user.id);
@@ -146,17 +137,14 @@ app.get('/api/user-workouts', authenticateToken, (req, res) => {
   res.json({ workouts: user.workouts });
 });
 
-// Добавление или обновление тренировки для пользователя
 app.post('/api/user-workouts', authenticateToken, (req, res) => {
-  const { workout_date, exercises, title } = req.body;
+  const { workout_date, workoutId, exercises, title } = req.body;
 
-  console.log('Workout received on server:', req.body); // Логируем входящие данные
-
-  if (!workout_date || !Array.isArray(exercises)) {
+  if (!workout_date || !workoutId || !Array.isArray(exercises)) {
     return res.status(400).json({ message: 'Некорректные данные тренировки' });
   }
 
-  const db = readDatabase(); // Читаем текущие данные из файла
+  const db = readDatabase();
   const userIndex = db.users.findIndex((u) => u.id === req.user.id);
 
   if (userIndex === -1) {
@@ -164,12 +152,15 @@ app.post('/api/user-workouts', authenticateToken, (req, res) => {
   }
 
   const user = db.users[userIndex];
-  const existingWorkoutIndex = user.workouts.findIndex((w) => w.workout_date === workout_date);
+  const existingWorkoutIndex = user.workouts.findIndex(
+    (w) => w.workout_date === workout_date && w.workoutId === workoutId
+  );
 
   const newWorkout = {
     id: existingWorkoutIndex !== -1 ? user.workouts[existingWorkoutIndex].id : Date.now(),
+    workoutId,
     workout_date,
-    title: title || (existingWorkoutIndex !== -1 ? user.workouts[existingWorkoutIndex].title : ''),
+    title: title || '', // Оставляем title опциональным, как было раньше
     exercises,
   };
 
@@ -179,11 +170,8 @@ app.post('/api/user-workouts', authenticateToken, (req, res) => {
     user.workouts.push(newWorkout);
   }
 
-  console.log('Workout to save in db.json:', db); // Лог перед записью
-
   try {
-    writeDatabase(db); // Записываем изменения в db.json
-    console.log('Workout successfully saved.');
+    writeDatabase(db);
     res.status(201).json({ workouts: user.workouts });
   } catch (error) {
     console.error('Error saving workout:', error);
@@ -191,11 +179,61 @@ app.post('/api/user-workouts', authenticateToken, (req, res) => {
   }
 });
 
+app.get('/api/user-muscle-groups', authenticateToken, (req, res) => {
+  const db = readDatabase();
+  const user = db.users.find((u) => u.id === req.user.id);
 
+  if (!user) {
+    return res.status(404).json({ message: 'Пользователь не найден' });
+  }
 
-// Запуск сервера
+  res.json({ muscleGroups: user.customMuscleGroups || {} });
+});
+
+app.post('/api/user-muscle-groups', authenticateToken, (req, res) => {
+  const { muscleGroups } = req.body;
+
+  if (!muscleGroups || typeof muscleGroups !== 'object') {
+    return res.status(400).json({ message: 'Некорректные данные групп мышц' });
+  }
+
+  const db = readDatabase();
+  const userIndex = db.users.findIndex((u) => u.id === req.user.id);
+
+  if (userIndex === -1) {
+    return res.status(404).json({ message: 'Пользователь не найден' });
+  }
+
+  db.users[userIndex].customMuscleGroups = muscleGroups;
+
+  try {
+    writeDatabase(db);
+    res.status(201).json({ muscleGroups });
+  } catch (error) {
+    console.error('Error saving custom muscle groups:', error);
+    res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
+
+app.post('/api/refresh-token', (req, res) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ message: 'Токен отсутствует' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, SECRET_KEY);
+    const newToken = jwt.sign({ id: decoded.id, email: decoded.email }, SECRET_KEY, { expiresIn: '1h' });
+    res.json({ accessToken: newToken });
+  } catch (error) {
+    console.error('Ошибка при обновлении токена:', error);
+    res.status(403).json({ message: 'Неверный токен' });
+  }
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
- 

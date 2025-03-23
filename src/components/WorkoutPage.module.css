@@ -1,21 +1,140 @@
 /* WorkoutPage.module.css */
 
+.container {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
 .dateTitle {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.workoutNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Центрируем по горизонтали */
+  gap: 5px;
+  font-size: 1.25rem;
+  color: var(--text-color-secondary);
+  margin-bottom: 20px;
+  width: 100%; /* Устанавливаем ширину, чтобы центрирование работало */
+  text-align: center; /* Дополнительно центрируем текст внутри элемента */
+}
+
+.numberIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .inputTitle {
-    font-size: 1.5rem;
-    width: 100%;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background-color: var(--background-color);
-    color: var(--text-color);
+  font-size: 1.5rem;
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 5px;
 }
 
 .editableTitle {
-    cursor: pointer;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.workoutOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.workoutOption:hover {
+  background-color: rgba(var(--text-color-rgb), 0.1);
+}
+
+.workoutOption img {
+  width: 20px;
+  height: 20px;
+}
+
+.inlineIcon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.newWorkoutButton {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.newWorkoutButton:hover {
+  background-color: #0056b3;
+}
+
+.addWorkoutButton {
+  margin: 10px 0;
+  padding: 10px 20px;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.addWorkoutButton:hover {
+  background-color: #4d4d4d;
+}
+
+@media (max-width: 768px) {
+  .dateTitle {
     font-size: 1.25rem;
-    color: var(--text-color);
-    margin: 0px;
+  }
+
+  .workoutNumber {
+    font-size: 1rem;
+  }
+
+  .inputTitle {
+    font-size: 1.25rem;
+  }
+
+  .editableTitle {
+    font-size: 1rem;
+  }
+
+  .workoutOption {
+    padding: 8px;
+  }
+
+  .newWorkoutButton {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
 }

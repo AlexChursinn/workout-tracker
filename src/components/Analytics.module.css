@@ -1,0 +1,145 @@
+/* src/pages/Analytics.module.css */
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--text-color);
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--text-color);
+  }
+  
+  .section {
+    margin-bottom: 40px;
+  }
+  
+  .statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .statsCard {
+    background-color: var(--table-bg-color);
+    border: 1px solid var(--table-border-color);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .statsCard h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+  }
+  
+  .statsCard p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+  }
+  
+  .timeFrameSelector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .button {
+    padding: 8px 15px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: var(--button-bg-color-hover, #4d4d4d);
+  }
+  
+  .activeButton {
+    padding: 8px 15px;
+    background-color: var(--button-bg-color-hover, #4d4d4d);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+  
+  .chartContainer {
+    margin-top: 15px;
+    height: 200px;
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .statsGrid {
+      grid-template-columns: 1fr;
+    }
+  
+    .title {
+      font-size: 1.3rem;
+    }
+  
+    .subtitle {
+      font-size: 1.1rem;
+    }
+  
+    .statsCard h3 {
+      font-size: 1rem;
+    }
+  
+    .statsCard p {
+      font-size: 0.85rem;
+    }
+  
+    .button,
+    .activeButton {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+    }
+  
+    .chartContainer {
+      height: 150px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .title {
+      font-size: 1.2rem;
+    }
+  
+    .subtitle {
+      font-size: 1rem;
+    }
+  
+    .statsCard {
+      padding: 10px;
+    }
+  
+    .chartContainer {
+      height: 120px;
+    }
+  }

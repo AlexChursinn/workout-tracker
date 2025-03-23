@@ -1,53 +1,51 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import WorkoutTable from './WorkoutTable';
 import Spinner from './Spinner';
 import styles from './WorkoutPage.module.css';
 
-const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange, onTitleChange, loading, darkMode }) => {
-  const { date } = useParams();
+const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange, onTitleChange, loading, darkMode, defaultMuscleGroups, customMuscleGroups }) => {
+  const { date, workoutId } = useParams();
   const [workoutTitle, setWorkoutTitle] = useState('');
   const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const parsedDate = new Date(date);
     parsedDate.setHours(0, 0, 0, 0);
     const localDate = new Date(parsedDate.getTime() - parsedDate.getTimezoneOffset() * 60000);
-
     if (!isNaN(localDate) && localDate.getTime() !== selectedDate.getTime()) {
-      onDateSelect(localDate);
-    } else if (isNaN(localDate)) {
-      console.error('Invalid date format:', date);
+      onDateSelect(localDate, parseInt(workoutId));
     }
-  }, [date, onDateSelect, selectedDate]);
+  }, [date, workoutId, onDateSelect, selectedDate]);
 
   useEffect(() => {
-    const currentWorkout = workoutData[selectedDate.toDateString()] || {};
+    const workoutsForDate = workoutData[selectedDate.toDateString()] || [];
+    const currentWorkout = workoutsForDate.find((w) => w.workoutId === parseInt(workoutId)) || {};
     setWorkoutTitle(currentWorkout.title || '');
-  }, [selectedDate, workoutData]);
+  }, [selectedDate, workoutData, workoutId]);
 
   const handleTitleSave = () => {
-    const updatedWorkoutData = {
-      ...workoutData,
-      [selectedDate.toDateString()]: {
-        ...workoutData[selectedDate.toDateString()],
-        title: workoutTitle,
-      },
-    };
-
-    console.log('Workout data to save:', updatedWorkoutData[selectedDate.toDateString()]);
-    onTitleChange(workoutTitle);
+    onTitleChange(workoutTitle, parseInt(workoutId));
     setIsEditingTitle(false);
   };
 
-  if (loading) {
-    return <Spinner darkMode={darkMode} />;
-  }
+  const handleAddNewWorkout = () => {
+    const workoutsForDate = workoutData[selectedDate.toDateString()] || [];
+    const newWorkoutId = workoutsForDate.length + 1;
+    const formattedDate = selectedDate.toISOString().split('T')[0];
+    navigate(`/${formattedDate}/${newWorkoutId}`);
+  };
+
+  if (loading) return <Spinner darkMode={darkMode} />;
+
+  const workoutsForDate = workoutData[selectedDate.toDateString()] || [];
+  const currentWorkout = workoutsForDate.find((w) => w.workoutId === parseInt(workoutId)) || {};
 
   return (
     <div className={styles.container}>
       <h1 className={styles.dateTitle}>Тренировка на {selectedDate.toLocaleDateString()}</h1>
-
+      <h3 className={styles.workoutNumber}>Тренировка №{workoutId}</h3>
       <div>
         {isEditingTitle ? (
           <input
@@ -60,20 +58,22 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
             className={styles.inputTitle}
           />
         ) : (
-          <h2
-            onClick={() => setIsEditingTitle(true)}
-            className={styles.editableTitle}
-          >
+          <h2 onClick={() => setIsEditingTitle(true)} className={styles.editableTitle}>
             {workoutTitle || 'Введите название тренировки'}
           </h2>
         )}
       </div>
-
       <WorkoutTable
         date={selectedDate}
-        workoutData={workoutData[selectedDate.toDateString()]?.exercises || []}
-        onWorkoutChange={onWorkoutChange}
+        workoutData={currentWorkout.exercises || []}
+        onWorkoutChange={(data) => onWorkoutChange(data, parseInt(workoutId))}
+        defaultMuscleGroups={defaultMuscleGroups}
+        customMuscleGroups={customMuscleGroups}
+        darkMode={darkMode}
       />
+      <button onClick={handleAddNewWorkout} className={styles.addWorkoutButton}>
+        Добавить еще одну тренировку
+      </button>
     </div>
   );
 };

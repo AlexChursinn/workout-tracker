@@ -1,6 +1,5 @@
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 
-// Функция для получения тренировок текущего пользователя
 export const getWorkouts = async (token) => {
   try {
     let response = await fetch(`${API_URL}/user-workouts`, {
@@ -34,7 +33,6 @@ export const getWorkouts = async (token) => {
 
 export const addWorkout = async (workout, token) => {
   try {
-    console.log('Workout being sent to server:', workout); // Логируем данные перед отправкой
     const response = await fetch(`${API_URL}/user-workouts`, {
       method: 'POST',
       headers: {
@@ -53,9 +51,43 @@ export const addWorkout = async (workout, token) => {
   }
 };
 
+export const getCustomMuscleGroups = async (token) => {
+  try {
+    const response = await fetch(`${API_URL}/user-muscle-groups`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Ошибка при загрузке пользовательских групп мышц');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Ошибка при загрузке пользовательских групп мышц:', error);
+    throw error;
+  }
+};
 
+export const saveCustomMuscleGroups = async (customMuscleGroups, token) => {
+  try {
+    const response = await fetch(`${API_URL}/user-muscle-groups`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ muscleGroups: customMuscleGroups }),
+    });
+    if (!response.ok) {
+      throw new Error('Ошибка при сохранении пользовательских групп мышц');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Ошибка при сохранении пользовательских групп мышц:', error);
+    throw error;
+  }
+};
 
-// Функция для авторизации через Telegram WebApp
 export const loginWithTelegram = async (telegramData) => {
   try {
     const response = await fetch(`${API_URL}/telegram-auth`, {
@@ -72,7 +104,7 @@ export const loginWithTelegram = async (telegramData) => {
     }
 
     const { token } = await response.json();
-    localStorage.setItem('jwt', token); // Сохраняем токен в localStorage
+    localStorage.setItem('jwt', token);
     return token;
   } catch (error) {
     console.error('Ошибка при авторизации через Telegram:', error);
@@ -80,17 +112,16 @@ export const loginWithTelegram = async (telegramData) => {
   }
 };
 
-// Функция для обновления токена
 export const refreshAuthToken = async () => {
   try {
     const response = await fetch(`${API_URL}/refresh-token`, {
       method: 'POST',
-      credentials: 'include', // Используется, если refresh token хранится в httpOnly cookie
+      credentials: 'include',
     });
 
     if (response.ok) {
       const data = await response.json();
-      localStorage.setItem('jwt', data.accessToken); // Сохраняем новый токен в localStorage
+      localStorage.setItem('jwt', data.accessToken);
       return data.accessToken;
     } else {
       console.error('Ошибка при обновлении токена');
@@ -101,46 +132,3 @@ export const refreshAuthToken = async () => {
     return null;
   }
 };
-
-// Функция для регистрации нового пользователя
-export const registerUser = async (userData) => {
-  try {
-    const response = await fetch(`${API_URL}/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Ошибка регистрации');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Ошибка при регистрации пользователя:', error);
-    throw error;
-  }
-};
-
-// Функция для авторизации пользователя
-export const loginUser = async (credentials) => {
-  try {
-    const response = await fetch(`${API_URL}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Ошибка авторизации');
-    }
-    return await response.json();
-  } catch (error) {
-    console.error('Ошибка при авторизации пользователя:', error);
-    throw error;
-  }
-};
-    
