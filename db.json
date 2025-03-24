@@ -1,5 +1,5 @@
 {
-  "users": [ 
+  "users": [
     {
       "id": 1733244308969,
       "name": "alex",
@@ -2182,9 +2182,9 @@
               "exercise": "",
               "sets": [
                 {
-                  "reps": "",
-                  "weight": "",
-                  "isEditing": true
+                  "reps": "2",
+                  "weight": "2",
+                  "isEditing": false
                 }
               ]
             }

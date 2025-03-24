@@ -264,7 +264,14 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route
+  path="/settings"
+  element={
+    <ProtectedRoute>
+      <Settings darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} />
+    </ProtectedRoute>
+  }
+/>
           <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
       </main>

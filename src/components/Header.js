@@ -34,11 +34,12 @@ const Header = ({ darkMode, toggleTheme, onLogout, showLogoutButton }) => {
           className={styles.logo} 
           onClick={handleTodayClick} 
         />
-        <div className={styles.controls}>
-          <div className={styles.themeToggle} onClick={toggleTheme}>
-            <img src={darkMode ? sunIcon : moonIcon} alt="Переключение темы" />
-          </div>
-          {showLogoutButton && (
+        {/* Показываем controls только на десктопе */}
+        {showLogoutButton && (
+          <div className={`${styles.controls} ${styles.desktopOnly}`}>
+            <div className={styles.themeToggle} onClick={toggleTheme}>
+              <img src={darkMode ? sunIcon : moonIcon} alt="Переключение темы" />
+            </div>
             <button className={styles.logoutButton} onClick={onLogout}>
               <img
                 src={darkMode ? logoutIconLight : logoutIconDark}
@@ -46,11 +47,11 @@ const Header = ({ darkMode, toggleTheme, onLogout, showLogoutButton }) => {
                 className={styles.logoutIcon}
               />
             </button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </header>
   );
-}; 
+};
 
 export default Header;

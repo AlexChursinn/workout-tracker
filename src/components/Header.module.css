@@ -42,6 +42,10 @@
   gap: 15px;
 }
 
+.desktopOnly {
+  display: flex;
+}
+
 .themeToggle {
   cursor: pointer;
   width: 30px;
@@ -87,6 +91,10 @@
 
   .logo {
     width: 40px; /* Уменьшаем логотип для планшетов */
+  }
+
+  .desktopOnly {
+    display: none; /* Скрываем controls на мобильных */
   }
 
   .themeToggle,
