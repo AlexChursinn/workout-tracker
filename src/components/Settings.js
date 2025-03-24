@@ -8,6 +8,6 @@ const Settings = () => {
       <p>Здесь будут настройки приложения</p>
     </div>
   );
-};
+}; 
 
 export default Settings;

@@ -148,4 +148,4 @@ const Register = ({ onLogin }) => {
   );
 };
 
-export default Register;
+export default Register; 

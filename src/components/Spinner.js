@@ -18,7 +18,7 @@ const Spinner = ({ darkMode, isButton = false }) => {
       <img src={spinnerSrc} alt="Loading..." className={spinnerClass} />
     </div>
   );
-};
+}; 
 
 export default Spinner;
  

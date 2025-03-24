@@ -11,7 +11,7 @@
   z-index: 1000;
   padding: 10px; /* Отступы вокруг модального окна */
 }
-
+ 
 .modalContent {
   background-color: var(--bg-color);
   padding: 20px;

@@ -131,4 +131,4 @@ export const refreshAuthToken = async () => {
     console.error('Ошибка при обновлении токена:', error);
     return null;
   }
-};
+}; 

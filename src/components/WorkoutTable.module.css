@@ -131,7 +131,7 @@ button {
   background-color: #4d4d4d;
   color: var(--button-text-color);
 }
-
+ 
 /* Стили для иконок */
 .deleteIcon,
 .copyIcon {

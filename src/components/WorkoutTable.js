@@ -185,7 +185,7 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
                 {workout.sets.length > 1 && (
                   <button className={styles.deleteSetButton} onClick={() => handleDeleteSet(workout.id)}>-</button>
                 )}
-              </div>
+              </div> 
             </td>
             <td className={styles.centeredCell}>
               <div className={styles.dropdownContainer}>

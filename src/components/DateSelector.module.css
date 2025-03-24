@@ -7,7 +7,7 @@
   font-family: 'Rubik', sans-serif !important;
   background-color: var(--bg-color) !important;
 }
-
+ 
 .react-datepicker__header {
   background-color: var(--table-bg-color) !important;
   border-bottom: 1px solid var(--table-border-color) !important;

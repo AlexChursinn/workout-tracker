@@ -6,7 +6,7 @@
     text-decoration: none;
     margin: 16px 0px;
     transition: color 0.3s;
-  }
+  } 
   
   /* Основные стили для кастомного календаря */
   .custom-datepicker .react-datepicker {

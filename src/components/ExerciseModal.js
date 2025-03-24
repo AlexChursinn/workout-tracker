@@ -5,7 +5,7 @@ const ExerciseModal = ({ workoutId, setIndex, onSave, onClose }) => {
   const [reps, setReps] = useState('');
   const [weight, setWeight] = useState('');
   const [isInvalid, setIsInvalid] = useState({ reps: false, weight: false });
-
+ 
   const handleSave = () => {
     const hasError = !reps || !weight;
     setIsInvalid({

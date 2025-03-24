@@ -5,7 +5,7 @@ import { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import './DateSelector.css'; // Подключаем CSS для кастомных стилей
 
-registerLocale('ru', ru);
+registerLocale('ru', ru); 
 
 const DateSelector = forwardRef(({ selectedDate, onDateSelect, filledDates }, ref) => {
   const [openCalendar, setOpenCalendar] = useState(false);

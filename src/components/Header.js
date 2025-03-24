@@ -51,6 +51,6 @@ const Header = ({ darkMode, toggleTheme, onLogout, showLogoutButton }) => {
       </div>
     </header>
   );
-};
+}; 
 
 export default Header;

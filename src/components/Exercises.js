@@ -4,7 +4,7 @@ import arrowDownIcon from '../assets/arrowDown.svg';
 import arrowUpIcon from '../assets/arrowUp.svg';
 import deleteIcon from '../assets/delete.svg';
 import Spinner from './Spinner';
-
+ 
 const Exercises = ({ darkMode, defaultMuscleGroups, customMuscleGroups, onMuscleGroupsChange, loading }) => {
   const [muscleGroups, setMuscleGroups] = useState(customMuscleGroups);
   const [newGroup, setNewGroup] = useState('');

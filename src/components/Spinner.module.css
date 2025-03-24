@@ -17,7 +17,7 @@
   height: 50px;
   animation: spin 1s linear infinite; /* Анимация вращения */
 }
-
+ 
 .spinnerButton {
   width: 20px; /* Размер спинера в кнопках */
   height: 20px;

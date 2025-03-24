@@ -6,7 +6,7 @@ const TOKEN = process.env.TELEGRAM_BOT_TOKEN || '7260346507:AAHgyipsw-rCJHvOzsqX
 // Создаем экземпляр бота
 const bot = new TelegramBot(TOKEN, { polling: true });
 
-// Обработка команды /start
+// Обработка команды /start 
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
  

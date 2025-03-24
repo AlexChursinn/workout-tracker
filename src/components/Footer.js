@@ -9,7 +9,7 @@ import settingsIconDark from '../assets/settings-icon-dark.svg';
 import exercisesIconLight from '../assets/exercises-icon-light.svg';
 import exercisesIconDark from '../assets/exercises-icon-dark.svg'; 
 import styles from './Footer.module.css';
-
+ 
 const Footer = ({ darkMode }) => {
   const navigate = useNavigate();
   const location = useLocation();
