@@ -46,11 +46,14 @@
   display: flex;
 }
 
+.mobileOnly {
+  display: none; /* По умолчанию скрыт */
+}
+
 .themeToggle {
   cursor: pointer;
   width: 30px;
   height: 30px;
-  margin-right: 10px;
 }
 
 .themeToggle img {
@@ -84,17 +87,22 @@
   height: 100%;
 }
 
+/* Мобильные устройства (ширина <= 768px) */
 @media (max-width: 768px) {
+  .desktopOnly {
+    display: none; /* Скрываем десктопные элементы */
+  }
+
+  .mobileOnly {
+    display: flex; /* Показываем мобильные элементы */
+  }
+
   .headerContainer {
     padding: 10px 15px;
   }
 
   .logo {
     width: 40px; /* Уменьшаем логотип для планшетов */
-  }
-
-  .desktopOnly {
-    display: none; /* Скрываем controls на мобильных */
   }
 
   .themeToggle,

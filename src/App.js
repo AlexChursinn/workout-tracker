@@ -24,7 +24,10 @@ const defaultMuscleGroups = {
 };
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedDarkMode = localStorage.getItem('darkMode');
+    return savedDarkMode !== null ? savedDarkMode === 'true' : true;
+  });
   const [selectedDate, setSelectedDate] = useState(() => new Date(localStorage.getItem('selectedDate') || Date.now()));
   const [showTable, setShowTable] = useState(() => localStorage.getItem('showTable') === 'true');
   const [workoutData, setWorkoutData] = useState({});
@@ -265,13 +268,13 @@ const App = () => {
             }
           />
           <Route
-  path="/settings"
-  element={
-    <ProtectedRoute>
-      <Settings darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} />
-    </ProtectedRoute>
-  }
-/>
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Settings darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
       </main>
@@ -282,4 +285,4 @@ const App = () => {
   );
 };
 
-export default App; 
+export default App;

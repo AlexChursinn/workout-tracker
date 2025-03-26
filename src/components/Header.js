@@ -34,21 +34,28 @@ const Header = ({ darkMode, toggleTheme, onLogout, showLogoutButton }) => {
           className={styles.logo} 
           onClick={handleTodayClick} 
         />
-        {/* Показываем controls только на десктопе */}
-        {showLogoutButton && (
-          <div className={`${styles.controls} ${styles.desktopOnly}`}>
-            <div className={styles.themeToggle} onClick={toggleTheme}>
+        <div className={styles.controls}>
+          {/* Переключатель темы для десктопа (всегда виден) */}
+          <div className={`${styles.themeToggle} ${styles.desktopOnly}`} onClick={toggleTheme}>
+            <img src={darkMode ? sunIcon : moonIcon} alt="Переключение темы" />
+          </div>
+          {/* Переключатель темы для мобильных (только до авторизации) */}
+          {!showLogoutButton && (
+            <div className={`${styles.themeToggle} ${styles.mobileOnly}`} onClick={toggleTheme}>
               <img src={darkMode ? sunIcon : moonIcon} alt="Переключение темы" />
             </div>
-            <button className={styles.logoutButton} onClick={onLogout}>
+          )}
+          {/* Кнопка выхода (только после авторизации, только на десктопе) */}
+          {showLogoutButton && (
+            <button className={`${styles.logoutButton} ${styles.desktopOnly}`} onClick={onLogout}>
               <img
                 src={darkMode ? logoutIconLight : logoutIconDark}
                 alt="Выйти"
                 className={styles.logoutIcon}
               />
             </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </header>
   );
