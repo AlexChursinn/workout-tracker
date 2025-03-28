@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group'; // Добавлены импорты
 import { jwtDecode } from 'jwt-decode';
 import Header from './components/Header';
 import WorkoutPage from './components/WorkoutPage';
@@ -246,67 +247,75 @@ const App = () => {
         showLogoutButton={!['/login', '/register'].includes(location.pathname)}
       />
       <main className="container">
-        <Routes>
-          <Route path="/login" element={<Login onLogin={handleLogin} />} />
-          <Route path="/register" element={<Register onLogin={handleLogin} />} />
-          <Route
-            path="/:date/:workoutId"
-            element={
-              <ProtectedRoute>
-                <WorkoutPage
-                  workoutData={workoutData}
-                  selectedDate={selectedDate}
-                  onDateSelect={handleDateSelect}
-                  onWorkoutChange={handleWorkoutChange}
-                  onTitleChange={handleTitleChange}
-                  loading={loading}
-                  darkMode={darkMode}
-                  defaultMuscleGroups={defaultMuscleGroups}
-                  customMuscleGroups={customMuscleGroups}
-                />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/home"
-            element={
-              <ProtectedRoute>
-                <Home workoutData={workoutData} onDateSelect={handleDateSelect} darkMode={darkMode} loading={loading} />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/analytics"
-            element={
-              <ProtectedRoute>
-                <Analytics workoutData={workoutData} darkMode={darkMode} />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/exercises"
-            element={
-              <ProtectedRoute>
-                <Exercises
-                  darkMode={darkMode}
-                  defaultMuscleGroups={defaultMuscleGroups}
-                  customMuscleGroups={customMuscleGroups}
-                  onMuscleGroupsChange={handleMuscleGroupsChange}
-                  loading={loading}
-                />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/settings"
-            element={
-              <ProtectedRoute>
-                <Settings darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<Navigate to="/home" />} />
-        </Routes>
+        <TransitionGroup>
+          <CSSTransition
+            key={location.pathname}
+            timeout={300}
+            classNames="page"
+          >
+            <Routes>
+              <Route path="/login" element={<Login onLogin={handleLogin} />} />
+              <Route path="/register" element={<Register onLogin={handleLogin} />} />
+              <Route
+                path="/:date/:workoutId"
+                element={
+                  <ProtectedRoute>
+                    <WorkoutPage
+                      workoutData={workoutData}
+                      selectedDate={selectedDate}
+                      onDateSelect={handleDateSelect}
+                      onWorkoutChange={handleWorkoutChange}
+                      onTitleChange={handleTitleChange}
+                      loading={loading}
+                      darkMode={darkMode}
+                      defaultMuscleGroups={defaultMuscleGroups}
+                      customMuscleGroups={customMuscleGroups}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/home"
+                element={
+                  <ProtectedRoute>
+                    <Home workoutData={workoutData} onDateSelect={handleDateSelect} darkMode={darkMode} loading={loading} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/analytics"
+                element={
+                  <ProtectedRoute>
+                    <Analytics workoutData={workoutData} darkMode={darkMode} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/exercises"
+                element={
+                  <ProtectedRoute>
+                    <Exercises
+                      darkMode={darkMode}
+                      defaultMuscleGroups={defaultMuscleGroups}
+                      customMuscleGroups={customMuscleGroups}
+                      onMuscleGroupsChange={handleMuscleGroupsChange}
+                      loading={loading}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/settings"
+                element={
+                  <ProtectedRoute>
+                    <Settings darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="*" element={<Navigate to="/home" />} />
+            </Routes>
+          </CSSTransition>
+        </TransitionGroup>
       </main>
       {!['/login', '/register'].includes(location.pathname) && (
         <Footer darkMode={darkMode} onNavigateToday={() => handleDateSelect(new Date())} />

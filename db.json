@@ -2189,6 +2189,113 @@
               ]
             }
           ]
+        },
+        {
+          "id": 1743184325785,
+          "workoutId": 1,
+          "workout_date": "2025-03-28",
+          "title": "test",
+          "exercises": [
+            {
+              "id": 1743184325779,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 1743184510329,
+              "number": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 1743184511228,
+              "number": 3,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 1743184563899,
+              "number": 4,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                },
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1743184570888,
+          "workoutId": 2,
+          "workout_date": "2025-03-28",
+          "title": "test 2",
+          "exercises": [
+            {
+              "id": 1743184570881,
+              "number": 1,
+              "muscleGroup": "Спина",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1743184580660,
+          "workoutId": 3,
+          "workout_date": "2025-03-28",
+          "title": "test 3",
+          "exercises": [
+            {
+              "id": 1743184580647,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            }
+          ]
         }
       ],
       "customMuscleGroups": {}

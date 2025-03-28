@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import DateSelector from './DateSelector';
 import Spinner from './Spinner';
 import styles from './Home.module.css';
@@ -47,7 +48,6 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading }) => {
       setSelectedDate(localDate);
       onDateSelect(localDate, workoutId);
       const formattedDate = localDate.toISOString().split('T')[0];
-      // Используем replace вместо push, чтобы не добавлять новую запись в историю
       navigate(`/${formattedDate}/${workoutId}`, { replace: true });
     } else {
       console.error('Invalid date:', date);
@@ -79,63 +79,70 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading }) => {
       {hasWorkouts ? (
         <>
           <h1 className={styles.mainTitle}>История тренировок</h1>
-          {filteredWorkoutData
-            .sort((a, b) => new Date(b.date) - new Date(a.date) || b.workoutId - a.workoutId)
-            .map(({ date, workoutId, title, exerciseCount }) => {
-              const workoutsForDate = workoutsByDate[date] || [];
-              const showWorkoutNumber = workoutsForDate.length > 1;
+          <TransitionGroup>
+            {filteredWorkoutData
+              .sort((a, b) => new Date(b.date) - new Date(a.date) || b.workoutId - a.workoutId)
+              .map(({ date, workoutId, title, exerciseCount }) => {
+                const workoutsForDate = workoutsByDate[date] || [];
+                const showWorkoutNumber = workoutsForDate.length > 1;
 
-              return (
-                <div
-                  key={`${date}-${workoutId}`}
-                  className={styles.workoutBlock}
-                  onClick={() => handleDateChange(new Date(date), workoutId)}
-                  role="button"
-                  tabIndex="0"
-                  onKeyDown={(e) => e.key === 'Enter' && handleDateChange(new Date(date), workoutId)}
-                >
-                  <div className={styles.workoutBlockContent}>
-                    <div className={styles.workoutInfo}>
-                      <img
-                        src={darkMode ? doneIconWhite : doneIconBlack}
-                        alt="Иконка завершенной тренировки"
-                        className={styles.doneIcon}
-                      />
-                      <h3>
-                        {new Date(date)
-                          .toLocaleDateString('ru-RU', {
-                            weekday: 'long',
-                            day: 'numeric',
-                            month: 'short',
-                            year: 'numeric',
-                          })
-                          .replace(/^([а-яё])/i, (match) => match.toUpperCase())}
-                      </h3>
+                return (
+                  <CSSTransition
+                    key={`${date}-${workoutId}`}
+                    timeout={500}
+                    classNames="block"
+                  >
+                    <div
+                      className={styles.workoutBlock}
+                      onClick={() => handleDateChange(new Date(date), workoutId)}
+                      role="button"
+                      tabIndex="0"
+                      onKeyDown={(e) => e.key === 'Enter' && handleDateChange(new Date(date), workoutId)}
+                    >
+                      <div className={styles.workoutBlockContent}>
+                        <div className={styles.workoutInfo}>
+                          <img
+                            src={darkMode ? doneIconWhite : doneIconBlack}
+                            alt="Иконка завершенной тренировки"
+                            className={styles.doneIcon}
+                          />
+                          <h3>
+                            {new Date(date)
+                              .toLocaleDateString('ru-RU', {
+                                weekday: 'long',
+                                day: 'numeric',
+                                month: 'short',
+                                year: 'numeric',
+                              })
+                              .replace(/^([а-яё])/i, (match) => match.toUpperCase())}
+                          </h3>
+                        </div>
+                        {title && (
+                          <div className={styles.workoutInfo}>
+                            <img
+                              src={darkMode ? titleWhite : titleBlack}
+                              alt="Иконка названия тренировки"
+                              className={styles.doneIcon}
+                            />
+                            <h3>{title}</h3>
+                          </div>
+                        )}
+                        {showWorkoutNumber && (
+                          <div className={styles.workoutInfo}>
+                            <img
+                              src={darkMode ? numberIconWhite : numberIconBlack}
+                              alt="Иконка номера тренировки"
+                              className={styles.doneIcon}
+                            />
+                            <h3>Тренировка №{workoutId}</h3>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    {title && (
-                      <div className={styles.workoutInfo}>
-                        <img
-                          src={darkMode ? titleWhite : titleBlack}
-                          alt="Иконка названия тренировки"
-                          className={styles.doneIcon}
-                        />
-                        <h3>{title}</h3>
-                      </div>
-                    )}
-                    {showWorkoutNumber && (
-                      <div className={styles.workoutInfo}>
-                        <img
-                          src={darkMode ? numberIconWhite : numberIconBlack}
-                          alt="Иконка номера тренировки"
-                          className={styles.doneIcon}
-                        />
-                        <h3>Тренировка №{workoutId}</h3>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
+                  </CSSTransition>
+                );
+              })}
+          </TransitionGroup>
         </>
       ) : (
         <div className={styles.noWorkouts}>
@@ -153,4 +160,4 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading }) => {
   );
 };
 
-export default Home; 
+export default Home;

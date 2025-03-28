@@ -131,4 +131,29 @@ export const refreshAuthToken = async () => {
     console.error('Ошибка при обновлении токена:', error);
     return null;
   }
-}; 
+};
+
+// Новая функция login для стандартной авторизации
+export const login = async (credentials) => {
+  try {
+    const response = await fetch(`${API_URL}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Ошибка авторизации');
+    }
+
+    const { token } = await response.json();
+    localStorage.setItem('jwt', token);
+    return token;
+  } catch (error) {
+    console.error('Ошибка при авторизации:', error);
+    throw error;
+  }
+};

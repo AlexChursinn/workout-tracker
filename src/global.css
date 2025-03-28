@@ -36,8 +36,8 @@ body {
 }
 
 .app {
-  min-height: 100vh;
-  position: relative;
+    min-height: 100vh;
+    position: relative;
 }
 
 .container {
@@ -47,7 +47,9 @@ body {
     text-align: center;
 }
 
-input, textarea, button {
+input,
+textarea,
+button {
     font-family: 'Rubik', sans-serif;
 }
 
@@ -56,7 +58,9 @@ h1 {
     color: var(--text-color);
 }
 
-table, th, td {
+table,
+th,
+td {
     background-color: var(--table-bg-color);
 }
 
@@ -89,6 +93,52 @@ input:focus {
     outline: none;
 }
 
+/* Анимация переходов между страницами */
+.page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+.page-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.page-exit-active {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+/* Анимация блоков (общая для всех страниц) */
+.block-enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.block-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
+}
+
+.block-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.block-exit-active {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
+}
+
 @media (max-width: 768px) {
     h1 {
         font-size: 2rem;
@@ -111,4 +161,4 @@ input:focus {
     h1 {
         font-size: 1.2rem;
     }
-} 
+}

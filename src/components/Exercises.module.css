@@ -33,6 +33,7 @@
 /* Блок группы */
 .workoutBlockLight,
 .workoutBlockDark {
+  margin-bottom: 20px;
   background-color: var(--table-bg-color);
   color: var(--text-color);
   border: 1px solid var(--table-border-color);
