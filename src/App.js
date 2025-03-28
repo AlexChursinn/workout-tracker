@@ -39,6 +39,36 @@ const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Прокрутка вверх при смене маршрута
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  // Сохранение и восстановление позиции прокрутки при перезагрузке
+  useEffect(() => {
+    const handleScroll = () => {
+      sessionStorage.setItem('scrollPosition', window.scrollY);
+    };
+
+    const restoreScrollPosition = () => {
+      const scrollPosition = sessionStorage.getItem('scrollPosition');
+      if (scrollPosition) {
+        window.scrollTo(0, parseInt(scrollPosition, 10));
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('load', restoreScrollPosition);
+
+    // Восстановить позицию при первой загрузке
+    restoreScrollPosition();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('load', restoreScrollPosition);
+    };
+  }, []);
+
   useEffect(() => {
     if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
       loginWithTelegram(window.Telegram.WebApp.initDataUnsafe.user)
