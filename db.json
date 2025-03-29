@@ -432,6 +432,9 @@
         }
       ],
       "customMuscleGroups": {
+        "3": [],
+        "33": [],
+        "333": [],
         "1111": [],
         "Плечи": [],
         "Спина": [],
@@ -2821,6 +2824,93 @@
                   "reps": "",
                   "weight": "",
                   "isEditing": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "customMuscleGroups": {}
+    },
+    {
+      "id": 1743248695023,
+      "name": "111111",
+      "email": "11111111@gmail.com",
+      "passwordHash": "$2a$10$CczSHK1wGA88FAVrOSt4nu6XYF1xGHat.5AoIEapkgGA1EAbbR0Ae",
+      "workouts": [],
+      "customMuscleGroups": {}
+    },
+    {
+      "id": 1743248703374,
+      "name": "12121",
+      "email": "1212121@gmail.com",
+      "passwordHash": "$2a$10$Yyz4VL63Hi/FnObJ/JCTle.nD4Ne4LFtN.M4BDdWmOCl.fLfgxTgG",
+      "workouts": [
+        {
+          "id": 1743248708868,
+          "workoutId": 1,
+          "workout_date": "2025-03-29",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1743248708852,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа 45",
+              "sets": [
+                {
+                  "reps": "10",
+                  "weight": "100",
+                  "isEditing": false
+                },
+                {
+                  "reps": "10",
+                  "weight": "100",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1743248716886,
+              "number": 2,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа Горизонт",
+              "sets": [
+                {
+                  "reps": "222",
+                  "weight": "222",
+                  "isEditing": false
+                },
+                {
+                  "reps": "222",
+                  "weight": "222",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1743248731015,
+          "workoutId": 2,
+          "workout_date": "2025-03-29",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1743248731002,
+              "number": 1,
+              "muscleGroup": "Руки",
+              "exercise": "Подъем гантелей на скамье 45",
+              "sets": [
+                {
+                  "reps": "22",
+                  "weight": "222",
+                  "isEditing": false
+                },
+                {
+                  "reps": "22",
+                  "weight": "222",
+                  "isEditing": false
                 }
               ]
             }

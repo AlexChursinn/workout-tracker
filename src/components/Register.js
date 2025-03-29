@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Spinner from './Spinner';
 import styles from './Register.module.css';
+import showIcon from '../assets/show.svg';
+import hideIcon from '../assets/hidden.svg';
 
 const Register = ({ onLogin }) => {
   const [name, setName] = useState('');
@@ -12,6 +14,7 @@ const Register = ({ onLogin }) => {
   const [errors, setErrors] = useState({});
   const [isMessageVisible, setIsMessageVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // Добавлено для отображения пароля
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,7 +70,6 @@ const Register = ({ onLogin }) => {
         setMessage('Регистрация прошла успешно');
         setMessageType('success');
 
-        // Выполняем автоматический вход
         localStorage.setItem('jwt', data.token);
         onLogin(data.token);
 
@@ -102,6 +104,8 @@ const Register = ({ onLogin }) => {
     }
   };
 
+  const togglePasswordVisibility = () => setShowPassword(prev => !prev);
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Регистрация</h2>
@@ -121,13 +125,26 @@ const Register = ({ onLogin }) => {
         className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
       />
       {errors.email && <p className={styles.errorText}>{errors.email}</p>}
-      <input
-        type="password"
-        placeholder="Пароль"
-        value={password}
-        onChange={(e) => handleInputChange('password', e.target.value)}
-        className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
-      />
+      <div className={styles.passwordContainer}>
+        <input
+          type={showPassword ? 'text' : 'password'}
+          placeholder="Пароль"
+          value={password}
+          onChange={(e) => handleInputChange('password', e.target.value)}
+          className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
+        />
+        <button
+          type="button"
+          className={styles.togglePassword}
+          onClick={togglePasswordVisibility}
+          aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
+        >
+          <img
+            src={showPassword ? showIcon : hideIcon}
+            alt=""
+          />
+        </button>
+      </div>
       {errors.password && <p className={styles.errorText}>{errors.password}</p>}
       <button onClick={handleRegister} className={styles.button} disabled={loading}>
         {loading ? <Spinner darkMode={true} isButton={true} /> : 'Зарегистрироваться'}
@@ -148,4 +165,4 @@ const Register = ({ onLogin }) => {
   );
 };
 
-export default Register; 
+export default Register;

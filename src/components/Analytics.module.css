@@ -18,7 +18,7 @@
   .subtitle {
     font-size: 1.2rem;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin: 0px 0px 20px 0px;
     color: var(--text-color);
   }
   
@@ -123,10 +123,6 @@
   }
   
   @media (max-width: 480px) {
-    .container {
-      padding: 10px;
-    }
-  
     .title {
       font-size: 1.2rem;
     }
@@ -134,9 +130,13 @@
     .subtitle {
       font-size: 1rem;
     }
-  
+
     .statsCard {
       padding: 10px;
+    }
+  
+    .statsCard:last-child {
+      margin-bottom: 100px;
     }
   
     .chartContainer {
