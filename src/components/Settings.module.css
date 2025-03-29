@@ -3,20 +3,20 @@
   max-width: 600px;
   margin: 0 auto;
   color: var(--text-color);
-  height: calc(100vh - 130px); /* Учитываем header (70px) и footer (60px) */
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Убираем скролл */
+  height: 100%; /* Используем height: 100% вместо vh */
+  overflow: hidden;
 }
 
 .title {
   font-size: 24px;
   margin: 0px 0px 20px 0px;
-  text-align: center; /* Заголовок по центру */
+  text-align: center;
 }
 
 .settingsList {
-  display: flex;
+  display: none; /* Скрываем по умолчанию */
   flex-direction: column;
   gap: 15px;
 }
@@ -98,7 +98,6 @@
   height: auto;
 }
 
-/* Telegram */
 .telegramLink {
   display: flex;
   align-items: center;
@@ -107,20 +106,22 @@
 }
 
 .desktopLogo {
-  display: none;
+  display: none; /* Скрываем по умолчанию */
 }
 
 @media (min-width: 769px) {
   .settingsContainer {
     padding: 0 20px;
-    justify-content: flex-start; /* Заголовок сверху, но выравнивание по центру через text-align */
+    justify-content: center; /* Центрируем по вертикали */
+    flex-grow: 1; /* Контейнер растягивается */
   }
 
   .desktopLogo {
-    display: flex;
+    margin-top: 200px;
+    display: flex; /* Показываем только на десктопе */
     justify-content: center;
     align-items: center;
-    flex-grow: 1; /* Иконка занимает оставшееся пространство и центрируется */
+    flex-grow: 1; /* Занимает доступное пространство */
   }
 
   .title {
@@ -129,28 +130,32 @@
   }
 
   .settingsList {
-    display: none;
+    display: none; /* Скрыто на десктопе */
   }
 }
 
 @media (max-width: 768px) {
   .settingsContainer {
     padding-bottom: 0;
+    flex-grow: 1; /* Контейнер растягивается */
   }
 
   .settingsList {
+    display: flex; /* Показываем только на мобильной версии */
     position: relative;
-    flex: 1;
+    flex: 1; /* Растягиваем список */
   }
 
   .settingItem:nth-child(3) {
-    position: absolute;
-    bottom: 20px; /* Подняли "Create by" выше на 20px от футера */
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 100px;
     width: auto;
-    padding: 10px 0;
+    padding: 200px 0 0 0;
     justify-content: center;
     gap: 10px;
+    margin-top: auto; /* Третий элемент внизу */
+  }
+
+  .desktopLogo {
+    display: none; /* Скрыто на мобильной версии */
   }
 }
