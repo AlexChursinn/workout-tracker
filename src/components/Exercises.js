@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group'; // Добавлены импорты для анимации
 import styles from './Exercises.module.css';
 import arrowDownIcon from '../assets/arrowDown.svg';
 import arrowUpIcon from '../assets/arrowUp.svg';
@@ -7,52 +7,144 @@ import deleteIcon from '../assets/delete.svg';
 import Spinner from './Spinner';
 
 const Exercises = ({ darkMode, defaultMuscleGroups, customMuscleGroups, onMuscleGroupsChange, loading }) => {
-  const [expandedGroup, setExpandedGroup] = useState(null);
+  const [muscleGroups, setMuscleGroups] = useState(customMuscleGroups);
+  const [newGroup, setNewGroup] = useState('');
+  const [newExercise, setNewExercise] = useState('');
+  const [selectedGroup, setSelectedGroup] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newGroupName, setNewGroupName] = useState('');
-  const [newExerciseName, setNewExerciseName] = useState('');
-  const [allMuscleGroups, setAllMuscleGroups] = useState({});
+  const [expandedGroup, setExpandedGroup] = useState(null);
+  const [errors, setErrors] = useState({}); // Состояние для ошибок валидации
+  const [message, setMessage] = useState(''); // Сообщение об успехе или ошибке
+  const [messageType, setMessageType] = useState(''); // Тип сообщения (success/error)
+  const [isMessageVisible, setIsMessageVisible] = useState(false); // Видимость сообщения
 
   useEffect(() => {
-    setAllMuscleGroups({ ...defaultMuscleGroups, ...customMuscleGroups });
-  }, [defaultMuscleGroups, customMuscleGroups]);
+    setMuscleGroups(customMuscleGroups);
+  }, [customMuscleGroups]);
 
-  const toggleGroup = (group) => {
-    setExpandedGroup(expandedGroup === group ? null : group);
+  useEffect(() => {
+    if (message) {
+      setIsMessageVisible(true);
+      const timer = setTimeout(() => {
+        setIsMessageVisible(false);
+        setTimeout(() => setMessage(''), 500);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
+  const allMuscleGroups = Object.keys({ ...defaultMuscleGroups, ...muscleGroups }).reduce((acc, group) => {
+    const defaultExercises = defaultMuscleGroups[group] || [];
+    const customExercises = muscleGroups[group] || [];
+    acc[group] = [...new Set([...defaultExercises, ...customExercises])];
+    return acc;
+  }, {});
+
+  const validateGroupForm = () => {
+    const errors = {};
+    if (!newGroup.trim()) {
+      errors.newGroup = 'Введите название группы';
+    } else if (defaultMuscleGroups[newGroup.trim()] || muscleGroups[newGroup.trim()]) {
+      errors.newGroup = 'Такая группа уже существует';
+    }
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const validateExerciseForm = () => {
+    const errors = {};
+    if (!selectedGroup) {
+      errors.selectedGroup = 'Выберите группу';
+    }
+    if (!newExercise.trim()) {
+      errors.newExercise = 'Введите название упражнения';
+    } else {
+      const existingDefaultExercises = defaultMuscleGroups[selectedGroup] || [];
+      const existingCustomExercises = muscleGroups[selectedGroup] || [];
+      const allExercises = [...existingDefaultExercises, ...existingCustomExercises];
+      if (allExercises.includes(newExercise.trim())) {
+        errors.newExercise = 'Такое упражнение уже существует в этой группе';
+      }
+    }
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleAddGroup = () => {
+    if (!validateGroupForm()) {
+      setMessage('Пожалуйста, исправьте ошибки');
+      setMessageType('error');
+      return;
+    }
+    const updatedGroups = { ...muscleGroups, [newGroup.trim()]: [] };
+    setMuscleGroups(updatedGroups);
+    onMuscleGroupsChange(updatedGroups);
+    setMessage(`Группа "${newGroup.trim()}" добавлена`);
+    setMessageType('success');
+    setNewGroup('');
+    setErrors({});
   };
 
   const handleAddExercise = () => {
-    if (newGroupName && newExerciseName) {
-      const updatedGroups = {
-        ...allMuscleGroups,
-        [newGroupName]: [...(allMuscleGroups[newGroupName] || []), newExerciseName],
-      };
-      setAllMuscleGroups(updatedGroups);
+    if (!validateExerciseForm()) {
+      setMessage('Пожалуйста, исправьте ошибки');
+      setMessageType('error');
+      return;
+    }
+    const existingCustomExercises = muscleGroups[selectedGroup] || [];
+    const updatedGroups = {
+      ...muscleGroups,
+      [selectedGroup]: [...existingCustomExercises, newExercise.trim()],
+    };
+    setMuscleGroups(updatedGroups);
+    onMuscleGroupsChange(updatedGroups);
+    setMessage(`Упражнение "${newExercise.trim()}" добавлено в группу "${selectedGroup}"`);
+    setMessageType('success');
+    setNewExercise('');
+    setErrors({});
+  };
+
+  const handleDeleteGroup = (group) => {
+    if (!defaultMuscleGroups[group]) {
+      const updatedGroups = { ...muscleGroups };
+      delete updatedGroups[group];
+      setMuscleGroups(updatedGroups);
       onMuscleGroupsChange(updatedGroups);
-      setNewGroupName('');
-      setNewExerciseName('');
-      setIsModalOpen(false);
+      console.log('Удалена группа:', group);
+      if (selectedGroup === group) setSelectedGroup('');
+      if (expandedGroup === group) setExpandedGroup(null);
     }
   };
 
   const handleDeleteExercise = (group, exercise) => {
-    const updatedGroups = {
-      ...allMuscleGroups,
-      [group]: allMuscleGroups[group].filter((ex) => ex !== exercise),
-    };
-    if (updatedGroups[group].length === 0) {
-      delete updatedGroups[group];
+    if (!defaultMuscleGroups[group]?.includes(exercise)) {
+      const updatedGroups = {
+        ...muscleGroups,
+        [group]: muscleGroups[group].filter((ex) => ex !== exercise),
+      };
+      setMuscleGroups(updatedGroups);
+      onMuscleGroupsChange(updatedGroups);
+      console.log('Удалено упражнение:', exercise, 'из группы', group);
+    } else {
+      console.log('Нельзя удалить дефолтное упражнение:', exercise);
     }
-    setAllMuscleGroups(updatedGroups);
-    onMuscleGroupsChange(updatedGroups);
   };
 
-  const handleDeleteGroup = (group) => {
-    const updatedGroups = { ...allMuscleGroups };
-    delete updatedGroups[group];
-    setAllMuscleGroups(updatedGroups);
-    onMuscleGroupsChange(updatedGroups);
-    if (expandedGroup === group) setExpandedGroup(null);
+  const toggleGroup = (group) => {
+    setExpandedGroup((prev) => (prev === group ? null : group));
+  };
+
+  const handleInputChange = (field, value) => {
+    if (field === 'newGroup') {
+      setNewGroup(value);
+      setErrors((prev) => ({ ...prev, newGroup: '' }));
+    } else if (field === 'newExercise') {
+      setNewExercise(value);
+      setErrors((prev) => ({ ...prev, newExercise: '' }));
+    } else if (field === 'selectedGroup') {
+      setSelectedGroup(value);
+      setErrors((prev) => ({ ...prev, selectedGroup: '' }));
+    }
   };
 
   if (loading) {
@@ -115,25 +207,56 @@ const Exercises = ({ darkMode, defaultMuscleGroups, customMuscleGroups, onMuscle
         </button>
       </div>
       {isModalOpen && (
-        <div className={darkMode ? styles.modalDark : styles.modalLight}>
+        <div className={styles.modalOverlay}>
           <div className={styles.modalContent}>
-            <h2>Добавить упражнение</h2>
+            <h2 className={darkMode ? styles.modalTitleDark : styles.modalTitleLight}>Добавить группу или упражнение</h2>
+            <select
+              value={selectedGroup}
+              onChange={(e) => handleInputChange('selectedGroup', e.target.value)}
+              className={`${styles.input} ${errors.selectedGroup ? styles.inputError : ''}`}
+            >
+              <option value="">Выберите группу</option>
+              {Object.keys(allMuscleGroups).map((group) => (
+                <option key={group} value={group}>{group}</option>
+              ))}
+            </select>
+            {errors.selectedGroup && <p className={styles.errorText}>{errors.selectedGroup}</p>}
             <input
               type="text"
-              placeholder="Название группы мышц"
-              value={newGroupName}
-              onChange={(e) => setNewGroupName(e.target.value)}
+              value={newGroup}
+              onChange={(e) => handleInputChange('newGroup', e.target.value)}
+              placeholder="Название новой группы"
+              className={`${styles.input} ${errors.newGroup ? styles.inputError : ''}`}
             />
+            {errors.newGroup && <p className={styles.errorText}>{errors.newGroup}</p>}
             <input
               type="text"
-              placeholder="Название упражнения"
-              value={newExerciseName}
-              onChange={(e) => setNewExerciseName(e.target.value)}
+              value={newExercise}
+              onChange={(e) => handleInputChange('newExercise', e.target.value)}
+              placeholder="Название нового упражнения"
+              className={`${styles.input} ${errors.newExercise ? styles.inputError : ''}`}
             />
+            {errors.newExercise && <p className={styles.errorText}>{errors.newExercise}</p>}
             <div className={styles.modalButtons}>
-              <button onClick={handleAddExercise}>Добавить</button>
-              <button onClick={() => setIsModalOpen(false)}>Отмена</button>
+              <button className={darkMode ? styles.addButtonDark : styles.addButtonLight} onClick={handleAddGroup}>
+                Добавить группу
+              </button>
+              <button className={darkMode ? styles.addButtonDark : styles.addButtonLight} onClick={handleAddExercise}>
+                Добавить упражнение
+              </button>
+              <button className={darkMode ? styles.closeModalButtonDark : styles.closeModalButtonLight} onClick={() => setIsModalOpen(false)}>
+                Закрыть
+              </button>
             </div>
+            {message && (
+              <p
+                className={`${styles.message} ${isMessageVisible ? styles.messageVisible : ''} ${
+                  messageType === 'success' ? styles.successMessage : styles.errorMessage
+                }`}
+              >
+                {message}
+              </p>
+            )}
           </div>
         </div>
       )}

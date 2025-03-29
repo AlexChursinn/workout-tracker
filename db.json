@@ -2494,6 +2494,105 @@
           "test"
         ]
       }
+    },
+    {
+      "id": 1743227114324,
+      "name": "44",
+      "email": "44@gmail.com",
+      "passwordHash": "$2a$10$eS9jtzGX4OvHu3H30xBS7O8J.1Q6LOvx0oGcDKijfVjKpQ2rlvYiO",
+      "workouts": [
+        {
+          "id": 1743227207885,
+          "workoutId": 1,
+          "workout_date": "2025-03-29",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1743227207871,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа Горизонт",
+              "sets": [
+                {
+                  "reps": "1",
+                  "weight": "1",
+                  "isEditing": false
+                },
+                {
+                  "reps": "1",
+                  "weight": "1",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1743227217587,
+              "number": 2,
+              "muscleGroup": "Грудь",
+              "exercise": "test",
+              "sets": [
+                {
+                  "reps": "1",
+                  "weight": "1",
+                  "isEditing": false
+                },
+                {
+                  "reps": "1",
+                  "weight": "1",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1743227226754,
+              "number": 3,
+              "muscleGroup": "test",
+              "exercise": "test",
+              "sets": [
+                {
+                  "reps": "1",
+                  "weight": "1",
+                  "isEditing": false
+                },
+                {
+                  "reps": "1",
+                  "weight": "1",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1743227236783,
+          "workoutId": 2,
+          "workout_date": "2025-03-29",
+          "title": "Test",
+          "exercises": [
+            {
+              "id": 1743227236771,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "test",
+              "sets": [
+                {
+                  "reps": "1",
+                  "weight": "1",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "customMuscleGroups": {
+        "test": [
+          "test"
+        ],
+        "Грудь": [
+          "test"
+        ]
+      }
     }
   ]
 }
