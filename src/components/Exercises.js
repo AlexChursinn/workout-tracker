@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group'; // Добавлены импорты для анимации
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import styles from './Exercises.module.css';
 import arrowDownIcon from '../assets/arrowDown.svg';
 import arrowUpIcon from '../assets/arrowUp.svg';
@@ -13,10 +13,10 @@ const Exercises = ({ darkMode, defaultMuscleGroups, customMuscleGroups, onMuscle
   const [selectedGroup, setSelectedGroup] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expandedGroup, setExpandedGroup] = useState(null);
-  const [errors, setErrors] = useState({}); // Состояние для ошибок валидации
-  const [message, setMessage] = useState(''); // Сообщение об успехе или ошибке
-  const [messageType, setMessageType] = useState(''); // Тип сообщения (success/error)
-  const [isMessageVisible, setIsMessageVisible] = useState(false); // Видимость сообщения
+  const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('');
+  const [isMessageVisible, setIsMessageVisible] = useState(false);
 
   useEffect(() => {
     setMuscleGroups(customMuscleGroups);
@@ -154,52 +154,54 @@ const Exercises = ({ darkMode, defaultMuscleGroups, customMuscleGroups, onMuscle
   return (
     <div className={darkMode ? styles.containerDark : styles.containerLight}>
       <h1 className={styles.mainTitle}>Список упражнений</h1>
-      <div className={styles.exerciseGroups}>
-        <TransitionGroup>
-          {Object.entries(allMuscleGroups).map(([group, exercises]) => (
-            <CSSTransition
-              key={group}
-              timeout={500}
-              classNames="block"
-            >
-              <div className={darkMode ? styles.workoutBlockDark : styles.workoutBlockLight}>
-                <div className={styles.groupHeader}>
-                  <h3 className={darkMode ? styles.workoutTitleDark : styles.workoutTitleLight}>{group}</h3>
-                  <div className={styles.groupControls}>
-                    {exercises.length > 0 && (
-                      <button className={styles.toggleButton} onClick={() => toggleGroup(group)}>
-                        <img
-                          src={expandedGroup === group ? arrowUpIcon : arrowDownIcon}
-                          alt={expandedGroup === group ? 'Collapse' : 'Expand'}
-                          className={styles.toggleIcon}
-                        />
-                      </button>
-                    )}
-                    {!defaultMuscleGroups[group] && (
-                      <button className={styles.deleteButton} onClick={() => handleDeleteGroup(group)}>
-                        <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} />
-                      </button>
-                    )}
+      <div className={styles.contentWrapper}>
+        <div className={styles.exerciseGroups}>
+          <TransitionGroup>
+            {Object.entries(allMuscleGroups).map(([group, exercises]) => (
+              <CSSTransition
+                key={group}
+                timeout={500}
+                classNames="block"
+              >
+                <div className={darkMode ? styles.workoutBlockDark : styles.workoutBlockLight}>
+                  <div className={styles.groupHeader}>
+                    <h3 className={darkMode ? styles.workoutTitleDark : styles.workoutTitleLight}>{group}</h3>
+                    <div className={styles.groupControls}>
+                      {exercises.length > 0 && (
+                        <button className={styles.toggleButton} onClick={() => toggleGroup(group)}>
+                          <img
+                            src={expandedGroup === group ? arrowUpIcon : arrowDownIcon}
+                            alt={expandedGroup === group ? 'Collapse' : 'Expand'}
+                            className={styles.toggleIcon}
+                          />
+                        </button>
+                      )}
+                      {!defaultMuscleGroups[group] && (
+                        <button className={styles.deleteButton} onClick={() => handleDeleteGroup(group)}>
+                          <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} />
+                        </button>
+                      )}
+                    </div>
                   </div>
+                  {expandedGroup === group && (
+                    <div className={styles.workoutBlockContent}>
+                      {exercises.map((exercise, index) => (
+                        <div key={index} className={darkMode ? styles.exerciseCardDark : styles.exerciseCardLight}>
+                          <h3 className={darkMode ? styles.exerciseTitleDark : styles.exerciseTitleLight}>{exercise}</h3>
+                          {!defaultMuscleGroups[group]?.includes(exercise) && (
+                            <button className={styles.deleteButton} onClick={() => handleDeleteExercise(group, exercise)}>
+                              <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} />
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                {expandedGroup === group && (
-                  <div className={styles.workoutBlockContent}>
-                    {exercises.map((exercise, index) => (
-                      <div key={index} className={darkMode ? styles.exerciseCardDark : styles.exerciseCardLight}>
-                        <h3 className={darkMode ? styles.exerciseTitleDark : styles.exerciseTitleLight}>{exercise}</h3>
-                        {!defaultMuscleGroups[group]?.includes(exercise) && (
-                          <button className={styles.deleteButton} onClick={() => handleDeleteExercise(group, exercise)}>
-                            <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} />
-                          </button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </CSSTransition>
-          ))}
-        </TransitionGroup>
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
+        </div>
       </div>
       <div className={styles.modalButtonContainer}>
         <button className={darkMode ? styles.openModalButtonDark : styles.openModalButtonLight} onClick={() => setIsModalOpen(true)}>

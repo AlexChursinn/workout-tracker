@@ -5,10 +5,11 @@
   color: var(--text-color);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   padding: 0px 20px;
   box-sizing: border-box;
-} 
+  height: auto;
+  overflow-y: auto;
+}
 
 /* Заголовок */
 .mainTitle {
@@ -17,6 +18,14 @@
   text-align: center;
   margin: 0 0 20px;
   color: var(--text-color);
+}
+
+/* Обертка для контента */
+.contentWrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 /* Группы упражнений */
@@ -28,6 +37,7 @@
   max-width: 600px;
   margin: 0 auto;
   position: relative;
+  flex-grow: 1;
 }
 
 /* Блок группы */
@@ -128,7 +138,7 @@
 .toggleIcon {
   width: 16px;
   height: 16px;
-  filter: brightness(0) invert(1); /* Белый цвет */
+  filter: brightness(0) invert(1);
 }
 
 /* Кнопка удаления */
@@ -155,17 +165,17 @@
 .deleteIcon {
   width: 16px;
   height: 16px;
-  filter: brightness(0) invert(1); /* Белый цвет */
+  filter: brightness(0) invert(1);
 }
 
 /* Кнопка добавления */
 .modalButtonContainer {
-  position: sticky;
-  bottom: 80px;
-  z-index: 1000;
+  position: fixed;
+  bottom: 70px; /* По умолчанию для мобильных - выше footer (60px) */
+  right: 20px;
+  z-index: 2000;
   display: flex;
   justify-content: flex-end;
-  padding-right: 20px;
 }
 
 .openModalButtonLight,
@@ -201,7 +211,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 1500;
 }
 
 .modalContent {
@@ -213,6 +223,12 @@
   max-width: 400px;
   border: 1px solid var(--table-border-color);
   box-sizing: border-box;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .modalTitleLight,
@@ -223,7 +239,7 @@
   text-align: center;
 }
 
-/* Поля ввода (взято из Login.module.css) */
+/* Поля ввода */
 .input {
   width: 100%;
   padding: 10px;
@@ -246,7 +262,7 @@
   border-bottom-color: red;
 }
 
-/* Стили для select (адаптированы под input) */
+/* Стили для select */
 .input select {
   width: 100%;
   padding: 10px;
@@ -402,6 +418,7 @@ body[data-theme="dark"] {
 
   .modalButtonContainer {
     bottom: 70px;
+    right: 15px;
   }
 }
 
@@ -424,6 +441,7 @@ body[data-theme="dark"] {
 
   .modalButtonContainer {
     bottom: 60px;
+    right: 10px;
   }
 
   .toggleButton,
@@ -436,5 +454,13 @@ body[data-theme="dark"] {
   .deleteIcon {
     width: 14px;
     height: 14px;
+  }
+}
+
+/* Десктопное отображение (ширина больше 768px) */
+@media (min-width: 769px) {
+  .modalButtonContainer {
+    right: calc(50% - 300px - 60px); /* Смещаем кнопку левее центра workoutBlock */
+    bottom: 80px; /* Устанавливаем выше footer (60px + отступ 20px) */
   }
 }
