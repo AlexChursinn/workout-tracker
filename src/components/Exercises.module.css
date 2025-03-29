@@ -54,6 +54,11 @@
   box-sizing: border-box;
 }
 
+.workoutBlockLight:last-child,
+.workoutBlockDark:last-child {
+  margin-bottom: 90px;
+}
+
 .workoutBlockLight:hover,
 .workoutBlockDark:hover {
   background-color: rgba(var(--bg-color-rgb), 0.8);
@@ -229,6 +234,7 @@
   transform: translate(-50%, -50%);
   max-height: 80vh;
   overflow-y: auto;
+  z-index: 9999999999;
 }
 
 .modalTitleLight,

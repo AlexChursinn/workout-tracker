@@ -5,7 +5,6 @@
   color: var(--text-color);
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Контейнер занимает весь экран */
   padding: 0px 20px;
 }
 
@@ -41,7 +40,7 @@
 }
 
 .workoutBlock:last-child {
-  margin-bottom: 0px;
+  margin-bottom: 90px;
 }
 
 .workoutBlockContent {

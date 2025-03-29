@@ -45,7 +45,6 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 70px; /* Отступ под header высотой 70px */
-    padding-bottom: 60px; /* Отступ под footer высотой 60px */
     text-align: center;
     min-height: calc(100vh - 130px); /* 100vh минус высота header и footer */
     box-sizing: border-box;
@@ -163,18 +162,14 @@ input:focus {
     h1 {
         font-size: 2rem;
     }
-    .container {
-        padding: 80px 0px 70px;
-    }
+ 
 }
 
 @media (max-width: 480px) {
     h1 {
         font-size: 1.5rem;
     }
-    .container {
-        padding: 75px 0px 65px;
-    }
+
 }
 
 @media (max-width: 320px) {
