@@ -37,16 +37,13 @@ body {
 }
 
 .app {
-    min-height: 100vh;
     position: relative;
 }
 
 .container {
-    max-width: 1200px;
     margin: 0 auto;
     padding-top: 70px; /* Отступ под header высотой 70px */
     text-align: center;
-    min-height: calc(100vh - 130px); /* 100vh минус высота header и footer */
     box-sizing: border-box;
     overflow: hidden; /* Убираем скролл */
 }
