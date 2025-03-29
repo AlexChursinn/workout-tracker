@@ -4,6 +4,8 @@ import tgWhite from '../assets/tg-white.svg';
 import tgBlack from '../assets/tg-black.svg';
 import logoutIconLight from '../assets/logout-light.svg';
 import logoutIconDark from '../assets/logout-dark.svg';
+import myTgBlack from '../assets/my-tg-black.svg';
+import myTgWhite from '../assets/my-tg-white.svg';
 import styles from './Settings.module.css';
 
 const Settings = ({ darkMode, toggleTheme, onLogout }) => {
@@ -17,6 +19,13 @@ const Settings = ({ darkMode, toggleTheme, onLogout }) => {
   return (
     <div className={styles.settingsContainer}>
       <h1 className={styles.title}>Настройки</h1>
+      <div className={styles.desktopLogo}>
+        <img
+          src={darkMode ? myTgWhite : myTgBlack}
+          alt="Logo"
+          className={styles.logoImage}
+        />
+      </div>
       <div className={styles.settingsList}>
         {/* Переключатель темы */}
         <div className={styles.settingItem}>

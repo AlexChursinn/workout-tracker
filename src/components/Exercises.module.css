@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding: 20px;
+  padding: 0px 20px;
   box-sizing: border-box;
 } 
 
@@ -15,7 +15,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
-  margin: 0 0 16px;
+  margin: 0 0 20px;
   color: var(--text-color);
 }
 
@@ -383,7 +383,7 @@ body[data-theme="dark"] {
 @media (max-width: 768px) {
   .containerLight,
   .containerDark {
-    padding: 15px 0px;
+    padding: 0px 20px;
   }
 
   .workoutTitleLight,

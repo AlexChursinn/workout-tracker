@@ -1,114 +1,156 @@
 .settingsContainer {
-    padding: 0px 20px;
-    max-width: 600px;
-    margin: 0 auto;
-    color: var(--text-color);
+  padding: 0 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--text-color);
+  height: calc(100vh - 130px); /* Учитываем header (70px) и footer (60px) */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Убираем скролл */
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center; /* Заголовок по центру */
+}
+
+.settingsList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.settingItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.settingItem:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.label {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* Стили для переключателя */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switchInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--table-border-color);
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--text-color);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.switchInput:checked + .slider {
+  background-color: var(--primary-color, rgba(255, 255, 255, 0.2));
+}
+
+.switchInput:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Иконки */
+.logoutIcon,
+.telegramIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.logoImage {
+  width: 150px;
+  height: auto;
+}
+
+/* Telegram */
+.telegramLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.desktopLogo {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .settingsContainer {
+    padding: 0 20px;
+    justify-content: flex-start; /* Заголовок сверху, но выравнивание по центру через text-align */
   }
-  
+
+  .desktopLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Иконка занимает оставшееся пространство и центрируется */
+  }
+
   .title {
-    font-size: 24px;
-    margin-bottom: 20px;
+    display: block;
+    margin: 0px 0px 20px 0px;
   }
-  
+
   .settingsList {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    display: none;
   }
-  
-  .settingItem {
-    display: flex;
-    justify-content: space-between; /* Текст слева, иконка справа */
-    align-items: center;
+}
+
+@media (max-width: 768px) {
+  .settingsContainer {
+    padding-bottom: 0;
+  }
+
+  .settingsList {
+    position: relative;
+    flex: 1;
+  }
+
+  .settingItem:nth-child(3) {
+    position: absolute;
+    bottom: 20px; /* Подняли "Create by" выше на 20px от футера */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
     padding: 10px 0;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    justify-content: center;
+    gap: 10px;
   }
-  
-  .settingItem:hover {
-    background-color: var(--hover-bg-color);
-  }
-  
-  .label {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: left; /* Текст прижат к левому краю */
-  }
-  
-  /* Стили для переключателя */
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 24px;
-  }
-  
-  .switchInput {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--table-border-color); /* Серый фон для выключенного состояния */
-    transition: 0.4s;
-    border-radius: 24px;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: '';
-    height: 18px;
-    width: 18px;
-    left: 3px;
-    bottom: 3px;
-    background-color: var(--text-color); /* Цвет ползунка под текст */
-    transition: 0.4s;
-    border-radius: 50%;
-  }
-  
-  .switchInput:checked + .slider {
-    background-color: var(--primary-color, rgba(255, 255, 255, 0.2)); /* Цвет при включении */
-  }
-  
-  .switchInput:checked + .slider:before {
-    transform: translateX(26px);
-  }
-  
-  /* Иконки */
-  .logoutIcon,
-  .telegramIcon {
-    width: 24px;
-    height: 24px;
-  }
-  
-  /* Telegram */
-  .telegramLink {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: var(--text-color);
-  }
-  
-  @media (min-width: 769px) {
-    /* На десктопе скрываем переключатель и выход, так как они в Header */
-    .settingItem:nth-child(1),
-    .settingItem:nth-child(2) {
-      display: none;
-    }
-  }
-  
-  /* Выравнивание первых букв текста */
-  .settingsList {
-    position: relative;
-  }
-  
-  .settingItem {
-    width: 100%;
-  }
+}

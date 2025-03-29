@@ -2593,6 +2593,85 @@
           "test"
         ]
       }
+    },
+    {
+      "id": 1743227405005,
+      "name": "a",
+      "email": "al@gmail.com",
+      "passwordHash": "$2a$10$64G1lWOBOZWdjPv0x98sPOmkt49ZIm71GUREwje/oRY43Psn8.eAK",
+      "workouts": [
+        {
+          "id": 1743227414053,
+          "workoutId": 1,
+          "workout_date": "2025-03-29",
+          "title": "Test",
+          "exercises": [
+            {
+              "id": 1743227424903,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа Горизонт",
+              "sets": [
+                {
+                  "reps": "10",
+                  "weight": "10",
+                  "isEditing": false
+                },
+                {
+                  "reps": "10",
+                  "weight": "10",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1743227428702,
+              "number": 2,
+              "muscleGroup": "Спина",
+              "exercise": "Тяга верхнего блока",
+              "sets": [
+                {
+                  "reps": "10",
+                  "weight": "10",
+                  "isEditing": false
+                },
+                {
+                  "reps": "10",
+                  "weight": "10",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1743227434794,
+          "workoutId": 2,
+          "workout_date": "2025-03-29",
+          "title": "Test 2",
+          "exercises": [
+            {
+              "id": 1743227434787,
+              "number": 1,
+              "muscleGroup": "Спина",
+              "exercise": "Тяга одной рукой в тренажере",
+              "sets": [
+                {
+                  "reps": "10",
+                  "weight": "10",
+                  "isEditing": false
+                },
+                {
+                  "reps": "10",
+                  "weight": "10",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "customMuscleGroups": {}
     }
   ]
 }
