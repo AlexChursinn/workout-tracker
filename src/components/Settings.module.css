@@ -99,17 +99,27 @@
 
 /* Telegram */
 .telegramLink {
-  display: flex;
-  align-items: center;
   text-decoration: none;
-  color: var(--text-color);
+  color: inherit; /* Наследуем цвет текста от родителя */
+  width: 100%; /* Растягиваем ссылку на всю ширину */
+  opacity: 0; /* Изначально скрыт */
+  transition: opacity 0.5s ease-in-out; /* Плавное появление */
 }
 
+/* Desktop logo */
 .desktopLogo {
   display: none;
   margin-top: 200px;
+  opacity: 0; /* Изначально скрыт */
+  transition: opacity 0.5s ease-in-out; /* Плавное появление */
 }
 
+/* Класс для видимости */
+.visible {
+  opacity: 1; /* Появляется */
+}
+
+/* Медиа-запросы */
 @media (min-width: 769px) {
   .settingsContainer {
     padding: 0 20px;
@@ -143,18 +153,22 @@
     flex: 1;
   }
 
-  .settingItem:nth-child(3) {
-    position: fixed; /* Фиксируем над футером */
+  /* Стили для третьего элемента (Telegram) */
+  .telegramLink {
+    position: fixed; /* Фиксируем саму ссылку */
     bottom: 70px; /* Как openModalButton: над футером 60px + 10px отступ */
     left: 50%;
     transform: translateX(-50%);
     width: auto;
+    z-index: 1000; /* Над контентом */
+  }
+
+  .telegramLink .settingItem {
     padding: 10px 20px;
     justify-content: center;
     gap: 10px;
     background-color: var(--table-bg-color); /* Фон для читаемости */
     border-radius: 8px; /* Как у openModalButton */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень как у openModalButton */
-    z-index: 1000; /* Над контентом */
   }
 }
