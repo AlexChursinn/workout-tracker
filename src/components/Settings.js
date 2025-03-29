@@ -6,19 +6,17 @@ import logoutIconLight from '../assets/logout-light.svg';
 import logoutIconDark from '../assets/logout-dark.svg';
 import myTgBlack from '../assets/my-tg-black.svg';
 import myTgWhite from '../assets/my-tg-white.svg';
+import Spinner from './Spinner'; // Импортируем Spinner
 import styles from './Settings.module.css';
 
-const Settings = ({ darkMode, toggleTheme, onLogout }) => {
+const Settings = ({ darkMode, toggleTheme, onLogout, loading }) => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Задержка появления на 1 секунду
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 1000);
-
-    // Очистка таймера при размонтировании компонента
     return () => clearTimeout(timer);
   }, []);
 
@@ -26,6 +24,11 @@ const Settings = ({ darkMode, toggleTheme, onLogout }) => {
     onLogout();
     navigate('/login');
   };
+
+  // Если данные еще загружаются, показываем Spinner
+  if (loading) {
+    return <Spinner darkMode={darkMode} />;
+  }
 
   return (
     <div className={styles.settingsContainer}>
@@ -38,7 +41,6 @@ const Settings = ({ darkMode, toggleTheme, onLogout }) => {
         />
       </div>
       <div className={styles.settingsList}>
-        {/* Переключатель темы */}
         <div className={styles.settingItem}>
           <span className={styles.label}>Тема</span>
           <label className={styles.switch}>
@@ -51,8 +53,6 @@ const Settings = ({ darkMode, toggleTheme, onLogout }) => {
             <span className={styles.slider}></span>
           </label>
         </div>
-
-        {/* Кнопка выхода с иконкой */}
         <div className={styles.settingItem} onClick={handleLogoutClick}>
           <span className={styles.label}>Выйти</span>
           <img
@@ -61,8 +61,6 @@ const Settings = ({ darkMode, toggleTheme, onLogout }) => {
             className={styles.logoutIcon}
           />
         </div>
-
-        {/* Telegram с "create by" */}
         <a
           href="https://t.me/chursin_tut"
           target="_blank"

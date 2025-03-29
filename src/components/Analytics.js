@@ -11,12 +11,18 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import Spinner from './Spinner'; // Импортируем Spinner
 import styles from './Analytics.module.css';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const Analytics = ({ workoutData, darkMode }) => {
+const Analytics = ({ workoutData, darkMode, loading }) => {
   const [timeFrame, setTimeFrame] = useState('days');
+
+  // Если данные еще загружаются, показываем Spinner
+  if (loading) {
+    return <Spinner darkMode={darkMode} />;
+  }
 
   const workoutStats = Object.entries(workoutData).flatMap(([date, workouts]) =>
     workouts.map((workout) => ({

@@ -282,14 +282,14 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
-              <Route
-                path="/analytics"
-                element={
-                  <ProtectedRoute>
-                    <Analytics workoutData={workoutData} darkMode={darkMode} />
-                  </ProtectedRoute>
-                }
-              />
+<Route
+  path="/analytics"
+  element={
+    <ProtectedRoute>
+      <Analytics workoutData={workoutData} darkMode={darkMode} loading={loading} />
+    </ProtectedRoute>
+  }
+/>
               <Route
                 path="/exercises"
                 element={
@@ -304,14 +304,14 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
-              <Route
-                path="/settings"
-                element={
-                  <ProtectedRoute>
-                    <Settings darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} />
-                  </ProtectedRoute>
-                }
-              />
+<Route
+  path="/settings"
+  element={
+    <ProtectedRoute>
+      <Settings darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} loading={loading} />
+    </ProtectedRoute>
+  }
+/>
               <Route path="*" element={<Navigate to="/home" />} />
             </Routes>
           </CSSTransition>
