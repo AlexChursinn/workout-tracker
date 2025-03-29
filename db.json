@@ -2918,6 +2918,65 @@
         }
       ],
       "customMuscleGroups": {}
+    },
+    {
+      "id": 1743255762181,
+      "name": "23",
+      "email": "23@gmail.com",
+      "passwordHash": "$2a$10$SHMfON5DSqyGR.Ahvd8ghefbs22wJ7xcaFPobsmQOLy0ibd/lxBES",
+      "workouts": [
+        {
+          "id": 1743256315674,
+          "workoutId": 1,
+          "workout_date": "2025-03-29",
+          "title": "",
+          "exercises": []
+        }
+      ],
+      "customMuscleGroups": {}
+    },
+    {
+      "id": 1743256384171,
+      "name": "555555",
+      "email": "5555555@gmail.com",
+      "passwordHash": "$2a$10$xavf1JDFX1LKr71RACEqL.pertABlUihsQQYcL9B29KhbviKBDf4i",
+      "workouts": [
+        {
+          "id": 1743256978742,
+          "workoutId": 1,
+          "workout_date": "2025-03-29",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1743256978734,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1743256984583,
+              "number": 2,
+              "muscleGroup": "Спина",
+              "exercise": "Тяга верхнего блока",
+              "sets": [
+                {
+                  "reps": "111",
+                  "weight": "111",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "customMuscleGroups": {}
     }
   ]
 }
