@@ -213,7 +213,7 @@ select:focus {
   outline: none;
   border-color: var(--button-bg-color);
   background-color: var(--bg-color);
-  box-shadow: 0 0 5px rgba(48, 15, 15, 1);
+  box-shadow: 0 0 5px #4d4d4d;
 }
 
 /* Контейнер для подходов */

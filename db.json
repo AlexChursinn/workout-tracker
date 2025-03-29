@@ -2977,6 +2977,36 @@
         }
       ],
       "customMuscleGroups": {}
+    },
+    {
+      "id": 1743265305530,
+      "name": "1111",
+      "email": "13@gmail.com",
+      "passwordHash": "$2a$10$wLPk4OaX1AhZ4K6cBvH0WuusEkx7VX37LSAuzTaf9mc1MNlZoeOeO",
+      "workouts": [
+        {
+          "id": 1743265337437,
+          "workoutId": 1,
+          "workout_date": "2025-03-29",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1743265337421,
+              "number": 1,
+              "muscleGroup": "Спина",
+              "exercise": "Тяга верхнего блока",
+              "sets": [
+                {
+                  "reps": "1",
+                  "weight": "1",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "customMuscleGroups": {}
     }
   ]
 }
