@@ -5,18 +5,17 @@
   color: var(--text-color);
   display: flex;
   flex-direction: column;
-  height: 100%; /* Используем height: 100% вместо vh */
-  overflow: hidden;
+  overflow: hidden; /* Убираем скролл */
 }
 
 .title {
   font-size: 24px;
   margin: 0px 0px 20px 0px;
-  text-align: center;
+  text-align: center; /* Заголовок по центру */
 }
 
 .settingsList {
-  display: none; /* Скрываем по умолчанию */
+  display: flex;
   flex-direction: column;
   gap: 15px;
 }
@@ -98,6 +97,7 @@
   height: auto;
 }
 
+/* Telegram */
 .telegramLink {
   display: flex;
   align-items: center;
@@ -106,22 +106,21 @@
 }
 
 .desktopLogo {
-  display: none; /* Скрываем по умолчанию */
+  display: none;
+  margin-top: 200px;
 }
 
 @media (min-width: 769px) {
   .settingsContainer {
     padding: 0 20px;
-    justify-content: center; /* Центрируем по вертикали */
-    flex-grow: 1; /* Контейнер растягивается */
+    justify-content: flex-start; /* Заголовок сверху, но выравнивание по центру через text-align */
   }
 
   .desktopLogo {
-    margin-top: 200px;
-    display: flex; /* Показываем только на десктопе */
+    display: flex;
     justify-content: center;
     align-items: center;
-    flex-grow: 1; /* Занимает доступное пространство */
+    flex-grow: 1; /* Иконка занимает оставшееся пространство и центрируется */
   }
 
   .title {
@@ -130,32 +129,32 @@
   }
 
   .settingsList {
-    display: none; /* Скрыто на десктопе */
+    display: none;
   }
 }
 
 @media (max-width: 768px) {
   .settingsContainer {
     padding-bottom: 0;
-    flex-grow: 1; /* Контейнер растягивается */
   }
 
   .settingsList {
-    display: flex; /* Показываем только на мобильной версии */
     position: relative;
-    flex: 1; /* Растягиваем список */
+    flex: 1;
   }
 
   .settingItem:nth-child(3) {
-    margin-top: 100px;
+    position: fixed; /* Фиксируем над футером */
+    bottom: 70px; /* Как openModalButton: над футером 60px + 10px отступ */
+    left: 50%;
+    transform: translateX(-50%);
     width: auto;
-    padding: 200px 0 0 0;
+    padding: 10px 20px;
     justify-content: center;
     gap: 10px;
-    margin-top: auto; /* Третий элемент внизу */
-  }
-
-  .desktopLogo {
-    display: none; /* Скрыто на мобильной версии */
+    background-color: var(--table-bg-color); /* Фон для читаемости */
+    border-radius: 8px; /* Как у openModalButton */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень как у openModalButton */
+    z-index: 1000; /* Над контентом */
   }
 }
