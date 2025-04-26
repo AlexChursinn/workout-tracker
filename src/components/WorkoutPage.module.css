@@ -1,5 +1,3 @@
-/* WorkoutPage.module.css */
-
 .container {
   background-color: var(--background-color);
   color: var(--text-color);
@@ -14,13 +12,15 @@
 .workoutNumber {
   display: flex;
   align-items: center;
-  justify-content: center; /* Центрируем по горизонтали */
+  justify-content: center;
   gap: 5px;
-  font-size: 1.25rem;
+  font-size: 
+
+1.25rem;
   color: var(--text-color-secondary);
   margin-bottom: 20px;
-  width: 100%; /* Устанавливаем ширину, чтобы центрирование работало */
-  text-align: center; /* Дополнительно центрируем текст внутри элемента */
+  width: 100%;
+  text-align: center;
 }
 
 .numberIcon {
@@ -141,4 +141,4 @@
   .addWorkoutButton {
     margin: 0px 0px 100px 0px;
   }
-} 
+}

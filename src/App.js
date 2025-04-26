@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group'; // Добавлены импорты
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { jwtDecode } from 'jwt-decode';
 import Header from './components/Header';
 import WorkoutPage from './components/WorkoutPage';
@@ -36,16 +36,15 @@ const App = () => {
   const [authToken, setAuthToken] = useState(localStorage.getItem('jwt') || null);
   const [loading, setLoading] = useState(true);
   const [customMuscleGroups, setCustomMuscleGroups] = useState({});
+  const hasInitialized = useRef(false); // Track initialization
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Прокрутка вверх при смене маршрута
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  // Сохранение и восстановление позиции прокрутки при перезагрузке
   useEffect(() => {
     const handleScroll = () => {
       sessionStorage.setItem('scrollPosition', window.scrollY);
@@ -60,8 +59,6 @@ const App = () => {
 
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('load', restoreScrollPosition);
-
-    // Восстановить позицию при первой загрузке
     restoreScrollPosition();
 
     return () => {
@@ -71,20 +68,36 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
-      loginWithTelegram(window.Telegram.WebApp.initDataUnsafe.user)
-        .then((token) => {
+    const initializeAuth = async () => {
+      if (hasInitialized.current) return; // Prevent re-initialization
+      hasInitialized.current = true;
+
+      setLoading(true);
+      try {
+        if (window.Telegram?.WebApp?.initDataUnsafe?.user && !isAuthenticated) {
+          const token = await loginWithTelegram(window.Telegram.WebApp.initDataUnsafe.user);
+          localStorage.setItem('jwt', token);
           setAuthToken(token);
           setIsAuthenticated(true);
-          fetchData(token);
-        })
-        .catch((error) => console.error('Ошибка авторизации через Telegram:', error));
-    } else if (isAuthenticated && authToken) {
-      fetchData(authToken);
-    } else {
-      setLoading(false);
-    }
-  }, [isAuthenticated, authToken]);
+          await fetchData(token);
+          if (location.pathname !== '/home') {
+            navigate('/home', { replace: true });
+          }
+        } else if (isAuthenticated && authToken) {
+          await fetchData(authToken);
+        }
+      } catch (error) {
+        console.error('Ошибка авторизации:', error);
+        if (location.pathname !== '/login') {
+          navigate('/login', { replace: true });
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    initializeAuth();
+  }, []); // Run only once on mount
 
   useEffect(() => {
     if (darkMode) document.body.classList.add('dark-theme');
@@ -94,22 +107,28 @@ const App = () => {
 
   useEffect(() => {
     const checkAndRefreshToken = async () => {
-      if (authToken && isTokenExpired(authToken)) {
-        const newToken = await refreshAuthToken();
-        if (newToken) {
-          setAuthToken(newToken);
-          localStorage.setItem('jwt', newToken);
-          setIsAuthenticated(true);
-          fetchData(newToken);
-        } else {
+      if (!authToken || !isAuthenticated) return;
+      if (isTokenExpired(authToken)) {
+        try {
+          const newToken = await refreshAuthToken();
+          if (newToken) {
+            setAuthToken(newToken);
+            localStorage.setItem('jwt', newToken);
+            await fetchData(newToken);
+          } else {
+            handleLogout();
+          }
+        } catch (error) {
+          console.error('Ошибка при обновлении токена:', error);
           handleLogout();
         }
       }
     };
+
     const interval = setInterval(checkAndRefreshToken, 15 * 60 * 1000);
     checkAndRefreshToken();
     return () => clearInterval(interval);
-  }, [authToken]);
+  }, [authToken, isAuthenticated]);
 
   useEffect(() => {
     localStorage.setItem('selectedDate', selectedDate.toISOString());
@@ -118,7 +137,6 @@ const App = () => {
 
   const fetchData = async (token) => {
     try {
-      setLoading(true);
       const [workoutsResponse, muscleGroupsResponse] = await Promise.all([
         getWorkouts(token),
         getCustomMuscleGroups(token),
@@ -138,16 +156,22 @@ const App = () => {
     } catch (error) {
       console.error('Ошибка при загрузке данных:', error);
       if (error.message.includes('Unauthorized')) handleLogout();
-    } finally {
-      setLoading(false);
     }
+  };
+
+  const formatDateToLocal = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   };
 
   const handleDateSelect = (date, workoutId = 1) => {
     setSelectedDate(date);
     setShowTable(true);
-    const formattedDate = date.toISOString().split('T')[0];
-    navigate(`/${formattedDate}/${workoutId}`);
+    const formattedDate = formatDateToLocal(date);
+    navigate(`/${formattedDate}/${workoutId}`, { replace: true });
   };
 
   const handleLogin = (token) => {
@@ -156,11 +180,14 @@ const App = () => {
     setIsAuthenticated(true);
     setSelectedDate(new Date());
     fetchData(token);
+    if (location.pathname !== '/home') {
+      navigate('/home', { replace: true });
+    }
   };
 
   const handleWorkoutChange = async (dataForDate, workoutId) => {
     try {
-      const workoutDate = selectedDate.toISOString().split('T')[0];
+      const workoutDate = formatDateToLocal(selectedDate);
       const currentWorkouts = workoutData[selectedDate.toDateString()] || [];
       const currentWorkout = currentWorkouts.find((w) => w.workoutId === workoutId) || {};
       const updatedWorkout = {
@@ -187,7 +214,7 @@ const App = () => {
 
   const handleTitleChange = async (newTitle, workoutId) => {
     try {
-      const workoutDate = selectedDate.toISOString().split('T')[0];
+      const workoutDate = formatDateToLocal(selectedDate);
       const currentWorkouts = workoutData[selectedDate.toDateString()] || [];
       const currentWorkout = currentWorkouts.find((w) => w.workoutId === workoutId) || {};
       const updatedWorkout = {
@@ -210,9 +237,10 @@ const App = () => {
   };
 
   const handleMuscleGroupsChange = async (newCustomGroups) => {
-    setCustomMuscleGroups(newCustomGroups);
     try {
+      setCustomMuscleGroups(newCustomGroups);
       await saveCustomMuscleGroups(newCustomGroups, authToken);
+      await fetchData(authToken);
     } catch (error) {
       console.error('Ошибка при сохранении пользовательских групп мышц:', error);
     }
@@ -226,7 +254,8 @@ const App = () => {
     setWorkoutData({});
     setCustomMuscleGroups({});
     setIsAuthenticated(false);
-    navigate('/login');
+    hasInitialized.current = false;
+    navigate('/login', { replace: true });
   };
 
   const isTokenExpired = (token) => {
@@ -249,11 +278,11 @@ const App = () => {
       <main className="container">
         <TransitionGroup>
           <CSSTransition
-            key={location.pathname}
+            key={location.key} // Use location.key for unique transitions
             timeout={300}
             classNames="page"
           >
-            <Routes>
+            <Routes location={location}>
               <Route path="/login" element={<Login onLogin={handleLogin} />} />
               <Route path="/register" element={<Register onLogin={handleLogin} />} />
               <Route
@@ -278,18 +307,25 @@ const App = () => {
                 path="/home"
                 element={
                   <ProtectedRoute>
-                    <Home workoutData={workoutData} onDateSelect={handleDateSelect} darkMode={darkMode} loading={loading} />
+                    <Home
+                      workoutData={workoutData}
+                      onDateSelect={handleDateSelect}
+                      darkMode={darkMode}
+                      loading={loading}
+                      authToken={authToken}
+                      onDataUpdate={() => fetchData(authToken)}
+                    />
                   </ProtectedRoute>
                 }
               />
-<Route
-  path="/analytics"
-  element={
-    <ProtectedRoute>
-      <Analytics workoutData={workoutData} darkMode={darkMode} loading={loading} />
-    </ProtectedRoute>
-  }
-/>
+              <Route
+                path="/analytics"
+                element={
+                  <ProtectedRoute>
+                    <Analytics workoutData={workoutData} darkMode={darkMode} loading={loading} />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/exercises"
                 element={
@@ -304,15 +340,15 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
-<Route
-  path="/settings"
-  element={
-    <ProtectedRoute>
-      <Settings darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} loading={loading} />
-    </ProtectedRoute>
-  }
-/>
-              <Route path="*" element={<Navigate to="/home" />} />
+              <Route
+                path="/settings"
+                element={
+                  <ProtectedRoute>
+                    <Settings darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} loading={loading} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="*" element={<Navigate to="/home" replace />} />
             </Routes>
           </CSSTransition>
         </TransitionGroup>

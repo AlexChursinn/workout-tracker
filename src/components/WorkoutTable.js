@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styles from './WorkoutTable.module.css';
-import copyIconBlack from '../assets/copy-black.svg'; // Черная иконка для светлой темы
-import copyIconWhite from '../assets/copy-white.svg'; // Белая иконка для темной темы
-import deleteIconBlack from '../assets/delete-black.svg'; // Черная иконка для светлой темы
-import deleteIconWhite from '../assets/delete-white.svg'; // Белая иконка для темной темы
+import copyIconBlack from '../assets/copy-black.svg';
+import copyIconWhite from '../assets/copy-white.svg';
+import deleteIconBlack from '../assets/delete-black.svg';
+import deleteIconWhite from '../assets/delete-white.svg';
 import numberIcon from '../assets/numberIcon.svg';
 import settingIcon from '../assets/setting.svg';
 
@@ -11,10 +11,8 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
   const [workouts, setWorkouts] = useState(Array.isArray(workoutData) ? workoutData : []);
   const [showDropdown, setShowDropdown] = useState(null);
 
-  // Логирование для проверки darkMode
   console.log('WorkoutTable darkMode:', darkMode);
 
-  // Объединяем дефолтные и пользовательские группы мышц
   const allMuscleGroups = {};
   Object.keys(defaultMuscleGroups).forEach((group) => {
     allMuscleGroups[group] = [...defaultMuscleGroups[group]];

@@ -1,5 +1,3 @@
-/* Home.module.css */
-
 .homeContainer {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -24,6 +22,7 @@
 }
 
 .workoutBlock {
+  position: relative;
   background-color: var(--table-bg-color);
   color: var(--text-color);
   border: 1px solid var(--table-border-color);
@@ -45,14 +44,14 @@
 
 .workoutBlockContent {
   display: flex;
-  flex-direction: column; /* Выравниваем элементы вертикально */
-  gap: 8px; /* Добавляем отступ между строками */
+  flex-direction: column;
+  gap: 8px;
 }
 
 .doneIcon {
   width: 20px;
   height: 20px;
-  flex-shrink: 0; /* Иконка не сжимается */
+  flex-shrink: 0;
 }
 
 .workoutBlock h3 {
@@ -74,12 +73,12 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  height: 100%; /* Центрируем содержимое по высоте */
+  height: 100%;
   text-align: center;
 }
 
 .lineIcon {
-  width: 40px; /* Уменьшенный размер иконки */
+  width: 40px;
   height: auto;
   margin: 0;
 }
@@ -92,46 +91,175 @@
 
 .workoutInfo {
   display: flex;
-  align-items: center; /* Выравниваем иконку и текст по вертикали */
-  gap: 10px; /* Отступ между иконкой и текстом */
+  align-items: center;
+  gap: 10px;
 }
 
 .workoutBlockContent h3 {
   margin: 0;
-  font-size: 1rem; /* Основной размер текста */
-  text-align: left; /* Выравнивание текста по левому краю */
-  word-break: break-word; /* Перенос текста на следующую строку при необходимости */
-  overflow-wrap: anywhere; /* Позволяет тексту переноситься в любом месте */
-  white-space: normal; /* Текст переносится по умолчанию */
-  line-height: 1.4; /* Увеличение межстрочного интервала для читаемости */
+  font-size: 1rem;
+  text-align: left;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  line-height: 1.4;
 }
 
 .mainTitle {
   margin: 0px 0px 16px 0px;
-  text-align: center; /* Добавлено для соответствия вашему стилю */
+  text-align: center;
+}
+
+.moreButton {
+  width: 40px;
+  height: 40px;
+  background-color: var(--button-bg-color);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  margin: 0;
+}
+
+.moreButton:hover {
+  background-color: #4d4d4d;
+}
+
+.settingIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.dropdownContainer {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.dropdownMenu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: var(--table-bg-color);
+  border: 1px solid var(--table-border-color);
+  border-radius: 4px;
+  min-width: 150px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  margin-top: 5px;
+}
+
+.dropdownItem {
+  width: 100%;
+  padding: 8px 12px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin: 5px 0;
+}
+
+.dropdownItem:hover {
+  background-color: #4d4d4d;
+  color: var(--button-text-color);
+}
+
+.actionIcon {
+  width: 15px;
+  height: 15px;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modalContent {
+  background: var(--table-bg-color);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.modalContent h2 {
+  margin: 0 0 20px;
+  color: var(--text-color);
+}
+
+.cancelButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancelButton:hover {
+  background-color: #4d4d4d;
+}
+
+.errorMessage {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
+
+  .moreButton {
+    width: 30px;
+    height: 30px;
+  }
+
   .lineIcon {
     width: 30px;
   }
 
   .workoutBlockContent h3 {
-    font-size: 1em; /* Уменьшение размера текста */
+    font-size: 1em;
   }
 
   .workoutInfo {
-    gap: 8px; /* Сокращаем отступы между иконкой и текстом */
+    gap: 8px;
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 375px) {
+
+  .moreButton {
+    width: 25px;
+    height: 25px;
+  }
+
   .workoutBlockContent h3 {
-    font-size: 0.8rem; /* Еще меньше размер текста для мобильных экранов */
+    font-size: 0.8rem;
   }
 
   .doneIcon {
-    width: 16px; /* Уменьшение размера иконки */
+    width: 16px;
     height: 16px;
   }
-} 
+}

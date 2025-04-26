@@ -78,4 +78,4 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
   );
 };
 
-export default WorkoutPage; 
+export default WorkoutPage;

@@ -70,22 +70,27 @@ const Exercises = ({ darkMode, defaultMuscleGroups, customMuscleGroups, onMuscle
     return Object.keys(errors).length === 0;
   };
 
-  const handleAddGroup = () => {
+  const handleAddGroup = async () => {
     if (!validateGroupForm()) {
       setMessage('Пожалуйста, исправьте ошибки');
       setMessageType('error');
       return;
     }
     const updatedGroups = { ...muscleGroups, [newGroup.trim()]: [] };
-    setMuscleGroups(updatedGroups);
-    onMuscleGroupsChange(updatedGroups);
-    setMessage(`Группа "${newGroup.trim()}" добавлена`);
-    setMessageType('success');
-    setNewGroup('');
-    setErrors({});
+    try {
+      setMuscleGroups(updatedGroups);
+      await onMuscleGroupsChange(updatedGroups);
+      setMessage(`Группа "${newGroup.trim()}" добавлена`);
+      setMessageType('success');
+      setNewGroup('');
+      setErrors({});
+    } catch (error) {
+      setMessage('Ошибка при добавлении группы');
+      setMessageType('error');
+    }
   };
 
-  const handleAddExercise = () => {
+  const handleAddExercise = async () => {
     if (!validateExerciseForm()) {
       setMessage('Пожалуйста, исправьте ошибки');
       setMessageType('error');
@@ -96,37 +101,55 @@ const Exercises = ({ darkMode, defaultMuscleGroups, customMuscleGroups, onMuscle
       ...muscleGroups,
       [selectedGroup]: [...existingCustomExercises, newExercise.trim()],
     };
-    setMuscleGroups(updatedGroups);
-    onMuscleGroupsChange(updatedGroups);
-    setMessage(`Упражнение "${newExercise.trim()}" добавлено в группу "${selectedGroup}"`);
-    setMessageType('success');
-    setNewExercise('');
-    setErrors({});
-  };
-
-  const handleDeleteGroup = (group) => {
-    if (!defaultMuscleGroups[group]) {
-      const updatedGroups = { ...muscleGroups };
-      delete updatedGroups[group];
+    try {
       setMuscleGroups(updatedGroups);
-      onMuscleGroupsChange(updatedGroups);
-      console.log('Удалена группа:', group);
-      if (selectedGroup === group) setSelectedGroup('');
-      if (expandedGroup === group) setExpandedGroup(null);
+      await onMuscleGroupsChange(updatedGroups);
+      setMessage(`Упражнение "${newExercise.trim()}" добавлено в группу "${selectedGroup}"`);
+      setMessageType('success');
+      setNewExercise('');
+      setErrors({});
+    } catch (error) {
+      setMessage('Ошибка при добавлении упражнения');
+      setMessageType('error');
     }
   };
 
-  const handleDeleteExercise = (group, exercise) => {
+  const handleDeleteGroup = async (group) => {
+    if (!defaultMuscleGroups[group]) {
+      const updatedGroups = { ...muscleGroups };
+      delete updatedGroups[group];
+      try {
+        setMuscleGroups(updatedGroups);
+        await onMuscleGroupsChange(updatedGroups);
+        setMessage(`Группа "${group}" удалена`);
+        setMessageType('success');
+        if (selectedGroup === group) setSelectedGroup('');
+        if (expandedGroup === group) setExpandedGroup(null);
+      } catch (error) {
+        setMessage('Ошибка при удалении группы');
+        setMessageType('error');
+      }
+    }
+  };
+
+  const handleDeleteExercise = async (group, exercise) => {
     if (!defaultMuscleGroups[group]?.includes(exercise)) {
       const updatedGroups = {
         ...muscleGroups,
         [group]: muscleGroups[group].filter((ex) => ex !== exercise),
       };
-      setMuscleGroups(updatedGroups);
-      onMuscleGroupsChange(updatedGroups);
-      console.log('Удалено упражнение:', exercise, 'из группы', group);
+      try {
+        setMuscleGroups(updatedGroups);
+        await onMuscleGroupsChange(updatedGroups);
+        setMessage(`Упражнение "${exercise}" удалено из группы "${group}"`);
+        setMessageType('success');
+      } catch (error) {
+        setMessage('Ошибка при удалении упражнения');
+        setMessageType('error');
+      }
     } else {
-      console.log('Нельзя удалить дефолтное упражнение:', exercise);
+      setMessage('Нельзя удалить дефолтное упражнение');
+      setMessageType('error');
     }
   };
 

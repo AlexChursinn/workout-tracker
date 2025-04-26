@@ -22,7 +22,8 @@ export const getWorkouts = async (token) => {
     }
 
     if (!response.ok) {
-      throw new Error('Ошибка при загрузке тренировок');
+      const errorData = await response.json();
+      throw new Error(errorData.message || `Ошибка при загрузке тренировок: ${response.status}`);
     }
     return await response.json();
   } catch (error) {
@@ -42,11 +43,62 @@ export const addWorkout = async (workout, token) => {
       body: JSON.stringify(workout),
     });
     if (!response.ok) {
-      throw new Error('Ошибка при добавлении тренировки');
+      const errorData = await response.json();
+      throw new Error(errorData.message || `Ошибка при добавлении тренировки: ${response.status}`);
     }
     return await response.json();
   } catch (error) {
     console.error('Ошибка при добавлении тренировки:', error);
+    throw error;
+  }
+};
+
+export const deleteWorkout = async (workoutId, workout_date, token) => {
+  try {
+    console.log('Sending DELETE request:', {
+      url: `${API_URL}/user-workouts/${workoutId}?workout_date=${workout_date}`,
+      token: token ? 'Token present' : 'No token',
+    });
+    const response = await fetch(`${API_URL}/user-workouts/${workoutId}?workout_date=${workout_date}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || `Ошибка при удалении тренировки: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Ошибка при удалении тренировки:', error);
+    throw error;
+  }
+};
+
+export const copyWorkout = async (source_workout_date, source_workoutId, target_workout_date, token) => {
+  try {
+    console.log('Sending POST request to copy workout:', {
+      source_workout_date,
+      source_workoutId,
+      target_workout_date,
+      token: token ? 'Token present' : 'No token',
+    });
+    const response = await fetch(`${API_URL}/user-workouts/copy`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ source_workout_date, source_workoutId, target_workout_date }),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || `Ошибка при копировании тренировки: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Ошибка при копировании тренировки:', error);
     throw error;
   }
 };
@@ -59,7 +111,8 @@ export const getCustomMuscleGroups = async (token) => {
       },
     });
     if (!response.ok) {
-      throw new Error('Ошибка при загрузке пользовательских групп мышц');
+      const errorData = await response.json();
+      throw new Error(errorData.message || `Ошибка при загрузке пользовательских групп мышц: ${response.status}`);
     }
     return await response.json();
   } catch (error) {
@@ -79,7 +132,8 @@ export const saveCustomMuscleGroups = async (customMuscleGroups, token) => {
       body: JSON.stringify({ muscleGroups: customMuscleGroups }),
     });
     if (!response.ok) {
-      throw new Error('Ошибка при сохранении пользовательских групп мышц');
+      const errorData = await response.json();
+      throw new Error(errorData.message || `Ошибка при сохранении пользовательских групп мышц: ${response.status}`);
     }
     return await response.json();
   } catch (error) {
@@ -133,7 +187,6 @@ export const refreshAuthToken = async () => {
   }
 };
 
-// Новая функция login для стандартной авторизации
 export const login = async (credentials) => {
   try {
     const response = await fetch(`${API_URL}/login`, {

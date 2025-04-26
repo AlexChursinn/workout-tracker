@@ -160,7 +160,7 @@ app.post('/api/user-workouts', authenticateToken, (req, res) => {
     id: existingWorkoutIndex !== -1 ? user.workouts[existingWorkoutIndex].id : Date.now(),
     workoutId,
     workout_date,
-    title: title || '', // Оставляем title опциональным, как было раньше
+    title: title || '',
     exercises,
   };
 
@@ -175,6 +175,97 @@ app.post('/api/user-workouts', authenticateToken, (req, res) => {
     res.status(201).json({ workouts: user.workouts });
   } catch (error) {
     console.error('Error saving workout:', error);
+    res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
+
+app.delete('/api/user-workouts/:workoutId', authenticateToken, (req, res) => {
+  const { workoutId } = req.params;
+  const workout_date = req.query.workout_date;
+
+  if (!workoutId || !workout_date) {
+    return res.status(400).json({ message: 'workoutId и workout_date обязательны' });
+  }
+
+  const db = readDatabase();
+  const userIndex = db.users.findIndex((u) => u.id === req.user.id);
+
+  if (userIndex === -1) {
+    return res.status(404).json({ message: 'Пользователь не найден' });
+  }
+
+  const user = db.users[userIndex];
+  const workoutIndex = user.workouts.findIndex(
+    (w) => w.workout_date === workout_date && w.workoutId === parseInt(workoutId)
+  );
+
+  if (workoutIndex === -1) {
+    console.log(`Workout not found for user ${req.user.id}: workoutId=${workoutId}, workout_date=${workout_date}`);
+    console.log('Available workouts:', user.workouts.map(w => ({ workoutId: w.workoutId, workout_date: w.workout_date })));
+    return res.status(404).json({ message: 'Тренировка не найдена' });
+  }
+
+  user.workouts.splice(workoutIndex, 1);
+
+  // Пересчитываем workoutId для оставшихся тренировок в тот же день
+  const workoutsForDate = user.workouts.filter((w) => w.workout_date === workout_date);
+  workoutsForDate.forEach((workout, index) => {
+    workout.workoutId = index + 1;
+  });
+
+  try {
+    writeDatabase(db);
+    res.json({ workouts: user.workouts });
+  } catch (error) {
+    console.error('Ошибка при удалении тренировки:', error);
+    res.status(500).json({ message: 'Ошибка сервера' });
+  }
+});
+
+app.post('/api/user-workouts/copy', authenticateToken, (req, res) => {
+  const { source_workout_date, source_workoutId, target_workout_date } = req.body;
+
+  if (!source_workout_date || !source_workoutId || !target_workout_date) {
+    return res.status(400).json({ message: 'source_workout_date, source_workoutId и target_workout_date обязательны' });
+  }
+
+  const db = readDatabase();
+  const userIndex = db.users.findIndex((u) => u.id === req.user.id);
+
+  if (userIndex === -1) {
+    return res.status(404).json({ message: 'Пользователь не найден' });
+  }
+
+  const user = db.users[userIndex];
+  const sourceWorkout = user.workouts.find(
+    (w) => w.workout_date === source_workout_date && w.workoutId === source_workoutId
+  );
+
+  if (!sourceWorkout) {
+    console.log(`Source workout not found for user ${req.user.id}: source_workoutId=${source_workoutId}, source_workout_date=${source_workout_date}`);
+    console.log('Available workouts:', user.workouts.map(w => ({ workoutId: w.workoutId, workout_date: w.workout_date })));
+    return res.status(404).json({ message: 'Исходная тренировка не найдена' });
+  }
+
+  // Определяем новый workoutId для целевой даты
+  const workoutsForTargetDate = user.workouts.filter((w) => w.workout_date === target_workout_date);
+  const newWorkoutId = workoutsForTargetDate.length + 1;
+
+  const newWorkout = {
+    id: Date.now(),
+    workoutId: newWorkoutId,
+    workout_date: target_workout_date,
+    title: sourceWorkout.title || '',
+    exercises: sourceWorkout.exercises.map((exercise) => ({ ...exercise })),
+  };
+
+  user.workouts.push(newWorkout);
+
+  try {
+    writeDatabase(db);
+    res.status(201).json({ workouts: user.workouts });
+  } catch (error) {
+    console.error('Ошибка при копировании тренировки:', error);
     res.status(500).json({ message: 'Ошибка сервера' });
   }
 });
@@ -236,4 +327,4 @@ app.post('/api/refresh-token', (req, res) => {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
-}); 
+});
