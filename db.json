@@ -169,6 +169,215 @@
           "1"
         ]
       }
+    },
+    {
+      "id": 1745734010091,
+      "name": "4",
+      "email": "4@gmail.com",
+      "passwordHash": "$2a$10$Mj0CFwVph9TMUk6VLCqybupfYcaEDevAzxe8wpH8jYP7qWlhdianq",
+      "workouts": [
+        {
+          "id": 1745734014789,
+          "workoutId": 1,
+          "workout_date": "2025-04-27",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1745734014782,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа Горизонт",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1745734019832,
+              "number": 2,
+              "muscleGroup": "Спина",
+              "exercise": "Тяга верхнего блока",
+              "sets": [
+                {
+                  "reps": "22",
+                  "weight": "22",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1745734259860,
+          "workoutId": 1,
+          "workout_date": "2025-04-28",
+          "title": "Test",
+          "exercises": [
+            {
+              "id": 1745734014782,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа Горизонт",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1745734019832,
+              "number": 2,
+              "muscleGroup": "Спина",
+              "exercise": "Тяга верхнего блока",
+              "sets": [
+                {
+                  "reps": "22",
+                  "weight": "22",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1745734372015,
+              "number": 3,
+              "muscleGroup": "Test",
+              "exercise": "Test",
+              "sets": [
+                {
+                  "reps": "22",
+                  "weight": "22",
+                  "isEditing": false
+                },
+                {
+                  "reps": "22",
+                  "weight": "22",
+                  "isEditing": false
+                },
+                {
+                  "reps": "1",
+                  "weight": "1",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1745734525562,
+          "workoutId": 2,
+          "workout_date": "2025-04-28",
+          "title": "Test 2",
+          "exercises": [
+            {
+              "id": 1745734526531,
+              "number": 1,
+              "muscleGroup": "Ноги",
+              "exercise": "Присед",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1745734619375,
+          "workoutId": 1,
+          "workout_date": "2025-04-29",
+          "title": "Test 2",
+          "exercises": [
+            {
+              "id": 1745734526531,
+              "number": 1,
+              "muscleGroup": "Ноги",
+              "exercise": "Присед",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1745734641974,
+          "workoutId": 1,
+          "workout_date": "2025-04-30",
+          "title": "Test 2",
+          "exercises": [
+            {
+              "id": 1745734526531,
+              "number": 1,
+              "muscleGroup": "Ноги",
+              "exercise": "Присед",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1745734644922,
+          "workoutId": 1,
+          "workout_date": "2025-05-01",
+          "title": "Test 2",
+          "exercises": [
+            {
+              "id": 1745734526531,
+              "number": 1,
+              "muscleGroup": "Ноги",
+              "exercise": "Присед",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 1745734647440,
+          "workoutId": 1,
+          "workout_date": "2025-05-02",
+          "title": "Test 2",
+          "exercises": [
+            {
+              "id": 1745734526531,
+              "number": 1,
+              "muscleGroup": "Ноги",
+              "exercise": "Присед",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "isEditing": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "customMuscleGroups": {
+        "Test": [
+          "Test"
+        ]
+      }
     }
   ]
 }

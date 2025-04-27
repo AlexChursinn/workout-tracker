@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { jwtDecode } from 'jwt-decode';
 import Header from './components/Header';
 import WorkoutPage from './components/WorkoutPage';
@@ -12,6 +11,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import ProtectedRoute from './ProtectedRoute';
 import Home from './components/Home';
+import Spinner from './components/Spinner';
 import { getWorkouts, addWorkout, refreshAuthToken, loginWithTelegram, getCustomMuscleGroups, saveCustomMuscleGroups } from './api';
 import './global.css';
 
@@ -36,12 +36,13 @@ const App = () => {
   const [authToken, setAuthToken] = useState(localStorage.getItem('jwt') || null);
   const [loading, setLoading] = useState(true);
   const [customMuscleGroups, setCustomMuscleGroups] = useState({});
-  const hasInitialized = useRef(false); // Track initialization
+  const hasInitialized = useRef(false);
 
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('Текущий маршрут:', location.pathname);
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
@@ -69,35 +70,40 @@ const App = () => {
 
   useEffect(() => {
     const initializeAuth = async () => {
-      if (hasInitialized.current) return; // Prevent re-initialization
+      if (hasInitialized.current) {
+        console.log('initializeAuth уже вызван, пропускаем');
+        return;
+      }
       hasInitialized.current = true;
 
+      console.log('Начало initializeAuth, isAuthenticated:', isAuthenticated, 'authToken:', !!authToken);
       setLoading(true);
       try {
         if (window.Telegram?.WebApp?.initDataUnsafe?.user && !isAuthenticated) {
+          console.log('Авторизация через Telegram');
           const token = await loginWithTelegram(window.Telegram.WebApp.initDataUnsafe.user);
           localStorage.setItem('jwt', token);
           setAuthToken(token);
           setIsAuthenticated(true);
           await fetchData(token);
-          if (location.pathname !== '/home') {
-            navigate('/home', { replace: true });
-          }
         } else if (isAuthenticated && authToken) {
+          console.log('Загрузка данных для авторизованного пользователя');
           await fetchData(authToken);
+        } else {
+          console.log('Нет данных для авторизации, перенаправление на /login');
+          navigate('/login', { replace: true });
         }
       } catch (error) {
         console.error('Ошибка авторизации:', error);
-        if (location.pathname !== '/login') {
-          navigate('/login', { replace: true });
-        }
+        navigate('/login', { replace: true });
       } finally {
+        console.log('Завершение initializeAuth, установка loading: false');
         setLoading(false);
       }
     };
 
     initializeAuth();
-  }, []); // Run only once on mount
+  }, []); // Пустой массив зависимостей
 
   useEffect(() => {
     if (darkMode) document.body.classList.add('dark-theme');
@@ -109,6 +115,7 @@ const App = () => {
     const checkAndRefreshToken = async () => {
       if (!authToken || !isAuthenticated) return;
       if (isTokenExpired(authToken)) {
+        console.log('Токен истёк, попытка обновления');
         try {
           const newToken = await refreshAuthToken();
           if (newToken) {
@@ -116,6 +123,7 @@ const App = () => {
             localStorage.setItem('jwt', newToken);
             await fetchData(newToken);
           } else {
+            console.log('Не удалось обновить токен, выход');
             handleLogout();
           }
         } catch (error) {
@@ -136,6 +144,7 @@ const App = () => {
   }, [selectedDate, showTable]);
 
   const fetchData = async (token) => {
+    console.log('Начало fetchData');
     try {
       const [workoutsResponse, muscleGroupsResponse] = await Promise.all([
         getWorkouts(token),
@@ -153,6 +162,7 @@ const App = () => {
       }, {});
       setWorkoutData(formattedData);
       setCustomMuscleGroups(muscleGroupsResponse.muscleGroups || {});
+      console.log('fetchData завершён успешно');
     } catch (error) {
       console.error('Ошибка при загрузке данных:', error);
       if (error.message.includes('Unauthorized')) handleLogout();
@@ -171,18 +181,17 @@ const App = () => {
     setSelectedDate(date);
     setShowTable(true);
     const formattedDate = formatDateToLocal(date);
+    console.log('Переход на дату:', formattedDate, 'workoutId:', workoutId);
     navigate(`/${formattedDate}/${workoutId}`, { replace: true });
   };
 
   const handleLogin = (token) => {
+    console.log('handleLogin вызван, токен:', !!token);
     localStorage.setItem('jwt', token);
     setAuthToken(token);
     setIsAuthenticated(true);
     setSelectedDate(new Date());
     fetchData(token);
-    if (location.pathname !== '/home') {
-      navigate('/home', { replace: true });
-    }
   };
 
   const handleWorkoutChange = async (dataForDate, workoutId) => {
@@ -249,6 +258,7 @@ const App = () => {
   const toggleTheme = () => setDarkMode((prev) => !prev);
 
   const handleLogout = () => {
+    console.log('Выход из аккаунта');
     localStorage.removeItem('jwt');
     setAuthToken(null);
     setWorkoutData({});
@@ -275,85 +285,81 @@ const App = () => {
         onLogout={handleLogout}
         showLogoutButton={!['/login', '/register'].includes(location.pathname)}
       />
-      <main className="container">
-        <TransitionGroup>
-          <CSSTransition
-            key={location.key} // Use location.key for unique transitions
-            timeout={300}
-            classNames="page"
-          >
-            <Routes location={location}>
-              <Route path="/login" element={<Login onLogin={handleLogin} />} />
-              <Route path="/register" element={<Register onLogin={handleLogin} />} />
-              <Route
-                path="/:date/:workoutId"
-                element={
-                  <ProtectedRoute>
-                    <WorkoutPage
-                      workoutData={workoutData}
-                      selectedDate={selectedDate}
-                      onDateSelect={handleDateSelect}
-                      onWorkoutChange={handleWorkoutChange}
-                      onTitleChange={handleTitleChange}
-                      loading={loading}
-                      darkMode={darkMode}
-                      defaultMuscleGroups={defaultMuscleGroups}
-                      customMuscleGroups={customMuscleGroups}
-                    />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/home"
-                element={
-                  <ProtectedRoute>
-                    <Home
-                      workoutData={workoutData}
-                      onDateSelect={handleDateSelect}
-                      darkMode={darkMode}
-                      loading={loading}
-                      authToken={authToken}
-                      onDataUpdate={() => fetchData(authToken)}
-                    />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/analytics"
-                element={
-                  <ProtectedRoute>
-                    <Analytics workoutData={workoutData} darkMode={darkMode} loading={loading} />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/exercises"
-                element={
-                  <ProtectedRoute>
-                    <Exercises
-                      darkMode={darkMode}
-                      defaultMuscleGroups={defaultMuscleGroups}
-                      customMuscleGroups={customMuscleGroups}
-                      onMuscleGroupsChange={handleMuscleGroupsChange}
-                      loading={loading}
-                    />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/settings"
-                element={
-                  <ProtectedRoute>
-                    <Settings darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} loading={loading} />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="*" element={<Navigate to="/home" replace />} />
-            </Routes>
-          </CSSTransition>
-        </TransitionGroup>
-      </main>
-      {!['/login', '/register'].includes(location.pathname) && (
+      {loading ? (
+        <Spinner darkMode={darkMode} />
+      ) : (
+        <main className="container page-transition" key={location.pathname}>
+          <Routes location={location}>
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route path="/register" element={<Register onLogin={handleLogin} />} />
+            <Route
+              path="/:date/:workoutId"
+              element={
+                <ProtectedRoute>
+                  <WorkoutPage
+                    workoutData={workoutData}
+                    selectedDate={selectedDate}
+                    onDateSelect={handleDateSelect}
+                    onWorkoutChange={handleWorkoutChange}
+                    onTitleChange={handleTitleChange}
+                    loading={loading}
+                    darkMode={darkMode}
+                    defaultMuscleGroups={defaultMuscleGroups}
+                    customMuscleGroups={customMuscleGroups}
+                  />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <Home
+                    workoutData={workoutData}
+                    onDateSelect={handleDateSelect}
+                    darkMode={darkMode}
+                    loading={loading}
+                    authToken={authToken}
+                    onDataUpdate={() => fetchData(authToken)}
+                  />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/analytics"
+              element={
+                <ProtectedRoute>
+                  <Analytics workoutData={workoutData} darkMode={darkMode} loading={loading} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/exercises"
+              element={
+                <ProtectedRoute>
+                  <Exercises
+                    darkMode={darkMode}
+                    defaultMuscleGroups={defaultMuscleGroups}
+                    customMuscleGroups={customMuscleGroups}
+                    onMuscleGroupsChange={handleMuscleGroupsChange}
+                    loading={loading}
+                  />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <Settings darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} loading={loading} />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<Navigate to="/home" replace />} />
+          </Routes>
+        </main>
+      )}
+      {!['/login', '/register'].includes(location.pathname) && !loading && (
         <Footer darkMode={darkMode} onNavigateToday={() => handleDateSelect(new Date())} />
       )}
     </div>

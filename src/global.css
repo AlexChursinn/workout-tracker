@@ -109,64 +109,58 @@ input:focus {
     outline: none;
 }
 
-/* Анимация переходов между страницами */
-.page-enter {
-    opacity: 0;
-    transform: translateY(20px);
+/* Анимация появления страниц (только fade-in) */
+.page-transition {
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-.page-enter-active {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-.page-exit {
-    opacity: 1;
-    transform: translateY(0);
+/* Стили для Spinner */
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--bg-color);
 }
 
-.page-exit-active {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+.spinner::after {
+    content: '';
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--text-color);
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
 
-/* Анимация блоков (общая для всех страниц) */
-.block-enter {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.block-enter-active {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
-}
-
-.block-exit {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.block-exit-active {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 500ms ease-in-out, transform 500ms ease-in-out;
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @media (max-width: 768px) {
     h1 {
         font-size: 2rem;
     }
- 
 }
 
 @media (max-width: 480px) {
     h1 {
         font-size: 1.5rem;
     }
-
 }
 
 @media (max-width: 320px) {
