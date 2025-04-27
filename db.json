@@ -369,6 +369,19 @@
                   "isEditing": false
                 }
               ]
+            },
+            {
+              "id": 1745736567841,
+              "number": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
             }
           ]
         }

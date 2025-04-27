@@ -16,7 +16,7 @@ const Settings = ({ darkMode, toggleTheme, onLogout, loading }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 1000);
+    }, 300);
     return () => clearTimeout(timer);
   }, []);
 

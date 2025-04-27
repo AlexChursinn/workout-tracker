@@ -6,7 +6,23 @@
   color: var(--text-color);
   overflow-x: auto;
   border-radius: 4px;
+  overflow: hidden; /* Добавлено для поддержки скругления углов */
 }
+
+/* Скругление углов для ячеек в первом и последнем tr */
+tr:first-child th,
+tr:first-child td {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+tr:last-child th,
+tr:last-child td {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+
 
 table,
 th,
@@ -131,7 +147,7 @@ button {
   background-color: #4d4d4d;
   color: var(--button-text-color);
 }
- 
+
 /* Стили для иконок */
 .deleteIcon,
 .copyIcon {
@@ -298,7 +314,6 @@ select:focus {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    border: 1px solid var(--table-border-color);
     border-radius: 5px;
     padding: 15px;
     background-color: var(--table-bg-color);
