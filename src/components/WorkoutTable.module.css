@@ -346,7 +346,7 @@ select:focus {
       padding: 6px;
       text-align: left;
       font-size: 0.85rem;
-      border-bottom: 1px solid #ddd !important; 
+      border-bottom: 1px solid var(--table-border-color) !important;
   }
 
   .table td::before {

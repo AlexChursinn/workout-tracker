@@ -383,8 +383,8 @@
             {
               "id": 1746080028314,
               "number": 2,
-              "muscleGroup": "",
-              "exercise": "",
+              "muscleGroup": "Спина",
+              "exercise": "Тяга верхнего блока",
               "sets": [
                 {
                   "reps": "",
