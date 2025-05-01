@@ -162,8 +162,7 @@
 }
 
 .dropdownItem:hover {
-  background-color: #4d4d4d;
-  color: var(--button-text-color);
+  background-color: rgba(77, 77, 77, 0.5);
 }
 
 /* Стили для иконок */
