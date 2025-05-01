@@ -3,9 +3,9 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
-import './DateSelector.css'; // Подключаем CSS для кастомных стилей
+import './DateSelector.css';
 
-registerLocale('ru', ru); 
+registerLocale('ru', ru);
 
 const DateSelector = forwardRef(({ selectedDate, onDateSelect, filledDates }, ref) => {
   const [openCalendar, setOpenCalendar] = useState(false);
@@ -52,7 +52,7 @@ const DateSelector = forwardRef(({ selectedDate, onDateSelect, filledDates }, re
           renderDayContents={renderDayContents}
           locale="ru"
           dateFormat="dd.MM.yyyy"
-          calendarClassName="custom-datepicker" // Кастомный класс
+          calendarClassName="custom-datepicker"
         />
       )}
     </div>

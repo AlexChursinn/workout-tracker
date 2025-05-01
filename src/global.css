@@ -17,7 +17,7 @@
 .dark-theme {
     --bg-color: #121212;
     --bg-color-rgb: 18, 18, 18;
-    --text-color: #e0e0e0;
+    --text-color: #fff;
     --table-bg-color: #1e1e1e;
     --table-border-color: #333;
     --button-bg-color: #3a3a3a;

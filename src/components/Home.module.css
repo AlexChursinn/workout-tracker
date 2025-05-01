@@ -167,8 +167,7 @@
 }
 
 .dropdownItem:hover {
-  background-color: #4d4d4d;
-  color: var(--button-text-color);
+  background-color: rgba(77, 77, 77, 0.5);
 }
 
 .actionIcon {
@@ -196,26 +195,27 @@
   text-align: center;
   max-width: 400px;
   width: 90%;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
 }
 
 .modalContent h2 {
   margin: 0 0 20px;
   color: var(--text-color);
-}
-
-.cancelButton {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: var(--button-bg-color);
-  color: var(--button-text-color);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.cancelButton:hover {
-  background-color: #4d4d4d;
 }
 
 .errorMessage {
@@ -228,7 +228,6 @@
 }
 
 @media (max-width: 768px) {
-
   .moreButton {
     width: 30px;
     height: 30px;
@@ -248,7 +247,6 @@
 }
 
 @media (max-width: 375px) {
-
   .moreButton {
     width: 25px;
     height: 25px;

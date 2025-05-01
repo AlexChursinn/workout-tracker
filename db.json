@@ -308,27 +308,6 @@
               ]
             }
           ]
-        },
-        {
-          "id": 1745734641974,
-          "workoutId": 1,
-          "workout_date": "2025-04-30",
-          "title": "Test 2",
-          "exercises": [
-            {
-              "id": 1746099152897,
-              "number": 1,
-              "muscleGroup": "Ноги",
-              "exercise": "Присед",
-              "sets": [
-                {
-                  "reps": "11",
-                  "weight": "11",
-                  "isEditing": false
-                }
-              ]
-            }
-          ]
         }
       ],
       "customMuscleGroups": {

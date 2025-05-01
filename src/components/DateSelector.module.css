@@ -6,12 +6,15 @@
   overflow: hidden !important;
   font-family: 'Rubik', sans-serif !important;
   background-color: var(--bg-color) !important;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
 }
- 
+
 .react-datepicker__header {
   background-color: var(--table-bg-color) !important;
   border-bottom: 1px solid var(--table-border-color) !important;
-  padding-top: 10px !important;
+  padding: 10px !important;
 }
 
 .react-datepicker__current-month {
@@ -24,8 +27,9 @@
 .react-datepicker__day,
 .react-datepicker__time-name {
   width: 2.5rem !important;
+  height: 2.5rem !important;
   line-height: 2.5rem !important;
-  margin: 0.2rem !important;
+  margin: 0.3rem !important;
   color: var(--text-color) !important;
   border-radius: 50% !important;
   transition: background-color 0.2s, color 0.2s !important;
@@ -39,7 +43,7 @@
 
 /* Стили для выделенных дней */
 .react-datepicker__day--highlighted {
-  background-color: #4CAF50 !important; /* Цвет подсветки заполненных дней */
+  background-color: #4CAF50 !important;
   color: #ffffff !important;
 }
 
@@ -52,12 +56,15 @@
 @media (max-width: 768px) {
   .react-datepicker {
     font-size: 0.9rem !important;
+    max-width: 300px;
   }
   .react-datepicker__day-name,
   .react-datepicker__day,
   .react-datepicker__time-name {
     width: 2rem !important;
+    height: 2rem !important;
     line-height: 2rem !important;
+    margin: 0.25rem !important;
   }
 }
 
@@ -65,12 +72,14 @@
 @media (max-width: 480px) {
   .react-datepicker {
     font-size: 0.8rem !important;
+    max-width: 280px;
   }
   .react-datepicker__day-name,
   .react-datepicker__day,
   .react-datepicker__time-name {
     width: 1.8rem !important;
+    height: 1.8rem !important;
     line-height: 1.8rem !important;
+    margin: 0.2rem !important;
   }
 }
- 

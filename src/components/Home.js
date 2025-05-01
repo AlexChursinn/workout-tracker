@@ -23,6 +23,8 @@ import copyIconBlack from '../assets/copy-black.svg';
 import copyIconWhite from '../assets/copy-white.svg';
 import deleteIconBlack from '../assets/delete-black.svg';
 import deleteIconWhite from '../assets/delete-white.svg';
+import closeIconBlack from '../assets/close-black.svg';
+import closeIconWhite from '../assets/close-white.svg';
 
 registerLocale('ru', ru);
 
@@ -33,7 +35,8 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
   const [workoutToCopy, setWorkoutToCopy] = useState(null);
   const [error, setError] = useState(null);
   const dateSelectorRef = useRef(null);
-  const dropdownRef = useRef(null); // ⬅️ для определения клика вне dropdown
+  const dropdownRef = useRef(null);
+  const modalRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,11 +44,19 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowDropdown(null);
       }
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setShowDatePicker(false);
+        setWorkoutToCopy(null);
+        setError(null);
+      }
     };
 
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
         setShowDropdown(null);
+        setShowDatePicker(false);
+        setWorkoutToCopy(null);
+        setError(null);
       }
     };
 
@@ -152,6 +163,26 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
     acc[date] = workouts;
     return acc;
   }, {});
+
+  const highlightedDates = filteredWorkoutData.map((data) => new Date(data.date).setHours(0, 0, 0, 0));
+
+  const renderDayContents = (day, date) => {
+    const dateTime = date.setHours(0, 0, 0, 0);
+    const isFilled = highlightedDates.includes(dateTime);
+
+    return (
+      <div 
+        style={{
+          backgroundColor: isFilled ? '#000' : 'transparent',
+          color: isFilled ? 'white' : '',
+          borderRadius: isFilled ? '50%' : '',
+          padding: '5px',
+        }}
+      >
+        {day}
+      </div>
+    );
+  };
 
   const hasWorkouts = filteredWorkoutData.length > 0;
 
@@ -288,7 +319,21 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
       )}
       {showDatePicker && (
         <div className={styles.modalOverlay}>
-          <div className={styles.modalContent}>
+          <div className={styles.modalContent} ref={modalRef}>
+            <button
+              className={styles.closeButton}
+              onClick={() => {
+                setShowDatePicker(false);
+                setWorkoutToCopy(null);
+                setError(null);
+              }}
+            >
+              <img
+                src={darkMode ? closeIconWhite : closeIconBlack}
+                alt="Закрыть"
+                className={styles.closeIcon}
+              />
+            </button>
             <h2>Выберите дату для копирования тренировки</h2>
             <DatePicker
               selected={new Date()}
@@ -297,17 +342,8 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
               locale="ru"
               dateFormat="dd.MM.yyyy"
               calendarClassName="custom-datepicker"
+              renderDayContents={renderDayContents}
             />
-            <button
-              className={styles.cancelButton}
-              onClick={() => {
-                setShowDatePicker(false);
-                setWorkoutToCopy(null);
-                setError(null);
-              }}
-            >
-              Отмена
-            </button>
           </div>
         </div>
       )}
