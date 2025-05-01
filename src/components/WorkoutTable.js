@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom'; // Импортируем createPortal
 import styles from './WorkoutTable.module.css';
 import copyIconBlack from '../assets/copy-black.svg';
 import copyIconWhite from '../assets/copy-white.svg';
@@ -11,8 +12,7 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
   const [workouts, setWorkouts] = useState(Array.isArray(workoutData) ? workoutData : []);
   const [showDropdown, setShowDropdown] = useState(null);
   const dropdownRef = useRef(null);
-
-  console.log('WorkoutTable darkMode:', darkMode);
+  const buttonRef = useRef(null); // Для хранения позиции кнопки
 
   const allMuscleGroups = {};
   Object.keys(defaultMuscleGroups).forEach((group) => {
@@ -33,7 +33,12 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
         setShowDropdown(null);
       }
     };
@@ -66,32 +71,43 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
 
   const handleAddRow = () => {
     const newNumber = workouts.length + 1;
-    handleWorkoutUpdate([...workouts, { id: Date.now(), number: newNumber, muscleGroup: '', exercise: '', sets: [{ reps: '', weight: '', isEditing: true }] }]);
+    handleWorkoutUpdate([
+      ...workouts,
+      { id: Date.now(), number: newNumber, muscleGroup: '', exercise: '', sets: [{ reps: '', weight: '', isEditing: true }] },
+    ]);
   };
 
   const handleDeleteRow = (workoutId) => {
-    const updatedWorkouts = workouts.filter((workout) => workout.id !== workoutId).map((workout, index) => ({ ...workout, number: index + 1 }));
+    const updatedWorkouts = workouts
+      .filter((workout) => workout.id !== workoutId)
+      .map((workout, index) => ({ ...workout, number: index + 1 }));
     handleWorkoutUpdate(updatedWorkouts);
     setShowDropdown(null);
   };
 
   const handleSetChange = (workoutId, setIndex, field, value) => {
     const updatedWorkouts = workouts.map((workout) =>
-      workout.id === workoutId ? { ...workout, sets: workout.sets.map((set, i) => i === setIndex ? { ...set, [field]: value } : set) } : workout
+      workout.id === workoutId
+        ? { ...workout, sets: workout.sets.map((set, i) => (i === setIndex ? { ...set, [field]: value } : set)) }
+        : workout
     );
     handleWorkoutUpdate(updatedWorkouts);
   };
 
   const handleAddSet = (workoutId) => {
     const updatedWorkouts = workouts.map((workout) =>
-      workout.id === workoutId ? { ...workout, sets: [...workout.sets, { reps: '', weight: '', isEditing: true }] } : workout
+      workout.id === workoutId
+        ? { ...workout, sets: [...workout.sets, { reps: '', weight: '', isEditing: true }] }
+        : workout
     );
     handleWorkoutUpdate(updatedWorkouts);
   };
 
   const handleDeleteSet = (workoutId) => {
     const updatedWorkouts = workouts.map((workout) =>
-      workout.id === workoutId && workout.sets.length > 1 ? { ...workout, sets: workout.sets.slice(0, -1) } : workout
+      workout.id === workoutId && workout.sets.length > 1
+        ? { ...workout, sets: workout.sets.slice(0, -1) }
+        : workout
     );
     handleWorkoutUpdate(updatedWorkouts);
   };
@@ -121,7 +137,35 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
 
   const toggleDropdown = (workoutId, event) => {
     event.stopPropagation();
+    buttonRef.current = event.currentTarget; // Сохраняем кнопку
     setShowDropdown((prev) => (prev === workoutId ? null : workoutId));
+  };
+
+  // Компонент для рендеринга выпадающего меню через портал
+  const DropdownMenu = ({ workoutId }) => {
+    if (!buttonRef.current) return null;
+
+    const rect = buttonRef.current.getBoundingClientRect();
+    const style = {
+      position: 'fixed',
+      top: `${rect.bottom + window.scrollY}px`,
+      left: `${rect.right - 150 + window.scrollX}px`, // 150 — ширина меню
+      zIndex: 1000,
+    };
+
+    return createPortal(
+      <div className={styles.dropdownMenu} style={style} ref={dropdownRef}>
+        <button className={styles.dropdownItem} onClick={() => handleCopyWorkout(workoutId)}>
+          <span>Копировать</span>
+          <img src={darkMode ? copyIconWhite : copyIconBlack} alt="Copy" className={styles.copyIcon} />
+        </button>
+        <button className={styles.dropdownItem} onClick={() => handleDeleteRow(workoutId)}>
+          <span>Удалить</span>
+          <img src={darkMode ? deleteIconWhite : deleteIconBlack} alt="Delete" className={styles.deleteIcon} />
+        </button>
+      </div>,
+      document.body
+    );
   };
 
   return (
@@ -132,7 +176,7 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
             <th>№</th>
             <th>Группа Мышц</th>
             <th>Упражнение</th>
-            {Array.from({ length: Math.max(...workouts.map(w => w.sets?.length || 1), 1) }, (_, i) => (
+            {Array.from({ length: Math.max(...workouts.map((w) => w.sets?.length || 1), 1) }, (_, i) => (
               <th key={i}>Подход {i + 1}</th>
             ))}
             <th>Управление подходами</th>
@@ -150,7 +194,9 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
                 <select
                   value={workout.muscleGroup}
                   onChange={(e) =>
-                    handleWorkoutUpdate(workouts.map(w => w.id === workout.id ? { ...w, muscleGroup: e.target.value, exercise: '' } : w))
+                    handleWorkoutUpdate(
+                      workouts.map((w) => (w.id === workout.id ? { ...w, muscleGroup: e.target.value, exercise: '' } : w))
+                    )
                   }
                 >
                   <option value="">Выберите группу мышц</option>
@@ -163,14 +209,17 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
                 <select
                   value={workout.exercise}
                   onChange={(e) =>
-                    handleWorkoutUpdate(workouts.map(w => w.id === workout.id ? { ...w, exercise: e.target.value } : w))
+                    handleWorkoutUpdate(
+                      workouts.map((w) => (w.id === workout.id ? { ...w, exercise: e.target.value } : w))
+                    )
                   }
                   disabled={!workout.muscleGroup}
                 >
                   <option value="">Выберите упражнение</option>
-                  {workout.muscleGroup && allMuscleGroups[workout.muscleGroup]?.map((exercise) => (
-                    <option key={exercise} value={exercise}>{exercise}</option>
-                  ))}
+                  {workout.muscleGroup &&
+                    allMuscleGroups[workout.muscleGroup]?.map((exercise) => (
+                      <option key={exercise} value={exercise}>{exercise}</option>
+                    ))}
                 </select>
               </td>
               {workout.sets.map((set, i) => (
@@ -191,12 +240,17 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
                           placeholder="Вес"
                           className={styles.workoutTableInput}
                           value={set?.weight || ''}
-                          onBlur={() => { if (set.reps && set.weight) handleSetChange(workout.id, i, 'isEditing', false); }}
+                          onBlur={() => {
+                            if (set.reps && set.weight) handleSetChange(workout.id, i, 'isEditing', false);
+                          }}
                           onChange={(e) => handleSetChange(workout.id, i, 'weight', e.target.value)}
                         />
                       </div>
                     ) : (
-                      <span className={styles.setText} onClick={() => handleSetChange(workout.id, i, 'isEditing', true)}>
+                      <span
+                        className={styles.setText}
+                        onClick={() => handleSetChange(workout.id, i, 'isEditing', true)}
+                      >
                         {set.reps && set.weight ? `${set.reps} х ${set.weight}` : 'Введите данные'}
                       </span>
                     )}
@@ -205,41 +259,43 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
               ))}
               <td>
                 <div className={styles.setControls}>
-                  <button className={styles.addSetButton} onClick={() => handleAddSet(workout.id)}>+</button>
+                  <button className={styles.addSetButton} onClick={() => handleAddSet(workout.id)}>
+                    +
+                  </button>
                   {workout.sets.length > 0 && (
                     <button className={styles.copySetButton} onClick={() => handleCopySet(workout.id)}>
                       <img src={copyIconWhite} alt="Copy" className={styles.copyIcon} />
                     </button>
                   )}
                   {workout.sets.length > 1 && (
-                    <button className={styles.deleteSetButton} onClick={() => handleDeleteSet(workout.id)}>-</button>
+                    <button className={styles.deleteSetButton} onClick={() => handleDeleteSet(workout.id)}>
+                      -
+                    </button>
                   )}
-                </div> 
+                </div>
               </td>
               <td className={styles.centeredCell}>
-                <div className={styles.dropdownContainer} ref={showDropdown === workout.id ? dropdownRef : null}>
-                  <button className={styles.moreButton} onClick={(e) => toggleDropdown(workout.id, e)}>
+                <div className={styles.dropdownContainer}>
+                  <button
+                    className={styles.moreButton}
+                    onClick={(e) => toggleDropdown(workout.id, e)}
+                    ref={showDropdown === workout.id ? buttonRef : null}
+                  >
                     <img src={settingIcon} alt="Settings" className={styles.settingIcon} />
                   </button>
-                  {showDropdown === workout.id && (
-                    <div className={styles.dropdownMenu}>
-                      <button className={styles.dropdownItem} onClick={() => handleCopyWorkout(workout.id)}>
-                        <span>Копировать</span>
-                        <img src={darkMode ? copyIconWhite : copyIconBlack} alt="Copy" className={styles.copyIcon} />
-                      </button>
-                      <button className={styles.dropdownItem} onClick={() => handleDeleteRow(workout.id)}>
-                        <span>Удалить</span>
-                        <img src={darkMode ? deleteIconWhite : deleteIconBlack} alt="Delete" className={styles.deleteIcon} />
-                      </button>
-                    </div>
-                  )}
+                  {showDropdown === workout.id && <DropdownMenu workoutId={workout.id} />}
                 </div>
               </td>
             </tr>
           ))}
           <tr>
-            <td colSpan={5 + Math.max(...workouts.map(w => w.sets?.length || 1), 1)} style={{ textAlign: 'center' }}>
-              <button className={styles.addExerciseButton} onClick={handleAddRow}>Добавить упражнение</button>
+            <td
+              colSpan={5 + Math.max(...workouts.map((w) => w.sets?.length || 1), 1)}
+              style={{ textAlign: 'center' }}
+            >
+              <button className={styles.addExerciseButton} onClick={handleAddRow}>
+                Добавить упражнение
+              </button>
             </td>
           </tr>
         </tbody>

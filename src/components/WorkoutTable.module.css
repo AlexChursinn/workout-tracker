@@ -1,4 +1,3 @@
-
 /* Общие стили для таблицы */
 .table {
   width: 100%;
@@ -36,28 +35,28 @@
 /* Десктопные стили (границы таблицы и ячеек) */
 @media (min-width: 769px) {
   .table {
-      border-collapse: collapse;
-      border: 1px solid var(--table-border-color) !important;
+    border-collapse: collapse;
+    border: 1px solid var(--table-border-color) !important;
   }
 
   .table table,
   .table th,
   .table td {
-      border: 1px solid var(--table-border-color) !important;
-      padding: 10px;
-      background-color: var(--table-bg-color);
+    border: 1px solid var(--table-border-color) !important;
+    padding: 10px;
+    background-color: var(--table-bg-color);
   }
 
   .table tr:first-child th,
   .table tr:first-child td {
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
   }
 
   .table tr:last-child th,
   .table tr:last-child td {
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
 }
 
@@ -133,10 +132,8 @@
   justify-content: center;
 }
 
+/* Стили для выпадающего меню */
 .dropdownMenu {
-  position: absolute;
-  right: 0;
-  top: 100%;
   background-color: var(--table-bg-color);
   border: 1px solid var(--table-border-color);
   border-radius: 4px;
@@ -188,7 +185,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 1.2rem;
-  transition: background-color 0.3s; /* Исправлено */
+  transition: background-color 0.3s;
 }
 
 .addSetButton {
@@ -291,221 +288,218 @@ select:focus {
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
   .workoutTableInput {
-      width: 100%;
-      margin: 2px 5px;
-      font-size: 0.85rem;
+    width: 100%;
+    margin: 2px 5px;
+    font-size: 0.85rem;
   }
 
   .repWeightContainer {
-      display: flex;
-      flex-direction: row;
-      gap: 5px;
-      justify-content: flex-start;
-      align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .table td {
-      padding: 4px;
-      font-size: 0.85rem;
-      text-align: left;
+    padding: 4px;
+    font-size: 0.85rem;
+    text-align: left;
   }
 
   .table,
   .table th,
   .table td {
-      border: none !important;
-      padding: 0px;
+    border: none !important;
+    padding: 0px;
   }
 
   .table {
-      background-color: transparent;
-      border-collapse: separate;
-      border: none !important;
+    background-color: transparent;
+    border-collapse: separate;
+    border: none !important;
   }
 
   .table thead {
-      display: none;
+    display: none;
   }
 
   .table tr {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
-      border-radius: 5px;
-      padding: 15px;
-      background-color: var(--table-bg-color);
-      border: 1px solid var(--table-border-color);
-      position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: var(--table-bg-color);
+    border: 1px solid var(--table-border-color);
+    position: relative;
   }
 
   .table td {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 6px;
-      text-align: left;
-      font-size: 0.85rem;
-      border-bottom: 1px solid var(--table-border-color) !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px;
+    text-align: left;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--table-border-color) !important;
   }
 
   .table td::before {
-      display: inline-block;
-      font-weight: bold;
-      color: var(--text-color);
-      margin-right: 10px;
-      position: static;
-      transform: none;
-      width: auto;
+    display: inline-block;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-right: 10px;
+    position: static;
+    transform: none;
+    width: auto;
   }
 
   .table td[data-label="Группа Мышц"]::before,
   .table td[data-label="Упражнение"]::before {
-      content: none;
+    content: none;
   }
 
   .table td:last-child {
-      border-bottom: none !important;
+    border-bottom: none !important;
   }
 
   .setControls {
-      flex-wrap: wrap;
-      gap: 5px;
+    flex-wrap: wrap;
+    gap: 5px;
   }
 
   .dropdownContainer {
-      justify-content: flex-end;
-      position: relative;
-      width: auto;
-      margin-left: auto;
+    justify-content: flex-end;
+    position: relative;
+    width: auto;
+    margin-left: auto;
   }
 
   .moreButton {
-      font-size: 1rem;
-      width: 40px;
-      height: 40px;
-      margin-left: auto;
+    font-size: 1rem;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
   }
 
   .dropdownMenu {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      width: 150px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
+    width: 150px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
   }
 
   .dropdownItem {
-      width: 100%;
-      padding: 10px;
+    width: 100%;
+    padding: 10px;
   }
 
   .addExerciseButton {
-      width: 100%;
+    width: 100%;
   }
 
   .tableContainer {
-      width: 100%;
-      border: none !important;
-      padding: 0;
-      margin: 0;
-      overflow: visible;
+    width: 100%;
+    border: none !important;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
   }
 
   select {
-      font-size: 0.85rem;
-      padding: 10px 5px;
-      -webkit-appearance: none;
-      appearance: none;
-      background-position: right 10px center;
-      padding-right: 30px;
+    font-size: 0.85rem;
+    padding: 10px 5px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-position: right 10px center;
+    padding-right: 30px;
   }
 
   .hideOnLargeScreens {
-      display: inline-flex;
+    display: flex;
   }
 
   .hideOnSmallScreens {
-      display: none;
+    display: none;
   }
 
   .setContainer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 
   .circle {
-      width: 28px;
-      height: 28px;
-      font-size: 0.8rem;
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
   }
 
   .numberCell {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .numberIcon {
-      display: block;
-      width: 20px;
-      height: 20px;
-      padding: 5px;
-      background-color: var(--button-bg-color);
-      color: var(--button-text-color);
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: background-color 0.3s;
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
   }
 
   .numberText {
-      font-size: 1rem;
-      color: var(--text-color);
+    font-size: 1rem;
+    color: var(--text-color);
   }
 }
 
 /* Дополнительная адаптация для экранов до 480px */
 @media (max-width: 480px) {
   .workoutTableInput {
-      width: 70px;
-      height: 40px;
-      font-size: 0.75rem;
+    width: 70px;
+    height: 40px;
+    font-size: 0.75rem;
   }
 
   .table td {
-      padding: 10px 4px;
-      font-size: 0.75rem;
+    padding: 10px 4px;
+    font-size: 0.75rem;
   }
 
   button {
-      padding: 5px 10px;
-      font-size: 0.8rem;
+    padding: 5px 10px;
+    font-size: 0.8rem;
   }
 
   .addSetButton,
   .deleteSetButton,
   .copySetButton {
-      width: 40px;
-      height: 40px;
-      font-size: 0.8rem;
+    width: 40px;
+    height: 40px;
+    font-size: 0.8rem;
   }
 
   select {
-      font-size: 0.75rem;
-      background-position: right 10px center;
-      padding-right: 30px;
+    font-size: 0.75rem;
+    background-position: right 10px center;
+    padding-right: 30px;
   }
 
   .dropdownMenu {
-      width: 130px;
+    width: 130px;
   }
 
   .dropdownItem {
-      font-size: 0.8rem;
-      padding: 8px;
+    font-size: 0.8rem;
+    padding: 8px;
   }
 }
