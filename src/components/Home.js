@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -33,7 +33,36 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
   const [workoutToCopy, setWorkoutToCopy] = useState(null);
   const [error, setError] = useState(null);
   const dateSelectorRef = useRef(null);
+  const dropdownRef = useRef(null); // ⬅️ для определения клика вне dropdown
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(null);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setShowDropdown(null);
+      }
+    };
+
+    const handleScroll = () => {
+      setShowDropdown(null);
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const formatDateToLocal = useCallback((date) => {
     const d = new Date(date);
@@ -198,7 +227,7 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
                     </div>
                   )}
                 </div>
-                <div className={styles.dropdownContainer}>
+                <div className={styles.dropdownContainer} ref={showDropdown === workoutKey ? dropdownRef : null}>
                   <button
                     className={styles.moreButton}
                     onClick={(e) => {

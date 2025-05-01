@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './WorkoutTable.module.css';
 import copyIconBlack from '../assets/copy-black.svg';
 import copyIconWhite from '../assets/copy-white.svg';
@@ -11,6 +10,7 @@ import settingIcon from '../assets/setting.svg';
 const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGroups, customMuscleGroups, darkMode }) => {
   const [workouts, setWorkouts] = useState(Array.isArray(workoutData) ? workoutData : []);
   const [showDropdown, setShowDropdown] = useState(null);
+  const dropdownRef = useRef(null);
 
   console.log('WorkoutTable darkMode:', darkMode);
 
@@ -30,6 +30,34 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
   useEffect(() => {
     setWorkouts(Array.isArray(workoutData) ? workoutData : []);
   }, [workoutData]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(null);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setShowDropdown(null);
+      }
+    };
+
+    const handleScroll = () => {
+      setShowDropdown(null);
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleWorkoutUpdate = async (updatedWorkouts) => {
     setWorkouts(updatedWorkouts);
@@ -91,7 +119,8 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
     setShowDropdown(null);
   };
 
-  const toggleDropdown = (workoutId) => {
+  const toggleDropdown = (workoutId, event) => {
+    event.stopPropagation();
     setShowDropdown((prev) => (prev === workoutId ? null : workoutId));
   };
 
@@ -188,8 +217,8 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
                 </div> 
               </td>
               <td className={styles.centeredCell}>
-                <div className={styles.dropdownContainer}>
-                  <button className={styles.moreButton} onClick={() => toggleDropdown(workout.id)}>
+                <div className={styles.dropdownContainer} ref={showDropdown === workout.id ? dropdownRef : null}>
+                  <button className={styles.moreButton} onClick={(e) => toggleDropdown(workout.id, e)}>
                     <img src={settingIcon} alt="Settings" className={styles.settingIcon} />
                   </button>
                   {showDropdown === workout.id && (
