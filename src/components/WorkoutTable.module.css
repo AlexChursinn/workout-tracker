@@ -1,52 +1,81 @@
+
 /* Общие стили для таблицы */
 .table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 16px;
   color: var(--text-color);
   overflow-x: auto;
   border-radius: 4px;
-  overflow: hidden; /* Добавлено для поддержки скругления углов */
+  overflow: hidden;
 }
 
-/* Скругление углов для ячеек в первом и последнем tr */
-tr:first-child th,
-tr:first-child td {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+/* Стили для контейнера таблицы */
+.tableContainer {
+  width: 100%; /* Полная ширина для соответствия таблице */
+  box-sizing: border-box; /* Учитываем padding и border в размерах */
 }
 
-tr:last-child th,
-tr:last-child td {
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+/* Граница вокруг таблицы на десктопе */
+@media (min-width: 769px) {
+  .tableContainer {
+    border: 1px solid var(--table-border-color); /* Граница вокруг таблицы */
+    border-radius: 4px; /* Скругленные углы */
+    overflow: hidden; /* Сохраняем скругление углов */
+  }
 }
 
-
-
-table,
-th,
-td {
-  border: 1px solid var(--table-border-color);
-  padding: 10px;
+/* Сброс стилей контейнера на мобильных, чтобы не влиять на адаптивность */
+@media (max-width: 768px) {
+  .tableContainer {
+    border: none !important; /* Убираем границу */
+    padding: 0; /* Убираем любые отступы */
+    margin: 0; /* Убираем любые внешние отступы */
+    overflow: visible; /* Сохраняем прокрутку таблицы */
+  }
 }
 
-th {
-  background-color: var(--table-bg-color);
+/* Десктопные стили (границы таблицы и ячеек) */
+@media (min-width: 769px) {
+  .table {
+      border-collapse: collapse;
+      border: 1px solid var(--table-border-color) !important;
+  }
+
+  .table table,
+  .table th,
+  .table td {
+      border: 1px solid var(--table-border-color) !important;
+      padding: 10px;
+      background-color: var(--table-bg-color);
+  }
+
+  .table tr:first-child th,
+  .table tr:first-child td {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+  }
+
+  .table tr:last-child th,
+  .table tr:last-child td {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+  }
+}
+
+.table th {
   font-weight: bold;
   text-align: center;
   color: var(--text-color);
   font-size: 0.95rem;
 }
 
-td {
+.table td {
   position: relative;
   text-align: center;
   font-size: 0.9rem;
   color: var(--text-color);
 }
 
-/* Уникальные стили для инпутов в WorkoutTable */
+/* Стили для инпутов в WorkoutTable */
 .workoutTableInput {
   text-align: center;
   width: 60px;
@@ -71,17 +100,6 @@ td {
   outline: none;
   border-color: var(--button-bg-color);
   box-shadow: 0 0 5px rgba(48, 15, 15, 0.3);
-}
-
-/* Общие стили для кнопок */
-button {
-  font-size: 1rem;
-  background-color: var(--button-bg-color);
-  color: var(--button-text-color);
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s;
 }
 
 /* Кнопка с иконкой настроек */
@@ -171,7 +189,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-size: 1.2rem;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s; /* Исправлено */
 }
 
 .addSetButton {
@@ -271,217 +289,224 @@ select:focus {
   display: none;
 }
 
-/* Адаптивность для WorkoutTable */
+/* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
   .workoutTableInput {
-    width: 100%;
-    margin: 2px 5px;
-    font-size: 0.85rem;
+      width: 100%;
+      margin: 2px 5px;
+      font-size: 0.85rem;
   }
 
   .repWeightContainer {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-    justify-content: flex-start;
-    align-items: center;
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+      justify-content: flex-start;
+      align-items: center;
   }
 
-  td {
-    padding: 4px;
-    font-size: 0.85rem;
-    text-align: left;
+  .table td {
+      padding: 4px;
+      font-size: 0.85rem;
+      text-align: left;
   }
 
-  table,
-  th,
-  td {
-    border: none;
-    padding: 0px;
+  .table,
+  .table th,
+  .table td {
+      border: none !important;
+      padding: 0px;
   }
 
   .table {
-    background-color: transparent;
-    overflow-x: auto;
-    border-collapse: separate;
+      background-color: transparent;
+      border-collapse: separate;
+      border: none !important;
   }
 
-  thead {
-    display: none;
+  .table thead {
+      display: none;
   }
 
-  tr {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    padding: 15px;
-    background-color: var(--table-bg-color);
-    border: 1px solid var(--table-border-color);
-    position: relative;
+  .table tr {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      padding: 15px;
+      background-color: var(--table-bg-color);
+      border: 1px solid var(--table-border-color);
+      position: relative;
   }
 
-  td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px;
-    text-align: left;
-    font-size: 0.85rem;
-    border: none;
-    border-bottom: 1px solid #ddd;
+  .table td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px;
+      text-align: left;
+      font-size: 0.85rem;
+      border-bottom: 1px solid #ddd !important; 
   }
 
-  td::before {
-    display: inline-block;
-    font-weight: bold;
-    color: var(--text-color);
-    margin-right: 10px;
-    position: static;
-    transform: none;
-    width: auto;
+  .table td::before {
+      display: inline-block;
+      font-weight: bold;
+      color: var(--text-color);
+      margin-right: 10px;
+      position: static;
+      transform: none;
+      width: auto;
   }
 
-  td[data-label="Группа Мышц"]::before,
-  td[data-label="Упражнение"]::before {
-    content: none;
+  .table td[data-label="Группа Мышц"]::before,
+  .table td[data-label="Упражнение"]::before {
+      content: none;
   }
 
-  td:last-child {
-    border-bottom: none;
+  .table td:last-child {
+      border-bottom: none !important;
   }
 
   .setControls {
-    flex-wrap: wrap;
-    gap: 5px;
+      flex-wrap: wrap;
+      gap: 5px;
   }
 
   .dropdownContainer {
-    justify-content: flex-end;
-    position: relative;
-    width: auto;
-    margin-left: auto;
+      justify-content: flex-end;
+      position: relative;
+      width: auto;
+      margin-left: auto;
   }
 
   .moreButton {
-    font-size: 1rem;
-    width: 40px;
-    height: 40px;
-    margin-left: auto;
+      font-size: 1rem;
+      width: 40px;
+      height: 40px;
+      margin-left: auto;
   }
 
   .dropdownMenu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    width: 150px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 150px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
   }
 
   .dropdownItem {
-    width: 100%;
-    padding: 10px;
+      width: 100%;
+      padding: 10px;
   }
 
   .addExerciseButton {
-    width: 100%;
+      width: 100%;
+  }
+
+  .tableContainer {
+      width: 100%;
+      border: none !important;
+      padding: 0;
+      margin: 0;
+      overflow: visible;
   }
 
   select {
-    font-size: 0.85rem;
-    padding: 10px 5px;
-    -webkit-appearance: none;
-    appearance: none;
-    background-position: right 10px center;
-    padding-right: 30px;
+      font-size: 0.85rem;
+      padding: 10px 5px;
+      -webkit-appearance: none;
+      appearance: none;
+      background-position: right 10px center;
+      padding-right: 30px;
   }
 
   .hideOnLargeScreens {
-    display: inline-flex;
+      display: inline-flex;
   }
 
   .hideOnSmallScreens {
-    display: none;
+      display: none;
   }
 
   .setContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
   }
 
   .circle {
-    width: 28px;
-    height: 28px;
-    font-size: 0.8rem;
+      width: 28px;
+      height: 28px;
+      font-size: 0.8rem;
   }
 
   .numberCell {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
   }
 
   .numberIcon {
-    display: block;
-    width: 20px;
-    height: 20px;
-    padding: 5px;
-    background-color: var(--button-bg-color);
-    color: var(--button-text-color);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: background-color 0.3s;
+      display: block;
+      width: 20px;
+      height: 20px;
+      padding: 5px;
+      background-color: var(--button-bg-color);
+      color: var(--button-text-color);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background-color 0.3s;
   }
 
   .numberText {
-    font-size: 1rem;
-    color: var(--text-color);
+      font-size: 1rem;
+      color: var(--text-color);
   }
 }
 
 /* Дополнительная адаптация для экранов до 480px */
 @media (max-width: 480px) {
   .workoutTableInput {
-    width: 70px;
-    height: 40px;
-    font-size: 0.75rem;
+      width: 70px;
+      height: 40px;
+      font-size: 0.75rem;
   }
 
-  td {
-    padding: 10px 4px;
-    font-size: 0.75rem;
+  .table td {
+      padding: 10px 4px;
+      font-size: 0.75rem;
   }
 
   button {
-    padding: 5px 10px;
-    font-size: 0.8rem;
+      padding: 5px 10px;
+      font-size: 0.8rem;
   }
 
   .addSetButton,
   .deleteSetButton,
   .copySetButton {
-    width: 40px;
-    height: 40px;
-    font-size: 0.8rem;
+      width: 40px;
+      height: 40px;
+      font-size: 0.8rem;
   }
 
   select {
-    font-size: 0.75rem;
-    background-position: right 10px center;
-    padding-right: 30px;
+      font-size: 0.75rem;
+      background-position: right 10px center;
+      padding-right: 30px;
   }
 
   .dropdownMenu {
-    width: 130px;
+      width: 130px;
   }
 
   .dropdownItem {
-    font-size: 0.8rem;
-    padding: 8px;
+      font-size: 0.8rem;
+      padding: 8px;
   }
 }

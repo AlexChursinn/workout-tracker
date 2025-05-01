@@ -360,9 +360,19 @@
             {
               "id": 1745734526531,
               "number": 1,
-              "muscleGroup": "Ноги",
-              "exercise": "Присед",
+              "muscleGroup": "Руки",
+              "exercise": "Подъем гантелей на скамье 45",
               "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "isEditing": false
+                },
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "isEditing": false
+                },
                 {
                   "reps": "11",
                   "weight": "11",
@@ -371,7 +381,7 @@
               ]
             },
             {
-              "id": 1745736567841,
+              "id": 1746080028314,
               "number": 2,
               "muscleGroup": "",
               "exercise": "",
