@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import styles from './Exercises.module.css';
 import arrowDownIcon from '../assets/arrowDown.svg';
 import arrowUpIcon from '../assets/arrowUp.svg';
 import deleteIcon from '../assets/delete.svg';
+import closeIconBlack from '../assets/close-black.svg';
+import closeIconWhite from '../assets/close-white.svg';
 import Spinner from './Spinner';
 
 const Exercises = ({ darkMode, defaultMuscleGroups, customMuscleGroups, onMuscleGroupsChange, loading }) => {
@@ -17,6 +19,7 @@ const Exercises = ({ darkMode, defaultMuscleGroups, customMuscleGroups, onMuscle
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
   const [isMessageVisible, setIsMessageVisible] = useState(false);
+  const modalRef = useRef(null);
 
   useEffect(() => {
     setMuscleGroups(customMuscleGroups);
@@ -32,6 +35,32 @@ const Exercises = ({ darkMode, defaultMuscleGroups, customMuscleGroups, onMuscle
       return () => clearTimeout(timer);
     }
   }, [message]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setIsModalOpen(false);
+        setErrors({});
+        setMessage('');
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setIsModalOpen(false);
+        setErrors({});
+        setMessage('');
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, []);
 
   const allMuscleGroups = Object.keys({ ...defaultMuscleGroups, ...muscleGroups }).reduce((acc, group) => {
     const defaultExercises = defaultMuscleGroups[group] || [];
@@ -233,8 +262,22 @@ const Exercises = ({ darkMode, defaultMuscleGroups, customMuscleGroups, onMuscle
       </div>
       {isModalOpen && (
         <div className={styles.modalOverlay}>
-          <div className={styles.modalContent}>
-            <h2 className={darkMode ? styles.modalTitleDark : styles.modalTitleLight}>Добавить группу или упражнение</h2>
+          <div className={styles.modalContent} ref={modalRef}>
+            <button
+              className={styles.closeButton}
+              onClick={() => {
+                setIsModalOpen(false);
+                setErrors({});
+                setMessage('');
+              }}
+            >
+              <img
+                src={darkMode ? closeIconWhite : closeIconBlack}
+                alt="Закрыть"
+                className={styles.closeIcon}
+              />
+            </button>
+            <h2 className={styles.modalTitle}>Добавить группу или упражнение</h2>
             <select
               value={selectedGroup}
               onChange={(e) => handleInputChange('selectedGroup', e.target.value)}
@@ -268,9 +311,6 @@ const Exercises = ({ darkMode, defaultMuscleGroups, customMuscleGroups, onMuscle
               </button>
               <button className={darkMode ? styles.addButtonDark : styles.addButtonLight} onClick={handleAddExercise}>
                 Добавить упражнение
-              </button>
-              <button className={darkMode ? styles.closeModalButtonDark : styles.closeModalButtonLight} onClick={() => setIsModalOpen(false)}>
-                Закрыть
               </button>
             </div>
             {message && (

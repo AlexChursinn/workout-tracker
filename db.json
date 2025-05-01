@@ -306,6 +306,19 @@
                   "isEditing": false
                 }
               ]
+            },
+            {
+              "id": 1746102965729,
+              "number": 2,
+              "muscleGroup": "Ноги",
+              "exercise": "Присед",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "isEditing": false
+                }
+              ]
             }
           ]
         }

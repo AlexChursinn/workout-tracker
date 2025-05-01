@@ -176,7 +176,7 @@
 /* Кнопка добавления */
 .modalButtonContainer {
   position: fixed;
-  bottom: 70px; /* По умолчанию для мобильных - выше footer (60px) */
+  bottom: 70px;
   right: 20px;
   z-index: 2000;
   display: flex;
@@ -234,15 +234,36 @@
   transform: translate(-50%, -50%);
   max-height: 80vh;
   overflow-y: auto;
-  z-index: 9999999999;
+  z-index: 1600;
 }
 
-.modalTitleLight,
-.modalTitleDark {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0 0 15px;
+/* Кнопка закрытия модального окна */
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Заголовок модального окна */
+.modalTitle {
+  margin: 0 auto 20px;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  max-width: calc(100% - 50px);
   text-align: center;
+  font-weight: 600;
 }
 
 /* Поля ввода */
@@ -341,10 +362,8 @@
 }
 
 .addButtonLight,
-.addButtonDark,
-.closeModalButtonLight,
-.closeModalButtonDark {
-  padding: 10px;
+.addButtonDark {
+  padding: 8px;
   background-color: var(--button-bg-color);
   color: var(--button-text-color);
   border: none;
@@ -352,20 +371,11 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-size: 1rem;
+  margin: 10px 0px;
 }
 
 .addButtonLight:hover,
 .addButtonDark:hover {
-  background-color: #4d4d4d;
-}
-
-.closeModalButtonLight,
-.closeModalButtonDark {
-  background-color: var(--secondary-button-bg);
-}
-
-.closeModalButtonLight:hover,
-.closeModalButtonDark:hover {
   background-color: #4d4d4d;
 }
 
@@ -420,6 +430,30 @@ body[data-theme="dark"] {
 
   .modalContent {
     max-width: 90%;
+    padding: 15px;
+  }
+
+  .modalTitle {
+    font-size: 1.25rem;
+    max-width: calc(100% - 40px);
+  }
+
+  .input,
+  .input select {
+    font-size: 0.9rem;
+    padding: 8px;
+    margin: 5px 0;
+  }
+
+  .addButtonLight,
+  .addButtonDark {
+    font-size: 0.9rem;
+    padding: 6px;
+  }
+
+  .closeIcon {
+    width: 16px;
+    height: 16px;
   }
 
   .modalButtonContainer {
@@ -438,11 +472,42 @@ body[data-theme="dark"] {
     font-size: 0.8rem;
   }
 
+  .modalTitle {
+    font-size: 1rem;
+    max-width: calc(100% - 35px);
+  }
+
+  .input,
+  .input select {
+    font-size: 0.8rem;
+    padding: 7px;
+    margin: 4px 0;
+  }
+
+  .addButtonLight,
+  .addButtonDark {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+
+  .errorText {
+    font-size: 0.7rem;
+  }
+
+  .message {
+    font-size: 0.8rem;
+  }
+
   .openModalButtonLight,
   .openModalButtonDark {
     width: 36px;
     height: 36px;
     font-size: 1.2rem;
+  }
+
+  .closeIcon {
+    width: 14px;
+    height: 14px;
   }
 
   .modalButtonContainer {
@@ -466,7 +531,7 @@ body[data-theme="dark"] {
 /* Десктопное отображение (ширина больше 768px) */
 @media (min-width: 769px) {
   .modalButtonContainer {
-    right: calc(50% - 300px - 60px); /* Смещаем кнопку левее центра workoutBlock */
-    bottom: 80px; /* Устанавливаем выше footer (60px + отступ 20px) */
+    right: calc(50% - 300px - 60px);
+    bottom: 80px;
   }
 }
