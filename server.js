@@ -122,7 +122,7 @@ app.post('/api/login', async (req, res) => {
     res.json({ token });
   } catch (error) {
     console.error('Ошибка авторизации пользователя:', error);
-    res.status(500).json({ message: 'Ошибка сервера' });
+    res.status(500).json({ message: 'Ошибка сервиса' });
   }
 });
 
@@ -138,7 +138,7 @@ app.get('/api/user-workouts', authenticateToken, (req, res) => {
 });
 
 app.post('/api/user-workouts', authenticateToken, (req, res) => {
-  const { workout_date, workoutId, exercises, title } = req.body;
+  const { workout_date, workoutId, exercises, title, bodyWeight } = req.body;
 
   if (!workout_date || !workoutId || !Array.isArray(exercises)) {
     return res.status(400).json({ message: 'Некорректные данные тренировки' });
@@ -162,6 +162,7 @@ app.post('/api/user-workouts', authenticateToken, (req, res) => {
     workout_date,
     title: title || '',
     exercises,
+    bodyWeight: bodyWeight || null,
   };
 
   if (existingWorkoutIndex !== -1) {
@@ -257,6 +258,7 @@ app.post('/api/user-workouts/copy', authenticateToken, (req, res) => {
     workout_date: target_workout_date,
     title: sourceWorkout.title || '',
     exercises: sourceWorkout.exercises.map((exercise) => ({ ...exercise })),
+    bodyWeight: sourceWorkout.bodyWeight || null,
   };
 
   user.workouts.push(newWorkout);

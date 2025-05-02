@@ -19,6 +19,7 @@
     border: 1px solid var(--table-border-color); /* Граница вокруг таблицы */
     border-radius: 4px; /* Скругленные углы */
     overflow: hidden; /* Сохраняем скругление углов */
+    margin-bottom: 20px;
   }
 }
 

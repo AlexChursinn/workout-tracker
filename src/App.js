@@ -20,7 +20,7 @@ const defaultMuscleGroups = {
   "Спина": ["Тяга верхнего блока", "Тяга одной рукой в тренажере", "Тяга горизонтального блока", "Тяга одной рукой в наклоне", "Тяга гантели одной рукой в наклоне", "Тяга штанги в наклоне", "Становая тяга", "Подтягивания", "Вис на турнике"],
   "Ноги": ["Присед", "Разгибание ног", "Задняя поверхность бедра (стоя одной ногой в тренажере)", "Задняя поверхность бедра (Двумя ногами)", "Выпады с гантелями", "Жим ногами в тренажере"],
   "Руки": ["Подъем гантелей на скамье 45", "Изогнутый гриф на скамье Скотта", "Скамья Скотта тренажер", "Молотки сидя на скамье", "Молотки стоя", "Подъем прямого грифа стоя", "Подъем изогнутого грифа"],
-  "Плечи": ["Жим штанги сидя на скамье", "Жим гантелей сидя на скамье", "Подъем гантелей перед собой сидя на скамье на плечи", "Подъем гантелей в стороны стоя Махи", "Задняя дельта сидя на скамье", "Тяга к подбородку", "Подъем гантелей на трапецию стоя"],
+  "Плечи": ["Жим штанги сидя на скамье", "Жим гантелей сидя на скамье", "Подъем гантелей перед собой сидя на скамье на плечи", "Подъем гантелей в стороны стоя Shorts", "Задняя дельта сидя на скамье", "Тяга к подбородку", "Подъем гантелей на трапецию стоя"],
   "Прочее": ["Гиперэкстензия", "Растяжка 30 сек", "Растяжка 1 минута", "Пресс (турник)", "Пресс (брусья)", "Икры со штангой в двух вариациях", "Икры в тренажере", "Икры со штангой", "Икры стоя"]
 };
 
@@ -103,7 +103,7 @@ const App = () => {
     };
 
     initializeAuth();
-  }, []); // Пустой массив зависимостей
+  }, []);
 
   useEffect(() => {
     if (darkMode) document.body.classList.add('dark-theme');
@@ -157,6 +157,7 @@ const App = () => {
           workoutId: workout.workoutId,
           title: workout.title || '',
           exercises: workout.exercises || [],
+          bodyWeight: workout.bodyWeight || null,
         });
         return acc;
       }, {});
@@ -194,7 +195,7 @@ const App = () => {
     fetchData(token);
   };
 
-  const handleWorkoutChange = async (dataForDate, workoutId) => {
+  const handleWorkoutChange = async (dataForDate, workoutId, bodyWeight) => {
     try {
       const workoutDate = formatDateToLocal(selectedDate);
       const currentWorkouts = workoutData[selectedDate.toDateString()] || [];
@@ -207,6 +208,7 @@ const App = () => {
           ...workout,
           number: workout.number || index + 1,
         })),
+        bodyWeight: bodyWeight || null,
       };
       setWorkoutData((prevData) => ({
         ...prevData,
@@ -231,6 +233,7 @@ const App = () => {
         workoutId,
         title: newTitle,
         exercises: currentWorkout.exercises || [],
+        bodyWeight: currentWorkout.bodyWeight || null,
       };
       setWorkoutData((prevData) => ({
         ...prevData,
@@ -306,6 +309,7 @@ const App = () => {
                     darkMode={darkMode}
                     defaultMuscleGroups={defaultMuscleGroups}
                     customMuscleGroups={customMuscleGroups}
+                    authToken={authToken}
                   />
                 </ProtectedRoute>
               }
