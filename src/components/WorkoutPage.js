@@ -95,7 +95,7 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
         <h3 className={styles.bodyWeightTitle}>Вес тела</h3>
         <div className={styles.bodyWeightContainer}>
           <img
-            src={darkMode ? weightIconLight : weightIconDark}
+            src={darkMode ? weightIconLight : weightIconLight}
             alt="Weight Icon"
             className={styles.weightIcon}
           />

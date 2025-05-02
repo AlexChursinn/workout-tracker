@@ -594,7 +594,7 @@
               ]
             }
           ],
-          "bodyWeight": "111"
+          "bodyWeight": null
         }
       ],
       "customMuscleGroups": {

@@ -180,6 +180,14 @@
   box-shadow: 0 0 5px #4d4d4d;
 }
 
+.weightIcon {
+  width: 20px;
+  height: 20px;
+  padding: 10px;
+  background-color: var(--button-bg-color);
+  border-radius: 4px;
+}
+
 @media (max-width: 768px) {
   .dateTitle {
     font-size: 1.25rem;
@@ -242,10 +250,5 @@ width: 100%;
   .bodyWeightInput {
     font-size: 1rem;
     max-width: 200px;
-  }
-
-  .weightIcon {
-    width: 18px;
-    height: 18px;
   }
 }
