@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import WorkoutTable from './WorkoutTable';
 import Spinner from './Spinner';
@@ -11,6 +11,9 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
   const [workoutTitle, setWorkoutTitle] = useState('');
   const [bodyWeight, setBodyWeight] = useState('');
   const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [inputWidth, setInputWidth] = useState(null);
+  const inputRef = useRef(null);
+  const textMeasureRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +32,13 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
     setBodyWeight(currentWorkout.bodyWeight || '');
   }, [selectedDate, workoutData, workoutId]);
 
+  useEffect(() => {
+    if (textMeasureRef.current && inputRef.current) {
+      const textWidth = textMeasureRef.current.offsetWidth;
+      setInputWidth(textWidth + 20); // Add padding for comfort
+    }
+  }, [bodyWeight]);
+
   const handleTitleSave = () => {
     onTitleChange(workoutTitle, parseInt(workoutId));
     setIsEditingTitle(false);
@@ -36,7 +46,8 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
 
   const handleBodyWeightChange = (e) => {
     const value = e.target.value;
-    if (value.length <= 3 && /^\d*\.?\d*$/.test(value)) {
+    // Allow empty input, integers, or numbers with up to 2 decimal places, whole number <= 999
+    if (value === '' || (/^\d{0,3}(\.\d{0,2})?$/.test(value) && parseInt(value.split('.')[0] || 0) <= 999)) {
       setBodyWeight(value);
       const workoutsForDate = workoutData[selectedDate.toDateString()] || [];
       const currentWorkout = workoutsForDate.find((w) => w.workoutId === parseInt(workoutId)) || {};
@@ -95,21 +106,28 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
         <h3 className={styles.bodyWeightTitle}>Вес тела</h3>
         <div className={styles.bodyWeightContainer}>
           <img
-            src={darkMode ? weightIconLight : weightIconLight}
+            src={darkMode ? weightIconLight : weightIconDark}
             alt="Weight Icon"
             className={styles.weightIcon}
           />
-          <input
-            type="number"
-            id="bodyWeight"
-            value={bodyWeight}
-            onChange={handleBodyWeightChange}
-            placeholder="Введите ваш вес (кг)"
-            className={styles.bodyWeightInput}
-            min="0"
-            step="0.1"
-            maxLength="3"
-          />
+          <div className={styles.inputWrapper}>
+            <input
+              type="number"
+              id="bodyWeight"
+              value={bodyWeight}
+              onChange={handleBodyWeightChange}
+              placeholder="Введите ваш вес (кг)"
+              className={styles.bodyWeightInput}
+              min="0"
+              step="0.01"
+              ref={inputRef}
+              style={{ width: inputWidth ? `${inputWidth}px` : 'auto' }}
+            />
+            <span className={styles.hiddenText} ref={textMeasureRef}>
+              {bodyWeight || 'Введите ваш вес (кг)'}
+            </span>
+          </div>
+          {bodyWeight && <span className={styles.weightUnit}>кг</span>}
         </div>
       </div>
     </div>
@@ -117,3 +135,4 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
 };
 
 export default WorkoutPage;
+

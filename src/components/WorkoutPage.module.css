@@ -147,23 +147,28 @@
 .bodyWeightContainer {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
 }
 
 .weightIcon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+  padding: 10px;
+  background-color: var(--button-bg-color);
+  border-radius: 4px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: inline-block;
 }
 
 .bodyWeightInput {
   font-size: 1.5rem;
-  width: 100%;
-  max-width: 300px;
   border: 1px solid var(--border-color);
   border-radius: 4px;
   background-color: var(--background-color);
   color: var(--text-color);
-  padding: 5px;
   -moz-appearance: textfield;
 }
 
@@ -180,12 +185,17 @@
   box-shadow: 0 0 5px #4d4d4d;
 }
 
-.weightIcon {
-  width: 20px;
-  height: 20px;
-  padding: 10px;
-  background-color: var(--button-bg-color);
-  border-radius: 4px;
+.hiddenText {
+  position: absolute;
+  visibility: hidden;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  white-space: nowrap;
+}
+
+.weightUnit {
+  font-size: 1.5rem;
+  color: var(--text-color);
 }
 
 @media (max-width: 768px) {
@@ -228,27 +238,44 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
   }
 
   .weightIcon {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
+    padding: 8px;
   }
 
   .bodyWeightInput {
     font-size: 1.25rem;
-    max-width: 250px;
+  }
+
+  .hiddenText {
+    font-size: 1.25rem;
+    padding: 5px 10px;
+  }
+
+  .weightUnit {
+    font-size: 1.25rem;
   }
 
   .addWorkoutButton {
-width: 100%;
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
   .bodyWeightInput {
     font-size: 1rem;
-    max-width: 200px;
+  }
+
+  .hiddenText {
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
+
+  .weightUnit {
+    font-size: 1rem;
   }
 }
