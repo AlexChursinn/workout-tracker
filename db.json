@@ -592,6 +592,45 @@
                   "isEditing": false
                 }
               ]
+            },
+            {
+              "id": 1746252362938,
+              "number": 3,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 1746252366255,
+              "number": 4,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 1746252695662,
+              "number": 5,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "isEditing": true
+                }
+              ]
             }
           ],
           "bodyWeight": null

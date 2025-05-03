@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom'; // Импортируем createPortal
 import styles from './WorkoutTable.module.css';
 import copyIconBlack from '../assets/copy-black.svg';
 import copyIconWhite from '../assets/copy-white.svg';
@@ -12,7 +11,7 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
   const [workouts, setWorkouts] = useState(Array.isArray(workoutData) ? workoutData : []);
   const [showDropdown, setShowDropdown] = useState(null);
   const dropdownRef = useRef(null);
-  const buttonRef = useRef(null); // Для хранения позиции кнопки
+  const buttonRef = useRef(null);
 
   const allMuscleGroups = {};
   Object.keys(defaultMuscleGroups).forEach((group) => {
@@ -137,35 +136,8 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
 
   const toggleDropdown = (workoutId, event) => {
     event.stopPropagation();
-    buttonRef.current = event.currentTarget; // Сохраняем кнопку
+    buttonRef.current = event.currentTarget;
     setShowDropdown((prev) => (prev === workoutId ? null : workoutId));
-  };
-
-  // Компонент для рендеринга выпадающего меню через портал
-  const DropdownMenu = ({ workoutId }) => {
-    if (!buttonRef.current) return null;
-
-    const rect = buttonRef.current.getBoundingClientRect();
-    const style = {
-      position: 'fixed',
-      top: `${rect.bottom + window.scrollY}px`,
-      left: `${rect.right - 150 + window.scrollX}px`, // 150 — ширина меню
-      zIndex: 1000,
-    };
-
-    return createPortal(
-      <div className={styles.dropdownMenu} style={style} ref={dropdownRef}>
-        <button className={styles.dropdownItem} onClick={() => handleCopyWorkout(workoutId)}>
-          <span>Копировать</span>
-          <img src={darkMode ? copyIconWhite : copyIconBlack} alt="Copy" className={styles.copyIcon} />
-        </button>
-        <button className={styles.dropdownItem} onClick={() => handleDeleteRow(workoutId)}>
-          <span>Удалить</span>
-          <img src={darkMode ? deleteIconWhite : deleteIconBlack} alt="Delete" className={styles.deleteIcon} />
-        </button>
-      </div>,
-      document.body
-    );
   };
 
   return (
@@ -283,7 +255,18 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
                   >
                     <img src={settingIcon} alt="Settings" className={styles.settingIcon} />
                   </button>
-                  {showDropdown === workout.id && <DropdownMenu workoutId={workout.id} />}
+                  {showDropdown === workout.id && (
+                    <div className={styles.dropdownMenu} ref={dropdownRef}>
+                      <button className={styles.dropdownItem} onClick={() => handleCopyWorkout(workout.id)}>
+                        <span>Копировать</span>
+                        <img src={darkMode ? copyIconWhite : copyIconBlack} alt="Copy" className={styles.copyIcon} />
+                      </button>
+                      <button className={styles.dropdownItem} onClick={() => handleDeleteRow(workout.id)}>
+                        <span>Удалить</span>
+                        <img src={darkMode ? deleteIconWhite : deleteIconBlack} alt="Delete" className={styles.deleteIcon} />
+                      </button>
+                    </div>
+                  )}
                 </div>
               </td>
             </tr>

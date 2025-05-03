@@ -9,31 +9,31 @@
 
 /* Стили для контейнера таблицы */
 .tableContainer {
-  width: 100%; /* Полная ширина для соответствия таблице */
-  box-sizing: border-box; /* Учитываем padding и border в размерах */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Граница вокруг таблицы на десктопе */
 @media (min-width: 769px) {
   .tableContainer {
-    border: 1px solid var(--table-border-color); /* Граница вокруг таблицы */
-    border-radius: 4px; /* Скругленные углы */
-    overflow: hidden; /* Сохраняем скругление углов */
+    border: 1px solid var(--table-border-color);
+    border-radius: 4px;
+    overflow: hidden;
     margin-bottom: 20px;
   }
 }
 
-/* Сброс стилей контейнера на мобильных, чтобы не влиять на адаптивность */
+/* Сброс стилей контейнера на мобильных */
 @media (max-width: 768px) {
   .tableContainer {
-    border: none !important; /* Убираем границу */
-    padding: 0; /* Убираем любые отступы */
-    margin: 0; /* Убираем любые внешние отступы */
-    overflow: visible; /* Сохраняем прокрутку таблицы */
+    border: none !important;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
   }
 }
 
-/* Десктопные стили (границы таблицы и ячеек) */
+/* Десктопные стили */
 @media (min-width: 769px) {
   .table {
     border-collapse: collapse;
@@ -75,7 +75,7 @@
   color: var(--text-color);
 }
 
-/* Стили для инпутов в WorkoutTable */
+/* Стили для инпутов */
 .workoutTableInput {
   text-align: center;
   width: 60px;
@@ -135,6 +135,9 @@
 
 /* Стили для выпадающего меню */
 .dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
   background-color: var(--table-bg-color);
   border: 1px solid var(--table-border-color);
   border-radius: 4px;
@@ -385,6 +388,9 @@ select:focus {
   }
 
   .dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
     width: 150px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
