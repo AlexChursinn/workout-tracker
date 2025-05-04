@@ -1,8 +1,9 @@
-
 .container {
   background-color: var(--background-color);
   color: var(--text-color);
   padding: 0px 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .dateTitle {
@@ -111,7 +112,6 @@
   border-radius: 8px;
   padding: 20px;
   margin: 0px 0px 20px 0px;
-  cursor: pointer;
   transition: background-color 0.3s;
   width: 100%;
   margin-left: auto;
@@ -170,6 +170,7 @@
   background-color: var(--background-color);
   color: var(--text-color);
   -moz-appearance: textfield;
+  padding: 5px 10px;
 }
 
 .bodyWeightInput::-webkit-inner-spin-button,
@@ -185,6 +186,63 @@
   box-shadow: 0 0 5px #4d4d4d;
 }
 
+.bodyWeightInput::placeholder {
+  color: #4d4d4d !important;
+}
+
+.notesContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  width: 100%;
+}
+
+.noteIcon {
+  width: 20px;
+  height: 20px;
+  padding: 10px;
+  background-color: var(--button-bg-color);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.notesInputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.notesInput {
+  font-size: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 4px 10px;
+  resize: none;
+  min-height: 32px;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 1.2;
+}
+
+.notesInput::placeholder {
+  color: #4d4d4d !important;
+  line-height: 1.2;
+  vertical-align: middle;
+  padding-top: 1px;
+}
+
+.notesInput:focus {
+  outline: none;
+  border-color: var(--button-bg-color);
+  background-color: var(--bg-color);
+  box-shadow: 0 0 5px #4d4d4d;
+}
+
+.notesInput.error {
+  border-color: #ff4d4d;
+}
+
 .hiddenText {
   position: absolute;
   visibility: hidden;
@@ -198,7 +256,18 @@
   color: var(--text-color);
 }
 
+.errorMessage {
+  font-size: 1rem;
+  color: #ff4d4d;
+  margin-top: 5px;
+  display: block;
+}
+
 @media (max-width: 768px) {
+  .container {
+    padding: 0px 16px;
+  }
+
   .dateTitle {
     font-size: 1.25rem;
   }
@@ -249,15 +318,48 @@
 
   .bodyWeightInput {
     font-size: 1.25rem;
+    padding: 4px 8px;
+  }
+
+  .bodyWeightInput::placeholder {
+    color: #4d4d4d !important;
+  }
+
+  .notesContainer {
+    gap: 5px;
+  }
+
+  .noteIcon {
+    width: 18px;
+    height: 18px;
+    padding: 8px;
+  }
+
+  .notesInput {
+    font-size: 1.25rem;
+    min-height: 80px;
+    padding: 8px;
+    line-height: 1.5;
+  }
+
+  .notesInput::placeholder {
+    color: #4d4d4d !important;
+    line-height: 1.5;
+    vertical-align: middle;
+    padding-top: 1px;
   }
 
   .hiddenText {
     font-size: 1.25rem;
-    padding: 5px 10px;
+    padding: 4px 8px;
   }
 
   .weightUnit {
     font-size: 1.25rem;
+  }
+
+  .errorMessage {
+    font-size: 0.9rem;
   }
 
   .addWorkoutButton {
@@ -266,16 +368,43 @@
 }
 
 @media (max-width: 480px) {
+  .container {
+    padding: 0px 12px;
+  }
+
   .bodyWeightInput {
     font-size: 1rem;
+    padding: 3px 6px;
+  }
+
+  .bodyWeightInput::placeholder {
+    color: #6c757d;
+  }
+
+  .notesInput {
+    font-size: 1rem;
+    min-height: 60px;
+    padding: 6px;
+    line-height: 1.5;
+  }
+
+  .notesInput::placeholder {
+    color: #4d4d4d !important;
+    line-height: 1.5;
+    vertical-align: middle;
+    padding-top: 0px;
   }
 
   .hiddenText {
     font-size: 1rem;
-    padding: 5px 10px;
+    padding: 3px 6px;
   }
 
   .weightUnit {
     font-size: 1rem;
+  }
+
+  .errorMessage {
+    font-size: 0.8rem;
   }
 }

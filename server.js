@@ -138,7 +138,7 @@ app.get('/api/user-workouts', authenticateToken, (req, res) => {
 });
 
 app.post('/api/user-workouts', authenticateToken, (req, res) => {
-  const { workout_date, workoutId, exercises, title, bodyWeight } = req.body;
+  const { workout_date, workoutId, exercises, title, bodyWeight, notes } = req.body;
 
   if (!workout_date || !workoutId || !Array.isArray(exercises)) {
     return res.status(400).json({ message: 'Некорректные данные тренировки' });
@@ -163,6 +163,7 @@ app.post('/api/user-workouts', authenticateToken, (req, res) => {
     title: title || '',
     exercises,
     bodyWeight: bodyWeight || null,
+    notes: notes || '',
   };
 
   if (existingWorkoutIndex !== -1) {
@@ -259,6 +260,7 @@ app.post('/api/user-workouts/copy', authenticateToken, (req, res) => {
     title: sourceWorkout.title || '',
     exercises: sourceWorkout.exercises.map((exercise) => ({ ...exercise })),
     bodyWeight: sourceWorkout.bodyWeight || null,
+    notes: sourceWorkout.notes || '',
   };
 
   user.workouts.push(newWorkout);

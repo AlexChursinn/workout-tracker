@@ -158,6 +158,7 @@ const App = () => {
           title: workout.title || '',
           exercises: workout.exercises || [],
           bodyWeight: workout.bodyWeight || null,
+          notes: workout.notes || '',
         });
         return acc;
       }, {});
@@ -195,7 +196,7 @@ const App = () => {
     fetchData(token);
   };
 
-  const handleWorkoutChange = async (dataForDate, workoutId, bodyWeight) => {
+  const handleWorkoutChange = async (dataForDate, workoutId, bodyWeight, notes) => {
     try {
       const workoutDate = formatDateToLocal(selectedDate);
       const currentWorkouts = workoutData[selectedDate.toDateString()] || [];
@@ -209,6 +210,7 @@ const App = () => {
           number: workout.number || index + 1,
         })),
         bodyWeight: bodyWeight || null,
+        notes: notes || '',
       };
       setWorkoutData((prevData) => ({
         ...prevData,
@@ -234,6 +236,7 @@ const App = () => {
         title: newTitle,
         exercises: currentWorkout.exercises || [],
         bodyWeight: currentWorkout.bodyWeight || null,
+        notes: currentWorkout.notes || '',
       };
       setWorkoutData((prevData) => ({
         ...prevData,

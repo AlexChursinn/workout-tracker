@@ -3,13 +3,15 @@ import { useParams, useNavigate } from 'react-router-dom';
 import WorkoutTable from './WorkoutTable';
 import Spinner from './Spinner';
 import weightIconLight from '../assets/weight-icon-light.svg';
-import weightIconDark from '../assets/weight-icon-dark.svg';
+import noteIconLight from '../assets/note-icon-light.svg';
 import styles from './WorkoutPage.module.css';
 
 const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange, onTitleChange, loading, darkMode, defaultMuscleGroups, customMuscleGroups, authToken }) => {
   const { date, workoutId } = useParams();
   const [workoutTitle, setWorkoutTitle] = useState('');
   const [bodyWeight, setBodyWeight] = useState('');
+  const [notes, setNotes] = useState('');
+  const [notesError, setNotesError] = useState('');
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [inputWidth, setInputWidth] = useState(null);
   const inputRef = useRef(null);
@@ -30,12 +32,13 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
     const currentWorkout = workoutsForDate.find((w) => w.workoutId === parseInt(workoutId)) || {};
     setWorkoutTitle(currentWorkout.title || '');
     setBodyWeight(currentWorkout.bodyWeight || '');
+    setNotes(currentWorkout.notes || '');
   }, [selectedDate, workoutData, workoutId]);
 
   useEffect(() => {
     if (textMeasureRef.current && inputRef.current) {
       const textWidth = textMeasureRef.current.offsetWidth;
-      setInputWidth(textWidth + 20); // Add padding for comfort
+      setInputWidth(textWidth + 20);
     }
   }, [bodyWeight]);
 
@@ -46,12 +49,24 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
 
   const handleBodyWeightChange = (e) => {
     const value = e.target.value;
-    // Allow empty input, integers, or numbers with up to 2 decimal places, whole number <= 999
     if (value === '' || (/^\d{0,3}(\.\d{0,2})?$/.test(value) && parseInt(value.split('.')[0] || 0) <= 999)) {
       setBodyWeight(value);
       const workoutsForDate = workoutData[selectedDate.toDateString()] || [];
       const currentWorkout = workoutsForDate.find((w) => w.workoutId === parseInt(workoutId)) || {};
-      onWorkoutChange(currentWorkout.exercises || [], parseInt(workoutId), value);
+      onWorkoutChange(currentWorkout.exercises || [], parseInt(workoutId), value, currentWorkout.notes || '');
+    }
+  };
+
+  const handleNotesChange = (e) => {
+    const value = e.target.value;
+    if (value.length <= 500) {
+      setNotes(value);
+      setNotesError('');
+      const workoutsForDate = workoutData[selectedDate.toDateString()] || [];
+      const currentWorkout = workoutsForDate.find((w) => w.workoutId === parseInt(workoutId)) || {};
+      onWorkoutChange(currentWorkout.exercises || [], parseInt(workoutId), currentWorkout.bodyWeight || '', value);
+    } else {
+      setNotesError('Максимальная длина заметки — 500 символов');
     }
   };
 
@@ -92,7 +107,7 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
       <WorkoutTable
         date={selectedDate}
         workoutData={currentWorkout.exercises || []}
-        onWorkoutChange={(data) => onWorkoutChange(data, parseInt(workoutId), bodyWeight)}
+        onWorkoutChange={(data) => onWorkoutChange(data, parseInt(workoutId), bodyWeight, notes)}
         defaultMuscleGroups={defaultMuscleGroups}
         customMuscleGroups={customMuscleGroups}
         darkMode={darkMode}
@@ -106,7 +121,7 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
         <h3 className={styles.bodyWeightTitle}>Вес тела</h3>
         <div className={styles.bodyWeightContainer}>
           <img
-            src={darkMode ? weightIconLight : weightIconDark}
+            src={weightIconLight}
             alt="Weight Icon"
             className={styles.weightIcon}
           />
@@ -130,9 +145,28 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
           {bodyWeight && <span className={styles.weightUnit}>кг</span>}
         </div>
       </div>
+      <div className={styles.workoutBlock}>
+        <h3 className={styles.bodyWeightTitle}>Заметки</h3>
+        <div className={styles.notesContainer}>
+          <img
+            src={noteIconLight}
+            alt="Note Icon"
+            className={styles.noteIcon}
+          />
+          <div className={styles.notesInputWrapper}>
+            <textarea
+              id="notes"
+              value={notes}
+              onChange={handleNotesChange}
+              placeholder="Введите ваши заметки"
+              className={`${styles.notesInput} ${notesError ? styles.error : ''}`}
+            />
+            {notesError && <span className={styles.errorMessage}>{notesError}</span>}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default WorkoutPage;
-
