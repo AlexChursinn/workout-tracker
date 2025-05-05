@@ -6,6 +6,7 @@ export const getWorkouts = async (token) => {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
+      credentials: 'include',
     });
 
     if (response.status === 401) {
@@ -15,6 +16,7 @@ export const getWorkouts = async (token) => {
           headers: {
             'Authorization': `Bearer ${newToken}`,
           },
+          credentials: 'include',
         });
       } else {
         throw new Error('Токен истек и не удалось обновить его');
@@ -40,6 +42,7 @@ export const addWorkout = async (workout, token) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
+      credentials: 'include',
       body: JSON.stringify(workout),
     });
     if (!response.ok) {
@@ -64,6 +67,7 @@ export const deleteWorkout = async (workoutId, workout_date, token) => {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
+      credentials: 'include',
     });
     if (!response.ok) {
       const errorData = await response.json();
@@ -90,6 +94,7 @@ export const copyWorkout = async (source_workout_date, source_workoutId, target_
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
+      credentials: 'include',
       body: JSON.stringify({ source_workout_date, source_workoutId, target_workout_date }),
     });
     if (!response.ok) {
@@ -109,6 +114,7 @@ export const getCustomMuscleGroups = async (token) => {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
+      credentials: 'include',
     });
     if (!response.ok) {
       const errorData = await response.json();
@@ -129,6 +135,7 @@ export const saveCustomMuscleGroups = async (customMuscleGroups, token) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
+      credentials: 'include',
       body: JSON.stringify({ muscleGroups: customMuscleGroups }),
     });
     if (!response.ok) {
@@ -149,6 +156,7 @@ export const loginWithTelegram = async (telegramData) => {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify(telegramData),
     });
 
@@ -157,9 +165,9 @@ export const loginWithTelegram = async (telegramData) => {
       throw new Error(errorData.message || 'Ошибка авторизации через Telegram');
     }
 
-    const { token } = await response.json();
-    localStorage.setItem('jwt', token);
-    return token;
+    const { accessToken } = await response.json();
+    localStorage.setItem('jwt', accessToken);
+    return accessToken;
   } catch (error) {
     console.error('Ошибка при авторизации через Telegram:', error);
     throw error;
@@ -194,6 +202,7 @@ export const login = async (credentials) => {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify(credentials),
     });
 
@@ -202,9 +211,9 @@ export const login = async (credentials) => {
       throw new Error(errorData.message || 'Ошибка авторизации');
     }
 
-    const { token } = await response.json();
-    localStorage.setItem('jwt', token);
-    return token;
+    const { accessToken } = await response.json();
+    localStorage.setItem('jwt', accessToken);
+    return accessToken;
   } catch (error) {
     console.error('Ошибка при авторизации:', error);
     throw error;

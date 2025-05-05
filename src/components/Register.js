@@ -14,7 +14,7 @@ const Register = ({ onLogin }) => {
   const [errors, setErrors] = useState({});
   const [isMessageVisible, setIsMessageVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // Добавлено для отображения пароля
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -62,6 +62,7 @@ const Register = ({ onLogin }) => {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ name, email, password }),
       });
 
@@ -70,8 +71,8 @@ const Register = ({ onLogin }) => {
         setMessage('Регистрация прошла успешно');
         setMessageType('success');
 
-        localStorage.setItem('jwt', data.token);
-        onLogin(data.token);
+        localStorage.setItem('jwt', data.accessToken);
+        onLogin(data.accessToken);
 
         setTimeout(() => {
           navigate('/home');

@@ -525,42 +525,6 @@
               ]
             }
           ]
-        },
-        {
-          "id": 1746194780684,
-          "workoutId": 1,
-          "workout_date": "2025-05-11",
-          "title": "Test 2fff",
-          "exercises": [
-            {
-              "id": 1745734526531,
-              "number": 1,
-              "muscleGroup": "Ноги",
-              "exercise": "Присед",
-              "sets": [
-                {
-                  "reps": "11",
-                  "weight": "11",
-                  "isEditing": false
-                }
-              ]
-            },
-            {
-              "id": 1746102965729,
-              "number": 2,
-              "muscleGroup": "Ноги",
-              "exercise": "Присед",
-              "sets": [
-                {
-                  "reps": "11",
-                  "weight": "11",
-                  "isEditing": false
-                }
-              ]
-            }
-          ],
-          "bodyWeight": null,
-          "notes": ""
         }
       ],
       "customMuscleGroups": {

@@ -4,8 +4,9 @@ const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
-const app = express();
+const cookieParser = require('cookie-parser');
 
+const app = express();
 const dbFile = fs.existsSync('/persistent') ? '/persistent/db.json' : path.join(__dirname, 'db.json');
 
 if (!fs.existsSync(dbFile)) {
@@ -33,10 +34,11 @@ app.use(cors({
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
   credentials: true,
 }));
-
 app.use(express.json());
+app.use(cookieParser());
 
-const SECRET_KEY = process.env.SECRET_KEY || 'your_secret_key';
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || 'default_access_secret_key';
+const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || 'default_refresh_secret_key';
 
 const readDatabase = () => {
   try {
@@ -67,7 +69,7 @@ const authenticateToken = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, SECRET_KEY);
+    const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
@@ -95,8 +97,17 @@ app.post('/api/register', async (req, res) => {
     db.users.push(newUser);
     writeDatabase(db);
 
-    const token = jwt.sign({ id: newUser.id, email: newUser.email }, SECRET_KEY, { expiresIn: '1h' });
-    res.status(201).json({ message: 'Регистрация успешна', token });
+    const accessToken = jwt.sign({ id: newUser.id, email: newUser.email }, ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+    const refreshToken = jwt.sign({ id: newUser.id, email: newUser.email }, REFRESH_TOKEN_SECRET, { expiresIn: '30d' });
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: true, // Всегда true, так как Render использует HTTPS
+      sameSite: 'None', // Для кросс-доменных запросов
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
+
+    res.status(201).json({ message: 'Регистрация успешна', accessToken });
   } catch (error) {
     console.error('Ошибка регистрации пользователя:', error);
     res.status(500).json({ message: 'Ошибка сервера' });
@@ -118,12 +129,102 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).json({ message: 'Неверный email или пароль' });
     }
 
-    const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
-    res.json({ token });
+    const accessToken = jwt.sign({ id: user.id, email: user.email }, ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+    const refreshToken = jwt.sign({ id: user.id, email: user.email }, REFRESH_TOKEN_SECRET, { expiresIn: '30d' });
+
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'None',
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
+
+    res.json({ accessToken });
   } catch (error) {
     console.error('Ошибка авторизации пользователя:', error);
     res.status(500).json({ message: 'Ошибка сервиса' });
   }
+});
+
+app.post('/api/refresh-token', async (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+
+  if (!refreshToken) {
+    return res.status(401).json({ message: 'Refresh-токен отсутствует' });
+  }
+
+  try {
+    const decoded = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
+    const db = readDatabase();
+    const user = db.users.find((u) => u.id === decoded.id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Пользователь не найден' });
+    }
+
+    const newAccessToken = jwt.sign({ id: user.id, email: user.email }, ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+    const newRefreshToken = jwt.sign({ id: user.id, email: user.email }, REFRESH_TOKEN_SECRET, { expiresIn: '30d' });
+
+    res.cookie('refreshToken', newRefreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'None',
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
+
+    res.json({ accessToken: newAccessToken });
+  } catch (error) {
+    console.error('Ошибка при обновлении токена:', error);
+    res.status(403).json({ message: 'Неверный refresh-токен' });
+  }
+});
+
+app.post('/api/logout', (req, res) => {
+  res.cookie('refreshToken', '', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None',
+    expires: new Date(0),
+  });
+  res.json({ message: 'Выход успешен' });
+});
+
+app.post('/api/telegram-auth', async (req, res) => {
+  const telegramData = req.body;
+
+  if (!telegramData || !telegramData.id) {
+    return res.status(400).json({ message: 'Некорректные данные Telegram' });
+  }
+
+  const db = readDatabase();
+  let user = db.users.find((u) => u.telegramId === telegramData.id);
+
+  if (!user) {
+    const newUser = {
+      id: Date.now(),
+      name: telegramData.first_name || 'Telegram User',
+      email: `telegram_${telegramData.id}@example.com`,
+      passwordHash: null,
+      telegramId: telegramData.id,
+      workouts: [],
+      customMuscleGroups: {},
+    };
+    db.users.push(newUser);
+    user = newUser;
+    writeDatabase(db);
+  }
+
+  const accessToken = jwt.sign({ id: user.id, email: user.email }, ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+  const refreshToken = jwt.sign({ id: user.id, email: user.email }, REFRESH_TOKEN_SECRET, { expiresIn: '30d' });
+
+  res.cookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None',
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+  });
+
+  res.json({ accessToken });
 });
 
 app.get('/api/user-workouts', authenticateToken, (req, res) => {
@@ -209,7 +310,6 @@ app.delete('/api/user-workouts/:workoutId', authenticateToken, (req, res) => {
 
   user.workouts.splice(workoutIndex, 1);
 
-  // Пересчитываем workoutId для оставшихся тренировок в тот же день
   const workoutsForDate = user.workouts.filter((w) => w.workout_date === workout_date);
   workoutsForDate.forEach((workout, index) => {
     workout.workoutId = index + 1;
@@ -249,7 +349,6 @@ app.post('/api/user-workouts/copy', authenticateToken, (req, res) => {
     return res.status(404).json({ message: 'Исходная тренировка не найдена' });
   }
 
-  // Определяем новый workoutId для целевой даты
   const workoutsForTargetDate = user.workouts.filter((w) => w.workout_date === target_workout_date);
   const newWorkoutId = workoutsForTargetDate.length + 1;
 
@@ -307,24 +406,6 @@ app.post('/api/user-muscle-groups', authenticateToken, (req, res) => {
   } catch (error) {
     console.error('Error saving custom muscle groups:', error);
     res.status(500).json({ message: 'Ошибка сервера' });
-  }
-});
-
-app.post('/api/refresh-token', (req, res) => {
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (!token) {
-    return res.status(401).json({ message: 'Токен отсутствует' });
-  }
-
-  try {
-    const decoded = jwt.verify(token, SECRET_KEY);
-    const newToken = jwt.sign({ id: decoded.id, email: decoded.email }, SECRET_KEY, { expiresIn: '1h' });
-    res.json({ accessToken: newToken });
-  } catch (error) {
-    console.error('Ошибка при обновлении токена:', error);
-    res.status(403).json({ message: 'Неверный токен' });
   }
 });
 

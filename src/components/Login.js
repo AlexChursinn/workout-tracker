@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import Spinner from './Spinner';
 import styles from './Login.module.css';
 import showIcon from '../assets/show.svg';
-import hideIcon from '../assets/hidden.svg'; 
+import hideIcon from '../assets/hidden.svg';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -14,7 +14,7 @@ const Login = ({ onLogin }) => {
   const [messageType, setMessageType] = useState('');
   const [isMessageVisible, setIsMessageVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // Для отображения пароля
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -69,12 +69,13 @@ const Login = ({ onLogin }) => {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
       if (response.ok) {
-        localStorage.setItem('jwt', data.token);
+        localStorage.setItem('jwt', data.accessToken);
         if (rememberMe) {
           localStorage.setItem('savedEmail', email);
           localStorage.setItem('savedPassword', password);
@@ -83,12 +84,12 @@ const Login = ({ onLogin }) => {
           localStorage.removeItem('savedPassword');
         }
 
-        onLogin(data.token);
+        onLogin(data.accessToken);
         setMessage('Вход выполнен успешно');
         setMessageType('success');
 
         setTimeout(() => {
-          navigate('/');
+          navigate('/home');
         }, 2000);
       } else {
         setMessage(data.message || 'Ошибка входа. Проверьте ваши данные и попробуйте снова');
@@ -130,25 +131,25 @@ const Login = ({ onLogin }) => {
       {errors.email && <p className={styles.errorText}>{errors.email}</p>}
 
       <div className={styles.passwordContainer}>
-  <input
-    type={showPassword ? 'text' : 'password'}
-    placeholder="Пароль"
-    value={password}
-    onChange={e => handleInputChange('password', e.target.value)}
-    className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
-  />
-  <button
-    type="button"
-    className={styles.togglePassword}
-    onClick={togglePasswordVisibility}
-    aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
-  >
-    <img
-      src={showPassword ? showIcon : hideIcon}
-      alt=""
-    />
-  </button>
-</div>
+        <input
+          type={showPassword ? 'text' : 'password'}
+          placeholder="Пароль"
+          value={password}
+          onChange={e => handleInputChange('password', e.target.value)}
+          className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
+        />
+        <button
+          type="button"
+          className={styles.togglePassword}
+          onClick={togglePasswordVisibility}
+          aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
+        >
+          <img
+            src={showPassword ? showIcon : hideIcon}
+            alt=""
+          />
+        </button>
+      </div>
       {errors.password && <p className={styles.errorText}>{errors.password}</p>}
 
       <div className={styles.checkboxContainer}>
@@ -180,4 +181,3 @@ const Login = ({ onLogin }) => {
 };
 
 export default Login;
- 

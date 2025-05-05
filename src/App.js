@@ -36,6 +36,8 @@ const App = () => {
   const [authToken, setAuthToken] = useState(localStorage.getItem('jwt') || null);
   const [loading, setLoading] = useState(true);
   const [customMuscleGroups, setCustomMuscleGroups] = useState({});
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('');
   const hasInitialized = useRef(false);
 
   const location = useLocation();
@@ -79,6 +81,23 @@ const App = () => {
       console.log('Начало initializeAuth, isAuthenticated:', isAuthenticated, 'authToken:', !!authToken);
       setLoading(true);
       try {
+        if (authToken && isTokenExpired(authToken)) {
+          console.log('Токен истек, пытаемся обновить');
+          const newToken = await refreshAuthToken();
+          if (newToken) {
+            localStorage.setItem('jwt', newToken);
+            setAuthToken(newToken);
+            setIsAuthenticated(true);
+            await fetchData(newToken);
+          } else {
+            console.log('Не удалось обновить токен, перенаправление на /login');
+            setMessage('Сессия истекла. Пожалуйста, войдите снова.');
+            setMessageType('error');
+            navigate('/login', { replace: true });
+            return;
+          }
+        }
+
         if (window.Telegram?.WebApp?.initDataUnsafe?.user && !isAuthenticated) {
           console.log('Авторизация через Telegram');
           const token = await loginWithTelegram(window.Telegram.WebApp.initDataUnsafe.user);
@@ -90,11 +109,23 @@ const App = () => {
           console.log('Загрузка данных для авторизованного пользователя');
           await fetchData(authToken);
         } else {
-          console.log('Нет данных для авторизации, перенаправление на /login');
-          navigate('/login', { replace: true });
+          console.log('Нет данных для авторизации, попытка обновления токена');
+          const newToken = await refreshAuthToken();
+          if (newToken) {
+            localStorage.setItem('jwt', newToken);
+            setAuthToken(newToken);
+            setIsAuthenticated(true);
+            await fetchData(newToken);
+          } else {
+            setMessage('Пожалуйста, войдите в аккаунт.');
+            setMessageType('info');
+            navigate('/login', { replace: true });
+          }
         }
       } catch (error) {
         console.error('Ошибка авторизации:', error);
+        setMessage('Ошибка авторизации. Попробуйте снова.');
+        setMessageType('error');
         navigate('/login', { replace: true });
       } finally {
         console.log('Завершение initializeAuth, установка loading: false');
@@ -142,6 +173,16 @@ const App = () => {
     localStorage.setItem('selectedDate', selectedDate.toISOString());
     localStorage.setItem('showTable', showTable);
   }, [selectedDate, showTable]);
+
+  useEffect(() => {
+    if (message) {
+      const timer = setTimeout(() => {
+        setMessage('');
+        setMessageType('');
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
 
   const fetchData = async (token) => {
     console.log('Начало fetchData');
@@ -222,6 +263,8 @@ const App = () => {
       await addWorkout(updatedWorkout, authToken);
     } catch (error) {
       console.error('Ошибка при сохранении данных:', error);
+      setMessage('Ошибка при сохранении тренировки.');
+      setMessageType('error');
     }
   };
 
@@ -248,6 +291,8 @@ const App = () => {
       await addWorkout(updatedWorkout, authToken);
     } catch (error) {
       console.error('Ошибка при сохранении названия тренировки:', error);
+      setMessage('Ошибка при сохранении названия тренировки.');
+      setMessageType('error');
     }
   };
 
@@ -258,13 +303,23 @@ const App = () => {
       await fetchData(authToken);
     } catch (error) {
       console.error('Ошибка при сохранении пользовательских групп мышц:', error);
+      setMessage('Ошибка при сохранении групп мышц.');
+      setMessageType('error');
     }
   };
 
   const toggleTheme = () => setDarkMode((prev) => !prev);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     console.log('Выход из аккаунта');
+    try {
+      await fetch(`${process.env.REACT_APP_API_URL}/logout`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+    } catch (error) {
+      console.error('Ошибка при выходе:', error);
+    }
     localStorage.removeItem('jwt');
     setAuthToken(null);
     setWorkoutData({});
