@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const crypto = require('crypto');
 
 const app = express();
 const dbFile = fs.existsSync('/persistent') ? '/persistent/db.json' : path.join(__dirname, 'db.json');
@@ -27,6 +28,7 @@ app.use(cors({
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.log('CORS отклонён для origin:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
@@ -39,6 +41,7 @@ app.use(cookieParser());
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || 'default_access_secret_key';
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || 'default_refresh_secret_key';
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '7260346507:AAHgyipsw-rCJHvOzsqXQgZgHRkJkMjMI90';
 
 const readDatabase = () => {
   try {
@@ -65,6 +68,7 @@ const authenticateToken = (req, res, next) => {
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
+    console.log('Токен отсутствует в запросе:', req.path);
     return res.status(401).json({ message: 'Токен отсутствует' });
   }
 
@@ -77,6 +81,59 @@ const authenticateToken = (req, res, next) => {
     return res.status(403).json({ message: 'Неверный токен' });
   }
 };
+
+const verifyTelegramData = (data) => {
+  const secret = crypto.createHash('sha256').update(TELEGRAM_BOT_TOKEN).digest();
+  const dataCheckString = Object.keys(data)
+    .filter((key) => key !== 'hash')
+    .sort()
+    .map((key) => `${key}=${data[key]}`)
+    .join('\n');
+  const computedHash = crypto.createHmac('sha256', secret).update(dataCheckString).digest('hex');
+  return computedHash === data.hash;
+};
+
+app.post('/api/telegram-auth', async (req, res) => {
+  const telegramData = req.body;
+
+  if (!telegramData || !telegramData.id || !telegramData.hash) {
+    return res.status(400).json({ message: 'Некорректные данные Telegram' });
+  }
+
+  if (!verifyTelegramData(telegramData)) {
+    return res.status(401).json({ message: 'Неверная подпись Telegram' });
+  }
+
+  const db = readDatabase();
+  let user = db.users.find((u) => u.telegramId === telegramData.id);
+
+  if (!user) {
+    const newUser = {
+      id: Date.now(),
+      name: telegramData.first_name || 'Telegram User',
+      email: `telegram_${telegramData.id}@example.com`,
+      passwordHash: null,
+      telegramId: telegramData.id,
+      workouts: [],
+      customMuscleGroups: {},
+    };
+    db.users.push(newUser);
+    user = newUser;
+    writeDatabase(db);
+  }
+
+  const accessToken = jwt.sign({ id: user.id, email: user.email }, ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+  const refreshToken = jwt.sign({ id: user.id, email: user.email }, REFRESH_TOKEN_SECRET, { expiresIn: '30d' });
+
+  res.cookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None',
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+  });
+
+  res.json({ accessToken });
+});
 
 app.post('/api/register', async (req, res) => {
   const { name, email, password } = req.body;
@@ -102,8 +159,8 @@ app.post('/api/register', async (req, res) => {
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: true, // Всегда true, так как Render использует HTTPS
-      sameSite: 'None', // Для кросс-доменных запросов
+      secure: true,
+      sameSite: 'None',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
@@ -148,17 +205,21 @@ app.post('/api/login', async (req, res) => {
 
 app.post('/api/refresh-token', async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
+  console.log('Получен refresh-токен:', refreshToken ? 'Присутствует' : 'Отсутствует');
 
   if (!refreshToken) {
+    console.log('Refresh-токен отсутствует в запросе');
     return res.status(401).json({ message: 'Refresh-токен отсутствует' });
   }
 
   try {
     const decoded = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
+    console.log('Refresh-токен валиден, пользователь:', decoded);
     const db = readDatabase();
     const user = db.users.find((u) => u.id === decoded.id);
 
     if (!user) {
+      console.log('Пользователь не найден для ID:', decoded.id);
       return res.status(404).json({ message: 'Пользователь не найден' });
     }
 
@@ -172,6 +233,7 @@ app.post('/api/refresh-token', async (req, res) => {
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
+    console.log('Новый access-токен выдан:', newAccessToken);
     res.json({ accessToken: newAccessToken });
   } catch (error) {
     console.error('Ошибка при обновлении токена:', error);
@@ -180,6 +242,7 @@ app.post('/api/refresh-token', async (req, res) => {
 });
 
 app.post('/api/logout', (req, res) => {
+  console.log('Запрос на выход, удаление refresh-токена');
   res.cookie('refreshToken', '', {
     httpOnly: true,
     secure: true,
@@ -187,44 +250,6 @@ app.post('/api/logout', (req, res) => {
     expires: new Date(0),
   });
   res.json({ message: 'Выход успешен' });
-});
-
-app.post('/api/telegram-auth', async (req, res) => {
-  const telegramData = req.body;
-
-  if (!telegramData || !telegramData.id) {
-    return res.status(400).json({ message: 'Некорректные данные Telegram' });
-  }
-
-  const db = readDatabase();
-  let user = db.users.find((u) => u.telegramId === telegramData.id);
-
-  if (!user) {
-    const newUser = {
-      id: Date.now(),
-      name: telegramData.first_name || 'Telegram User',
-      email: `telegram_${telegramData.id}@example.com`,
-      passwordHash: null,
-      telegramId: telegramData.id,
-      workouts: [],
-      customMuscleGroups: {},
-    };
-    db.users.push(newUser);
-    user = newUser;
-    writeDatabase(db);
-  }
-
-  const accessToken = jwt.sign({ id: user.id, email: user.email }, ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
-  const refreshToken = jwt.sign({ id: user.id, email: user.email }, REFRESH_TOKEN_SECRET, { expiresIn: '30d' });
-
-  res.cookie('refreshToken', refreshToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'None',
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-  });
-
-  res.json({ accessToken });
 });
 
 app.get('/api/user-workouts', authenticateToken, (req, res) => {

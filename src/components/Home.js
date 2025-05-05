@@ -76,19 +76,16 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
   }, []);
 
   const formatDateToLocal = useCallback((date) => {
-    const d = new Date(date);
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    return date.toLocaleDateString('sv-SE'); // sv-SE дает YYYY-MM-DD
   }, []);
 
   const handleDateChange = useCallback((date, workoutId) => {
     if (date instanceof Date && !isNaN(date)) {
-      const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-      setSelectedDate(localDate);
-      onDateSelect(localDate, workoutId);
-      const formattedDate = formatDateToLocal(localDate);
+      console.log('Выбрана дата в handleDateChange:', date);
+      setSelectedDate(date);
+      onDateSelect(date, workoutId);
+      const formattedDate = formatDateToLocal(date);
+      console.log('Форматированная дата для навигации:', formattedDate);
       navigate(`/${formattedDate}/${workoutId}`, { replace: true });
     } else {
       console.error('Invalid date:', date);
@@ -107,7 +104,7 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
 
   const handleDeleteWorkout = useCallback(async (date, workoutId) => {
     try {
-      const formattedDate = formatDateToLocal(date);
+      const formattedDate = formatDateToLocal(new Date(date));
       await deleteWorkout(workoutId, formattedDate, authToken);
       setShowDropdown(null);
       setError(null);
@@ -129,7 +126,7 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
       setError('Пожалуйста, выберите действительную дату.');
       return;
     }
-    const formattedSourceDate = formatDateToLocal(workoutToCopy.date);
+    const formattedSourceDate = formatDateToLocal(new Date(workoutToCopy.date));
     const formattedTargetDate = formatDateToLocal(newDate);
     try {
       await copyWorkout(formattedSourceDate, workoutToCopy.workoutId, formattedTargetDate, authToken);

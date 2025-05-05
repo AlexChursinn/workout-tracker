@@ -81,23 +81,7 @@ const App = () => {
       console.log('Начало initializeAuth, isAuthenticated:', isAuthenticated, 'authToken:', !!authToken);
       setLoading(true);
       try {
-        if (authToken && isTokenExpired(authToken)) {
-          console.log('Токен истек, пытаемся обновить');
-          const newToken = await refreshAuthToken();
-          if (newToken) {
-            localStorage.setItem('jwt', newToken);
-            setAuthToken(newToken);
-            setIsAuthenticated(true);
-            await fetchData(newToken);
-          } else {
-            console.log('Не удалось обновить токен, перенаправление на /login');
-            setMessage('Сессия истекла. Пожалуйста, войдите снова.');
-            setMessageType('error');
-            navigate('/login', { replace: true });
-            return;
-          }
-        }
-
+        // Проверяем Telegram-авторизацию
         if (window.Telegram?.WebApp?.initDataUnsafe?.user && !isAuthenticated) {
           console.log('Авторизация через Telegram');
           const token = await loginWithTelegram(window.Telegram.WebApp.initDataUnsafe.user);
@@ -105,18 +89,23 @@ const App = () => {
           setAuthToken(token);
           setIsAuthenticated(true);
           await fetchData(token);
-        } else if (isAuthenticated && authToken) {
-          console.log('Загрузка данных для авторизованного пользователя');
-          await fetchData(authToken);
+          console.log('Telegram-авторизация успешна');
         } else {
-          console.log('Нет данных для авторизации, попытка обновления токена');
+          // Пробуем обновить токен через refresh-token
+          console.log('Попытка обновления токена через /refresh-token');
           const newToken = await refreshAuthToken();
           if (newToken) {
+            console.log('Токен успешно обновлен:', newToken);
             localStorage.setItem('jwt', newToken);
             setAuthToken(newToken);
             setIsAuthenticated(true);
             await fetchData(newToken);
+          } else if (authToken && !isTokenExpired(authToken)) {
+            console.log('Токен валиден, загружаем данные');
+            setIsAuthenticated(true);
+            await fetchData(authToken);
           } else {
+            console.log('Токен отсутствует или истек, перенаправление на /login');
             setMessage('Пожалуйста, войдите в аккаунт.');
             setMessageType('info');
             navigate('/login', { replace: true });
@@ -150,6 +139,7 @@ const App = () => {
         try {
           const newToken = await refreshAuthToken();
           if (newToken) {
+            console.log('Токен обновлен:', newToken);
             setAuthToken(newToken);
             localStorage.setItem('jwt', newToken);
             await fetchData(newToken);
@@ -173,16 +163,6 @@ const App = () => {
     localStorage.setItem('selectedDate', selectedDate.toISOString());
     localStorage.setItem('showTable', showTable);
   }, [selectedDate, showTable]);
-
-  useEffect(() => {
-    if (message) {
-      const timer = setTimeout(() => {
-        setMessage('');
-        setMessageType('');
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [message]);
 
   const fetchData = async (token) => {
     console.log('Начало fetchData');
@@ -221,6 +201,10 @@ const App = () => {
   };
 
   const handleDateSelect = (date, workoutId = 1) => {
+    if (!(date instanceof Date) || isNaN(date)) {
+      console.error('Invalid date in handleDateSelect:', date);
+      return;
+    }
     setSelectedDate(date);
     setShowTable(true);
     const formattedDate = formatDateToLocal(date);
