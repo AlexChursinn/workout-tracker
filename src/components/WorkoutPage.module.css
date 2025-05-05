@@ -44,6 +44,7 @@
   background-color: var(--background-color);
   color: var(--text-color);
   padding: 5px;
+  margin-bottom: 20px;
 }
 
 .inputTitle:focus {
@@ -279,6 +280,7 @@
 
   .inputTitle {
     font-size: 1.25rem;
+    margin-bottom: 16px;
   }
 
   .editableTitle {
