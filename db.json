@@ -431,7 +431,7 @@
           "title": "Test 2",
           "exercises": [
             {
-              "id": 1745734526531,
+              "id": 1746102965729,
               "number": 1,
               "muscleGroup": "Ноги",
               "exercise": "Присед",
@@ -444,29 +444,8 @@
               ]
             },
             {
-              "id": 1746102965729,
+              "id": 1746536135527,
               "number": 2,
-              "muscleGroup": "Ноги",
-              "exercise": "Присед",
-              "sets": [
-                {
-                  "reps": "11",
-                  "weight": "11",
-                  "isEditing": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": 1746194776135,
-          "workoutId": 5,
-          "workout_date": "2025-05-04",
-          "title": "Test 2",
-          "exercises": [
-            {
-              "id": 1745734526531,
-              "number": 1,
               "muscleGroup": "Ноги",
               "exercise": "Присед",
               "sets": [
@@ -478,8 +457,8 @@
               ]
             },
             {
-              "id": 1746102965729,
-              "number": 2,
+              "id": 1746536136726,
+              "number": 3,
               "muscleGroup": "Ноги",
               "exercise": "Присед",
               "sets": [
@@ -490,7 +469,9 @@
                 }
               ]
             }
-          ]
+          ],
+          "bodyWeight": null,
+          "notes": ""
         },
         {
           "id": 1746194778417,

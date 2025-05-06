@@ -246,8 +246,8 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
                   )}
                 </div>
               </td>
-              <td className={styles.centeredCell}>
-                <div className={styles.dropdownContainer}>
+              <td className={styles.CenteredCell}>
+                <div className={`${styles.dropdownContainer} ${showDropdown === workout.id ? styles.activeDropdown : ''}`}>
                   <button
                     className={styles.moreButton}
                     onClick={(e) => toggleDropdown(workout.id, e)}

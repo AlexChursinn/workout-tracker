@@ -4,13 +4,14 @@
   color: var(--text-color);
   overflow-x: auto;
   border-radius: 4px;
-  overflow: hidden;
 }
 
 /* Стили для контейнера таблицы */
 .tableContainer {
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+  overflow: visible !important;
 }
 
 /* Граница вокруг таблицы на десктопе */
@@ -18,7 +19,7 @@
   .tableContainer {
     border: 1px solid var(--table-border-color);
     border-radius: 4px;
-    overflow: hidden;
+    overflow: visible !important;
     margin-bottom: 20px;
   }
 }
@@ -29,7 +30,7 @@
     border: none !important;
     padding: 0;
     margin: 0;
-    overflow: visible;
+    overflow: visible !important;
   }
 }
 
@@ -73,6 +74,13 @@
   text-align: center;
   font-size: 0.9rem;
   color: var(--text-color);
+  overflow: visible !important;
+}
+
+/* Ensure centeredCell doesn’t clip dropdown */
+.CenteredCell {
+  position: relative;
+  overflow: visible !important;
 }
 
 /* Стили для инпутов */
@@ -114,6 +122,8 @@
   justify-content: center;
   transition: background-color 0.3s;
   margin: 0px;
+  position: relative;
+  z-index: 100;
 }
 
 .moreButton:hover {
@@ -131,22 +141,30 @@
   position: relative;
   display: flex;
   justify-content: center;
+  z-index: 100;
+  overflow: visible !important;
+}
+
+/* Active dropdown container */
+.activeDropdown {
+  z-index: 1000 !important; /* Highest z-index when dropdown is open */
 }
 
 /* Стили для выпадающего меню */
 .dropdownMenu {
   position: absolute;
-  top: 100%;
+  top: 45px; /* Position below button */
   right: 0;
   background-color: var(--table-bg-color);
   border: 1px solid var(--table-border-color);
   border-radius: 4px;
   min-width: 150px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  margin-top: 5px;
+  z-index: 1001; /* Higher than all other elements */
+  transform: translateZ(0);
 }
 
+/* Стили для пунктов выпадающего меню */
 .dropdownItem {
   width: 100%;
   padding: 8px 12px;
@@ -378,6 +396,12 @@ select:focus {
     position: relative;
     width: auto;
     margin-left: auto;
+    z-index: 100;
+    overflow: visible !important;
+  }
+
+  .activeDropdown {
+    z-index: 200 !important; /* Higher z-index for active dropdown on mobile */
   }
 
   .moreButton {
@@ -385,15 +409,16 @@ select:focus {
     width: 40px;
     height: 40px;
     margin-left: auto;
+    z-index: 100;
   }
 
   .dropdownMenu {
     position: absolute;
-    top: 100%;
+    top: 45px;
     right: 0;
     width: 150px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    z-index: 201; /* Higher than moreButton on mobile */
   }
 
   .dropdownItem {
@@ -410,7 +435,7 @@ select:focus {
     border: none !important;
     padding: 0;
     margin: 0;
-    overflow: visible;
+    overflow: visible !important;
   }
 
   select {
