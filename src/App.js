@@ -90,6 +90,10 @@ const App = () => {
           setIsAuthenticated(true);
           await fetchData(token);
           console.log('Telegram-авторизация успешна');
+        } else if (authToken && !isTokenExpired(authToken)) {
+          console.log('Токен валиден, загружаем данные');
+          setIsAuthenticated(true);
+          await fetchData(authToken);
         } else {
           // Пробуем обновить токен через refresh-token
           console.log('Попытка обновления токена через /refresh-token');
@@ -100,14 +104,12 @@ const App = () => {
             setAuthToken(newToken);
             setIsAuthenticated(true);
             await fetchData(newToken);
-          } else if (authToken && !isTokenExpired(authToken)) {
-            console.log('Токен валиден, загружаем данные');
-            setIsAuthenticated(true);
-            await fetchData(authToken);
           } else {
             console.log('Токен отсутствует или истек, перенаправление на /login');
             setMessage('Пожалуйста, войдите в аккаунт.');
             setMessageType('info');
+            setIsAuthenticated(false);
+            localStorage.removeItem('jwt');
             navigate('/login', { replace: true });
           }
         }
@@ -115,6 +117,8 @@ const App = () => {
         console.error('Ошибка авторизации:', error);
         setMessage('Ошибка авторизации. Попробуйте снова.');
         setMessageType('error');
+        setIsAuthenticated(false);
+        localStorage.removeItem('jwt');
         navigate('/login', { replace: true });
       } finally {
         console.log('Завершение initializeAuth, установка loading: false');
@@ -123,7 +127,7 @@ const App = () => {
     };
 
     initializeAuth();
-  }, []);
+  }, [isAuthenticated, authToken, navigate]); // Added dependencies to prevent multiple runs
 
   useEffect(() => {
     if (darkMode) document.body.classList.add('dark-theme');
@@ -309,7 +313,7 @@ const App = () => {
     setWorkoutData({});
     setCustomMuscleGroups({});
     setIsAuthenticated(false);
-    hasInitialized.current = false;
+    hasInitialized.current = false; // Reset to allow re-initialization after logout
     navigate('/login', { replace: true });
   };
 
