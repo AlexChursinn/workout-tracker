@@ -932,8 +932,46 @@
               ]
             }
           ],
-          "bodyWeight": null,
-          "notes": ""
+          "bodyWeight": "75",
+          "notes": "Тест"
+        },
+        {
+          "id": 1746605643617,
+          "workoutId": 1,
+          "workout_date": "2025-05-12",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746605044144,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа Горизонт",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "10",
+                  "weightType": "Вес",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1746605143242,
+              "number": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": "75",
+          "notes": "Тест"
         }
       ],
       "customMuscleGroups": {
