@@ -602,8 +602,8 @@ select:focus {
   .addSetButton,
   .deleteSetButton,
   .copySetButton {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     font-size: 0.8rem;
   }
 

@@ -979,6 +979,95 @@
           "Test"
         ]
       }
+    },
+    {
+      "id": 1746627021590,
+      "name": "10",
+      "email": "10@gmail.com",
+      "passwordHash": "$2a$10$XcnNRrIM954Z6flo2qh56u3kabRF11fgqHLfCe0n5vkqDrlO9y4b6",
+      "workouts": [
+        {
+          "id": 1746627144433,
+          "workoutId": 1,
+          "workout_date": "2025-05-09",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746627044359,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 1746627045676,
+              "number": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 1746627051793,
+              "number": 3,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 1746627053576,
+              "number": 4,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            },
+            {
+              "id": 1746627129793,
+              "number": 5,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        }
+      ],
+      "customMuscleGroups": {}
     }
   ]
 }
