@@ -270,6 +270,18 @@ app.post('/api/user-workouts', authenticateToken, (req, res) => {
     return res.status(400).json({ message: 'Некорректные данные тренировки' });
   }
 
+  // Validate exercises structure
+  for (const exercise of exercises) {
+    if (!exercise.sets || !Array.isArray(exercise.sets)) {
+      return res.status(400).json({ message: 'Некорректная структура подходов' });
+    }
+    for (const set of exercise.sets) {
+      if (!set.weightType || !['Вес', 'Соб. вес', 'Доп. вес', 'Гриф', 'Резинки'].includes(set.weightType)) {
+        return res.status(400).json({ message: 'Некорректный тип веса' });
+      }
+    }
+  }
+
   const db = readDatabase();
   const userIndex = db.users.findIndex((u) => u.id === req.user.id);
 
@@ -382,7 +394,10 @@ app.post('/api/user-workouts/copy', authenticateToken, (req, res) => {
     workoutId: newWorkoutId,
     workout_date: target_workout_date,
     title: sourceWorkout.title || '',
-    exercises: sourceWorkout.exercises.map((exercise) => ({ ...exercise })),
+    exercises: sourceWorkout.exercises.map((exercise) => ({
+      ...exercise,
+      sets: exercise.sets.map((set) => ({ ...set })),
+    })),
     bodyWeight: sourceWorkout.bodyWeight || null,
     notes: sourceWorkout.notes || '',
   };

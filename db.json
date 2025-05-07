@@ -564,6 +564,383 @@
         }
       ],
       "customMuscleGroups": {}
+    },
+    {
+      "id": 1746604058417,
+      "name": "8",
+      "email": "8@gmail.com",
+      "passwordHash": "$2a$10$jKDJke9Z5FKxbxtNjjciTetFPF8yEDwdZw//30OA3OVfGoWcxAy8e",
+      "workouts": [
+        {
+          "id": 1746604063227,
+          "workoutId": 1,
+          "workout_date": "2025-05-07",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746604063219,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Резинки",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Резинки",
+                  "isEditing": false
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746604104558,
+          "workoutId": 1,
+          "workout_date": "2025-05-08",
+          "title": "Test",
+          "exercises": [
+            {
+              "id": 1746604707196,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа Горизонт",
+              "sets": [
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Доп. вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Резинки",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Доп. вес",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1746604959860,
+              "number": 2,
+              "muscleGroup": "Test",
+              "exercise": "Test",
+              "sets": [
+                {
+                  "reps": "10",
+                  "weight": "10",
+                  "weightType": "Вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "10",
+                  "weight": "10",
+                  "weightType": "Вес",
+                  "isEditing": false
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746605004357,
+          "workoutId": 2,
+          "workout_date": "2025-05-08",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746605004345,
+              "number": 1,
+              "muscleGroup": "Прочее",
+              "exercise": "Гиперэкстензия",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "weightType": "Вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "weightType": "Вес",
+                  "isEditing": false
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746605024220,
+          "workoutId": 3,
+          "workout_date": "2025-05-08",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746605004345,
+              "number": 1,
+              "muscleGroup": "Прочее",
+              "exercise": "Гиперэкстензия",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "weightType": "Вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "weightType": "Вес",
+                  "isEditing": false
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746605030753,
+          "workoutId": 4,
+          "workout_date": "2025-05-08",
+          "title": "Test",
+          "exercises": [
+            {
+              "id": 1746604707196,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа Горизонт",
+              "sets": [
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Доп. вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Резинки",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Доп. вес",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1746604959860,
+              "number": 2,
+              "muscleGroup": "Test",
+              "exercise": "Test",
+              "sets": [
+                {
+                  "reps": "10",
+                  "weight": "10",
+                  "weightType": "Вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "10",
+                  "weight": "10",
+                  "weightType": "Вес",
+                  "isEditing": false
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746605034383,
+          "workoutId": 1,
+          "workout_date": "2025-05-09",
+          "title": "Test",
+          "exercises": [
+            {
+              "id": 1746604707196,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа Горизонт",
+              "sets": [
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Доп. вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Резинки",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Доп. вес",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1746605128365,
+              "number": 2,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа Горизонт",
+              "sets": [
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Доп. вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Резинки",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "232",
+                  "weight": "322332",
+                  "weightType": "Доп. вес",
+                  "isEditing": false
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746605044155,
+          "workoutId": 1,
+          "workout_date": "2025-05-10",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746605044144,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа Горизонт",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "11",
+                  "weightType": "Вес",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1746605143242,
+              "number": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746605151784,
+          "workoutId": 1,
+          "workout_date": "2025-05-11",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746605044144,
+              "number": 1,
+              "muscleGroup": "Грудь",
+              "exercise": "Жим штанги лежа Горизонт",
+              "sets": [
+                {
+                  "reps": "11",
+                  "weight": "10",
+                  "weightType": "Вес",
+                  "isEditing": false
+                }
+              ]
+            },
+            {
+              "id": 1746605143242,
+              "number": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        }
+      ],
+      "customMuscleGroups": {
+        "Test": [
+          "Test"
+        ]
+      }
     }
   ]
 }
