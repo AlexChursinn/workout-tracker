@@ -993,7 +993,7 @@
           "title": "",
           "exercises": [
             {
-              "id": 1746627044359,
+              "id": 1746630616400,
               "number": 1,
               "muscleGroup": "",
               "exercise": "",
@@ -1003,54 +1003,30 @@
                   "weight": "",
                   "weightType": "Вес",
                   "isEditing": true
+                },
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                },
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                },
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
                 }
               ]
             },
             {
-              "id": 1746627045676,
+              "id": 1746630704085,
               "number": 2,
-              "muscleGroup": "",
-              "exercise": "",
-              "sets": [
-                {
-                  "reps": "",
-                  "weight": "",
-                  "weightType": "Вес",
-                  "isEditing": true
-                }
-              ]
-            },
-            {
-              "id": 1746627051793,
-              "number": 3,
-              "muscleGroup": "",
-              "exercise": "",
-              "sets": [
-                {
-                  "reps": "",
-                  "weight": "",
-                  "weightType": "Вес",
-                  "isEditing": true
-                }
-              ]
-            },
-            {
-              "id": 1746627053576,
-              "number": 4,
-              "muscleGroup": "",
-              "exercise": "",
-              "sets": [
-                {
-                  "reps": "",
-                  "weight": "",
-                  "weightType": "Вес",
-                  "isEditing": true
-                }
-              ]
-            },
-            {
-              "id": 1746627129793,
-              "number": 5,
               "muscleGroup": "",
               "exercise": "",
               "sets": [

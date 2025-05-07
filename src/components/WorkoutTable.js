@@ -160,217 +160,227 @@ const WorkoutTable = ({ date, workoutData = [], onWorkoutChange, defaultMuscleGr
 
   return (
     <div className={styles.tableContainer}>
-      <div className={styles.tableWrapper}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>№</th>
-              <th>Группа Мышц</th>
-              <th>Упражнение</th>
-              {Array.from(
-                { length: Math.max(...workouts.map((w) => w.sets?.length || 1), 1) },
-                (_, i) => (
-                  <th key={i}>Подход {i + 1}</th>
-                )
-              )}
-              <th>Управление подходами</th>
-              <th>Действия</th>
-            </tr>
-          </thead>
-          <tbody>
-            {workouts.map((workout) => (
-              <tr key={workout.id}>
-                <td data-label="№" className={styles.numberCell}>
-                  <img src={numberIcon} alt="Workout Icon" className={styles.numberIcon} />
-                  <span className={styles.numberText}>
-                    {workout.number || workouts.indexOf(workout) + 1}
-                  </span>
-                </td>
-                <td data-label="Группа Мышц">
-                  <select
-                    value={workout.muscleGroup}
-                    onChange={(e) =>
-                      handleWorkoutUpdate(
-                        workouts.map((w) =>
-                          w.id === workout.id
-                            ? { ...w, muscleGroup: e.target.value, exercise: '' }
-                            : w
+      {workouts.length === 0 ? (
+        <div className={styles.tableWrapper}>
+          <div className={styles.emptyState}>
+            <button className={styles.addExerciseButton} onClick={handleAddRow}>
+              Добавить упражнение
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.tableWrapper}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>№</th>
+                <th>Группа Мышц</th>
+                <th>Упражнение</th>
+                {Array.from(
+                  { length: Math.max(...workouts.map((w) => w.sets?.length || 1), 1) },
+                  (_, i) => (
+                    <th key={i}>Подход {i + 1}</th>
+                  )
+                )}
+                <th>Управление подходами</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody>
+              {workouts.map((workout) => (
+                <tr key={workout.id}>
+                  <td data-label="№" className={styles.numberCell}>
+                    <img src={numberIcon} alt="Workout Icon" className={styles.numberIcon} />
+                    <span className={styles.numberText}>
+                      {workout.number || workouts.indexOf(workout) + 1}
+                    </span>
+                  </td>
+                  <td data-label="Группа Мышц">
+                    <select
+                      value={workout.muscleGroup}
+                      onChange={(e) =>
+                        handleWorkoutUpdate(
+                          workouts.map((w) =>
+                            w.id === workout.id
+                              ? { ...w, muscleGroup: e.target.value, exercise: '' }
+                              : w
+                          )
                         )
-                      )
-                    }
-                  >
-                    <option value="">Выберите группу мышц</option>
-                    {Object.keys(allMuscleGroups).map((group) => (
-                      <option key={group} value={group}>{group}</option>
-                    ))}
-                  </select>
-                </td>
-                <td data-label="Упражнение">
-                  <select
-                    value={workout.exercise}
-                    onChange={(e) =>
-                      handleWorkoutUpdate(
-                        workouts.map((w) =>
-                          w.id === workout.id ? { ...w, exercise: e.target.value } : w
-                        )
-                      )
-                    }
-                    disabled={!workout.muscleGroup}
-                  >
-                    <option value="">Выберите упражнение</option>
-                    {workout.muscleGroup &&
-                      allMuscleGroups[workout.muscleGroup]?.map((exercise) => (
-                        <option key={exercise} value={exercise}>{exercise}</option>
+                      }
+                    >
+                      <option value="">Выберите группу мышц</option>
+                      {Object.keys(allMuscleGroups).map((group) => (
+                        <option key={group} value={group}>{group}</option>
                       ))}
-                  </select>
-                </td>
-                {workout.sets.map((set, i) => (
-                  <td key={i}>
-                    <div className={styles.setContainer}>
-                      <span className={`${styles.circle} ${styles.hideOnLargeScreens}`}>
-                        {i + 1}
-                      </span>
-                      {set.isEditing || !set.reps ? (
-                        <div className={styles.inputContainer}>
-                          <input
-                            type="number"
-                            placeholder="Повт."
-                            className={styles.workoutTableInput}
-                            value={set?.reps || ''}
-                            onChange={(e) =>
-                              handleSetChange(workout.id, i, 'reps', e.target.value)
-                            }
-                          />
-                          {['Вес', 'Доп. вес'].includes(set.weightType) && (
+                    </select>
+                  </td>
+                  <td data-label="Упражнение">
+                    <select
+                      value={workout.exercise}
+                      onChange={(e) =>
+                        handleWorkoutUpdate(
+                          workouts.map((w) =>
+                            w.id === workout.id ? { ...w, exercise: e.target.value } : w
+                          )
+                        )
+                      }
+                      disabled={!workout.muscleGroup}
+                    >
+                      <option value="">Выберите упражнение</option>
+                      {workout.muscleGroup &&
+                        allMuscleGroups[workout.muscleGroup]?.map((exercise) => (
+                          <option key={exercise} value={exercise}>{exercise}</option>
+                        ))}
+                    </select>
+                  </td>
+                  {workout.sets.map((set, i) => (
+                    <td key={i}>
+                      <div className={styles.setContainer}>
+                        <span className={`${styles.circle} ${styles.hideOnLargeScreens}`}>
+                          {i + 1}
+                        </span>
+                        {set.isEditing || !set.reps ? (
+                          <div className={styles.inputContainer}>
                             <input
                               type="number"
-                              placeholder="Вес"
+                              placeholder="Повт."
                               className={styles.workoutTableInput}
-                              value={set?.weight || ''}
+                              value={set?.reps || ''}
                               onChange={(e) =>
-                                handleSetChange(workout.id, i, 'weight', e.target.value)
+                                handleSetChange(workout.id, i, 'reps', e.target.value)
                               }
+                            />
+                            {['Вес', 'Доп. вес'].includes(set.weightType) && (
+                              <input
+                                type="number"
+                                placeholder="Вес"
+                                className={styles.workoutTableInput}
+                                value={set?.weight || ''}
+                                onChange={(e) =>
+                                  handleSetChange(workout.id, i, 'weight', e.target.value)
+                                }
+                                onBlur={() => {
+                                  if (set.reps) {
+                                    handleSetChange(workout.id, i, 'isEditing', false);
+                                  }
+                                }}
+                              />
+                            )}
+                            <select
+                              value={set.weightType}
+                              onChange={(e) =>
+                                handleSetChange(workout.id, i, 'weightType', e.target.value)
+                              }
+                              className={styles.weightTypeSelect}
                               onBlur={() => {
                                 if (set.reps) {
                                   handleSetChange(workout.id, i, 'isEditing', false);
                                 }
                               }}
-                            />
-                          )}
-                          <select
-                            value={set.weightType}
-                            onChange={(e) =>
-                              handleSetChange(workout.id, i, 'weightType', e.target.value)
-                            }
-                            className={styles.weightTypeSelect}
-                            onBlur={() => {
-                              if (set.reps) {
-                                handleSetChange(workout.id, i, 'isEditing', false);
-                              }
-                            }}
+                            >
+                              {weightTypeOptions.map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        ) : (
+                          <span
+                            className={styles.setText}
+                            onClick={() => handleSetChange(workout.id, i, 'isEditing', true)}
                           >
-                            {weightTypeOptions.map((option) => (
-                              <option key={option} value={option}>
-                                {option}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                      ) : (
-                        <span
-                          className={styles.setText}
-                          onClick={() => handleSetChange(workout.id, i, 'isEditing', true)}
+                            {set.reps && ['Вес', 'Доп. вес'].includes(set.weightType)
+                              ? `${set.reps} х ${set.weight} (${set.weightType})`
+                              : `${set.reps} (${set.weightType})`}
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                  ))}
+                  <td>
+                    <div className={styles.setControls}>
+                      <button
+                        className={styles.addSetButton}
+                        onClick={() => handleAddSet(workout.id)}
+                      >
+                        +
+                      </button>
+                      {workout.sets.length > 0 && (
+                        <button
+                          className={styles.copySetButton}
+                          onClick={() => handleCopySet(workout.id)}
                         >
-                          {set.reps && ['Вес', 'Доп. вес'].includes(set.weightType)
-                            ? `${set.reps} х ${set.weight} (${set.weightType})`
-                            : `${set.reps} (${set.weightType})`}
-                        </span>
+                          <img src={copyIconWhite} alt="Copy" className={styles.copyIcon} />
+                        </button>
+                      )}
+                      {workout.sets.length > 1 && (
+                        <button
+                          className={styles.deleteSetButton}
+                          onClick={() => handleDeleteSet(workout.id)}
+                        >
+                          -
+                        </button>
                       )}
                     </div>
                   </td>
-                ))}
-                <td>
-                  <div className={styles.setControls}>
-                    <button
-                      className={styles.addSetButton}
-                      onClick={() => handleAddSet(workout.id)}
+                  <td className={styles.CenteredCell}>
+                    <div
+                      className={`${styles.dropdownContainer} ${
+                        showDropdown === workout.id ? styles.activeDropdown : ''
+                      }`}
                     >
-                      +
-                    </button>
-                    {workout.sets.length > 0 && (
                       <button
-                        className={styles.copySetButton}
-                        onClick={() => handleCopySet(workout.id)}
+                        className={styles.moreButton}
+                        onClick={(e) => toggleDropdown(workout.id, e)}
+                        ref={showDropdown === workout.id ? buttonRef : null}
                       >
-                        <img src={copyIconWhite} alt="Copy" className={styles.copyIcon} />
+                        <img src={settingIcon} alt="Settings" className={styles.settingIcon} />
                       </button>
-                    )}
-                    {workout.sets.length > 1 && (
-                      <button
-                        className={styles.deleteSetButton}
-                        onClick={() => handleDeleteSet(workout.id)}
-                      >
-                        -
-                      </button>
-                    )}
-                  </div>
-                </td>
-                <td className={styles.CenteredCell}>
-                  <div
-                    className={`${styles.dropdownContainer} ${
-                      showDropdown === workout.id ? styles.activeDropdown : ''
-                    }`}
-                  >
-                    <button
-                      className={styles.moreButton}
-                      onClick={(e) => toggleDropdown(workout.id, e)}
-                      ref={showDropdown === workout.id ? buttonRef : null}
-                    >
-                      <img src={settingIcon} alt="Settings" className={styles.settingIcon} />
-                    </button>
-                    {showDropdown === workout.id && (
-                      <div className={styles.dropdownMenu} ref={dropdownRef}>
-                        <button
-                          className={styles.dropdownItem}
-                          onClick={() => handleCopyWorkout(workout.id)}
-                        >
-                          <span>Копировать</span>
-                          <img
-                            src={darkMode ? copyIconWhite : copyIconBlack}
-                            alt="Copy"
-                            className={styles.copyIcon}
-                          />
-                        </button>
-                        <button
-                          className={styles.dropdownItem}
-                          onClick={() => handleDeleteRow(workout.id)}
-                        >
-                          <span>Удалить</span>
-                          <img
-                            src={darkMode ? deleteIconWhite : deleteIconBlack}
-                            alt="Delete"
-                            className={styles.deleteIcon}
-                          />
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                      {showDropdown === workout.id && (
+                        <div className={styles.dropdownMenu} ref={dropdownRef}>
+                          <button
+                            className={styles.dropdownItem}
+                            onClick={() => handleCopyWorkout(workout.id)}
+                          >
+                            <span>Копировать</span>
+                            <img
+                              src={darkMode ? copyIconWhite : copyIconBlack}
+                              alt="Copy"
+                              className={styles.copyIcon}
+                            />
+                          </button>
+                          <button
+                            className={styles.dropdownItem}
+                            onClick={() => handleDeleteRow(workout.id)}
+                          >
+                            <span>Удалить</span>
+                            <img
+                              src={darkMode ? deleteIconWhite : deleteIconBlack}
+                              alt="Delete"
+                              className={styles.deleteIcon}
+                            />
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <td
+                  colSpan={5 + Math.max(...workouts.map((w) => w.sets?.length || 1), 1)}
+                  style={{ textAlign: 'center' }}
+                >
+                  <button className={styles.addExerciseButton} onClick={handleAddRow}>
+                    Добавить упражнение
+                  </button>
                 </td>
               </tr>
-            ))}
-            <tr>
-              <td
-                colSpan={5 + Math.max(...workouts.map((w) => w.sets?.length || 1), 1)}
-                style={{ textAlign: 'center' }}
-              >
-                <button className={styles.addExerciseButton} onClick={handleAddRow}>
-                  Добавить упражнение
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

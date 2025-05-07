@@ -11,25 +11,37 @@
   box-sizing: border-box;
   position: relative;
   overflow: visible !important;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+/* Стили для пустого состояния */
+.emptyState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 /* Стили для обертки таблицы для горизонтального скролла */
 .tableWrapper {
   overflow-x: auto;
   width: 100%;
+  border-radius: 8px;
 }
 
 /* Граница вокруг таблицы на десктопе */
 @media (min-width: 769px) {
   .tableContainer {
     border: 1px solid var(--table-border-color);
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: visible !important;
     margin-bottom: 20px;
   }
   .tableWrapper {
     max-width: 100%;
     overflow-x: auto;
+    background-color: var(--table-bg-color);
   }
   .table {
     min-width: 1000px; /* Минимальная ширина для скролла */
@@ -38,10 +50,20 @@
 
 /* Сброс стилей контейнера на мобильных */
 @media (max-width: 768px) {
+  .emptyState {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--table-bg-color);
+    border: 1px solid var(--table-border-color);
+    margin: 0px 0px 20px 0px;
+    border-radius: 8px;
+    padding: 20px;
+  }
+
   .tableContainer {
     border: none !important;
     padding: 0;
-    margin: 0;
     overflow: visible !important;
   }
   .tableWrapper {
@@ -69,9 +91,14 @@
     border-top: none !important;
   }
 
-  .table tr:last-child th,
+  
   .table tr:last-child td {
     border-bottom: none !important;
+  }
+
+  .table tr:last-child th {
+    
+    border: 1px solid var(--table-border-color);
   }
 
   .table tr th:first-child,
@@ -195,7 +222,7 @@
   transition: background-color 0.3s;
   margin: 0px;
   position: relative;
-  z-index: 100;
+  z-index: 9500;
 }
 
 .moreButton:hover {
@@ -213,13 +240,13 @@
   position: relative;
   display: flex;
   justify-content: center;
-  z-index: 100;
+  z-index: 9500;
   overflow: visible !important;
 }
 
 /* Active dropdown container */
 .activeDropdown {
-  z-index: 1000 !important; /* Highest z-index when dropdown is open */
+  z-index: 9999 !important; /* Higher z-index when dropdown is open */
 }
 
 /* Стили для выпадающего меню */
@@ -232,7 +259,7 @@
   border-radius: 4px;
   min-width: 150px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 1001; /* Higher than all other elements */
+  z-index: 10000; /* High to ensure it’s above everything */
   transform: translateZ(0);
 }
 
@@ -290,12 +317,9 @@
 
 /* Кнопка добавления упражнения */
 .addExerciseButton {
-  height: 40px;
   display: block;
-  margin: 20px auto;
-  padding: 10px 15px;
-  position: sticky;
-  bottom: 0;
+  margin: 0px auto;
+  padding: 10px 20px;
   background-color: var(--button-bg-color);
   color: var(--button-text-color);
   border: none;
@@ -498,7 +522,7 @@ select:focus {
     right: 0;
     width: 150px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    z-index: 201; /* Higher than moreButton on mobile */
+    z-index: 201; /* Matches original mobile z-index */
   }
 
   .dropdownItem {
