@@ -93,6 +93,17 @@ const verifyTelegramData = (data) => {
   return computedHash === data.hash;
 };
 
+app.get('/api/user-info', authenticateToken, (req, res) => {
+  const db = readDatabase();
+  const user = db.users.find((u) => u.id === req.user.id);
+
+  if (!user) {
+    return res.status(404).json({ message: 'Пользователь не найден' });
+  }
+
+  res.json({ name: user.name, email: user.email });
+});
+
 app.post('/api/telegram-auth', async (req, res) => {
   const telegramData = req.body;
 
@@ -427,7 +438,7 @@ app.get('/api/user-muscle-groups', authenticateToken, (req, res) => {
 app.post('/api/user-muscle-groups', authenticateToken, (req, res) => {
   const { muscleGroups } = req.body;
 
-  if (!muscleGroups || typeof muscleGroups !== 'object') {
+  if (! muscleGroups || typeof muscleGroups !== 'object') {
     return res.status(400).json({ message: 'Некорректные данные групп мышц' });
   }
 
@@ -451,5 +462,5 @@ app.post('/api/user-muscle-groups', authenticateToken, (req, res) => {
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Serverince is running on http://localhost:${PORT}`);
 });

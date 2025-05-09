@@ -5,13 +5,13 @@
   color: var(--text-color);
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Убираем скролл */
+  min-height: 100vh;
 }
 
 .title {
   font-size: 24px;
   margin: 0px 0px 20px 0px;
-  text-align: center; /* Заголовок по центру */
+  text-align: center;
 }
 
 .settingsList {
@@ -37,6 +37,18 @@
   font-size: 16px;
   font-weight: bold;
   text-align: left;
+}
+
+.value {
+  font-size: 16px;
+  color: var(--text-secondary-color, #666);
+}
+
+.error {
+  color: var(--error-color, #ff4d4f);
+  font-size: 16px;
+  text-align: center;
+  padding: 10px 0;
 }
 
 /* Стили для переключателя */
@@ -92,45 +104,25 @@
   height: 24px;
 }
 
-.logoImage {
-  width: 150px;
-  height: auto;
-}
-
 /* Telegram */
 .telegramLink {
   text-decoration: none;
-  color: inherit; /* Наследуем цвет текста от родителя */
-  width: 100%; /* Растягиваем ссылку на всю ширину */
-  opacity: 0; /* Изначально скрыт */
-  transition: opacity 0.5s ease-in-out; /* Плавное появление */
-}
-
-/* Desktop logo */
-.desktopLogo {
-  display: none;
-  margin-top: 200px;
-  opacity: 0; /* Изначально скрыт */
-  transition: opacity 0.5s ease-in-out; /* Плавное появление */
+  color: inherit;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
 /* Класс для видимости */
 .visible {
-  opacity: 1; /* Появляется */
+  opacity: 1;
 }
 
-/* Медиа-запросы */
+/* Медиа-запросы для десктопа */
 @media (min-width: 769px) {
   .settingsContainer {
     padding: 0 20px;
-    justify-content: flex-start; /* Заголовок сверху, но выравнивание по центру через text-align */
-  }
-
-  .desktopLogo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1; /* Иконка занимает оставшееся пространство и центрируется */
+    justify-content: flex-start;
   }
 
   .title {
@@ -138,14 +130,40 @@
     margin: 0px 0px 20px 0px;
   }
 
-  .settingsList {
+  /* Скрываем элементы "Тема" и "Выйти" на десктопе */
+  .themeItem,
+  .logoutItem {
     display: none;
+  }
+
+  .settingsList {
+    display: flex;
+  }
+
+  .telegramLink {
+    position: fixed;
+    bottom: 20px; /* Уменьшен отступ для десктопа */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    z-index: 1000;
+  }
+
+  .telegramLink .settingItem {
+    padding: 10px 20px;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--table-bg-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0px 0px 60px 0px;
   }
 }
 
+/* Медиа-запросы для мобильных */
 @media (max-width: 768px) {
   .settingsContainer {
-    padding-bottom: 0;
+    padding-bottom: 80px;
   }
 
   .settingsList {
@@ -153,22 +171,21 @@
     flex: 1;
   }
 
-  /* Стили для третьего элемента (Telegram) */
   .telegramLink {
-    position: fixed; /* Фиксируем саму ссылку */
-    bottom: 70px; /* Как openModalButton: над футером 60px + 10px отступ */
+    position: fixed;
+    bottom: 70px;
     left: 50%;
     transform: translateX(-50%);
     width: auto;
-    z-index: 1000; /* Над контентом */
+    z-index: 1000;
   }
 
   .telegramLink .settingItem {
     padding: 10px 20px;
     justify-content: center;
     gap: 10px;
-    background-color: var(--table-bg-color); /* Фон для читаемости */
-    border-radius: 8px; /* Как у openModalButton */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень как у openModalButton */
+    background-color: var(--table-bg-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 }

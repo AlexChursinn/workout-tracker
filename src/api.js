@@ -219,3 +219,23 @@ export const login = async (credentials) => {
     throw error;
   }
 };
+
+export const getUserInfo = async (token) => {
+  try {
+    const response = await fetch(`${API_URL}/user-info`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || `Ошибка при загрузке данных пользователя: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Ошибка при загрузке данных пользователя:', error);
+    throw error;
+  }
+};

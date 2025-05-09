@@ -2783,11 +2783,15 @@
           "notes": "Test"
         }
       ],
-      "customMuscleGroups": {
-        "test": [
-          "test"
-        ]
-      }
+      "customMuscleGroups": {}
+    },
+    {
+      "id": 1746813071871,
+      "name": "адеч",
+      "email": "11111@gmail.com",
+      "passwordHash": "$2a$10$AcOD8Bs09K7qkxz/2gbku.O7iUmluzqSH3.C8HyijXQGeSh8/Xh/i",
+      "workouts": [],
+      "customMuscleGroups": {}
     }
   ]
 }

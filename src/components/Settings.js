@@ -4,14 +4,16 @@ import tgWhite from '../assets/tg-white.svg';
 import tgBlack from '../assets/tg-black.svg';
 import logoutIconLight from '../assets/logout-light.svg';
 import logoutIconDark from '../assets/logout-dark.svg';
-import myTgBlack from '../assets/my-tg-black.svg';
-import myTgWhite from '../assets/my-tg-white.svg';
-import Spinner from './Spinner'; // Импортируем Spinner
+import Spinner from './Spinner';
+import { getUserInfo } from '../api';
 import styles from './Settings.module.css';
 
-const Settings = ({ darkMode, toggleTheme, onLogout, loading }) => {
+const Settings = ({ darkMode, toggleTheme, onLogout, loading, authToken }) => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
+  const [userInfo, setUserInfo] = useState({ name: '', email: '' });
+  const [userLoading, setUserLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,28 +22,61 @@ const Settings = ({ darkMode, toggleTheme, onLogout, loading }) => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      console.log('authToken:', authToken);
+      if (!authToken) {
+        setError('Токен отсутствует');
+        setUserLoading(false);
+        return;
+      }
+      try {
+        setUserLoading(true);
+        const data = await getUserInfo(authToken);
+        console.log('User info data:', data);
+        setUserInfo({
+          name: data.name || 'Не указано',
+          email: data.email || 'Не указано',
+        });
+        setError(null);
+      } catch (err) {
+        setError('Не удалось загрузить данные пользователя');
+        console.error('Ошибка загрузки данных пользователя:', err);
+      } finally {
+        setUserLoading(false);
+      }
+    };
+    fetchUserInfo();
+  }, [authToken]);
+
   const handleLogoutClick = () => {
     onLogout();
     navigate('/login');
   };
 
-  // Если данные еще загружаются, показываем Spinner
-  if (loading) {
+  if (loading || userLoading) {
     return <Spinner darkMode={darkMode} />;
   }
 
   return (
     <div className={styles.settingsContainer}>
       <h1 className={styles.title}>Настройки</h1>
-      <div className={`${styles.desktopLogo} ${isVisible ? styles.visible : ''}`}>
-        <img
-          src={darkMode ? myTgWhite : myTgBlack}
-          alt="Logo"
-          className={styles.logoImage}
-        />
-      </div>
       <div className={styles.settingsList}>
-        <div className={styles.settingItem}>
+        {error ? (
+          <div className={styles.error}>{error}</div>
+        ) : (
+          <>
+            <div className={styles.settingItem}>
+              <span className={styles.label}>Имя</span>
+              <span className={styles.value}>{userInfo.name}</span>
+            </div>
+            <div className={styles.settingItem}>
+              <span className={styles.label}>Почта</span>
+              <span className={styles.value}>{userInfo.email}</span>
+            </div>
+          </>
+        )}
+        <div className={`${styles.settingItem} ${styles.themeItem}`}>
           <span className={styles.label}>Тема</span>
           <label className={styles.switch}>
             <input
@@ -53,7 +88,7 @@ const Settings = ({ darkMode, toggleTheme, onLogout, loading }) => {
             <span className={styles.slider}></span>
           </label>
         </div>
-        <div className={styles.settingItem} onClick={handleLogoutClick}>
+        <div className={`${styles.settingItem} ${styles.logoutItem}`} onClick={handleLogoutClick}>
           <span className={styles.label}>Выйти</span>
           <img
             src={darkMode ? logoutIconLight : logoutIconDark}

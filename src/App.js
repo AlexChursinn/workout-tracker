@@ -411,7 +411,13 @@ const App = () => {
               path="/settings"
               element={
                 <ProtectedRoute>
-                  <Settings darkMode={darkMode} toggleTheme={toggleTheme} onLogout={handleLogout} loading={loading} />
+                  <Settings
+                    darkMode={darkMode}
+                    toggleTheme={toggleTheme}
+                    onLogout={handleLogout}
+                    loading={loading}
+                    authToken={authToken}
+                  />
                 </ProtectedRoute>
               }
             />
