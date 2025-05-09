@@ -17,7 +17,7 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
   const inputRef = useRef(null);
   const textMeasureRef = useRef(null);
   const navigate = useNavigate();
-  const hasSynced = useRef(false); // Prevent multiple syncs
+  const hasSynced = useRef(false);
 
   useEffect(() => {
     const parsedDate = new Date(date);
@@ -80,8 +80,7 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
   const handleAddNewWorkout = () => {
     const workoutsForDate = workoutData[selectedDate.toDateString()] || [];
     const newWorkoutId = workoutsForDate.length + 1;
-    const formattedDate = selectedDate.toISOString().split('T')[0];
-    navigate(`/${formattedDate}/${newWorkoutId}`);
+    navigate(`/${date}/${newWorkoutId}`); // Используем date из URL вместо selectedDate
   };
 
   if (loading) return <Spinner darkMode={darkMode} />;
@@ -119,11 +118,13 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
         customMuscleGroups={customMuscleGroups}
         darkMode={darkMode}
       />
-      <div className={styles.workoutBlock}>
-        <button onClick={handleAddNewWorkout} className={styles.addWorkoutButton}>
-          Добавить еще одну тренировку
-        </button>
-      </div>
+      {currentWorkout.exercises?.length > 0 && (
+        <div className={styles.workoutBlock}>
+          <button onClick={handleAddNewWorkout} className={styles.addWorkoutButton}>
+            Добавить еще одну тренировку
+          </button>
+        </div>
+      )}
       <div className={styles.workoutBlock}>
         <h3 className={styles.bodyWeightTitle}>Вес тела</h3>
         <div className={styles.bodyWeightContainer}>

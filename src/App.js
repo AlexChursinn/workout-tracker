@@ -39,7 +39,7 @@ const App = () => {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
   const hasInitialized = useRef(false);
-  const lastNavigation = useRef({ date: null, workoutId: null }); // Track last navigation
+  const lastNavigation = useRef({ date: null, workoutId: null });
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -219,7 +219,7 @@ const App = () => {
       return;
     }
     lastNavigation.current = { date: dateKey, workoutId };
-    setSelectedDate(date);
+    setSelectedDate(date); // Обновляем selectedDate
     setShowTable(true);
     const formattedDate = formatDateToLocal(date);
     console.log('Переход на дату:', formattedDate, 'workoutId:', workoutId);
@@ -394,7 +394,7 @@ const App = () => {
               }
             />
             <Route
-              path="/exercises"
+              path="/exercicios"
               element={
                 <ProtectedRoute>
                   <Exercises
