@@ -25,8 +25,12 @@ import deleteIconBlack from '../assets/delete-black.svg';
 import deleteIconWhite from '../assets/delete-white.svg';
 import closeIconBlack from '../assets/close-black.svg';
 import closeIconWhite from '../assets/close-white.svg';
+import arrowLeft from '../assets/arrow-left.svg';
+import arrowRight from '../assets/arrow-right.svg';
 
 registerLocale('ru', ru);
+
+const ITEMS_PER_PAGE = 30;
 
 const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataUpdate }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -34,11 +38,12 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [workoutToCopy, setWorkoutToCopy] = useState(null);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const dateSelectorRef = useRef(null);
   const dropdownRef = useRef(null);
   const modalRef = useRef(null);
   const navigate = useNavigate();
-  const lastNavigation = useRef({ date: null, workoutId: null }); // Track last navigation
+  const lastNavigation = useRef({ date: null, workoutId: null });
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -77,28 +82,31 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
   }, []);
 
   const formatDateToLocal = useCallback((date) => {
-    return date.toLocaleDateString('sv-SE'); // sv-SE gives YYYY-MM-DD
+    return date.toLocaleDateString('sv-SE');
   }, []);
 
-  const handleDateChange = useCallback((date, workoutId) => {
-    if (date instanceof Date && !isNaN(date)) {
-      const dateKey = date.toDateString();
-      const navigationKey = `${dateKey}-${workoutId}`;
-      if (
-        lastNavigation.current.date === dateKey &&
-        lastNavigation.current.workoutId === workoutId
-      ) {
-        console.log('Duplicate navigation detected, skipping:', navigationKey);
-        return;
+  const handleDateChange = useCallback(
+    (date, workoutId) => {
+      if (date instanceof Date && !isNaN(date)) {
+        const dateKey = date.toDateString();
+        const navigationKey = `${dateKey}-${workoutId}`;
+        if (
+          lastNavigation.current.date === dateKey &&
+          lastNavigation.current.workoutId === workoutId
+        ) {
+          console.log('Duplicate navigation detected, skipping:', navigationKey);
+          return;
+        }
+        lastNavigation.current = { date: dateKey, workoutId };
+        console.log('Выбрана дата в handleDateChange:', date);
+        setSelectedDate(date);
+        onDateSelect(date, workoutId);
+      } else {
+        console.error('Invalid date:', date);
       }
-      lastNavigation.current = { date: dateKey, workoutId };
-      console.log('Выбрана дата в handleDateChange:', date);
-      setSelectedDate(date);
-      onDateSelect(date, workoutId);
-    } else {
-      console.error('Invalid date:', date);
-    }
-  }, [onDateSelect]);
+    },
+    [onDateSelect]
+  );
 
   const handleCalendarClick = useCallback(() => {
     if (dateSelectorRef.current) {
@@ -110,43 +118,96 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
     setShowDropdown((prev) => (prev === workoutKey ? null : workoutKey));
   }, []);
 
-  const handleDeleteWorkout = useCallback(async (date, workoutId) => {
-    try {
-      const formattedDate = formatDateToLocal(new Date(date));
-      await deleteWorkout(workoutId, formattedDate, authToken);
-      setShowDropdown(null);
-      setError(null);
-      onDataUpdate();
-    } catch (error) {
-      console.error('Ошибка при удалении тренировки:', error);
-      setError(error.message || 'Не удалось удалить тренировку. Попробуйте снова.');
-    }
-  }, [authToken, formatDateToLocal, onDataUpdate]);
+  const handleDeleteWorkout = useCallback(
+    async (date, workoutId) => {
+      try {
+        const formattedDate = formatDateToLocal(new Date(date));
+        await deleteWorkout(workoutId, formattedDate, authToken);
+        setShowDropdown(null);
+        setError(null);
+        onDataUpdate();
+      } catch (error) {
+        console.error('Ошибка при удалении тренировки:', error);
+        setError(error.message || 'Не удалось удалить тренировку. Попробуйте снова.');
+      }
+    },
+    [authToken, formatDateToLocal, onDataUpdate]
+  );
 
   const handleCopyWorkout = useCallback((date, workoutId) => {
     setWorkoutToCopy({ date, workoutId });
     setShowDatePicker(true);
   }, []);
 
-  const handleDateSelectForCopy = useCallback(async (newDate) => {
-    if (!newDate || isNaN(newDate)) {
-      console.error('Invalid target date for copy:', newDate);
-      setError('Пожалуйста, выберите действительную дату.');
-      return;
+  const handleDateSelectForCopy = useCallback(
+    async (newDate) => {
+      if (!newDate || isNaN(newDate)) {
+        console.error('Invalid target date for copy:', newDate);
+        setError('Пожалуйста, выберите действительную дату.');
+        return;
+      }
+      const formattedSourceDate = formatDateToLocal(new Date(workoutToCopy.date));
+      const formattedTargetDate = formatDateToLocal(newDate);
+      try {
+        await copyWorkout(formattedSourceDate, workoutToCopy.workoutId, formattedTargetDate, authToken);
+        setShowDatePicker(false);
+        setWorkoutToCopy(null);
+        setError(null);
+        onDataUpdate();
+      } catch (error) {
+        console.error('Ошибка при копировании тренировки:', error);
+        setError(error.message || 'Не удалось скопировать тренировку. Попробуйте снова.');
+      }
+    },
+    [authToken, formatDateToLocal, onDataUpdate, workoutToCopy]
+  );
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const getPageNumbers = () => {
+    const totalItems = filteredWorkoutData.length;
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    const maxPagesToShow = window.innerWidth <= 375 ? 3 : window.innerWidth <= 768 ? 5 : 7;
+    const pages = [];
+
+    if (totalPages <= maxPagesToShow) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+      const sidePages = Math.floor((maxPagesToShow - 3) / 2);
+      let startPage = Math.max(2, currentPage - sidePages);
+      let endPage = Math.min(totalPages - 1, currentPage + sidePages);
+
+      if (endPage - startPage + 2 < maxPagesToShow - 2) {
+        if (currentPage < totalPages / 2) {
+          endPage = Math.min(totalPages - 1, startPage + maxPagesToShow - 3);
+        } else {
+          startPage = Math.max(2, endPage - maxPagesToShow + 3);
+        }
+      }
+
+      if (startPage > 2) {
+        pages.push('...');
+      }
+
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+
+      if (endPage < totalPages - 1) {
+        pages.push('...');
+      }
+
+      pages.push(totalPages);
     }
-    const formattedSourceDate = formatDateToLocal(new Date(workoutToCopy.date));
-    const formattedTargetDate = formatDateToLocal(newDate);
-    try {
-      await copyWorkout(formattedSourceDate, workoutToCopy.workoutId, formattedTargetDate, authToken);
-      setShowDatePicker(false);
-      setWorkoutToCopy(null);
-      setError(null);
-      onDataUpdate();
-    } catch (error) {
-      console.error('Ошибка при копировании тренировки:', error);
-      setError(error.message || 'Не удалось скопировать тренировку. Попробуйте снова.');
-    }
-  }, [authToken, formatDateToLocal, onDataUpdate, workoutToCopy]);
+
+    return pages;
+  };
 
   if (loading) {
     return <Spinner darkMode={darkMode} />;
@@ -176,7 +237,7 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
     const isFilled = highlightedDates.includes(dateTime);
 
     return (
-      <div 
+      <div
         style={{
           backgroundColor: isFilled ? '#000' : 'transparent',
           color: isFilled ? 'white' : '',
@@ -190,6 +251,10 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
   };
 
   const hasWorkouts = filteredWorkoutData.length > 0;
+  const totalPages = Math.ceil(filteredWorkoutData.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentWorkouts = filteredWorkoutData.slice(startIndex, endIndex);
 
   return (
     <div className={styles.homeContainer}>
@@ -211,7 +276,7 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
       {hasWorkouts ? (
         <>
           <h1 className={styles.mainTitle}>История тренировок</h1>
-          {filteredWorkoutData.map(({ date, workoutId, title, exerciseCount }) => {
+          {currentWorkouts.map(({ date, workoutId, title, exerciseCount }) => {
             const workoutsForDate = workoutsByDate[date] || [];
             const showWorkoutNumber = workoutsForDate.length > 1;
             const workoutKey = `${date}-${workoutId}`;
@@ -309,17 +374,58 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
               </div>
             );
           })}
+          {totalPages > 1 && (
+            <div className={styles.paginationContainer}>
+              <button
+                className={styles.paginationButton}
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                aria-label="Предыдущая страница"
+              >
+                <img
+                  src={arrowLeft}
+                  alt="Предыдущая страница"
+                  className={styles.paginationIcon}
+                />
+              </button>
+              <div className={styles.pageNumbers}>
+                {getPageNumbers().map((page, index) =>
+                  page === '...' ? (
+                    <span key={`ellipsis-${index}`} className={styles.ellipsis}>
+                      ...
+                    </span>
+                  ) : (
+                    <button
+                      key={page}
+                      className={`${styles.paginationPageButton} ${currentPage === page ? styles.activePage : ''}`}
+                      onClick={() => handlePageChange(page)}
+                      aria-label={`Страница ${page}`}
+                      aria-current={currentPage === page ? 'page' : undefined}
+                    >
+                      {page}
+                    </button>
+                  )
+                )}
+              </div>
+              <button
+                className={styles.paginationButton}
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                aria-label="Следующая страница"
+              >
+                <img
+                  src={arrowRight}
+                  alt="Следующая страница"
+                  className={styles.paginationIcon}
+                />
+              </button>
+            </div>
+          )}
         </>
       ) : (
         <div className={styles.noWorkouts}>
-          <img
-            src={darkMode ? lineWhite : lineBlack}
-            alt="Линия"
-            className={styles.lineIcon}
-          />
-          <h1 className={styles.noWorkoutsMessage}>
-            Создайте свою тренировку через календарь
-          </h1>
+          <img src={darkMode ? lineWhite : lineBlack} alt="Линия" className={styles.lineIcon} />
+          <h1 className={styles.noWorkoutsMessage}>Создайте свою тренировку через календарь</h1>
         </div>
       )}
       {showDatePicker && (

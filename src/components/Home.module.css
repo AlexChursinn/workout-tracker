@@ -222,7 +222,7 @@
   margin: 0 auto 20px;
   color: var(--text-color);
   font-size: 1.5rem;
-  max-width: calc(100% - 50px); /* Ограничиваем ширину, чтобы не наезжать на иконку */
+  max-width: calc(100% - 50px);
   text-align: center;
 }
 
@@ -233,6 +233,85 @@
   border-radius: 4px;
   margin-bottom: 10px;
   text-align: center;
+}
+
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0 90px;
+  color: var(--text-color);
+}
+
+.paginationButton {
+  background-color: var(--button-bg-color);
+  border: none;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.paginationButton:disabled {
+  background-color: var(--button-disabled-bg-color);
+  cursor: not-allowed;
+  background-color: #4d4d4d;
+}
+
+.paginationButton:hover:not(:disabled) {
+  background-color: #4d4d4d;
+}
+
+.paginationIcon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1); /* Makes pagination arrow icons white */
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.paginationPageButton {
+  background-color: var(--button-bg-color);
+  border: none;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--button-text-color);
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.paginationPageButton:hover:not(:disabled) {
+  background-color: #4d4d4d;
+}
+
+.activePage {
+  background-color: #4d4d4d;
+  font-weight: bold;
+}
+
+.ellipsis {
+  font-size: 1rem;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
 }
 
 @media (max-width: 768px) {
@@ -260,12 +339,43 @@
 
   .modalContent h2 {
     font-size: 1.25rem;
-    max-width: calc(100% - 40px); /* Меньший отступ для средних экранов */
+    max-width: calc(100% - 40px);
   }
 
   .closeIcon {
     width: 16px;
     height: 16px;
+  }
+
+  .paginationContainer {
+    gap: 8px;
+    margin: 16px 0 80px;
+  }
+
+  .paginationButton {
+    width: 35px;
+    height: 35px;
+  }
+
+  .paginationIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .paginationPageButton {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .ellipsis {
+    font-size: 0.9rem;
+    width: 35px;
+    height: 35px;
+  }
+
+  .pageNumbers {
+    gap: 6px;
   }
 }
 
@@ -290,11 +400,42 @@
 
   .modalContent h2 {
     font-size: 1rem;
-    max-width: calc(100% - 35px); /* Еще меньший отступ для маленьких экранов */
+    max-width: calc(100% - 35px);
   }
 
   .closeIcon {
     width: 14px;
     height: 14px;
+  }
+
+  .paginationContainer {
+    gap: 6px;
+    margin: 12px 0 90px;
+  }
+
+  .paginationButton {
+    width: 30px;
+    height: 30px;
+  }
+
+  .paginationIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .paginationPageButton {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .ellipsis {
+    font-size: 0.8rem;
+    width: 30px;
+    height: 30px;
+  }
+
+  .pageNumbers {
+    gap: 4px;
   }
 }
