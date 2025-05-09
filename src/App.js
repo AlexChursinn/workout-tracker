@@ -394,7 +394,7 @@ const App = () => {
               }
             />
             <Route
-              path="/exercicios"
+              path="/exercises"
               element={
                 <ProtectedRoute>
                   <Exercises

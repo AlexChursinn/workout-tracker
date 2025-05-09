@@ -1745,6 +1745,67 @@
         }
       ],
       "customMuscleGroups": {}
+    },
+    {
+      "id": 1746800206371,
+      "name": "101",
+      "email": "101@gmail.com",
+      "passwordHash": "$2a$10$.EZB0soIPZlNvltyuBxbH.dD.3gNxoOszJum1jJd3zPDwImxPad4S",
+      "workouts": [
+        {
+          "id": 1746800211658,
+          "workoutId": 1,
+          "workout_date": "2025-05-09",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746800211643,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746800281116,
+          "workoutId": 2,
+          "workout_date": "2025-05-09",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746800281109,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        }
+      ],
+      "customMuscleGroups": {
+        "test": [
+          "test"
+        ]
+      }
     }
   ]
 }
