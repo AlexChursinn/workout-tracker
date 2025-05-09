@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
@@ -9,6 +9,7 @@ registerLocale('ru', ru);
 
 const DateSelector = forwardRef(({ selectedDate, onDateSelect, filledDates }, ref) => {
   const [openCalendar, setOpenCalendar] = useState(false);
+  const lastSelected = useRef(null); // Track last selected date
 
   const highlightedDates = filledDates.map((date) => new Date(date).setHours(0, 0, 0, 0));
 
@@ -36,6 +37,19 @@ const DateSelector = forwardRef(({ selectedDate, onDateSelect, filledDates }, re
     closeCalendar: () => setOpenCalendar(false),
   }));
 
+  const handleDateChange = (date) => {
+    if (date instanceof Date && !isNaN(date)) {
+      const dateKey = date.toDateString();
+      if (lastSelected.current === dateKey) {
+        console.log('Duplicate date selection detected, skipping:', dateKey);
+        return;
+      }
+      lastSelected.current = dateKey;
+      onDateSelect(date);
+      setOpenCalendar(false);
+    }
+  };
+
   return (
     <div>
       <h2 className="dateDisplay" onClick={() => setOpenCalendar(!openCalendar)}>
@@ -44,10 +58,7 @@ const DateSelector = forwardRef(({ selectedDate, onDateSelect, filledDates }, re
       {openCalendar && (
         <DatePicker
           selected={selectedDate}
-          onChange={(date) => {
-            onDateSelect(date);
-            setOpenCalendar(false);
-          }}
+          onChange={handleDateChange}
           inline
           renderDayContents={renderDayContents}
           locale="ru"

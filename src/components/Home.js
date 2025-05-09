@@ -38,6 +38,7 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
   const dropdownRef = useRef(null);
   const modalRef = useRef(null);
   const navigate = useNavigate();
+  const lastNavigation = useRef({ date: null, workoutId: null }); // Track last navigation
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -76,21 +77,28 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
   }, []);
 
   const formatDateToLocal = useCallback((date) => {
-    return date.toLocaleDateString('sv-SE'); // sv-SE дает YYYY-MM-DD
+    return date.toLocaleDateString('sv-SE'); // sv-SE gives YYYY-MM-DD
   }, []);
 
   const handleDateChange = useCallback((date, workoutId) => {
     if (date instanceof Date && !isNaN(date)) {
+      const dateKey = date.toDateString();
+      const navigationKey = `${dateKey}-${workoutId}`;
+      if (
+        lastNavigation.current.date === dateKey &&
+        lastNavigation.current.workoutId === workoutId
+      ) {
+        console.log('Duplicate navigation detected, skipping:', navigationKey);
+        return;
+      }
+      lastNavigation.current = { date: dateKey, workoutId };
       console.log('Выбрана дата в handleDateChange:', date);
       setSelectedDate(date);
       onDateSelect(date, workoutId);
-      const formattedDate = formatDateToLocal(date);
-      console.log('Форматированная дата для навигации:', formattedDate);
-      navigate(`/${formattedDate}/${workoutId}`, { replace: true });
     } else {
       console.error('Invalid date:', date);
     }
-  }, [formatDateToLocal, navigate, onDateSelect]);
+  }, [onDateSelect]);
 
   const handleCalendarClick = useCallback(() => {
     if (dateSelectorRef.current) {

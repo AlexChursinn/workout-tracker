@@ -39,6 +39,7 @@ const App = () => {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
   const hasInitialized = useRef(false);
+  const lastNavigation = useRef({ date: null, workoutId: null }); // Track last navigation
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ const App = () => {
   useEffect(() => {
     console.log('Текущий маршрут:', location.pathname);
     window.scrollTo(0, 0);
+    lastNavigation.current = { date: null, workoutId: null }; // Reset on route change
   }, [location.pathname]);
 
   useEffect(() => {
@@ -81,7 +83,6 @@ const App = () => {
       console.log('Начало initializeAuth, isAuthenticated:', isAuthenticated, 'authToken:', !!authToken);
       setLoading(true);
       try {
-        // Проверяем Telegram-авторизацию
         if (window.Telegram?.WebApp?.initDataUnsafe?.user && !isAuthenticated) {
           console.log('Авторизация через Telegram');
           const token = await loginWithTelegram(window.Telegram.WebApp.initDataUnsafe.user);
@@ -95,7 +96,6 @@ const App = () => {
           setIsAuthenticated(true);
           await fetchData(authToken);
         } else {
-          // Пробуем обновить токен через refresh-token
           console.log('Попытка обновления токена через /refresh-token');
           const newToken = await refreshAuthToken();
           if (newToken) {
@@ -110,7 +110,7 @@ const App = () => {
             setMessageType('info');
             setIsAuthenticated(false);
             localStorage.removeItem('jwt');
-            navigate('/login', { replace: true });
+            navigate('/login');
           }
         }
       } catch (error) {
@@ -119,7 +119,7 @@ const App = () => {
         setMessageType('error');
         setIsAuthenticated(false);
         localStorage.removeItem('jwt');
-        navigate('/login', { replace: true });
+        navigate('/login');
       } finally {
         console.log('Завершение initializeAuth, установка loading: false');
         setLoading(false);
@@ -127,7 +127,7 @@ const App = () => {
     };
 
     initializeAuth();
-  }, [isAuthenticated, authToken, navigate]); // Added dependencies to prevent multiple runs
+  }, [isAuthenticated, authToken, navigate]);
 
   useEffect(() => {
     if (darkMode) document.body.classList.add('dark-theme');
@@ -209,11 +209,21 @@ const App = () => {
       console.error('Invalid date in handleDateSelect:', date);
       return;
     }
+    const dateKey = date.toDateString();
+    const navigationKey = `${dateKey}-${workoutId}`;
+    if (
+      lastNavigation.current.date === dateKey &&
+      lastNavigation.current.workoutId === workoutId
+    ) {
+      console.log('Duplicate navigation detected, skipping:', navigationKey);
+      return;
+    }
+    lastNavigation.current = { date: dateKey, workoutId };
     setSelectedDate(date);
     setShowTable(true);
     const formattedDate = formatDateToLocal(date);
     console.log('Переход на дату:', formattedDate, 'workoutId:', workoutId);
-    navigate(`/${formattedDate}/${workoutId}`, { replace: true });
+    navigate(`/${formattedDate}/${workoutId}`);
   };
 
   const handleLogin = (token) => {
@@ -313,8 +323,8 @@ const App = () => {
     setWorkoutData({});
     setCustomMuscleGroups({});
     setIsAuthenticated(false);
-    hasInitialized.current = false; // Reset to allow re-initialization after logout
-    navigate('/login', { replace: true });
+    hasInitialized.current = false;
+    navigate('/login');
   };
 
   const isTokenExpired = (token) => {
@@ -405,7 +415,7 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-            <Route path="*" element={<Navigate to="/home" replace />} />
+            <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
         </main>
       )}

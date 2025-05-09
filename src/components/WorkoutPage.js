@@ -17,12 +17,18 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
   const inputRef = useRef(null);
   const textMeasureRef = useRef(null);
   const navigate = useNavigate();
+  const hasSynced = useRef(false); // Prevent multiple syncs
 
   useEffect(() => {
     const parsedDate = new Date(date);
     parsedDate.setHours(0, 0, 0, 0);
     const localDate = new Date(parsedDate.getTime() - parsedDate.getTimezoneOffset() * 60000);
-    if (!isNaN(localDate) && localDate.getTime() !== selectedDate.getTime()) {
+    if (
+      !hasSynced.current &&
+      !isNaN(localDate) &&
+      localDate.toDateString() !== selectedDate.toDateString()
+    ) {
+      hasSynced.current = true;
       onDateSelect(localDate, parseInt(workoutId));
     }
   }, [date, workoutId, onDateSelect, selectedDate]);
@@ -33,6 +39,7 @@ const WorkoutPage = ({ workoutData, selectedDate, onDateSelect, onWorkoutChange,
     setWorkoutTitle(currentWorkout.title || '');
     setBodyWeight(currentWorkout.bodyWeight || '');
     setNotes(currentWorkout.notes || '');
+    hasSynced.current = false; // Reset for future navigations
   }, [selectedDate, workoutData, workoutId]);
 
   useEffect(() => {
