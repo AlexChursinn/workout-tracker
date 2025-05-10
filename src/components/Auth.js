@@ -58,13 +58,20 @@ const Auth = ({ onLogin, darkMode }) => {
     setIsTestAccount(email.toLowerCase() === 'test@gmail.com');
   }, [email]);
 
-  // Auto-focus on first OTP field with delay for mobile compatibility
+  // Auto-focus on first OTP field with enhanced mobile compatibility
   useEffect(() => {
     if (step === 'otp' && otpRefs.current[0]) {
-      const timer = setTimeout(() => {
-        otpRefs.current[0].focus();
-        otpRefs.current[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 100); // Small delay to ensure DOM is ready
+      const focusInput = () => {
+        const input = otpRefs.current[0];
+        input.focus();
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Trigger keyboard explicitly for mobile
+        if (document.activeElement !== input) {
+          input.focus(); // Retry focus
+        }
+      };
+
+      const timer = setTimeout(focusInput, 200); // Increased delay for mobile rendering
       return () => clearTimeout(timer);
     }
   }, [step]);
