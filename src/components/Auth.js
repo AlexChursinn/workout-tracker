@@ -29,12 +29,12 @@ const Auth = ({ onLogin, darkMode }) => {
   const navigate = useNavigate();
   const otpRefs = useRef([]);
 
-  // Инициализация EmailJS
+  // Initialize EmailJS
   useEffect(() => {
     emailjs.init('a9RNH2h1jh8xfMy6-');
   }, []);
 
-  // Загрузка сохраненного email и статуса блокировки
+  // Load saved email and block status
   useEffect(() => {
     const savedEmail = localStorage.getItem('rememberedEmail');
     if (savedEmail) {
@@ -53,25 +53,25 @@ const Auth = ({ onLogin, darkMode }) => {
     }
   }, []);
 
-  // Проверка test@gmail.com
+  // Check for test account
   useEffect(() => {
     setIsTestAccount(email.toLowerCase() === 'test@gmail.com');
   }, [email]);
 
-  // Автофокус на первом поле OTP при переходе на шаг otp
+  // Auto-focus on first OTP field
   useEffect(() => {
     if (step === 'otp' && otpRefs.current[0]) {
       otpRefs.current[0].focus();
     }
   }, [step]);
 
-  // Обновление времени до разблокировки
+  // Update time left for block
   const updateTimeLeft = (blockTime) => {
     const timeRemaining = Math.max(0, Math.floor((blockTime - new Date().getTime()) / 1000));
     setTimeLeft(timeRemaining);
   };
 
-  // Таймер для повторной отправки
+  // Resend timer
   useEffect(() => {
     let timer;
     if (resendTimer > 0) {
@@ -82,7 +82,7 @@ const Auth = ({ onLogin, darkMode }) => {
     return () => clearInterval(timer);
   }, [resendTimer]);
 
-  // Таймер блокировки
+  // Block timer
   useEffect(() => {
     if (isBlocked && blockTime) {
       const interval = setInterval(() => {
@@ -99,7 +99,7 @@ const Auth = ({ onLogin, darkMode }) => {
     }
   }, [isBlocked, blockTime]);
 
-  // Управление видимостью сообщения
+  // Message visibility
   useEffect(() => {
     if (message) {
       setIsMessageVisible(true);
@@ -483,7 +483,9 @@ const Auth = ({ onLogin, darkMode }) => {
                 {otp.map((digit, index) => (
                   <input
                     key={index}
-                    type={showOtp ? 'text' : 'password'}
+                    type={showOtp ? 'tel' : 'password'}
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     value={digit}
                     onChange={(e) => handleOtpInput(index, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(index, e)}

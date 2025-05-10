@@ -23,6 +23,8 @@
 
 .darkMode .formContainer {
   background-color: rgba(var(--bg-color-rgb), 0.9);
+ 
+
   border-color: var(--table-border-color);
 }
 
