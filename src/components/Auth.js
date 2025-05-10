@@ -61,17 +61,27 @@ const Auth = ({ onLogin, darkMode }) => {
   // Auto-focus on first OTP field with enhanced mobile compatibility
   useEffect(() => {
     if (step === 'otp' && otpRefs.current[0]) {
+      let attempts = 0;
+      const maxAttempts = 3;
+
       const focusInput = () => {
         const input = otpRefs.current[0];
-        input.focus();
-        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        // Trigger keyboard explicitly for mobile
-        if (document.activeElement !== input) {
-          input.focus(); // Retry focus
+        if (input) {
+          input.focus();
+          input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          input.select(); // Trigger keyboard on iOS
+          if (document.activeElement !== input && attempts < maxAttempts) {
+            attempts++;
+            requestAnimationFrame(focusInput); // Retry on next frame
+          }
         }
       };
 
-      const timer = setTimeout(focusInput, 200); // Increased delay for mobile rendering
+      // Initial attempt after a short delay
+      const timer = setTimeout(() => {
+        requestAnimationFrame(focusInput);
+      }, 300); // Increased delay for mobile rendering
+
       return () => clearTimeout(timer);
     }
   }, [step]);
@@ -187,7 +197,7 @@ const Auth = ({ onLogin, darkMode }) => {
           )
           .catch((error) => {
             console.error('Ошибка EmailJS:', error);
-            throw new Error(`Ошибка отправки email: ${error.text || error.message}`);
+            throw new Error('Ошибка отправки email: Не удалось отправить код');
           });
         setMessage(`Код отправлен на ${email}`);
         setMessageType('success');
@@ -261,7 +271,7 @@ const Auth = ({ onLogin, darkMode }) => {
           )
           .catch((error) => {
             console.error('Ошибка EmailJS:', error);
-            throw new Error(`Ошибка отправки email: ${error.text || error.message}`);
+            throw new Error('Ошибка отправки email: Не удалось отправить код');
           });
         setMessage(`Новый код отправлен на ${email}`);
         setMessageType('success');
@@ -463,7 +473,7 @@ const Auth = ({ onLogin, darkMode }) => {
           <>
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Электронная почта"
               value={email}
               onChange={(e) => handleInputChange('email', e.target.value)}
               onKeyPress={(e) => handleKeyPress(e, handleEmailSubmit)}
