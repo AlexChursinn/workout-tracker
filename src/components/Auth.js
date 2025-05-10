@@ -473,7 +473,7 @@ const Auth = ({ onLogin, darkMode }) => {
           <>
             <input
               type="email"
-              placeholder="Электронная почта"
+              placeholder="Введите вашу почту"
               value={email}
               onChange={(e) => handleInputChange('email', e.target.value)}
               onKeyPress={(e) => handleKeyPress(e, handleEmailSubmit)}

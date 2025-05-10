@@ -101,7 +101,6 @@
 
 .input:focus {
   border-bottom-color: var(--text-color);
-  outline: 2px solid var(--text-color);
   outline-offset: 2px;
   box-shadow: none;
 }
@@ -149,7 +148,7 @@
 }
 
 .otpInput:focus {
-  
+  border-bottom-color: var(--text-color);
   outline: 2px solid var(--text-color);
 
   box-shadow: none;
@@ -377,11 +376,6 @@
     -webkit-appearance: none;
   }
 
-  .otpInput:focus {
-    outline: 2px solid white;
-   
-    box-shadow: none;
-  }
 
   .submitButton,
   .resendButton {
@@ -476,11 +470,6 @@
     -webkit-appearance: none;
   }
 
-  .otpInput:focus {
-    outline: 2px solid var(--text-color);
-   
-    box-shadow: none;
-  }
 
   .submitButton,
   .resendButton {
@@ -561,11 +550,7 @@
     -webkit-appearance: none;
   }
 
-  .otpInput:focus {
-    outline: 2px solid var(--text-color);
-    
-    box-shadow: none;
-  }
+
 
   .submitButton,
   .resendButton {
