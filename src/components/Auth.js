@@ -5,6 +5,7 @@ import Spinner from './Spinner';
 import styles from './Auth.module.css';
 import showIcon from '../assets/show.svg';
 import hideIcon from '../assets/hidden.svg';
+import arrowLeft from '../assets/arrow-left.svg';
 
 const Auth = ({ onLogin, darkMode }) => {
   const [step, setStep] = useState('email'); // email, otp, name
@@ -24,13 +25,13 @@ const Auth = ({ onLogin, darkMode }) => {
   const [isBlocked, setIsBlocked] = useState(false);
   const [blockTime, setBlockTime] = useState(null);
   const [timeLeft, setTimeLeft] = useState(null);
-  const [isTestAccount, setIsTestAccount] = useState(false); // Flag for test@gmail.com
+  const [isTestAccount, setIsTestAccount] = useState(false);
   const navigate = useNavigate();
   const otpRefs = useRef([]);
 
   // Инициализация EmailJS
   useEffect(() => {
-    emailjs.init('a9RNH2h1jh8xfMy6-'); // Ваш Public Key из EmailJS
+    emailjs.init('a9RNH2h1jh8xfMy6-');
   }, []);
 
   // Загрузка сохраненного email и статуса блокировки
@@ -40,7 +41,7 @@ const Auth = ({ onLogin, darkMode }) => {
       setEmail(savedEmail);
       setRememberMe(true);
     }
-  
+
     const savedBlockTime = localStorage.getItem('otpBlockTime');
     if (savedBlockTime && new Date().getTime() < parseInt(savedBlockTime)) {
       setIsBlocked(true);
@@ -51,12 +52,18 @@ const Auth = ({ onLogin, darkMode }) => {
       setResendAttempts(0);
     }
   }, []);
-  
 
   // Проверка test@gmail.com
   useEffect(() => {
     setIsTestAccount(email.toLowerCase() === 'test@gmail.com');
   }, [email]);
+
+  // Автофокус на первом поле OTP при переходе на шаг otp
+  useEffect(() => {
+    if (step === 'otp' && otpRefs.current[0]) {
+      otpRefs.current[0].focus();
+    }
+  }, [step]);
 
   // Обновление времени до разблокировки
   const updateTimeLeft = (blockTime) => {
@@ -153,20 +160,18 @@ const Auth = ({ onLogin, darkMode }) => {
     try {
       let otpCode;
       if (isTestAccount) {
-        // Тестовый аккаунт: генерация OTP и отображение в UI
         otpCode = generateOtp();
         setMessage(`Ваш код: ${otpCode}`);
         setMessageType('success');
       } else {
-        // Реальный аккаунт: отправка OTP через EmailJS
         otpCode = generateOtp();
         await emailjs
           .send(
-            'service_nbiuc0q', // Замените на ваш Service ID из EmailJS
-            'template_d4ohedt', // Замените на ваш Template ID из EmailJS
+            'service_nbiuc0q',
+            'template_d4ohedt',
             {
-              to_email: email, // Убедитесь, что имя переменной совпадает с шаблоном (например, {{to_email}})
-              otp_code: otpCode, // Убедитесь, что имя переменной совпадает с шаблоном (например, {{otp_code}})
+              to_email: email,
+              otp_code: otpCode,
             }
           )
           .catch((error) => {
@@ -177,7 +182,6 @@ const Auth = ({ onLogin, darkMode }) => {
         setMessageType('success');
       }
 
-      // Отправка OTP на сервер для хранения
       const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/send-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -192,9 +196,6 @@ const Auth = ({ onLogin, darkMode }) => {
         setOtp(['', '', '', '']);
         setResendTimer(59);
         setResendAttempts((prev) => prev + 1);
-        if (otpRefs.current[0]) {
-          otpRefs.current[0].focus();
-        }
       } else {
         setMessage(data.message || 'Ошибка при отправке кода');
         setMessageType('error');
@@ -218,7 +219,7 @@ const Auth = ({ onLogin, darkMode }) => {
     }
 
     if (resendAttempts >= 3) {
-      const blockUntil = new Date().getTime() + 24 * 60 * 60 * 1000; // 24 часа
+      const blockUntil = new Date().getTime() + 24 * 60 * 60 * 1000;
       setIsBlocked(true);
       setBlockTime(blockUntil);
       setResendAttempts(0);
@@ -240,11 +241,11 @@ const Auth = ({ onLogin, darkMode }) => {
         otpCode = generateOtp();
         await emailjs
           .send(
-            'service_nbiuc0q', // Замените на ваш Service ID из EmailJS
-            'template_d4ohedt', // Замените на ваш Template ID из EmailJS
+            'service_nbiuc0q',
+            'template_d4ohedt',
             {
-              to_email: email, // Убедитесь, что имя переменной совпадает с шаблоном
-              otp_code: otpCode, // Убедитесь, что имя переменной совпадает с шаблоном
+              to_email: email,
+              otp_code: otpCode,
             }
           )
           .catch((error) => {
@@ -267,9 +268,6 @@ const Auth = ({ onLogin, darkMode }) => {
         setResendTimer(59);
         setResendAttempts((prev) => prev + 1);
         setOtp(['', '', '', '']);
-        if (otpRefs.current[0]) {
-          otpRefs.current[0].focus();
-        }
       } else {
         setMessage(data.message || 'Ошибка при отправке кода');
         setMessageType('error');
@@ -388,6 +386,16 @@ const Auth = ({ onLogin, darkMode }) => {
     }
   };
 
+  const handleOtpPaste = (e) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text').trim();
+    if (/^\d{4}$/.test(pastedData)) {
+      const newOtp = pastedData.split('');
+      setOtp(newOtp);
+      otpRefs.current[3].focus();
+    }
+  };
+
   const handleOtpKeyDown = (index, e) => {
     if (e.key === 'Backspace' && !otp[index] && index > 0) {
       otpRefs.current[index - 1].focus();
@@ -414,11 +422,30 @@ const Auth = ({ onLogin, darkMode }) => {
     return `${hours}ч ${minutes}м`;
   };
 
+  const handleBackToEmail = () => {
+    setStep('email');
+    setOtp(['', '', '', '']);
+    setErrors({});
+    setMessage('');
+    setResendTimer(0);
+    setResendAttempts(0);
+  };
+
   return (
     <div className={`${styles.authContainer} ${darkMode ? styles.darkMode : ''}`}>
       <div className={styles.formContainer}>
+        {step === 'otp' && (
+          <button
+            type="button"
+            className={styles.backButton}
+            onClick={handleBackToEmail}
+            aria-label="Вернуться к вводу email"
+          >
+            <img src={arrowLeft} alt="Назад" className={styles.backIcon} />
+          </button>
+        )}
         <h2 className={styles.title}>
-          {step === 'email' ? 'Вход или регистрация' : step === 'otp' ? 'Введите код' : 'Введите ваше имя'}
+          {step === 'email' ? 'Вход или регистрация' : step === 'otp' ? 'Введите код из письма' : 'Введите ваше имя'}
         </h2>
 
         {step === 'email' && (
@@ -449,6 +476,8 @@ const Auth = ({ onLogin, darkMode }) => {
 
         {step === 'otp' && (
           <>
+            <p className={styles.otpEmail}>Отправлен на {email}</p>
+            <p className={styles.otpSpamHint}>Если во входящих нет, проверьте спам</p>
             <div className={styles.otpInputContainer}>
               <div className={styles.otpInputWrapper}>
                 {otp.map((digit, index) => (
@@ -458,6 +487,7 @@ const Auth = ({ onLogin, darkMode }) => {
                     value={digit}
                     onChange={(e) => handleOtpInput(index, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(index, e)}
+                    onPaste={handleOtpPaste}
                     className={`${styles.otpInput} ${isTestAccount ? styles.testOtpInput : ''}`}
                     maxLength={1}
                     ref={(el) => (otpRefs.current[index] = el)}
