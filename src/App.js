@@ -7,8 +7,7 @@ import Footer from './components/Footer';
 import Analytics from './components/Analytics';
 import Exercises from './components/Exercises';
 import Settings from './components/Settings';
-import Login from './components/Login';
-import Register from './components/Register';
+import Auth from './components/Auth';
 import ProtectedRoute from './ProtectedRoute';
 import Home from './components/Home';
 import Spinner from './components/Spinner';
@@ -105,12 +104,12 @@ const App = () => {
             setIsAuthenticated(true);
             await fetchData(newToken);
           } else {
-            console.log('Токен отсутствует или истек, перенаправление на /login');
+            console.log('Токен отсутствует или истек, перенаправление на /auth');
             setMessage('Пожалуйста, войдите в аккаунт.');
             setMessageType('info');
             setIsAuthenticated(false);
             localStorage.removeItem('jwt');
-            navigate('/login');
+            navigate('/auth');
           }
         }
       } catch (error) {
@@ -119,7 +118,7 @@ const App = () => {
         setMessageType('error');
         setIsAuthenticated(false);
         localStorage.removeItem('jwt');
-        navigate('/login');
+        navigate('/auth');
       } finally {
         console.log('Завершение initializeAuth, установка loading: false');
         setLoading(false);
@@ -324,7 +323,7 @@ const App = () => {
     setCustomMuscleGroups({});
     setIsAuthenticated(false);
     hasInitialized.current = false;
-    navigate('/login');
+    navigate('/auth');
   };
 
   const isTokenExpired = (token) => {
@@ -342,15 +341,14 @@ const App = () => {
         darkMode={darkMode}
         toggleTheme={toggleTheme}
         onLogout={handleLogout}
-        showLogoutButton={!['/login', '/register'].includes(location.pathname)}
+        showLogoutButton={location.pathname !== '/auth'}
       />
       {loading ? (
         <Spinner darkMode={darkMode} />
       ) : (
         <main className="container page-transition" key={location.pathname}>
           <Routes location={location}>
-            <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            <Route path="/register" element={<Register onLogin={handleLogin} />} />
+            <Route path="/auth" element={<Auth onLogin={handleLogin} darkMode={darkMode} />} />
             <Route
               path="/:date/:workoutId"
               element={
@@ -425,7 +423,7 @@ const App = () => {
           </Routes>
         </main>
       )}
-      {!['/login', '/register'].includes(location.pathname) && !loading && (
+      {location.pathname !== '/auth' && !loading && (
         <Footer darkMode={darkMode} onNavigateToday={() => handleDateSelect(new Date())} />
       )}
     </div>

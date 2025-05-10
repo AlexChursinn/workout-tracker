@@ -1,0 +1,465 @@
+.authContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 400px;
+  background-color: rgba(var(--bg-color-rgb), 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-sizing: border-box;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.darkMode .formContainer {
+  background-color: rgba(var(--bg-color-rgb), 0.9);
+  border-color: var(--table-border-color);
+}
+
+.title {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.input:focus {
+  border-bottom-color: var(--button-bg-color);
+}
+
+.inputError {
+  border-bottom-color: #b77e83;
+}
+
+.otpInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  justify-content: center;
+  width: 100%;
+}
+
+.otpInputWrapper {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.otpInput {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1.25rem;
+  color: var(--text-color);
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid var(--table-border-color);
+  text-align: center;
+  outline: none;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.otpInput[type='password'] {
+  text-security: disc;
+  -webkit-text-security: disc;
+  font-family: 'Rubik', sans-serif;
+}
+
+.otpInput:focus {
+  border-bottom-color: #4d4d4d;
+}
+
+.errorText {
+  font-family: 'Rubik', sans-serif;
+  color: #b77e83;
+  font-size: 0.75rem;
+  margin: 4px 0 12px 8px;
+  opacity: 0.9;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.submitButton {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  min-height: 42px;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px 
+}
+
+.submitButton:hover {
+  background-color: #4d4d4d;
+}
+
+.submitButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.resendButton {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  min-height: 42px;
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--table-border-color);
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resendButton:hover {
+  background-color: rgba(var(--button-bg-color-rgb), 0.1);
+}
+
+.resendButton:disabled {
+  color: #cccccc;
+  cursor: not-allowed;
+}
+
+.resendText {
+  font-family: 'Rubik', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-color);
+  text-align: center;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.toggleButton {
+  width: 36px;
+  height: 36px;
+  background-color: var(--button-bg-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background-color 0.3s ease;
+}
+
+.toggleButton:hover {
+  background-color: #4d4d4d;
+}
+
+.toggleIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.rememberMe {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  gap: 8px;
+  align-self: flex-start;
+}
+
+.rememberCheckbox {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--text-color);
+  border-radius: 3px;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s, border-color 0.3s;
+  appearance: none;
+  margin: 0;
+}
+
+.rememberCheckbox:checked {
+  background-color: var(--button-bg-color);
+  border-color: var(--button-bg-color);
+}
+
+.rememberCheckbox:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 10px;
+  border: solid var(--button-text-color);
+  border-width: 0 3px 3px 0;
+  transform: translate(-50%, -60%) rotate(45deg);
+}
+
+.rememberText {
+  font-family: 'Rubik', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.message {
+  font-family: 'Rubik', sans-serif;
+  margin-top: 16px;
+  padding: 12px;
+  font-size: 0.875rem;
+  text-align: center;
+  border-radius: 4px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  word-wrap: break-word;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.messageVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.successMessage {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+.errorMessage {
+  color: #fff;
+  background-color: #b77e83;
+  border: 1px solid #b77e83;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .authContainer {
+    padding: 0 20px;
+  }
+
+  .formContainer {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+
+  .input {
+    padding: 8px;
+    font-size: 0.875rem;
+  }
+
+  .otpInput {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .submitButton,
+  .resendButton {
+    padding: 8px;
+    font-size: 0.875rem;
+    min-height: 36px;
+  }
+
+  .resendText {
+    font-size: 0.8rem;
+  }
+
+  .errorText {
+    font-size: 0.7rem;
+    margin: 4px 0 10px 6px;
+  }
+
+  .message {
+    font-size: 0.8rem;
+    padding: 10px;
+  }
+
+  .toggleButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .toggleIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .rememberCheckbox {
+    width: 14px;
+    height: 14px;
+    border-width: 1.5px;
+  }
+
+  .rememberCheckbox:checked::after {
+    width: 5px;
+    height: 8px;
+    border-width: 0 2px 2px 0;
+  }
+
+  .rememberText {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .authContainer {
+    padding: 0 15px;
+  }
+
+  .formContainer {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .input {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  .otpInput {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .submitButton,
+  .resendButton {
+    padding: 8px;
+    font-size: 0.85rem;
+    min-height: 34px;
+  }
+
+  .resendText {
+    font-size: 0.75rem;
+  }
+
+  .toggleButton {
+    width: 30px;
+    height: 30px;
+  }
+
+  .toggleIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .rememberCheckbox {
+    width: 12px;
+    height: 12px;
+    border-width: 1.5px;
+  }
+
+  .rememberCheckbox:checked::after {
+    width: 4px;
+    height: 7px;
+    border-width: 0 2px 2px 0;
+  }
+
+  .rememberText {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .formContainer {
+    padding: 8px;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .input {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+
+  .otpInput {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+
+  .submitButton,
+  .resendButton {
+    padding: 6px;
+    font-size: 0.8rem;
+    min-height: 32px;
+  }
+
+  .resendText {
+    font-size: 0.7rem;
+  }
+
+  .toggleButton {
+    width: 28px;
+    height: 28px;
+  }
+
+  .toggleIcon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .rememberCheckbox {
+    width: 10px;
+    height: 10px;
+    border-width: 1px;
+  }
+
+  .rememberCheckbox:checked::after {
+    width: 3px;
+    height: 6px;
+    border-width: 0 1.5px 1.5px 0;
+  }
+
+  .rememberText {
+    font-size: 0.7rem;
+  }
+}

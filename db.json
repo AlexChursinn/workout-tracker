@@ -2783,7 +2783,11 @@
           "notes": "Test"
         }
       ],
-      "customMuscleGroups": {}
+      "customMuscleGroups": {
+        "1": [
+          "1"
+        ]
+      }
     },
     {
       "id": 1746813071871,
@@ -2791,6 +2795,80 @@
       "email": "11111@gmail.com",
       "passwordHash": "$2a$10$AcOD8Bs09K7qkxz/2gbku.O7iUmluzqSH3.C8HyijXQGeSh8/Xh/i",
       "workouts": [],
+      "customMuscleGroups": {}
+    },
+    {
+      "id": 1746868669103,
+      "name": "Alex",
+      "email": "alchursinn@gmail.com",
+      "passwordHash": null,
+      "workouts": [
+        {
+          "id": 1746868957514,
+          "workoutId": 1,
+          "workout_date": "2025-05-10",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746868957507,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        }
+      ],
+      "customMuscleGroups": {}
+    },
+    {
+      "id": 1746893880757,
+      "name": "Alex",
+      "email": "121@gmail.com",
+      "passwordHash": null,
+      "workouts": [],
+      "customMuscleGroups": {}
+    },
+    {
+      "id": 1746894741492,
+      "name": "Alex",
+      "email": "test@gmail.com",
+      "passwordHash": null,
+      "workouts": [
+        {
+          "id": 1746894747778,
+          "workoutId": 1,
+          "workout_date": "2025-05-09",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746894747766,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        }
+      ],
       "customMuscleGroups": {}
     }
   ]

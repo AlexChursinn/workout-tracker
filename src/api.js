@@ -195,27 +195,68 @@ export const refreshAuthToken = async () => {
   }
 };
 
-export const login = async (credentials) => {
+export const sendOtp = async (email, otp) => {
   try {
-    const response = await fetch(`${API_URL}/login`, {
+    const response = await fetch(`${API_URL}/auth/send-otp`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       credentials: 'include',
-      body: JSON.stringify(credentials),
+      body: JSON.stringify({ email, otp }),
     });
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || 'Ошибка авторизации');
+      throw new Error(errorData.message || 'Ошибка при отправке OTP');
     }
-
-    const { accessToken } = await response.json();
-    localStorage.setItem('jwt', accessToken);
-    return accessToken;
+    return await response.json();
   } catch (error) {
-    console.error('Ошибка при авторизации:', error);
+    console.error('Ошибка при отправке OTP:', error);
+    throw error;
+  }
+};
+
+export const verifyOtp = async (email, otp) => {
+  try {
+    const response = await fetch(`${API_URL}/auth/verify-otp`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({ email, otp }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Ошибка при проверке OTP');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Ошибка при проверке OTP:', error);
+    throw error;
+  }
+};
+
+export const completeRegistration = async (email, name) => {
+  try {
+    const response = await fetch(`${API_URL}/auth/complete-registration`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({ email, name }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Ошибка при завершении регистрации');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Ошибка при завершении регистрации:', error);
     throw error;
   }
 };
