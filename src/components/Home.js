@@ -39,6 +39,8 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
   const [workoutToCopy, setWorkoutToCopy] = useState(null);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loadingStates, setLoadingStates] = useState({});
+  const [isModalLoading, setIsModalLoading] = useState(false);
   const dateSelectorRef = useRef(null);
   const dropdownRef = useRef(null);
   const modalRef = useRef(null);
@@ -101,11 +103,12 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
         console.log('Выбрана дата в handleDateChange:', date);
         setSelectedDate(date);
         onDateSelect(date, workoutId);
+        navigate(`/${formatDateToLocal(date)}/${workoutId}`, { replace: true });
       } else {
         console.error('Invalid date:', date);
       }
     },
-    [onDateSelect]
+    [onDateSelect, navigate, formatDateToLocal]
   );
 
   const handleCalendarClick = useCallback(() => {
@@ -120,6 +123,8 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
 
   const handleDeleteWorkout = useCallback(
     async (date, workoutId) => {
+      const workoutKey = `${date}-${workoutId}`;
+      setLoadingStates((prev) => ({ ...prev, [workoutKey]: { ...prev[workoutKey], delete: true } }));
       try {
         const formattedDate = formatDateToLocal(new Date(date));
         await deleteWorkout(workoutId, formattedDate, authToken);
@@ -129,15 +134,29 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
       } catch (error) {
         console.error('Ошибка при удалении тренировки:', error);
         setError(error.message || 'Не удалось удалить тренировку. Попробуйте снова.');
+      } finally {
+        setLoadingStates((prev) => ({ ...prev, [workoutKey]: { ...prev[workoutKey], delete: false } }));
       }
     },
     [authToken, formatDateToLocal, onDataUpdate]
   );
 
-  const handleCopyWorkout = useCallback((date, workoutId) => {
-    setWorkoutToCopy({ date, workoutId });
-    setShowDatePicker(true);
-  }, []);
+  const handleCopyWorkout = useCallback(
+    async (date, workoutId) => {
+      const workoutKey = `${date}-${workoutId}`;
+      setLoadingStates((prev) => ({ ...prev, [workoutKey]: { ...prev[workoutKey], copy: true } }));
+      try {
+        setWorkoutToCopy({ date, workoutId });
+        setShowDatePicker(true);
+      } catch (error) {
+        console.error('Ошибка при инициализации копирования:', error);
+        setError(error.message || 'Не удалось начать копирование. Попробуйте снова.');
+      } finally {
+        setLoadingStates((prev) => ({ ...prev, [workoutKey]: { ...prev[workoutKey], copy: false } }));
+      }
+    },
+    []
+  );
 
   const handleDateSelectForCopy = useCallback(
     async (newDate) => {
@@ -146,20 +165,38 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
         setError('Пожалуйста, выберите действительную дату.');
         return;
       }
+      const workoutKey = `${workoutToCopy.date}-${workoutToCopy.workoutId}`;
+      setLoadingStates((prev) => ({ ...prev, [workoutKey]: { ...prev[workoutKey], copy: true } }));
+      setIsModalLoading(true);
       const formattedSourceDate = formatDateToLocal(new Date(workoutToCopy.date));
       const formattedTargetDate = formatDateToLocal(newDate);
       try {
-        await copyWorkout(formattedSourceDate, workoutToCopy.workoutId, formattedTargetDate, authToken);
+        const response = await copyWorkout(formattedSourceDate, workoutToCopy.workoutId, formattedTargetDate, authToken);
+        console.log('copyWorkout response:', response);
+        let newWorkoutId = response?.workoutId;
+        await onDataUpdate();
+        if (!newWorkoutId || isNaN(newWorkoutId)) {
+          const targetDateKey = newDate.toDateString();
+          const newWorkouts = workoutData[targetDateKey] || [];
+          const existingIds = newWorkouts.map(w => w.workoutId);
+          newWorkoutId = existingIds.length > 0 ? Math.max(...existingIds) + 1 : 1;
+        }
+        console.log('Navigating to new workout ID:', newWorkoutId);
         setShowDatePicker(false);
         setWorkoutToCopy(null);
         setError(null);
-        onDataUpdate();
+        // Push home to history before navigating to new workout
+        navigate('/home', { replace: true });
+        navigate(`/${formattedTargetDate}/${newWorkoutId}`, { replace: false });
       } catch (error) {
         console.error('Ошибка при копировании тренировки:', error);
         setError(error.message || 'Не удалось скопировать тренировку. Попробуйте снова.');
+      } finally {
+        setLoadingStates((prev) => ({ ...prev, [workoutKey]: { ...prev[workoutKey], copy: false } }));
+        setIsModalLoading(false);
       }
     },
-    [authToken, formatDateToLocal, onDataUpdate, workoutToCopy]
+    [authToken, formatDateToLocal, onDataUpdate, workoutToCopy, navigate, workoutData]
   );
 
   const handlePageChange = (page) => {
@@ -280,6 +317,9 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
             const workoutsForDate = workoutsByDate[date] || [];
             const showWorkoutNumber = workoutsForDate.length > 1;
             const workoutKey = `${date}-${workoutId}`;
+            const isCopyLoading = loadingStates[workoutKey]?.copy || false;
+            const isDeleteLoading = loadingStates[workoutKey]?.delete || false;
+            const isLoading = isCopyLoading || isDeleteLoading;
 
             return (
               <div
@@ -335,6 +375,7 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
                       e.stopPropagation();
                       toggleDropdown(workoutKey);
                     }}
+                    disabled={isLoading}
                   >
                     <img src={settingIcon} alt="Settings" className={styles.settingIcon} />
                   </button>
@@ -346,13 +387,22 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
                           e.stopPropagation();
                           handleCopyWorkout(date, workoutId);
                         }}
+                        disabled={isLoading}
                       >
-                        <span>Копировать</span>
-                        <img
-                          src={darkMode ? copyIconWhite : copyIconBlack}
-                          alt="Copy"
-                          className={styles.actionIcon}
-                        />
+                        {isCopyLoading ? (
+                          <div className={styles.spinnerContainer}>
+                            <Spinner darkMode={darkMode} isButton={true} />
+                          </div>
+                        ) : (
+                          <>
+                            <span>Копировать</span>
+                            <img
+                              src={darkMode ? copyIconWhite : copyIconBlack}
+                              alt="Copy"
+                              className={styles.actionIcon}
+                            />
+                          </>
+                        )}
                       </button>
                       <button
                         className={styles.dropdownItem}
@@ -360,13 +410,22 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
                           e.stopPropagation();
                           handleDeleteWorkout(date, workoutId);
                         }}
+                        disabled={isLoading}
                       >
-                        <span>Удалить</span>
-                        <img
-                          src={darkMode ? deleteIconWhite : deleteIconBlack}
-                          alt="Delete"
-                          className={styles.actionIcon}
-                        />
+                        {isDeleteLoading ? (
+                          <div className={styles.spinnerContainer}>
+                            <Spinner darkMode={darkMode} isButton={true} />
+                          </div>
+                        ) : (
+                          <>
+                            <span>Удалить</span>
+                            <img
+                              src={darkMode ? deleteIconWhite : deleteIconBlack}
+                              alt="Delete"
+                              className={styles.actionIcon}
+                            />
+                          </>
+                        )}
                       </button>
                     </div>
                   )}
@@ -438,6 +497,7 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
                 setWorkoutToCopy(null);
                 setError(null);
               }}
+              disabled={isModalLoading}
             >
               <img
                 src={darkMode ? closeIconWhite : closeIconBlack}
@@ -454,7 +514,13 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
               dateFormat="dd.MM.yyyy"
               calendarClassName="custom-datepicker"
               renderDayContents={renderDayContents}
+              disabled={isModalLoading}
             />
+            {isModalLoading && (
+              <div className={styles.modalSpinnerOverlay}>
+                <Spinner darkMode={darkMode} />
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -9,7 +9,7 @@ registerLocale('ru', ru);
 
 const DateSelector = forwardRef(({ selectedDate, onDateSelect, filledDates }, ref) => {
   const [openCalendar, setOpenCalendar] = useState(false);
-  const lastSelected = useRef(null); // Track last selected date
+  const lastSelected = useRef(null);
 
   const highlightedDates = filledDates.map((date) => new Date(date).setHours(0, 0, 0, 0));
 
@@ -18,7 +18,7 @@ const DateSelector = forwardRef(({ selectedDate, onDateSelect, filledDates }, re
     const isFilled = highlightedDates.includes(dateTime);
 
     return (
-      <div 
+      <div
         style={{
           backgroundColor: isFilled ? '#000' : 'transparent',
           color: isFilled ? 'white' : '',

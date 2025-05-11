@@ -466,7 +466,7 @@ const Auth = ({ onLogin, darkMode }) => {
           </button>
         )}
         <h2 className={styles.title}>
-          {step === 'email' ? 'Вход или регистрация' : step === 'otp' ? 'Введите код из письма' : 'Введите ваше имя'}
+          {step === 'email' ? 'Вход и регистрация' : step === 'otp' ? 'Введите код из письма' : 'Введите ваше имя'}
         </h2>
 
         {step === 'email' && (
@@ -490,7 +490,7 @@ const Auth = ({ onLogin, darkMode }) => {
               <span className={styles.rememberText}>Запомнить</span>
             </label>
             <button onClick={handleEmailSubmit} className={styles.submitButton} disabled={loading}>
-              {loading ? <Spinner darkMode={darkMode} isButton={true} /> : 'Получить код'}
+              {loading ? <Spinner darkMode={true} isButton={true} /> : 'Получить код'}
             </button>
           </>
         )}
