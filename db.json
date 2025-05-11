@@ -4323,13 +4323,229 @@
           "notes": ""
         },
         {
-          "id": 1746958234575,
-          "workoutId": 2,
-          "workout_date": "2025-05-22",
+          "id": 1746959340538,
+          "workoutId": 1,
+          "workout_date": "2025-05-23",
           "title": "",
           "exercises": [
             {
-              "id": 1746957414859,
+              "id": 1746959340527,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746959345466,
+          "workoutId": 1,
+          "workout_date": "2025-05-24",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746959345460,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746959349601,
+          "workoutId": 2,
+          "workout_date": "2025-05-24",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746959345460,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746959361867,
+          "workoutId": 1,
+          "workout_date": "2025-05-25",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746959345460,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746959450201,
+          "workoutId": 1,
+          "workout_date": "2025-05-26",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746959450193,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746959453983,
+          "workoutId": 2,
+          "workout_date": "2025-05-26",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746959450193,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746959457763,
+          "workoutId": 1,
+          "workout_date": "2025-05-27",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746959450193,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746959462764,
+          "workoutId": 1,
+          "workout_date": "2025-05-28",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746959450193,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746959772317,
+          "workoutId": 1,
+          "workout_date": "2025-05-29",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746959772307,
+              "number": 1,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "",
+                  "weight": "",
+                  "weightType": "Вес",
+                  "isEditing": true
+                }
+              ]
+            }
+          ],
+          "bodyWeight": null,
+          "notes": ""
+        },
+        {
+          "id": 1746959777461,
+          "workoutId": 2,
+          "workout_date": "2025-05-29",
+          "title": "",
+          "exercises": [
+            {
+              "id": 1746959772307,
               "number": 1,
               "muscleGroup": "",
               "exercise": "",

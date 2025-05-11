@@ -534,7 +534,7 @@ const Auth = ({ onLogin, darkMode }) => {
               </button>
             )}
             <button onClick={handleOtpSubmit} className={styles.submitButton} disabled={loading}>
-              {loading ? <Spinner darkMode={darkMode} isButton={true} /> : 'Войти'}
+              {loading ? <Spinner darkMode={true} isButton={true} /> : 'Войти'}
             </button>
           </>
         )}
@@ -551,7 +551,7 @@ const Auth = ({ onLogin, darkMode }) => {
             />
             {errors.name && <p className={styles.errorText}>{errors.name}</p>}
             <button onClick={handleNameSubmit} className={styles.submitButton} disabled={loading}>
-              {loading ? <Spinner darkMode={darkMode} isButton={true} /> : 'Завершить регистрацию'}
+              {loading ? <Spinner darkMode={true} isButton={true} /> : 'Завершить регистрацию'}
             </button>
           </>
         )}
