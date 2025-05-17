@@ -185,9 +185,9 @@
 
 .openModalButtonLight,
 .openModalButtonDark {
-  background-color: var(--button-bg-color);
-  color: var(--button-text-color);
-  border: none;
+  background-color: var(--table-bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--table-border-color);
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -198,11 +198,12 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
 }
 
 .openModalButtonLight:hover,
 .openModalButtonDark:hover {
-  background-color: #4d4d4d;
+  background-color: rgba(var(--bg-color-rgb), 0.8);
 }
 
 /* Модальное окно */

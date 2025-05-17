@@ -23,7 +23,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip)
 registerLocale('ru', ru);
 
 const Analytics = ({ workoutData, darkMode, loading }) => {
-  const [timeFrame, setTimeFrame] = useState('week');
+  const [timeFrame, setTimeFrame] = useState('month');
   const [selectedWeek, setSelectedWeek] = useState(new Date());
   const [selectedMonth, setSelectedMonth] = useState(new Date());
   const [selectedYear, setSelectedYear] = useState(new Date());
@@ -33,18 +33,22 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
   const [exerciseSearch, setExerciseSearch] = useState('');
   const navigate = useNavigate();
 
-  // Calculate total workouts
   const totalWorkouts = useMemo(() => {
     return Object.values(workoutData).reduce((sum, workouts) => sum + workouts.length, 0);
   }, [workoutData]);
 
-  // Get date range for workout count chart
+  const hasBodyWeightData = useMemo(() => {
+    return Object.values(workoutData).some(workouts =>
+      workouts.some(workout => workout.bodyWeight !== null && workout.bodyWeight !== '')
+    );
+  }, [workoutData]);
+
   const getDateRange = useMemo(() => {
     if (timeFrame === 'week') {
       const start = new Date(selectedWeek);
-      start.setDate(start.getDate() - start.getDay() + 1); // Start of week (Monday)
+      start.setDate(start.getDate() - start.getDay() + 1);
       const end = new Date(start);
-      end.setDate(end.getDate() + 6); // End of week (Sunday)
+      end.setDate(end.getDate() + 6);
       return { start, end };
     } else if (timeFrame === 'month') {
       const start = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), 1);
@@ -58,7 +62,6 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
     return { start: new Date(), end: new Date() };
   }, [timeFrame, selectedWeek, selectedMonth, selectedYear]);
 
-  // Get date range for exercise stats chart
   const getExerciseDateRange = useMemo(() => {
     if (exerciseTimeFrame === 'month') {
       const start = new Date(exerciseSelectedMonth.getFullYear(), exerciseSelectedMonth.getMonth(), 1);
@@ -72,7 +75,6 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
     return { start: new Date(), end: new Date() };
   }, [exerciseTimeFrame, exerciseSelectedMonth, exerciseSelectedYear]);
 
-  // Prepare workout count data for the chart
   const getWorkoutCountData = useCallback(() => {
     const { start, end } = getDateRange;
     const labels = [];
@@ -121,7 +123,77 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
     };
   }, [workoutData, timeFrame, getDateRange, darkMode]);
 
-  // Get available exercises for search
+  const getBodyWeightData = useCallback(() => {
+    const { start, end } = getExerciseDateRange;
+    const history = [];
+
+    Object.entries(workoutData).forEach(([date, workouts]) => {
+      workouts.forEach((workout) => {
+        if (workout.bodyWeight !== null && workout.bodyWeight !== '') {
+          history.push({
+            date: new Date(date),
+            weight: parseFloat(workout.bodyWeight) || 0,
+          });
+        }
+      });
+    });
+
+    const filteredHistory = history.filter((entry) => entry.date >= start && entry.date <= end);
+    if (filteredHistory.length === 0) return null;
+
+    const aggregatedData = {};
+    if (exerciseTimeFrame === 'month') {
+      filteredHistory.forEach((entry) => {
+        const dateKey = entry.date.toDateString();
+        if (!aggregatedData[dateKey] || entry.date > aggregatedData[dateKey].date) {
+          aggregatedData[dateKey] = { weight: entry.weight, date: entry.date };
+        }
+      });
+    } else if (exerciseTimeFrame === 'year') {
+      filteredHistory.forEach((entry) => {
+        const monthKey = `${entry.date.getFullYear()}-${entry.date.getMonth()}`;
+        if (!aggregatedData[monthKey] || entry.date > aggregatedData[monthKey].date) {
+          aggregatedData[monthKey] = { weight: entry.weight, date: entry.date };
+        }
+      });
+    }
+
+    const labels = [];
+    const weightData = [];
+
+    if (exerciseTimeFrame === 'month') {
+      for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+        const dateKey = d.toDateString();
+        labels.push(d.toLocaleDateString('ru-RU', { day: 'numeric' }));
+        const entry = aggregatedData[dateKey] || { weight: 0 };
+        weightData.push(entry.weight);
+      }
+    } else if (exerciseTimeFrame === 'year') {
+      for (let month = 0; month < 12; month++) {
+        const monthStart = new Date(start.getFullYear(), month, 1);
+        const monthKey = `${monthStart.getFullYear()}-${monthStart.getMonth()}`;
+        labels.push(monthStart.toLocaleDateString('ru-RU', { month: 'short' }));
+        const entry = aggregatedData[monthKey] || { weight: 0 };
+        weightData.push(entry.weight);
+      }
+    }
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'Вес тела (кг)',
+          data: weightData,
+          borderColor: darkMode ? '#9ca3af' : '#4b5563',
+          backgroundColor: darkMode ? 'rgba(156, 163, 175, 0.1)' : 'rgba(75, 85, 99, 0.1)',
+          fill: true,
+          tension: 0.4,
+          pointRadius: 0,
+        },
+      ],
+    };
+  }, [workoutData, exerciseTimeFrame, getExerciseDateRange, darkMode]);
+
   const availableExercises = useMemo(() => {
     const exercises = new Set();
     Object.values(workoutData).forEach((workouts) =>
@@ -137,7 +209,6 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
     return Array.from(exercises).sort();
   }, [workoutData]);
 
-  // Prepare exercise stats for the selected exercise (max weight and corresponding reps)
   const getExerciseStats = useCallback(() => {
     if (!exerciseSearch) return null;
 
@@ -153,6 +224,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
                   date: new Date(date),
                   reps: parseInt(set.reps) || 0,
                   weight: parseFloat(set.weight) || 0,
+                  weightType: set.weightType || 'Вес',
                 });
               });
             }
@@ -167,78 +239,115 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
     if (filteredHistory.length === 0) return null;
 
     const aggregatedData = {};
+    const weightTypes = ['Вес', 'Доп. вес', 'Соб. вес', 'Гриф', 'Резинки'];
+
     if (exerciseTimeFrame === 'month') {
-      // Daily aggregation
-      filteredHistory.forEach((entry) => {
-        const dateKey = entry.date.toDateString();
-        if (!aggregatedData[dateKey]) {
-          aggregatedData[dateKey] = { maxWeight: -Infinity, repsAtMaxWeight: 0 };
-        }
-        if (entry.weight > aggregatedData[dateKey].maxWeight) {
-          aggregatedData[dateKey] = { maxWeight: entry.weight, repsAtMaxWeight: entry.reps };
-        }
+      weightTypes.forEach((type) => {
+        filteredHistory
+          .filter((entry) => entry.weightType === type)
+          .forEach((entry) => {
+            const dateKey = entry.date.toDateString();
+            if (!aggregatedData[dateKey]) {
+              aggregatedData[dateKey] = {};
+            }
+            if (!aggregatedData[dateKey][type]) {
+              aggregatedData[dateKey][type] = { maxWeight: -Infinity, repsAtMaxWeight: 0 };
+            }
+            if (entry.weight > aggregatedData[dateKey][type].maxWeight) {
+              aggregatedData[dateKey][type] = { maxWeight: entry.weight, repsAtMaxWeight: entry.reps };
+            }
+          });
       });
     } else if (exerciseTimeFrame === 'year') {
-      // Monthly aggregation
-      filteredHistory.forEach((entry) => {
-        const monthKey = `${entry.date.getFullYear()}-${entry.date.getMonth()}`;
-        if (!aggregatedData[monthKey]) {
-          aggregatedData[monthKey] = { maxWeight: -Infinity, repsAtMaxWeight: 0 };
-        }
-        if (entry.weight > aggregatedData[monthKey].maxWeight) {
-          aggregatedData[monthKey] = { maxWeight: entry.weight, repsAtMaxWeight: entry.reps };
-        }
+      weightTypes.forEach((type) => {
+        filteredHistory
+          .filter((entry) => entry.weightType === type)
+          .forEach((entry) => {
+            const monthKey = `${entry.date.getFullYear()}-${entry.date.getMonth()}`;
+            if (!aggregatedData[monthKey]) {
+              aggregatedData[monthKey] = {};
+            }
+            if (!aggregatedData[monthKey][type]) {
+              aggregatedData[monthKey][type] = { maxWeight: -Infinity, repsAtMaxWeight: 0 };
+            }
+            if (entry.weight > aggregatedData[monthKey][type].maxWeight) {
+              aggregatedData[monthKey][type] = { maxWeight: entry.weight, repsAtMaxWeight: entry.reps };
+            }
+          });
       });
     }
 
     const labels = [];
-    const repsData = [];
-    const weightData = [];
+    const datasets = [];
 
     if (exerciseTimeFrame === 'month') {
       for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
         const dateKey = d.toDateString();
         labels.push(d.toLocaleDateString('ru-RU', { day: 'numeric' }));
-        const entry = aggregatedData[dateKey] || { maxWeight: 0, repsAtMaxWeight: 0 };
-        repsData.push(entry.repsAtMaxWeight);
-        weightData.push(entry.maxWeight);
+        weightTypes.forEach((type, index) => {
+          const entry = aggregatedData[dateKey]?.[type] || { maxWeight: 0, repsAtMaxWeight: 0 };
+          if (!datasets[index * 2]) {
+            datasets[index * 2] = {
+              label: `Повторения (${type})`,
+              data: [],
+              borderColor: darkMode ? `#${(6 + index * 2).toString(16)}b7280` : `#${(1 + index * 2).toString(16)}f2937`,
+              backgroundColor: darkMode ? `rgba(${107 + index * 20}, 114, 128, 0.1)` : `rgba(${31 + index * 20}, 41, 55, 0.1)`,
+              fill: true,
+              tension: 0.4,
+              pointRadius: 0,
+              yAxisID: 'y',
+            };
+            datasets[index * 2 + 1] = {
+              label: `${type} (кг)`,
+              data: [],
+              borderColor: darkMode ? `#${(9 + index * 2).toString(16)}ca3af` : `#${(4 + index * 2).toString(16)}b5563`,
+              backgroundColor: darkMode ? `rgba(${156 + index * 20}, 163, 175, 0.1)` : `rgba(${75 + index * 20}, 85, 99, 0.1)`,
+              fill: true,
+              tension: 0.4,
+              pointRadius: 0,
+              yAxisID: 'y1',
+            };
+          }
+          datasets[index * 2].data.push(entry.repsAtMaxWeight);
+          datasets[index * 2 + 1].data.push(entry.maxWeight);
+        });
       }
     } else if (exerciseTimeFrame === 'year') {
       for (let month = 0; month < 12; month++) {
         const monthStart = new Date(start.getFullYear(), month, 1);
         const monthKey = `${monthStart.getFullYear()}-${monthStart.getMonth()}`;
         labels.push(monthStart.toLocaleDateString('ru-RU', { month: 'short' }));
-        const entry = aggregatedData[monthKey] || { maxWeight: 0, repsAtMaxWeight: 0 };
-        repsData.push(entry.repsAtMaxWeight);
-        weightData.push(entry.maxWeight);
+        weightTypes.forEach((type, index) => {
+          const entry = aggregatedData[monthKey]?.[type] || { maxWeight: 0, repsAtMaxWeight: 0 };
+          if (!datasets[index * 2]) {
+            datasets[index * 2] = {
+              label: `Повторения (${type})`,
+              data: [],
+              borderColor: darkMode ? `#${(6 + index * 2).toString(16)}b7280` : `#${(1 + index * 2).toString(16)}f2937`,
+              backgroundColor: darkMode ? `rgba(${107 + index * 20}, 114, 128, 0.1)` : `rgba(${31 + index * 20}, 41, 55, 0.1)`,
+              fill: true,
+              tension: 0.4,
+              pointRadius: 0,
+              yAxisID: 'y',
+            };
+            datasets[index * 2 + 1] = {
+              label: `${type} (кг)`,
+              data: [],
+              borderColor: darkMode ? `#${(9 + index * 2).toString(16)}ca3af` : `#${(4 + index * 2).toString(16)}b5563`,
+              backgroundColor: darkMode ? `rgba(${156 + index * 20}, 163, 175, 0.1)` : `rgba(${75 + index * 20}, 85, 99, 0.1)`,
+              fill: true,
+              tension: 0.4,
+              pointRadius: 0,
+              yAxisID: 'y1',
+            };
+          }
+          datasets[index * 2].data.push(entry.repsAtMaxWeight);
+          datasets[index * 2 + 1].data.push(entry.maxWeight);
+        });
       }
     }
 
-    return {
-      labels,
-      datasets: [
-        {
-          label: 'Повторения',
-          data: repsData,
-          borderColor: darkMode ? '#6b7280' : '#1f2937',
-          backgroundColor: darkMode ? 'rgba(107, 114, 128, 0.1)' : 'rgba(31, 41, 55, 0.1)',
-          fill: true,
-          tension: 0.4,
-          pointRadius: 0,
-          yAxisID: 'y',
-        },
-        {
-          label: 'Вес (кг)',
-          data: weightData,
-          borderColor: darkMode ? '#9ca3af' : '#4b5563',
-          backgroundColor: darkMode ? 'rgba(156, 163, 175, 0.1)' : 'rgba(75, 85, 99, 0.1)',
-          fill: true,
-          tension: 0.4,
-          pointRadius: 0,
-          yAxisID: 'y1',
-        },
-      ],
-    };
+    return { labels, datasets };
   }, [exerciseSearch, workoutData, exerciseTimeFrame, getExerciseDateRange, darkMode]);
 
   const chartOptions = useMemo(
@@ -246,7 +355,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
+        legend: { display: true, position: 'top' },
         tooltip: {
           backgroundColor: darkMode ? '#1f2937' : '#fff',
           titleColor: darkMode ? '#e5e7eb' : '#1f2937',
@@ -257,7 +366,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
             label: (context) => {
               const label = context.dataset.label || '';
               const value = context.parsed.y || 0;
-              return `${label}: ${value}${label === 'Вес (кг)' ? ' кг' : ''}`;
+              return `${label}: ${value}${label.includes('(кг)') ? ' кг' : ''}`;
             },
           },
         },
@@ -282,7 +391,12 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
             color: darkMode ? '#9ca3af' : '#4b5563',
             font: { size: 12, weight: '500' },
           },
-          ticks: { color: darkMode ? '#9ca3af' : '#4b5563', maxTicksLimit: 5 },
+          ticks: {
+            color: darkMode ? '#9ca3af' : '#4b5563',
+            maxTicksLimit: 5,
+            stepSize: 1,
+            precision: 0,
+          },
           grid: { color: darkMode ? '#374151' : '#e5e7eb' },
         },
         y1: {
@@ -326,18 +440,55 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
             color: darkMode ? '#9ca3af' : '#4b5563',
             font: { size: 12, weight: '500' },
           },
-          ticks: { color: darkMode ? '#9ca3af' : '#4b5563', maxTicksLimit: 5 },
+          ticks: {
+            color: darkMode ? '#9ca3af' : '#4b5563',
+            maxTicksLimit: 5,
+            stepSize: 1,
+            precision: 0,
+          },
           grid: { color: darkMode ? '#374151' : '#e5e7eb' },
         },
-        y1: { display: false }, // Hide right y-axis for workout count chart
+        y1: { display: false },
       },
     }),
     [chartOptions, darkMode, timeFrame]
   );
 
+  const bodyWeightChartOptions = useMemo(
+    () => ({
+      ...chartOptions,
+      scales: {
+        ...chartOptions.scales,
+        x: {
+          title: {
+            display: true,
+            text: exerciseTimeFrame === 'year' ? 'Месяц' : 'Дата',
+            color: darkMode ? '#9ca3af' : '#4b5563',
+            font: { size: 12, weight: '500' },
+          },
+          ticks: { color: darkMode ? '#9ca3af' : '#4b5563', maxTicksLimit: 8 },
+          grid: { display: false },
+        },
+        y: {
+          type: 'linear',
+          position: 'left',
+          title: {
+            display: true,
+            text: 'Вес тела (кг)',
+            color: darkMode ? '#9ca3af' : '#4b5563',
+            font: { size: 12, weight: '500' },
+          },
+          ticks: { color: darkMode ? '#9ca3af' : '#4b5563', maxTicksLimit: 5 },
+          grid: { color: darkMode ? '#374151' : '#e5e7eb' },
+        },
+        y1: { display: false },
+      },
+    }),
+    [chartOptions, darkMode, exerciseTimeFrame]
+  );
+
   const hasWorkouts = totalWorkouts > 0;
 
-  // Handle navigation to home page
   const handleReturnHome = useCallback(() => {
     navigate('/home');
   }, [navigate]);
@@ -351,7 +502,6 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
       <h1 className={styles.title}>Аналитика тренировок</h1>
       {hasWorkouts ? (
         <>
-          {/* Total Workouts Block */}
           <section className={styles.totalWorkouts}>
             <img
               src={darkMode ? workoutIconWhite : workoutIconBlack}
@@ -362,7 +512,6 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
             <span className={styles.totalWorkoutsCount}>{totalWorkouts}</span>
           </section>
 
-          {/* Workout Count Chart */}
           <section className={styles.section}>
             <h2 className={styles.subtitle}>Количество тренировок</h2>
             <div className={styles.controls}>
@@ -426,7 +575,53 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
             </div>
           </section>
 
-          {/* Exercise Search and Stats */}
+          {hasBodyWeightData && (
+            <section className={styles.section}>
+              <h2 className={styles.subtitle}>Прогресс веса тела</h2>
+              <div className={styles.controls}>
+                <div className={styles.timeFrameSelector}>
+                  <button
+                    className={exerciseTimeFrame === 'month' ? styles.activeButton : styles.button}
+                    onClick={() => setExerciseTimeFrame('month')}
+                  >
+                    Месяц
+                  </button>
+                  <button
+                    className={exerciseTimeFrame === 'year' ? styles.activeButton : styles.button}
+                    onClick={() => setExerciseTimeFrame('year')}
+                  >
+                    Год
+                  </button>
+                </div>
+                {exerciseTimeFrame === 'month' && (
+                  <DatePicker
+                    selected={exerciseSelectedMonth}
+                    onChange={(date) => setExerciseSelectedMonth(date)}
+                    dateFormat="MMMM yyyy"
+                    locale="ru"
+                    showMonthYearPicker
+                    className={styles.datePicker}
+                    placeholderText="Выберите месяц"
+                  />
+                )}
+                {exerciseTimeFrame === 'year' && (
+                  <DatePicker
+                    selected={exerciseSelectedYear}
+                    onChange={(date) => setExerciseSelectedYear(date)}
+                    dateFormat="yyyy"
+                    locale="ru"
+                    showYearPicker
+                    className={styles.datePicker}
+                    placeholderText="Выберите год"
+                  />
+                )}
+              </div>
+              <div className={styles.chartContainer}>
+                <Line data={getBodyWeightData()} options={bodyWeightChartOptions} />
+              </div>
+            </section>
+          )}
+
           <section className={styles.section}>
             <h2 className={styles.subtitle}>Статистика по упражнениям</h2>
             <div className={styles.controls}>
@@ -494,14 +689,6 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
               )
             )}
           </section>
-
-          {/* Return to Home Button */}
-          <button
-            className={styles.returnHomeButton}
-            onClick={handleReturnHome}
-          >
-            Вернуться на главную
-          </button>
         </>
       ) : (
         <div className={styles.noWorkouts}>
