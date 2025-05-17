@@ -8,6 +8,9 @@ import Spinner from './Spinner';
 import { getUserInfo } from '../api';
 import styles from './Settings.module.css';
 
+// In-memory cache for user info
+const userInfoCache = {};
+
 const Settings = ({ darkMode, toggleTheme, onLogout, authToken }) => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
@@ -30,14 +33,27 @@ const Settings = ({ darkMode, toggleTheme, onLogout, authToken }) => {
         setUserLoading(false);
         return;
       }
+
+      // Check cache first
+      if (userInfoCache[authToken]) {
+        console.log('Using cached user info');
+        setUserInfo(userInfoCache[authToken]);
+        setUserLoading(false);
+        setError(null);
+        return;
+      }
+
       try {
         setUserLoading(true);
         const data = await getUserInfo(authToken);
         console.log('User info data:', data);
-        setUserInfo({
+        const userData = {
           name: data.name || 'Не указано',
           email: data.email || 'Не указано',
-        });
+        };
+        setUserInfo(userData);
+        // Store in cache
+        userInfoCache[authToken] = userData;
         setError(null);
       } catch (err) {
         setError('Не удалось загрузить данные пользователя');
@@ -50,6 +66,8 @@ const Settings = ({ darkMode, toggleTheme, onLogout, authToken }) => {
   }, [authToken]);
 
   const handleLogoutClick = () => {
+    // Clear cache on logout
+    delete userInfoCache[authToken];
     onLogout();
     navigate('/login');
   };
