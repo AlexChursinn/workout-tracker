@@ -8,7 +8,7 @@ import Spinner from './Spinner';
 import { getUserInfo } from '../api';
 import styles from './Settings.module.css';
 
-const Settings = ({ darkMode, toggleTheme, onLogout, loading, authToken }) => {
+const Settings = ({ darkMode, toggleTheme, onLogout, authToken }) => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [userInfo, setUserInfo] = useState({ name: '', email: '' });
@@ -54,7 +54,7 @@ const Settings = ({ darkMode, toggleTheme, onLogout, loading, authToken }) => {
     navigate('/login');
   };
 
-  if (loading || userLoading) {
+  if (userLoading) {
     return <Spinner darkMode={darkMode} />;
   }
 
