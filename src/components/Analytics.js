@@ -728,7 +728,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
               <Line data={getWorkoutCountData()} options={workoutChartOptions} />
               <TransitionGroup>
                 {tappedDataByChart.workout && (
-                  <CSSTransition timeout={300} classNames="notification">
+                  <CSSTransition timeout={{ enter: 300, exit: 0 }} classNames="notification">
                     <div className={styles.tappedData}>
                       <span>
                         {tappedDataByChart.workout.label}: {tappedDataByChart.workout.value} {tappedDataByChart.workout.unit} ({tappedDataByChart.workout.date})
@@ -795,7 +795,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
                 )}
                 <TransitionGroup>
                   {tappedDataByChart.bodyWeight && (
-                    <CSSTransition timeout={300} classNames="notification">
+                    <CSSTransition timeout={{ enter: 300, exit: 0 }} classNames="notification">
                       <div className={styles.tappedData}>
                         <span>
                           {tappedDataByChart.bodyWeight.label}: {tappedDataByChart.bodyWeight.value} {tappedDataByChart.bodyWeight.unit} ({tappedDataByChart.bodyWeight.date})
@@ -864,7 +864,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
             />
             <datalist id="exercises">
               {availableExercises.map((exercise) => (
-                <option key={exercise} value={exercise} />
+                <option key={exercise | exercise} value={exercise} />
               ))}
             </datalist>
             {exerciseSearch && (
@@ -878,7 +878,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
                     )}
                     <TransitionGroup>
                       {tappedDataByChart.exercise && (
-                        <CSSTransition timeout={300} classNames="notification">
+                        <CSSTransition timeout={{ enter: 300, exit: 0 }} classNames="notification">
                           <div className={styles.tappedData}>
                             <span>
                               {tappedDataByChart.exercise.label}: {tappedDataByChart.exercise.value} {tappedDataByChart.exercise.unit} ({tappedDataByChart.exercise.date})
