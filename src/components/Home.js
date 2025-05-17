@@ -12,8 +12,6 @@ import calendarIconBlack from '../assets/calendar-black.svg';
 import calendarIconWhite from '../assets/calendar-white.svg';
 import doneIconBlack from '../assets/done-black.svg';
 import doneIconWhite from '../assets/done-light.svg';
-import lineBlack from '../assets/lineupblack.svg';
-import lineWhite from '../assets/lineupwhite.svg';
 import titleBlack from '../assets/title-black.svg';
 import titleWhite from '../assets/title-white.svg';
 import numberIconBlack from '../assets/numberIcon-black.svg';
@@ -36,6 +34,7 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDropdown, setShowDropdown] = useState(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
   const [workoutToCopy, setWorkoutToCopy] = useState(null);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,8 +43,16 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
   const dateSelectorRef = useRef(null);
   const dropdownRef = useRef(null);
   const modalRef = useRef(null);
+  const createModalRef = useRef(null);
   const navigate = useNavigate();
   const lastNavigation = useRef({ date: null, workoutId: null });
+
+  // Define stripTime function to normalize dates
+  const stripTime = useCallback((date) => {
+    const normalizedDate = new Date(date);
+    normalizedDate.setHours(0, 0, 0, 0);
+    return normalizedDate;
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -57,12 +64,17 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
         setWorkoutToCopy(null);
         setError(null);
       }
+      if (createModalRef.current && !createModalRef.current.contains(event.target)) {
+        setShowCreateModal(false);
+        setError(null);
+      }
     };
 
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
         setShowDropdown(null);
         setShowDatePicker(false);
+        setShowCreateModal(false);
         setWorkoutToCopy(null);
         setError(null);
       }
@@ -185,7 +197,6 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
         setShowDatePicker(false);
         setWorkoutToCopy(null);
         setError(null);
-        // Push home to history before navigating to new workout
         navigate('/home', { replace: true });
         navigate(`/${formattedTargetDate}/${newWorkoutId}`, { replace: false });
       } catch (error) {
@@ -197,6 +208,32 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
       }
     },
     [authToken, formatDateToLocal, onDataUpdate, workoutToCopy, navigate, workoutData]
+  );
+
+  const handleCreateWorkout = useCallback(
+    (newDate) => {
+      if (!newDate || isNaN(newDate)) {
+        console.error('Invalid date for new workout:', newDate);
+        setError('Пожалуйста, выберите действительную дату.');
+        return;
+      }
+      setIsModalLoading(true);
+      const formattedDate = formatDateToLocal(newDate);
+      const targetDateKey = newDate.toDateString();
+      const workoutsForDate = workoutData[targetDateKey] || [];
+      const newWorkoutId = workoutsForDate.length + 1;
+      try {
+        navigate(`/${formattedDate}/${newWorkoutId}`);
+        setShowCreateModal(false);
+        setError(null);
+      } catch (error) {
+        console.error('Ошибка при создании тренировки:', error);
+        setError(error.message || 'Не удалось создать тренировку. Попробуйте снова.');
+      } finally {
+        setIsModalLoading(false);
+      }
+    },
+    [formatDateToLocal, navigate, workoutData]
   );
 
   const handlePageChange = (page) => {
@@ -306,7 +343,7 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
         <DateSelector
           ref={dateSelectorRef}
           selectedDate={selectedDate}
-          onDateSelect={(date) => handleDateChange(date, 1)}
+          onDateSelect={(date) => handleDateChange(stripTime(date), 1)}
           filledDates={filteredWorkoutData.map((data) => data.date)}
         />
       </div>
@@ -483,12 +520,16 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
         </>
       ) : (
         <div className={styles.noWorkouts}>
-          <img src={darkMode ? lineWhite : lineBlack} alt="Линия" className={styles.lineIcon} />
-          <h1 className={styles.noWorkoutsMessage}>Создайте свою тренировку через календарь</h1>
+          <button
+            className={styles.createFirstWorkoutButton}
+            onClick={() => setShowCreateModal(true)}
+          >
+            Создать первую тренировку
+          </button>
         </div>
       )}
       {showDatePicker && (
-        <div className={styles.modalOverlay}>
+        <div className={`${styles.modalOverlay} ${showDatePicker ? styles.isOpen : ''}`}>
           <div className={styles.modalContent} ref={modalRef}>
             <button
               className={styles.closeButton}
@@ -509,6 +550,42 @@ const Home = ({ workoutData, onDateSelect, darkMode, loading, authToken, onDataU
             <DatePicker
               selected={new Date()}
               onChange={handleDateSelectForCopy}
+              inline
+              locale="ru"
+              dateFormat="dd.MM.yyyy"
+              calendarClassName="custom-datepicker"
+              renderDayContents={renderDayContents}
+              disabled={isModalLoading}
+            />
+            {isModalLoading && (
+              <div className={styles.modalSpinnerOverlay}>
+                <Spinner darkMode={darkMode} />
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+      {showCreateModal && (
+        <div className={`${styles.modalOverlay} ${showCreateModal ? styles.isOpen : ''}`}>
+          <div className={styles.modalContent} ref={createModalRef}>
+            <button
+              className={styles.closeButton}
+              onClick={() => {
+                setShowCreateModal(false);
+                setError(null);
+              }}
+              disabled={isModalLoading}
+            >
+              <img
+                src={darkMode ? closeIconWhite : closeIconBlack}
+                alt="Закрыть"
+                className={styles.closeIcon}
+              />
+            </button>
+            <h2>Выберите дату для тренировки</h2>
+            <DatePicker
+              selected={new Date()}
+              onChange={handleCreateWorkout}
               inline
               locale="ru"
               dateFormat="dd.MM.yyyy"

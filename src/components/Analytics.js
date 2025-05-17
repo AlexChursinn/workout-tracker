@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import DatePicker from 'react-datepicker';
@@ -30,6 +31,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
   const [exerciseSelectedMonth, setExerciseSelectedMonth] = useState(new Date());
   const [exerciseSelectedYear, setExerciseSelectedYear] = useState(new Date());
   const [exerciseSearch, setExerciseSearch] = useState('');
+  const navigate = useNavigate();
 
   // Calculate total workouts
   const totalWorkouts = useMemo(() => {
@@ -335,6 +337,11 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
 
   const hasWorkouts = totalWorkouts > 0;
 
+  // Handle navigation to home page
+  const handleReturnHome = useCallback(() => {
+    navigate('/home');
+  }, [navigate]);
+
   if (loading) {
     return <Spinner darkMode={darkMode} />;
   }
@@ -397,7 +404,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
                   onChange={(date) => setSelectedMonth(date)}
                   dateFormat="MMMM yyyy"
                   locale="ru"
-                  show RollerMonthYearPicker
+                  showMonthYearPicker
                   className={styles.datePicker}
                   placeholderText="Выберите месяц"
                 />
@@ -487,17 +494,26 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
               )
             )}
           </section>
+
+          {/* Return to Home Button */}
+          <button
+            className={styles.returnHomeButton}
+            onClick={handleReturnHome}
+          >
+            Вернуться на главную
+          </button>
         </>
       ) : (
         <div className={styles.noWorkouts}>
           <h1 className={styles.noWorkoutsMessage}>
             Чтобы появилась аналитика, создайте свою первую тренировку
           </h1>
-          <img
-            src={darkMode ? workoutIconWhite : workoutIconBlack}
-            alt="Иконка тренировок"
-            className={styles.lineIcon}
-          />
+          <button
+            className={styles.createFirstWorkoutButton}
+            onClick={() => navigate('/home')}
+          >
+            Вернуться на главную
+          </button>
         </div>
       )}
     </div>

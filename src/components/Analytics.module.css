@@ -164,10 +164,50 @@
   text-align: center;
 }
 
-.lineIcon {
-  width: 40px;
-  height: auto;
-  margin: 15px 0;
+.createFirstWorkoutButton {
+  position: relative;
+  background-color: var(--table-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--table-border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 0px 0px 90px 0px;
+  transition: background-color 0.3s;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+}
+
+.createFirstWorkoutButton:hover {
+  background-color: rgba(var(--bg-color-rgb), 0.8);
+}
+
+.returnHomeButton {
+  position: relative;
+  background-color: var(--table-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--table-border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0px 90px 0px;
+  transition: background-color 0.3s;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.returnHomeButton:hover {
+  background-color: rgba(var(--bg-color-rgb), 0.8);
 }
 
 .noWorkoutsMessage {
@@ -242,6 +282,20 @@
     padding: 12px;
   }
 
+  .createFirstWorkoutButton {
+    padding: 16px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0px 0px 80px 0px;
+  }
+
+  .returnHomeButton {
+    padding: 16px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px 0px 80px 0px;
+  }
+
   .title {
     font-size: 21px;
     margin: 20px 0;
@@ -293,10 +347,6 @@
     font-size: 21px;
   }
 
-  .lineIcon {
-    width: 30px;
-  }
-
   .noDataMessage {
     font-size: 14px;
     margin-bottom: 90px;
@@ -337,6 +387,20 @@
     max-width: 100%;
     height: 200px;
     padding: 10px;
+  }
+
+  .createFirstWorkoutButton {
+    padding: 16px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0px 0px 90px 0px;
+  }
+
+  .returnHomeButton {
+    padding: 16px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px 0px 90px 0px;
   }
 
   .title {
@@ -388,11 +452,6 @@
 
   .noWorkoutsMessage {
     font-size: 19px;
-  }
-
-  .lineIcon {
-    width: 25px;
-    margin: 15px 0;
   }
 
   .noDataMessage {

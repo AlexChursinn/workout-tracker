@@ -13,8 +13,8 @@
 }
 
 .spinner {
-  width: 50px; /* Размер спинера */
-  height: 50px;
+  width: 60px; /* Размер спинера */
+  height: 60px;
   animation: spin 1s linear infinite; /* Анимация вращения */
 }
  

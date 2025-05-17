@@ -77,16 +77,27 @@
   text-align: center;
 }
 
-.lineIcon {
-  width: 40px;
-  height: auto;
-  margin: 0;
+.createFirstWorkoutButton {
+  position: relative;
+  background-color: var(--table-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--table-border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0px 90px 0px;
+  transition: background-color 0.3s;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
 }
 
-.noWorkoutsMessage {
-  color: var(--text-color);
-  font-size: 1.5rem;
-  margin-top: 0px;
+.createFirstWorkoutButton:hover {
+  background-color: rgba(var(--bg-color-rgb), 0.8);
 }
 
 .workoutInfo {
@@ -182,7 +193,6 @@
   opacity: 0.6;
 }
 
-/* Center spinner in dropdown buttons */
 .spinnerContainer {
   display: flex;
   justify-content: center;
@@ -215,6 +225,14 @@
   justify-content: center;
   align-items: center;
   z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 300ms ease-out, visibility 300ms ease-out;
+}
+
+.modalOverlay.isOpen {
+  opacity: 1;
+  visibility: visible;
 }
 
 .modalContent {
@@ -227,6 +245,14 @@
   width: 90%;
   position: relative;
   box-sizing: border-box;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+
+.modalOverlay.isOpen .modalContent {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .closeButton {
@@ -373,8 +399,11 @@
     height: 30px;
   }
 
-  .lineIcon {
-    width: 30px;
+  .createFirstWorkoutButton {
+    padding: 16px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0px 0px 80px 0px;
   }
 
   .workoutBlockContent h3 {
@@ -436,6 +465,13 @@
   .moreButton {
     width: 25px;
     height: 25px;
+  }
+
+  .createFirstWorkoutButton {
+    padding: 16px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0px 0px 90px 0px;
   }
 
   .workoutBlockContent h3 {
