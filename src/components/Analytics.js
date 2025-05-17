@@ -31,6 +31,11 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
   const [exerciseSelectedMonth, setExerciseSelectedMonth] = useState(new Date());
   const [exerciseSelectedYear, setExerciseSelectedYear] = useState(new Date());
   const [exerciseSearch, setExerciseSearch] = useState('');
+  const [tappedDataByChart, setTappedDataByChart] = useState({
+    workout: null,
+    bodyWeight: null,
+    exercise: null,
+  });
   const navigate = useNavigate();
 
   const totalWorkouts = useMemo(() => {
@@ -79,18 +84,23 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
     const { start, end } = getDateRange;
     const labels = [];
     const data = [];
+    const pointRadii = [];
 
     if (timeFrame === 'week') {
       for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
         const dateKey = d.toDateString();
         labels.push(d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' }));
-        data.push((workoutData[dateKey] || []).length);
+        const workoutCount = (workoutData[dateKey] || []).length;
+        data.push(workoutCount);
+        pointRadii.push(workoutCount > 0 ? 5 : 0);
       }
     } else if (timeFrame === 'month') {
       for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
         const dateKey = d.toDateString();
         labels.push(d.toLocaleDateString('ru-RU', { day: 'numeric' }));
-        data.push((workoutData[dateKey] || []).length);
+        const workoutCount = (workoutData[dateKey] || []).length;
+        data.push(workoutCount);
+        pointRadii.push(workoutCount > 0 ? 5 : 0);
       }
     } else if (timeFrame === 'year') {
       for (let month = 0; month < 12; month++) {
@@ -104,6 +114,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
           })
           .reduce((sum, date) => sum + workoutData[date].length, 0);
         data.push(workoutsInMonth);
+        pointRadii.push(workoutsInMonth > 0 ? 5 : 0);
       }
     }
 
@@ -117,7 +128,8 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
           backgroundColor: darkMode ? 'rgba(107, 114, 128, 0.1)' : 'rgba(31, 41, 55, 0.1)',
           fill: true,
           tension: 0.4,
-          pointRadius: 0,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointRadii.map(r => r > 0 ? 8 : 0),
         },
       ],
     };
@@ -139,7 +151,21 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
     });
 
     const filteredHistory = history.filter((entry) => entry.date >= start && entry.date <= end);
-    if (filteredHistory.length === 0) return null;
+    if (filteredHistory.length === 0) {
+      return {
+        labels: [],
+        datasets: [{
+          label: 'Вес тела (кг)',
+          data: [],
+          borderColor: darkMode ? '#9ca3af' : '#4b5563',
+          backgroundColor: darkMode ? 'rgba(156, 163, 175, 0.1)' : 'rgba(75, 85, 99, 0.1)',
+          fill: true,
+          tension: 0.4,
+          pointRadius: [],
+          pointHoverRadius: [],
+        }],
+      };
+    }
 
     const aggregatedData = {};
     if (exerciseTimeFrame === 'month') {
@@ -160,6 +186,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
 
     const labels = [];
     const weightData = [];
+    const pointRadii = [];
 
     if (exerciseTimeFrame === 'month') {
       for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
@@ -167,6 +194,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
         labels.push(d.toLocaleDateString('ru-RU', { day: 'numeric' }));
         const entry = aggregatedData[dateKey] || { weight: 0 };
         weightData.push(entry.weight);
+        pointRadii.push(entry.weight > 0 ? 5 : 0);
       }
     } else if (exerciseTimeFrame === 'year') {
       for (let month = 0; month < 12; month++) {
@@ -175,6 +203,7 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
         labels.push(monthStart.toLocaleDateString('ru-RU', { month: 'short' }));
         const entry = aggregatedData[monthKey] || { weight: 0 };
         weightData.push(entry.weight);
+        pointRadii.push(entry.weight > 0 ? 5 : 0);
       }
     }
 
@@ -188,7 +217,8 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
           backgroundColor: darkMode ? 'rgba(156, 163, 175, 0.1)' : 'rgba(75, 85, 99, 0.1)',
           fill: true,
           tension: 0.4,
-          pointRadius: 0,
+          pointRadius: pointRadii,
+          pointHoverRadius: pointRadii.map(r => r > 0 ? 8 : 0),
         },
       ],
     };
@@ -210,7 +240,12 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
   }, [workoutData]);
 
   const getExerciseStats = useCallback(() => {
-    if (!exerciseSearch) return null;
+    if (!exerciseSearch) {
+      return {
+        labels: [],
+        datasets: [],
+      };
+    }
 
     const history = [];
     Object.entries(workoutData).forEach(([date, workouts]) => {
@@ -236,7 +271,12 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
     const { start, end } = getExerciseDateRange;
     const filteredHistory = history.filter((entry) => entry.date >= start && entry.date <= end);
 
-    if (filteredHistory.length === 0) return null;
+    if (filteredHistory.length === 0) {
+      return {
+        labels: [],
+        datasets: [],
+      };
+    }
 
     const aggregatedData = {};
     const weightTypes = ['Вес', 'Доп. вес', 'Соб. вес', 'Гриф', 'Резинки'];
@@ -290,26 +330,32 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
             datasets[index * 2] = {
               label: `Повторения (${type})`,
               data: [],
+              pointRadius: [],
+              pointHoverRadius: [],
               borderColor: darkMode ? `#${(6 + index * 2).toString(16)}b7280` : `#${(1 + index * 2).toString(16)}f2937`,
               backgroundColor: darkMode ? `rgba(${107 + index * 20}, 114, 128, 0.1)` : `rgba(${31 + index * 20}, 41, 55, 0.1)`,
               fill: true,
               tension: 0.4,
-              pointRadius: 0,
               yAxisID: 'y',
             };
             datasets[index * 2 + 1] = {
               label: `${type} (кг)`,
               data: [],
+              pointRadius: [],
+              pointHoverRadius: [],
               borderColor: darkMode ? `#${(9 + index * 2).toString(16)}ca3af` : `#${(4 + index * 2).toString(16)}b5563`,
               backgroundColor: darkMode ? `rgba(${156 + index * 20}, 163, 175, 0.1)` : `rgba(${75 + index * 20}, 85, 99, 0.1)`,
               fill: true,
               tension: 0.4,
-              pointRadius: 0,
               yAxisID: 'y1',
             };
           }
           datasets[index * 2].data.push(entry.repsAtMaxWeight);
+          datasets[index * 2].pointRadius.push(entry.repsAtMaxWeight > 0 ? 5 : 0);
+          datasets[index * 2].pointHoverRadius.push(entry.repsAtMaxWeight > 0 ? 8 : 0);
           datasets[index * 2 + 1].data.push(entry.maxWeight);
+          datasets[index * 2 + 1].pointRadius.push(entry.maxWeight > 0 ? 5 : 0);
+          datasets[index * 2 + 1].pointHoverRadius.push(entry.maxWeight > 0 ? 8 : 0);
         });
       }
     } else if (exerciseTimeFrame === 'year') {
@@ -323,26 +369,32 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
             datasets[index * 2] = {
               label: `Повторения (${type})`,
               data: [],
+              pointRadius: [],
+              pointHoverRadius: [],
               borderColor: darkMode ? `#${(6 + index * 2).toString(16)}b7280` : `#${(1 + index * 2).toString(16)}f2937`,
               backgroundColor: darkMode ? `rgba(${107 + index * 20}, 114, 128, 0.1)` : `rgba(${31 + index * 20}, 41, 55, 0.1)`,
               fill: true,
               tension: 0.4,
-              pointRadius: 0,
               yAxisID: 'y',
             };
             datasets[index * 2 + 1] = {
               label: `${type} (кг)`,
               data: [],
+              pointRadius: [],
+              pointHoverRadius: [],
               borderColor: darkMode ? `#${(9 + index * 2).toString(16)}ca3af` : `#${(4 + index * 2).toString(16)}b5563`,
               backgroundColor: darkMode ? `rgba(${156 + index * 20}, 163, 175, 0.1)` : `rgba(${75 + index * 20}, 85, 99, 0.1)`,
               fill: true,
               tension: 0.4,
-              pointRadius: 0,
               yAxisID: 'y1',
             };
           }
           datasets[index * 2].data.push(entry.repsAtMaxWeight);
+          datasets[index * 2].pointRadius.push(entry.repsAtMaxWeight > 0 ? 5 : 0);
+          datasets[index * 2].pointHoverRadius.push(entry.repsAtMaxWeight > 0 ? 8 : 0);
           datasets[index * 2 + 1].data.push(entry.maxWeight);
+          datasets[index * 2 + 1].pointRadius.push(entry.maxWeight > 0 ? 5 : 0);
+          datasets[index * 2 + 1].pointHoverRadius.push(entry.maxWeight > 0 ? 8 : 0);
         });
       }
     }
@@ -350,23 +402,74 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
     return { labels, datasets };
   }, [exerciseSearch, workoutData, exerciseTimeFrame, getExerciseDateRange, darkMode]);
 
+  const handleChartClick = useCallback((event, elements, chart, chartType) => {
+    if (elements.length > 0) {
+      const { datasetIndex, index } = elements[0];
+      const dataset = chart.data.datasets[datasetIndex];
+      const value = dataset.data[index];
+      if (value === 0) return;
+      const label = chart.data.labels[index];
+      setTappedDataByChart({
+        workout: null,
+        bodyWeight: null,
+        exercise: null,
+        [chartType]: {
+          label: dataset.label,
+          value,
+          date: label,
+          unit: dataset.label.includes('(кг)') ? 'кг' : '',
+        },
+      });
+    } else {
+      setTappedDataByChart({
+        workout: null,
+        bodyWeight: null,
+        exercise: null,
+      });
+    }
+  }, []);
+
+  const handleCloseTappedData = useCallback((chartType) => {
+    setTappedDataByChart((prev) => ({
+      ...prev,
+      [chartType]: null,
+    }));
+  }, []);
+
   const chartOptions = useMemo(
     () => ({
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: true, position: 'top' },
+        legend: { 
+          display: true, 
+          position: 'top',
+          labels: {
+            color: darkMode ? '#e5e7eb' : '#1f2937',
+            font: { size: 12 },
+          },
+        },
         tooltip: {
+          enabled: true,
           backgroundColor: darkMode ? '#1f2937' : '#fff',
           titleColor: darkMode ? '#e5e7eb' : '#1f2937',
           bodyColor: darkMode ? '#e5e7eb' : '#1f2937',
           borderColor: darkMode ? '#4b5563' : '#d1d5db',
           borderWidth: 1,
+          mode: 'nearest',
+          intersect: true,
+          filter: (tooltipItem) => {
+            const dataPoints = tooltipItem.chart.tooltip.dataPoints;
+            return tooltipItem.parsed.y !== 0 && dataPoints && dataPoints.length > 0 && tooltipItem.datasetIndex === dataPoints[0].datasetIndex;
+          },
           callbacks: {
             label: (context) => {
               const label = context.dataset.label || '';
               const value = context.parsed.y || 0;
               return `${label}: ${value}${label.includes('(кг)') ? ' кг' : ''}`;
+            },
+            title: (tooltipItems) => {
+              return tooltipItems.length > 0 ? tooltipItems[0].label : '';
             },
           },
         },
@@ -376,11 +479,18 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
           title: {
             display: true,
             text: exerciseTimeFrame === 'year' ? 'Месяц' : 'Дата',
-            color: darkMode ? '#9ca3af' : '#4b5563',
+            color: darkMode ? '#e5e7eb' : '#1f2937',
             font: { size: 12, weight: '500' },
           },
-          ticks: { color: darkMode ? '#9ca3af' : '#4b5563', maxTicksLimit: 8 },
-          grid: { display: false },
+          ticks: { 
+            color: darkMode ? '#e5e7eb' : '#1f2937', 
+            maxTicksLimit: 8,
+            font: { size: 11 },
+          },
+          grid: { 
+            display: false,
+            borderColor: darkMode ? '#4b5563' : '#d1d5db',
+          },
         },
         y: {
           type: 'linear',
@@ -388,16 +498,20 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
           title: {
             display: true,
             text: 'Повторения',
-            color: darkMode ? '#9ca3af' : '#4b5563',
+            color: darkMode ? '#e5e7eb' : '#1f2937',
             font: { size: 12, weight: '500' },
           },
           ticks: {
-            color: darkMode ? '#9ca3af' : '#4b5563',
-            maxTicksLimit: 5,
+            color: darkMode ? '#e5e7eb' : '#1f2937',
+            maxTicksLimit: 6,
             stepSize: 1,
             precision: 0,
+            font: { size: 11 },
           },
-          grid: { color: darkMode ? '#374151' : '#e5e7eb' },
+          grid: { 
+            color: darkMode ? '#4b5563' : '#e5e7eb',
+            borderColor: darkMode ? '#4b5563' : '#d1d5db',
+          },
         },
         y1: {
           type: 'linear',
@@ -405,15 +519,28 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
           title: {
             display: true,
             text: 'Вес (кг)',
-            color: darkMode ? '#9ca3af' : '#4b5563',
+            color: darkMode ? '#e5e7eb' : '#1f2937',
             font: { size: 12, weight: '500' },
           },
-          ticks: { color: darkMode ? '#9ca3af' : '#4b5563', maxTicksLimit: 5 },
-          grid: { display: false },
+          ticks: { 
+            color: darkMode ? '#e5e7eb' : '#1f2937', 
+            maxTicksLimit: 6,
+            font: { size: 11 },
+          },
+          grid: { 
+            display: false,
+            borderColor: darkMode ? '#4b5563' : '#d1d5db',
+          },
         },
       },
+      interaction: {
+        mode: 'nearest',
+        intersect: true,
+        axis: 'x',
+      },
+      onClick: (event, elements, chart) => handleChartClick(event, elements, chart, 'exercise'),
     }),
-    [darkMode, exerciseTimeFrame]
+    [darkMode, exerciseTimeFrame, handleChartClick]
   );
 
   const workoutChartOptions = useMemo(
@@ -425,11 +552,18 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
           title: {
             display: true,
             text: timeFrame === 'year' ? 'Месяц' : 'Дата',
-            color: darkMode ? '#9ca3af' : '#4b5563',
+            color: darkMode ? '#e5e7eb' : '#1f2937',
             font: { size: 12, weight: '500' },
           },
-          ticks: { color: darkMode ? '#9ca3af' : '#4b5563', maxTicksLimit: 8 },
-          grid: { display: false },
+          ticks: { 
+            color: darkMode ? '#e5e7eb' : '#1f2937', 
+            maxTicksLimit: 8,
+            font: { size: 11 },
+          },
+          grid: { 
+            display: false,
+            borderColor: darkMode ? '#4b5563' : '#d1d5db',
+          },
         },
         y: {
           type: 'linear',
@@ -437,21 +571,26 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
           title: {
             display: true,
             text: 'Количество тренировок',
-            color: darkMode ? '#9ca3af' : '#4b5563',
+            color: darkMode ? '#e5e7eb' : '#1f2937',
             font: { size: 12, weight: '500' },
           },
           ticks: {
-            color: darkMode ? '#9ca3af' : '#4b5563',
-            maxTicksLimit: 5,
+            color: darkMode ? '#e5e7eb' : '#1f2937',
+            maxTicksLimit: 6,
             stepSize: 1,
             precision: 0,
+            font: { size: 11 },
           },
-          grid: { color: darkMode ? '#374151' : '#e5e7eb' },
+          grid: { 
+            color: darkMode ? '#4b5563' : '#e5e7eb',
+            borderColor: darkMode ? '#4b5563' : '#d1d5db',
+          },
         },
         y1: { display: false },
       },
+      onClick: (event, elements, chart) => handleChartClick(event, elements, chart, 'workout'),
     }),
-    [chartOptions, darkMode, timeFrame]
+    [chartOptions, darkMode, timeFrame, handleChartClick]
   );
 
   const bodyWeightChartOptions = useMemo(
@@ -463,11 +602,18 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
           title: {
             display: true,
             text: exerciseTimeFrame === 'year' ? 'Месяц' : 'Дата',
-            color: darkMode ? '#9ca3af' : '#4b5563',
+            color: darkMode ? '#e5e7eb' : '#1f2937',
             font: { size: 12, weight: '500' },
           },
-          ticks: { color: darkMode ? '#9ca3af' : '#4b5563', maxTicksLimit: 8 },
-          grid: { display: false },
+          ticks: { 
+            color: darkMode ? '#e5e7eb' : '#1f2937', 
+            maxTicksLimit: 8,
+            font: { size: 11 },
+          },
+          grid: { 
+            display: false,
+            borderColor: darkMode ? '#4b5563' : '#d1d5db',
+          },
         },
         y: {
           type: 'linear',
@@ -475,16 +621,24 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
           title: {
             display: true,
             text: 'Вес тела (кг)',
-            color: darkMode ? '#9ca3af' : '#4b5563',
+            color: darkMode ? '#e5e7eb' : '#1f2937',
             font: { size: 12, weight: '500' },
           },
-          ticks: { color: darkMode ? '#9ca3af' : '#4b5563', maxTicksLimit: 5 },
-          grid: { color: darkMode ? '#374151' : '#e5e7eb' },
+          ticks: { 
+            color: darkMode ? '#e5e7eb' : '#1f2937', 
+            maxTicksLimit: 6,
+            font: { size: 11 },
+          },
+          grid: { 
+            color: darkMode ? '#4b5563' : '#e5e7eb',
+            borderColor: darkMode ? '#4b5563' : '#d1d5db',
+          },
         },
         y1: { display: false },
       },
+      onClick: (event, elements, chart) => handleChartClick(event, elements, chart, 'bodyWeight'),
     }),
-    [chartOptions, darkMode, exerciseTimeFrame]
+    [chartOptions, darkMode, exerciseTimeFrame, handleChartClick]
   );
 
   const hasWorkouts = totalWorkouts > 0;
@@ -570,8 +724,25 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
                 />
               )}
             </div>
-            <div className={styles.chartContainer}>
+            <div className={`${styles.chartContainer} ${tappedDataByChart.workout ? styles.activeChart : ''}`}>
               <Line data={getWorkoutCountData()} options={workoutChartOptions} />
+              <TransitionGroup>
+                {tappedDataByChart.workout && (
+                  <CSSTransition timeout={300} classNames="notification">
+                    <div className={styles.tappedData}>
+                      <span>
+                        {tappedDataByChart.workout.label}: {tappedDataByChart.workout.value} {tappedDataByChart.workout.unit} ({tappedDataByChart.workout.date})
+                      </span>
+                      <button
+                        className={styles.closeButton}
+                        onClick={() => handleCloseTappedData('workout')}
+                      >
+                        ×
+                      </button>
+                    </div>
+                  </CSSTransition>
+                )}
+              </TransitionGroup>
             </div>
           </section>
 
@@ -616,8 +787,29 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
                   />
                 )}
               </div>
-              <div className={styles.chartContainer}>
-                <Line data={getBodyWeightData()} options={bodyWeightChartOptions} />
+              <div className={`${styles.chartContainer} ${tappedDataByChart.bodyWeight ? styles.activeChart : ''}`}>
+                {getBodyWeightData().labels.length > 0 ? (
+                  <Line data={getBodyWeightData()} options={bodyWeightChartOptions} />
+                ) : (
+                  <p className={styles.noDataMessage}>Нет данных о весе для выбранного периода</p>
+                )}
+                <TransitionGroup>
+                  {tappedDataByChart.bodyWeight && (
+                    <CSSTransition timeout={300} classNames="notification">
+                      <div className={styles.tappedData}>
+                        <span>
+                          {tappedDataByChart.bodyWeight.label}: {tappedDataByChart.bodyWeight.value} {tappedDataByChart.bodyWeight.unit} ({tappedDataByChart.bodyWeight.date})
+                        </span>
+                        <button
+                          className={styles.closeButton}
+                          onClick={() => handleCloseTappedData('bodyWeight')}
+                        >
+                          ×
+                        </button>
+                      </div>
+                    </CSSTransition>
+                  )}
+                </TransitionGroup>
               </div>
             </section>
           )}
@@ -675,18 +867,35 @@ const Analytics = ({ workoutData, darkMode, loading }) => {
                 <option key={exercise} value={exercise} />
               ))}
             </datalist>
-            {exerciseSearch && getExerciseStats() ? (
+            {exerciseSearch && (
               <TransitionGroup>
                 <CSSTransition timeout={300} classNames="fade">
-                  <div className={`${styles.chartContainer} ${styles.exerciseChart}`}>
-                    <Line data={getExerciseStats()} options={chartOptions} />
+                  <div className={`${styles.chartContainer} ${styles.exerciseChart} ${tappedDataByChart.exercise ? styles.activeChart : ''}`}>
+                    {getExerciseStats().labels.length > 0 ? (
+                      <Line data={getExerciseStats()} options={chartOptions} />
+                    ) : (
+                      <p className={styles.noDataMessage}>Нет данных для этого упражнения</p>
+                    )}
+                    <TransitionGroup>
+                      {tappedDataByChart.exercise && (
+                        <CSSTransition timeout={300} classNames="notification">
+                          <div className={styles.tappedData}>
+                            <span>
+                              {tappedDataByChart.exercise.label}: {tappedDataByChart.exercise.value} {tappedDataByChart.exercise.unit} ({tappedDataByChart.exercise.date})
+                            </span>
+                            <button
+                              className={styles.closeButton}
+                              onClick={() => handleCloseTappedData('exercise')}
+                            >
+                              ×
+                            </button>
+                          </div>
+                        </CSSTransition>
+                      )}
+                    </TransitionGroup>
                   </div>
                 </CSSTransition>
               </TransitionGroup>
-            ) : (
-              exerciseSearch && (
-                <p className={styles.noDataMessage}>Нет данных для этого упражнения</p>
-              )
             )}
           </section>
         </>

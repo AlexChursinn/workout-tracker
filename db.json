@@ -3151,6 +3151,26 @@
                   "isEditing": false
                 }
               ]
+            },
+            {
+              "id": 1747496620942,
+              "number": 2,
+              "muscleGroup": "",
+              "exercise": "",
+              "sets": [
+                {
+                  "reps": "1",
+                  "weight": "1",
+                  "weightType": "Вес",
+                  "isEditing": false
+                },
+                {
+                  "reps": "1",
+                  "weight": "1",
+                  "weightType": "Доп. вес",
+                  "isEditing": false
+                }
+              ]
             }
           ],
           "bodyWeight": "80",
